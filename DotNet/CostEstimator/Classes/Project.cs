@@ -988,6 +988,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         int totalLinks = altPackage.ModelAltLinks.Count;
         int linkCounter = 0;
+        ConstructionDurationCalculator constructionDurationCalculator = new ConstructionDurationCalculator();
         foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
         {
           linkCounter++;
@@ -1070,7 +1071,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             throw new Exception("Cannot add CostItemFactor");
 
           // Ancillary CostItemFactors
-          AncillaryCoster ancillaryCoster = new AncillaryCoster(altPackage);
+          AncillaryCoster ancillaryCoster = new AncillaryCoster(altPackage, constructionDurationCalculator);
           ancillaryCoster.AltLink = altLink;
           ancillaryCoster.AltPipXP = altPackage.AltConflictFromAltLink(altLink);
 
@@ -1111,8 +1112,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           reportPipeItem.Pipe = pipeCostItemFactor;
           reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
           reportPipeItem.ConstructionDuration =
-          ConstructionDurationCalculator.ConstructionDurationDays(
-          ancillaryCoster.CurrentAltConflictPackage);
+            constructionDurationCalculator.ConstructionDurationDays(
+              ancillaryCoster.CurrentAltConflictPackage, _PipeCoster);
         } // foreach  (altLink)
 
         _IsDirty = true;
@@ -1588,7 +1589,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _ProjectInfo.Source = modelPath;
           _ProjectInfo.BaseENR = _PipeCoster.BaseENR;
           _ProjectInfo.ENR = _PipeCoster.CurrentENR;
-
+          ConstructionDurationCalculator constructionDurationCalculator =
+            new ConstructionDurationCalculator();
           Model model = new Model(modelPath);
           CostItemFactor newEstimate = new CostItemFactor(Path.GetFileName(modelPath));
           _CostItemFactors.Add(newEstimate.ID, newEstimate);
@@ -1707,7 +1709,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             // Ancillary CostItemFactors
             currentStage = "Creating ancillary CostItemFactors";
-            AncillaryCoster ancillaryCoster = new AncillaryCoster(model);
+            AncillaryCoster ancillaryCoster = new AncillaryCoster(model, constructionDurationCalculator);
             ancillaryCoster.Link = link;
             ancillaryCoster.PipXP = model.ConflictFromLink(link);
 
@@ -1763,8 +1765,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportPipeItem.Pipe = pipeCostItemFactor;
             reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
             reportPipeItem.ConstructionDuration =
-            ConstructionDurationCalculator.ConstructionDurationDays(
-            ancillaryCoster.CurrentConflictPackage);
+              constructionDurationCalculator.ConstructionDurationDays(
+                ancillaryCoster.CurrentConflictPackage, _PipeCoster);
           } // foreach  (link)
           currentLink = null;
 
@@ -1912,6 +1914,181 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       return conflictsTable;
     }
 
+    private void GenerateRehabCIF(
+      Dictionary<int, Conflict> conflictsTable, 
+      CostItemFactor wholePipeDirectConstructionCIF, 
+      Segment currentSegment, 
+      RehabItemType rehabType, 
+      ConstructionDurationCalculator constructionDurationCalculator)
+    {
+      string currentStage = string.Empty;
+      try
+      {
+        var segmentDepths = new float[] { currentSegment.USDepth, currentSegment.DSDepth };
+        _PipeCoster.Depth = segmentDepths.Average();
+
+        _PipeCoster.InsideDiameter = currentSegment.PipeDiamWidth;
+
+        if (rehabType == RehabItemType.WholePipe)
+        {
+          if (currentSegment.PipeDiamWidth <= 15)
+            _PipeCoster.Material = PipeMaterial.PVCHDPE;
+          else
+            _PipeCoster.Material = PipeMaterial.Concrete;
+        }
+        else
+        {
+          _PipeCoster.Material = PipeMaterial.CIPP;
+        }
+
+        // Pipe and Manhole CostItemFactor
+        currentStage = "Setting up Pipe and manhole CIF";
+        CostItemFactor pipeAndManholeCostItemFactor =
+          new CostItemFactor(
+            string.Format("{0}{3} {1}-{2}",
+              currentSegment.ID,
+              currentSegment.USNodeID.Trim(),
+              currentSegment.DSNodeID.Trim(),
+              rehabType == RehabItemType.WholePipe ? "W" : "L"));
+        _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID,
+          pipeAndManholeCostItemFactor);
+        int pipeAndManholeIndex =
+          wholePipeDirectConstructionCIF.AddCostItemFactor(pipeAndManholeCostItemFactor);
+        if (pipeAndManholeIndex == -1)
+          throw new Exception("Cannot add CostItemFactor");
+        CostItemFactor pipeAndManholeItem =
+          wholePipeDirectConstructionCIF.ChildCostItemFactor(pipeAndManholeIndex);
+
+        currentStage = "Setting up manhole CIF";
+        CostItem manholeCostItem = null;
+        // Manhole CostItem
+        if (currentSegment.SegUSNodeID == 0)
+        {
+          string manholeCostItemName = string.Format("Manhole {0:F0} in diam {1:F0} ft deep",
+          _PipeCoster.InsideDiameter, _PipeCoster.Depth);
+          bool outsideManholeTable;
+          manholeCostItem = CostItemFromPool(manholeCostItemName);
+          if (manholeCostItem == null)
+          {
+            manholeCostItem = new CostItem(manholeCostItemName,
+            1, _PipeCoster.ManholeCost(_PipeCoster.ManholeDiameter,
+            _PipeCoster.Depth, out outsideManholeTable), "ea");
+            AddCostItemToPool(manholeCostItem);
+          } // if
+        }
+
+        // Pipe CostItemFactor
+        currentStage = "Setting up pipe CIF";
+        string pipeItemName = string.Format("Pipe {0:F1} in diam, {1:F0} ft deep, {2}",
+          currentSegment.PipeDiamWidth,
+          _PipeCoster.Depth,
+          _PipeCoster.Material);
+        CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, currentSegment.LengthFt);
+        _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
+        _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
+        int pipeIndex = pipeAndManholeItem.AddCostItemFactor(pipeCostItemFactor);
+        if (pipeIndex == -1)
+          throw new Exception("Cannot add CostItemFactor");
+
+        currentStage = "Setting up manhole CIF";
+        CostItemFactor manholeCostItemFactor = null;
+        // Manhole CostItemFactor
+        if (currentSegment.SegUSNodeID == 0)
+        {
+          string manholeItemName = string.Format("Manhole {0:F0} in diam, {1:F0} ft deep",
+            _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
+          manholeCostItemFactor = new CostItemFactor(manholeItemName,
+          manholeCostItem, null, 1);
+          _CostItemFactors.Add(manholeCostItemFactor.ID, manholeCostItemFactor);
+          int manholeIndex = pipeAndManholeItem.AddCostItemFactor(manholeCostItemFactor);
+          if (manholeIndex == -1)
+            throw new Exception("Cannot add CostItemFactor");
+        }
+
+        // Ancillary CostItemFactors
+        currentStage = "Setting up ancillary costs";
+        AncillaryCoster ancillaryCoster =
+          new AncillaryCoster(
+            currentSegment,
+            conflictsTable[currentSegment.ID],
+            (Int16)currentSegment.LengthFt,
+            currentSegment.PipeDiamWidth,
+            currentSegment.USElevation,
+            currentSegment.DSElevation,
+            currentSegment.Material,
+            string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
+            string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
+            constructionDurationCalculator);
+
+        List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
+        if (ancillaryCosts.Count == 0)
+        {
+          if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
+            pipeAndManholeCostItemFactor.Comment =
+              String.Format("{0};No ancillary costs", pipeAndManholeCostItemFactor);
+          else
+            pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
+        } // if
+        else
+        {
+          foreach (AncillaryCost ancillaryCost in ancillaryCosts)
+          {
+            CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
+            CostItem poolItem = AddCostItemToPool(ancillaryItem);
+            CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
+            AddCostItemFactorToPool(ancillaryCIF);
+            pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
+          } // foreach  (ancillaryCost)
+        } // else
+
+        // Ancillary CostFactors
+        currentStage = "Creating ancillary CostFactors";
+        if (ancillaryCoster.PipXP != null)
+        {
+          List<AncillaryFactor> ancillaryFactors = ancillaryCoster.RehabAncillaryFactors;
+          foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+          {
+            CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
+            CostFactor factorItem = AddFactorToPool(factor);
+            pipeAndManholeCostItemFactor.AddFactor(factorItem);
+          } // foreach  (ancillaryFactor)
+        }
+
+        foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
+          pipeAndManholeItem.AddFactor(kvpair.Value);
+
+        // Prepare report item
+        currentStage = "Preparing report item";
+        pipeAndManholeCostItemFactor.Data = new ReportPipeItem();
+        pipeAndManholeCostItemFactor.ReportItemType = ReportItemType.Pipe;
+        ReportPipeItem reportPipeItem = pipeAndManholeCostItemFactor.Data as ReportPipeItem;
+        reportPipeItem.Name = string.Format("{0}", pipeAndManholeCostItemFactor.Name);
+        reportPipeItem.ID = currentSegment.ID;
+        reportPipeItem.MaterialType = _PipeCoster.Material.ToString();
+        reportPipeItem.DiameterIn = _PipeCoster.InsideDiameter;
+        reportPipeItem.DepthFt = _PipeCoster.Depth;
+        reportPipeItem.Length = currentSegment.LengthFt;
+        reportPipeItem.ExcavationVolCuYd = _PipeCoster.ExcavationVolume * currentSegment.LengthFt;
+        reportPipeItem.Manhole = currentSegment.SegUSNodeID == 0 ? manholeCostItemFactor : null;
+        reportPipeItem.Pipe = pipeCostItemFactor;
+        reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
+        reportPipeItem.ConstructionDuration =
+          constructionDurationCalculator.ConstructionDurationDays(ancillaryCoster.CurrentConflictPackage, _PipeCoster);
+      }
+      catch (Exception ex)
+      {
+        _IsDirty = true;
+        string currentSegmentMessage = "";
+        if (currentSegment != null)
+          currentSegmentMessage = string.Format("{0} {1}->{2}:", currentSegment.ID,
+            currentSegment.USNodeID, currentSegment.DSNodeID);
+
+        string errorMessage = currentSegment != null ?
+        string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, ex.Message) :
+          ex.Message;
+      }
+    }
+
     /// <summary>
     /// Creates a cost estimate from a rehab segmentations table and accompanying conflicts table
     /// </summary>
@@ -1942,6 +2119,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _ProjectInfo.ENR = _PipeCoster.CurrentENR;
         }
 
+        ConstructionDurationCalculator constructionDurationCalculator =
+          new ConstructionDurationCalculator();
         // Read in conflicts table
         currentStage = "Reading conflicts table";
         string conflictsTableFileName = Path.Combine(modelPath, conflictsTableDB);
@@ -2006,7 +2185,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             try
             {
               segmentCounter++;
-              if (segmentCounter % 10000 == 0)
+              if (segmentCounter % 1000 == 0)
               {
                 double fractionDone = (double)segmentCounter / (double)totalCount;
                 int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
@@ -2016,169 +2195,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                   string.Format("Reading segments: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
                   segmentCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
                   startTime, DateTime.Now));
-                GC.Collect();
               }
 
               currentSegment = new Segment(reader);
 
-              var segmentDepths = new float[] { currentSegment.USDepth, currentSegment.DSDepth };
-              _PipeCoster.Depth = segmentDepths.Average();
-
-              _PipeCoster.InsideDiameter = currentSegment.PipeDiamWidth;
-
-              switch (currentSegment.Material)
-              {
-                case "PVC":
-                case "PVC PVT PRESSURE":
-                case "PVC STUB":
-                case "PVC STUBOUT":
-                case @"PVC\PRVT.PRESSURE":
-                case "HDPE":
-                  _PipeCoster.Material = PipeMaterial.PVCHDPE;
-                  break;
-                case "CIPP":
-                  _PipeCoster.Material = PipeMaterial.CIPP;
-                  break;
-                default:
-                  _PipeCoster.Material = PipeMaterial.Concrete;
-                  break;
-              }
-
-              // Pipe and Manhole CostItemFactor
-              currentStage = "Setting up Pipe and manhole CIF";
-              CostItemFactor pipeAndManholeCostItemFactor =
-                new CostItemFactor(
-                  string.Format("{0} {1}-{2}",
-                    currentSegment.ID, 
-                    currentSegment.USNodeID, 
-                    currentSegment.DSNodeID));
-              _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID, 
-                pipeAndManholeCostItemFactor);
-              int pipeAndManholeIndex = 
-                wholePipeDirectConstructionCIF.AddCostItemFactor(pipeAndManholeCostItemFactor);
-              if (pipeAndManholeIndex == -1)
-                throw new Exception("Cannot add CostItemFactor");
-              CostItemFactor pipeAndManholeItem = 
-                wholePipeDirectConstructionCIF.ChildCostItemFactor(pipeAndManholeIndex);
-
-              currentStage = "Setting up manhole CIF";
-              CostItem manholeCostItem = null;
-              // Manhole CostItem
-              if (currentSegment.SegUSNodeID == 0)
-              {
-                string manholeCostItemName = string.Format("Manhole {0:F0} in diam {1:F0} ft deep",
-                _PipeCoster.InsideDiameter, _PipeCoster.Depth);
-                bool outsideManholeTable;
-                manholeCostItem = CostItemFromPool(manholeCostItemName);
-                if (manholeCostItem == null)
-                {
-                  manholeCostItem = new CostItem(manholeCostItemName,
-                  1, _PipeCoster.ManholeCost(_PipeCoster.ManholeDiameter,
-                  _PipeCoster.Depth, out outsideManholeTable), "ea");
-                  AddCostItemToPool(manholeCostItem);
-                } // if
-              }
-
-              // Pipe CostItemFactor
-              currentStage = "Setting up pipe CIF";
-              string pipeItemName = string.Format("Pipe {0:F1} in diam, {1:F0} ft deep, {2}",
-                currentSegment.PipeDiamWidth,
-                _PipeCoster.Depth,
-                _PipeCoster.Material);
-              CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, currentSegment.LengthFt);
-              _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
-              _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
-              int pipeIndex = pipeAndManholeItem.AddCostItemFactor(pipeCostItemFactor);
-              if (pipeIndex == -1)
-                throw new Exception("Cannot add CostItemFactor");
-
-              currentStage = "Setting up manhole CIF";
-              CostItemFactor manholeCostItemFactor = null;
-              // Manhole CostItemFactor
-              if (currentSegment.SegUSNodeID == 0)
-              {
-                string manholeItemName = string.Format("Manhole {0:F0} in diam, {1:F0} ft deep",
-                  _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
-                manholeCostItemFactor = new CostItemFactor(manholeItemName,
-                manholeCostItem, null, 1);
-                _CostItemFactors.Add(manholeCostItemFactor.ID, manholeCostItemFactor);
-                int manholeIndex = pipeAndManholeItem.AddCostItemFactor(manholeCostItemFactor);
-                if (manholeIndex == -1)
-                  throw new Exception("Cannot add CostItemFactor");
-              }
-
-              // Ancillary CostItemFactors
-              currentStage = "Setting up ancillary costs";
-              AncillaryCoster ancillaryCoster = 
-                new AncillaryCoster(
-                  currentSegment,
-                  conflictsTable[currentSegment.ID],
-                  (Int16)currentSegment.LengthFt,
-                  currentSegment.PipeDiamWidth,
-                  currentSegment.USElevation,
-                  currentSegment.DSElevation,
-                  currentSegment.Material,
-                  string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
-                  string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID));
-
-              List<AncillaryCost> ancillaryCosts = ancillaryCoster.ModelAncillaryCosts;
-              if (ancillaryCosts.Count == 0)
-              {
-                if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
-                  pipeAndManholeCostItemFactor.Comment = 
-                    String.Format("{0};No ancillary costs", pipeAndManholeCostItemFactor);
-                else
-                  pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
-              } // if
-              else
-              {
-                foreach (AncillaryCost ancillaryCost in ancillaryCosts)
-                {
-                  CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
-                  CostItem poolItem = AddCostItemToPool(ancillaryItem);
-                  CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
-                  AddCostItemFactorToPool(ancillaryCIF);
-                  pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
-                } // foreach  (ancillaryCost)
-              } // else
-
-              // Ancillary CostFactors
-              currentStage = "Creating ancillary CostFactors";
-              if (ancillaryCoster.PipXP != null)
-              {
-                List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
-                foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
-                {
-                  CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
-                  CostFactor factorItem = AddFactorToPool(factor);
-                  pipeAndManholeCostItemFactor.AddFactor(factorItem);
-                } // foreach  (ancillaryFactor)
-              }
-
-              foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
-                pipeAndManholeItem.AddFactor(kvpair.Value);
-
-              // Prepare report item
-              currentStage = "Preparing report item";
-              pipeAndManholeCostItemFactor.Data = new ReportPipeItem();
-              pipeAndManholeCostItemFactor.ReportItemType = ReportItemType.Pipe;
-              ReportPipeItem reportPipeItem = pipeAndManholeCostItemFactor.Data as ReportPipeItem;
-              reportPipeItem.Name = string.Format("{0}", pipeAndManholeCostItemFactor.Name);
-              reportPipeItem.ID = currentSegment.ID;
-              reportPipeItem.MaterialType = _PipeCoster.Material.ToString();
-              reportPipeItem.DiameterIn = _PipeCoster.InsideDiameter;
-              reportPipeItem.DepthFt = _PipeCoster.Depth;
-              reportPipeItem.Length = currentSegment.LengthFt;
-              reportPipeItem.ExcavationVolCuYd = _PipeCoster.ExcavationVolume * currentSegment.LengthFt;
-              reportPipeItem.Manhole = currentSegment.SegUSNodeID == 0 ? manholeCostItemFactor : null;
-              reportPipeItem.Pipe = pipeCostItemFactor;
-              reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
-              reportPipeItem.ConstructionDuration =
-                ConstructionDurationCalculator.ConstructionDurationDays(ancillaryCoster.CurrentConflictPackage);
-
+              GenerateRehabCIF(conflictsTable, wholePipeDirectConstructionCIF, currentSegment, 
+                RehabItemType.WholePipe, constructionDurationCalculator);
+              GenerateRehabCIF(conflictsTable, linerDirectConstructionCIF, currentSegment, 
+                RehabItemType.Liner, constructionDurationCalculator);
             }
             catch (Exception e)
             {
+              throw;
               _IsDirty = true;
               string currentSegmentMessage = "";
               if (currentSegment != null)

@@ -619,6 +619,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // Assemble pipe costs
       List<CostItemFactor> pipeList = _project.PipeItems();
       Dictionary<CostItemFactor, CostItemFactor> pipeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> lateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> manholeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs = new Dictionary<CostItemFactor, List<CostItemFactor>>();
       foreach (CostItemFactor item in pipeList)
@@ -628,6 +629,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
           List<CostItemFactor> subItems = item.ChildCostItemFactors;
           CostItemFactor pipeCIF = null;
           CostItemFactor manholeCIF = null;
+          CostItemFactor lateralCIF = null;
           List<CostItemFactor> ancillaryCIFList = new List<CostItemFactor>();
           foreach (CostItemFactor subItem in subItems)
           {
@@ -635,6 +637,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             {
               pipeCIF = subItem;
               pipeCIFs.Add(item, pipeCIF);
+
+              List<CostItemFactor> pipeSubItems = pipeCIF.ChildCostItemFactors;
+              foreach (CostItemFactor pipeSubItem in pipeSubItems)
+              {
+                if (pipeSubItem.Name.StartsWith("Lateral"))
+                {
+                  lateralCIF = pipeSubItem;
+                  lateralCIFs.Add(item, lateralCIF);
+                }
+              }
             } // if
             else
               if (subItem.Name.StartsWith("Manhole"))
@@ -677,15 +689,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
                 DSNode = tokens[2];
               } // if
 
-              pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, item.Cost));
+              pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
+              MLinkID, USNode, DSNode, item.Cost, item.Factor));
               if (pipeCIFs[item] != null)
                 pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
                 MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
-              if (manholeCIFs[item] != null)
+              if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
+                pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
+              if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
                 pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
                 MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
-              if (ancillaryCIFs[item].Count > 0)
+              if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
               {
                 foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
                 {

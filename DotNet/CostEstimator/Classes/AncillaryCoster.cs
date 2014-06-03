@@ -36,6 +36,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private Segment _Segment;
     private Conflict _Conflict;
+
+    private ConstructionDurationCalculator _constructionDurationCalculator = null;
     #endregion
 
     #region Constructors
@@ -43,30 +45,33 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create ancillary coster for an alternative package
     /// </summary>
     /// <param name="altPackage">The alternative package being processed</param>
-    public AncillaryCoster(AlternativePackage altPackage)
+    public AncillaryCoster(AlternativePackage altPackage, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Alt;
       _AltPackage = altPackage;
       _Model = null;
+      _constructionDurationCalculator = constructionDurationCalculator;
     } // AncillaryCoster(altPackage)
 
     /// <summary>
     /// Create ancillary coster for a model
     /// </summary>
     /// <param name="model">The model being processed</param>
-    public AncillaryCoster(Model model)
+    public AncillaryCoster(Model model, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Model;
       _Model = model;
       _AltPackage = null;
+      _constructionDurationCalculator = constructionDurationCalculator;
     } // AncillaryCoster(model)
 
     public AncillaryCoster(Segment segment, Conflict conflict, int lengthFt, float diamWidthIn, float USIE, float DSIE,
-      string material, string USNode, string DSNode)
+      string material, string USNode, string DSNode, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Rehab;
       _Segment = segment;
       _Conflict = conflict;
+      _constructionDurationCalculator = constructionDurationCalculator;
 
       DataAccess.ModelDataSet.MdlLinksDataTable tempLinksTable = new DataAccess.ModelDataSet.MdlLinksDataTable();
       DataAccess.ModelDataSet.MdlLinksRow tempLinksRow = tempLinksTable.NewMdlLinksRow();
@@ -255,15 +260,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="ancillaryCosts">Reference to list that will contain ancillary costs</param>
     /// <param name="conflictPackage">Conflict package from link that will be used to get ancillary costs</param>
-    private static void GetAncillaryCosts(List<AncillaryCost> ancillaryCosts, ConflictPackage conflictPackage)
+    private void GetAncillaryCosts(List<AncillaryCost> ancillaryCosts, ConflictPackage conflictPackage, PipeCoster coster)
     {
-      ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(new TrafficControlAncillaryCost(conflictPackage).AncillaryCost);
+      ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage, coster).AncillaryCost);
+      ancillaryCosts.Add(
+        new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
       ancillaryCosts.Add(new ParallelRelocationAncillaryCost(conflictPackage).AncillaryCost);
       ancillaryCosts.Add(new CrossingRelocationAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(new BypassPumpingAncillaryCost(conflictPackage).AncillaryCost);
+      ancillaryCosts.Add(
+        new BypassPumpingAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
       ancillaryCosts.Add(new EnvironmentalMitigationAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(new HazardousMaterialAncillaryCost(conflictPackage).AncillaryCost);
+      ancillaryCosts.Add(new HazardousMaterialAncillaryCost(conflictPackage, coster).AncillaryCost);
 
       // Clean up the list (nulls might be there if an ancillary cost comes back null
       for (int i = ancillaryCosts.Count - 1; i >= 0; i--)
@@ -300,7 +307,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         List<AncillaryCost> ancillaryCosts = new List<AncillaryCost>();
 
         ConflictPackage altConflictPackage = new ConflictPackage(_AltPackage, _AltLink, _AltPipXP);
-        GetAncillaryCosts(ancillaryCosts, altConflictPackage);
+        GetAncillaryCosts(ancillaryCosts, altConflictPackage, _PipeCoster);
 
         return ancillaryCosts;
       } // get
@@ -334,7 +341,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         List<AncillaryCost> ancillaryCosts = new List<AncillaryCost>();
 
         ConflictPackage modelConflictPackage = new ConflictPackage(_Model, _Link, _PipXP);
-        GetAncillaryCosts(ancillaryCosts, modelConflictPackage);
+        GetAncillaryCosts(ancillaryCosts, modelConflictPackage, _PipeCoster);
 
         return ancillaryCosts;
       } // get
@@ -356,6 +363,31 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       } // get
     } // ModelAncillaryFactors
 
+    public List<AncillaryCost> RehabAncillaryCosts
+    {
+      get
+      {
+        List<AncillaryCost> ancillaryCosts = new List<AncillaryCost>();
+
+        ConflictPackage rehabConflictPackage = new ConflictPackage(_Segment, _Conflict, _PipXP);
+        GetAncillaryCosts(ancillaryCosts, rehabConflictPackage, _PipeCoster);
+
+        return ancillaryCosts;
+      }
+    }
+
+    public List<AncillaryFactor> RehabAncillaryFactors
+    {
+      get
+      {
+        List<AncillaryFactor> ancillaryFactors = new List<AncillaryFactor>();
+
+        ConflictPackage rehabConflictPackage = new ConflictPackage(_Segment, _Conflict, _PipXP);
+        GetAncillaryFactors(ancillaryFactors, rehabConflictPackage);
+
+        return ancillaryFactors;
+      }
+    }
     /// <summary>
     /// Current alternative conflict package
     /// </summary>

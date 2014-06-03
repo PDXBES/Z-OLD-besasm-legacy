@@ -32,15 +32,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     #region Variables
     public ConflictPackage _ConflictPackage;
+    private PipeCoster _coster;
+    private ConstructionDurationCalculator _constructionDurationCalculator;
     #endregion
 
     #region Constructors
     /// <summary>
     /// Create traffic control ancillary cost
     /// </summary>
-    public TrafficControlAncillaryCost(ConflictPackage conflictPackage)
+    public TrafficControlAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster,
+      ConstructionDurationCalculator constructionDurationCalculator)
     {
       _ConflictPackage = conflictPackage;
+      _coster = coster;
+      _constructionDurationCalculator = constructionDurationCalculator;
     } // TrafficControlAncillaryCost()
     #endregion
 
@@ -121,7 +126,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return "days";
+        return "man-days";
       } // get
     } // Unit
 
@@ -133,7 +138,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return ConstructionDurationCalculator.ConstructionDurationDays(_ConflictPackage);
+        // Base cost is two people for two streets "intersecting" at the segment. More is charged
+        // if there are additional streets intersecting
+        int baseStreets = 2;
+        int numAdditionalStreets =
+          (_ConflictPackage.Conflicts.NumStreetsIfUsNodeInIntersection > baseStreets ?
+                    _ConflictPackage.Conflicts.NumStreetsIfUsNodeInIntersection :
+                    _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection > baseStreets ?
+                    _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
+        return _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster) *
+          (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
       } // get
     } // Units
 
