@@ -96,7 +96,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return (float)((double)Manhole.Cost * PipeAndManhole.Factor);
+        return (float)(double)(Manhole != null ? Manhole.Cost * PipeAndManhole.Factor : 0.0);
       } // get
     } // ManholeCost
 
@@ -161,7 +161,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       get
       {
         return (float)(_Length * (double)DirectConstructionCostPerFt) +
-        ManholeCost;
+          ManholeCost;
       } // get
     } // DirectConstructionPipeCost
 

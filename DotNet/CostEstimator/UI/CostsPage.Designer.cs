@@ -646,7 +646,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl1.Controls.Add(this.ultraGridBagLayoutPanel6);
       this.ultraTabPageControl1.Location = new System.Drawing.Point(1, 24);
       this.ultraTabPageControl1.Name = "ultraTabPageControl1";
-      this.ultraTabPageControl1.Size = new System.Drawing.Size(923, 515);
+      this.ultraTabPageControl1.Size = new System.Drawing.Size(923, 505);
       // 
       // ultraGridBagLayoutPanel6
       // 
@@ -656,7 +656,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel6.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel6.Name = "ultraGridBagLayoutPanel6";
-      this.ultraGridBagLayoutPanel6.Size = new System.Drawing.Size(923, 515);
+      this.ultraGridBagLayoutPanel6.Size = new System.Drawing.Size(923, 505);
       this.ultraGridBagLayoutPanel6.TabIndex = 1;
       // 
       // gridCosts
@@ -1729,11 +1729,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridCosts.Location = new System.Drawing.Point(0, 40);
       this.gridCosts.Name = "gridCosts";
       this.ultraGridBagLayoutPanel6.SetPreferredSize(this.gridCosts, new System.Drawing.Size(826, 329));
-      this.gridCosts.Size = new System.Drawing.Size(923, 475);
+      this.gridCosts.Size = new System.Drawing.Size(923, 465);
       this.gridCosts.TabIndex = 0;
       this.gridCosts.Text = "ultraGrid1";
-      this.gridCosts.AfterRowInsert += new Infragistics.Win.UltraWinGrid.RowEventHandler(this.gridCosts_AfterRowInsert);
       this.gridCosts.AfterRowExpanded += new Infragistics.Win.UltraWinGrid.RowEventHandler(this.gridCosts_AfterRowExpanded);
+      this.gridCosts.AfterRowInsert += new Infragistics.Win.UltraWinGrid.RowEventHandler(this.gridCosts_AfterRowInsert);
       // 
       // ultraCalcManager1
       // 
@@ -2002,14 +2002,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             ultraDataColumn134,
             ultraDataColumn135});
       this.dsProject.Band.Key = "CostItemFactor0";
-      this.dsProject.RowCancelEdit += new Infragistics.Win.UltraWinDataSource.RowCancelEditEventHandler(this.dsProject_RowCancelEdit);
-      this.dsProject.RowDeleted += new Infragistics.Win.UltraWinDataSource.RowDeletedEventHandler(this.dsProject_RowDeleted);
+      this.dsProject.CellDataRequested += new Infragistics.Win.UltraWinDataSource.CellDataRequestedEventHandler(this.dsProject_CellDataRequested);
+      this.dsProject.CellDataUpdating += new Infragistics.Win.UltraWinDataSource.CellDataUpdatingEventHandler(this.dsProject_CellDataUpdating);
+      this.dsProject.CellDataUpdated += new Infragistics.Win.UltraWinDataSource.CellDataUpdatedEventHandler(this.dsProject_CellDataUpdated);
       this.dsProject.RowAdded += new Infragistics.Win.UltraWinDataSource.RowAddedEventHandler(this.dsProject_RowAdded);
       this.dsProject.RowDeleting += new Infragistics.Win.UltraWinDataSource.RowDeletingEventHandler(this.dsProject_RowDeleting);
-      this.dsProject.CellDataUpdated += new Infragistics.Win.UltraWinDataSource.CellDataUpdatedEventHandler(this.dsProject_CellDataUpdated);
-      this.dsProject.CellDataUpdating += new Infragistics.Win.UltraWinDataSource.CellDataUpdatingEventHandler(this.dsProject_CellDataUpdating);
+      this.dsProject.RowDeleted += new Infragistics.Win.UltraWinDataSource.RowDeletedEventHandler(this.dsProject_RowDeleted);
       this.dsProject.RowEndEdit += new Infragistics.Win.UltraWinDataSource.RowEndEditEventHandler(this.dsProject_RowEndEdit);
-      this.dsProject.CellDataRequested += new Infragistics.Win.UltraWinDataSource.CellDataRequestedEventHandler(this.dsProject_CellDataRequested);
+      this.dsProject.RowCancelEdit += new Infragistics.Win.UltraWinDataSource.RowCancelEditEventHandler(this.dsProject_RowCancelEdit);
       // 
       // grpENR
       // 
@@ -2035,10 +2035,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel10.Controls.Add(this.edtENR);
       this.ultraGridBagLayoutPanel10.Controls.Add(this.trackENR);
       this.ultraGridBagLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ultraGridBagLayoutPanel10.Location = new System.Drawing.Point(3, 0);
+      this.ultraGridBagLayoutPanel10.Location = new System.Drawing.Point(3, 3);
       this.ultraGridBagLayoutPanel10.Name = "ultraGridBagLayoutPanel10";
       this.ultraGridBagLayoutPanel10.Padding = new System.Windows.Forms.Padding(8, 2, 8, 0);
-      this.ultraGridBagLayoutPanel10.Size = new System.Drawing.Size(917, 29);
+      this.ultraGridBagLayoutPanel10.Size = new System.Drawing.Size(917, 26);
       this.ultraGridBagLayoutPanel10.TabIndex = 0;
       // 
       // calENRDate
@@ -2049,7 +2049,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint15.OriginX = 2;
       gridBagConstraint15.OriginY = 0;
       this.ultraGridBagLayoutPanel10.SetGridBagConstraint(this.calENRDate, gridBagConstraint15);
-      this.calENRDate.Location = new System.Drawing.Point(276, 4);
+      this.calENRDate.Location = new System.Drawing.Point(276, 2);
       this.calENRDate.Name = "calENRDate";
       this.calENRDate.NonAutoSizeHeight = 22;
       this.ultraGridBagLayoutPanel10.SetPreferredSize(this.calENRDate, new System.Drawing.Size(121, 22));
@@ -2066,7 +2066,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint16.OriginX = 0;
       gridBagConstraint16.OriginY = 0;
       this.ultraGridBagLayoutPanel10.SetGridBagConstraint(this.ultraLabel2, gridBagConstraint16);
-      this.ultraLabel2.Location = new System.Drawing.Point(8, 4);
+      this.ultraLabel2.Location = new System.Drawing.Point(8, 2);
       this.ultraLabel2.Name = "ultraLabel2";
       this.ultraGridBagLayoutPanel10.SetPreferredSize(this.ultraLabel2, new System.Drawing.Size(60, 21));
       this.ultraLabel2.Size = new System.Drawing.Size(60, 23);
@@ -2082,7 +2082,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint17.OriginY = 0;
       gridBagConstraint17.WeightX = 1F;
       this.ultraGridBagLayoutPanel10.SetGridBagConstraint(this.lblENR, gridBagConstraint17);
-      this.lblENR.Location = new System.Drawing.Point(505, 4);
+      this.lblENR.Location = new System.Drawing.Point(505, 2);
       this.lblENR.Name = "lblENR";
       this.ultraGridBagLayoutPanel10.SetPreferredSize(this.lblENR, new System.Drawing.Size(200, 21));
       this.lblENR.Size = new System.Drawing.Size(404, 23);
@@ -2101,7 +2101,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint18.OriginX = 3;
       gridBagConstraint18.OriginY = 0;
       this.ultraGridBagLayoutPanel10.SetGridBagConstraint(this.edtENR, gridBagConstraint18);
-      this.edtENR.Location = new System.Drawing.Point(397, 4);
+      this.edtENR.Location = new System.Drawing.Point(397, 2);
       this.edtENR.Name = "edtENR";
       this.ultraGridBagLayoutPanel10.SetPreferredSize(this.edtENR, new System.Drawing.Size(100, 23));
       this.edtENR.PromptChar = ' ';
@@ -2119,7 +2119,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint19.OriginX = 1;
       gridBagConstraint19.OriginY = 0;
       this.ultraGridBagLayoutPanel10.SetGridBagConstraint(this.trackENR, gridBagConstraint19);
-      this.trackENR.Location = new System.Drawing.Point(68, 4);
+      this.trackENR.Location = new System.Drawing.Point(68, 2);
       this.trackENR.MidpointSettings.Visible = Infragistics.Win.DefaultableBoolean.True;
       this.trackENR.Name = "trackENR";
       this.ultraGridBagLayoutPanel10.SetPreferredSize(this.trackENR, new System.Drawing.Size(200, 21));
@@ -2134,7 +2134,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl2.Controls.Add(this.ultraGridBagLayoutPanel2);
       this.ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl2.Name = "ultraTabPageControl2";
-      this.ultraTabPageControl2.Size = new System.Drawing.Size(923, 515);
+      this.ultraTabPageControl2.Size = new System.Drawing.Size(923, 478);
       // 
       // ultraGridBagLayoutPanel2
       // 
@@ -2147,7 +2147,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel2.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel2.Name = "ultraGridBagLayoutPanel2";
-      this.ultraGridBagLayoutPanel2.Size = new System.Drawing.Size(923, 515);
+      this.ultraGridBagLayoutPanel2.Size = new System.Drawing.Size(923, 478);
       this.ultraGridBagLayoutPanel2.TabIndex = 1;
       // 
       // cmbApplyTo
@@ -2177,7 +2177,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraLabel1.Size = new System.Drawing.Size(923, 28);
       this.ultraLabel1.TabIndex = 3;
       this.ultraLabel1.Text = "Select direct construction factors from the list below.  Checked items will be ad" +
-          "ded to the \"Other direct construction\" item underneath the current estimate.";
+    "ded to the \"Other direct construction\" item underneath the current estimate.";
       // 
       // ultraGridBagLayoutPanel3
       // 
@@ -2188,7 +2188,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint5.OriginY = 3;
       gridBagConstraint5.SpanX = 2;
       this.ultraGridBagLayoutPanel2.SetGridBagConstraint(this.ultraGridBagLayoutPanel3, gridBagConstraint5);
-      this.ultraGridBagLayoutPanel3.Location = new System.Drawing.Point(0, 487);
+      this.ultraGridBagLayoutPanel3.Location = new System.Drawing.Point(0, 450);
       this.ultraGridBagLayoutPanel3.Name = "ultraGridBagLayoutPanel3";
       this.ultraGridBagLayoutPanel2.SetPreferredSize(this.ultraGridBagLayoutPanel3, new System.Drawing.Size(200, 28));
       this.ultraGridBagLayoutPanel3.Size = new System.Drawing.Size(923, 28);
@@ -2333,7 +2333,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridOtherDirectConstruction.Location = new System.Drawing.Point(0, 57);
       this.gridOtherDirectConstruction.Name = "gridOtherDirectConstruction";
       this.ultraGridBagLayoutPanel2.SetPreferredSize(this.gridOtherDirectConstruction, new System.Drawing.Size(550, 185));
-      this.gridOtherDirectConstruction.Size = new System.Drawing.Size(923, 422);
+      this.gridOtherDirectConstruction.Size = new System.Drawing.Size(923, 385);
       this.gridOtherDirectConstruction.TabIndex = 0;
       this.gridOtherDirectConstruction.Text = "ultraGrid1";
       // 
@@ -2347,16 +2347,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             ultraDataColumn2,
             ultraDataColumn3,
             ultraDataColumn4});
+      this.dsOtherDirectConstructionFactors.CellDataRequested += new Infragistics.Win.UltraWinDataSource.CellDataRequestedEventHandler(this.dsOtherDirectConstructionFactors_CellDataRequested);
       this.dsOtherDirectConstructionFactors.CellDataUpdated += new Infragistics.Win.UltraWinDataSource.CellDataUpdatedEventHandler(this.dsOtherDirectConstructionFactors_CellDataUpdated);
       this.dsOtherDirectConstructionFactors.RowEndEdit += new Infragistics.Win.UltraWinDataSource.RowEndEditEventHandler(this.dsOtherDirectConstructionFactors_RowEndEdit);
-      this.dsOtherDirectConstructionFactors.CellDataRequested += new Infragistics.Win.UltraWinDataSource.CellDataRequestedEventHandler(this.dsOtherDirectConstructionFactors_CellDataRequested);
       // 
       // ultraTabPageControl3
       // 
       this.ultraTabPageControl3.Controls.Add(this.ultraGridBagLayoutPanel4);
       this.ultraTabPageControl3.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl3.Name = "ultraTabPageControl3";
-      this.ultraTabPageControl3.Size = new System.Drawing.Size(923, 515);
+      this.ultraTabPageControl3.Size = new System.Drawing.Size(923, 478);
       // 
       // ultraGridBagLayoutPanel4
       // 
@@ -2367,7 +2367,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel4.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel4.Name = "ultraGridBagLayoutPanel4";
-      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(923, 515);
+      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(923, 478);
       this.ultraGridBagLayoutPanel4.TabIndex = 1;
       // 
       // ultraLabel3
@@ -2392,7 +2392,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint11.OriginX = 0;
       gridBagConstraint11.OriginY = 2;
       this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.ultraGridBagLayoutPanel5, gridBagConstraint11);
-      this.ultraGridBagLayoutPanel5.Location = new System.Drawing.Point(0, 487);
+      this.ultraGridBagLayoutPanel5.Location = new System.Drawing.Point(0, 450);
       this.ultraGridBagLayoutPanel5.Name = "ultraGridBagLayoutPanel5";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.ultraGridBagLayoutPanel5, new System.Drawing.Size(200, 28));
       this.ultraGridBagLayoutPanel5.Size = new System.Drawing.Size(923, 28);
@@ -2430,11 +2430,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       // treeCostItemFactor
       // 
+      ultraTreeNodeColumn1.ButtonDisplayStyle = Infragistics.Win.UltraWinTree.ButtonDisplayStyle.Always;
       ultraTreeNodeColumn1.Key = "Name";
       ultraTreeNodeColumn1.LayoutInfo.PreferredCellSize = new System.Drawing.Size(184, 19);
       ultraTreeNodeColumn1.LayoutInfo.PreferredLabelSize = new System.Drawing.Size(184, 23);
       ultraTreeNodeColumn1.LayoutInfo.SpanX = 2;
       ultraTreeNodeColumn1.LayoutInfo.SpanY = 2;
+      ultraTreeNodeColumn2.ButtonDisplayStyle = Infragistics.Win.UltraWinTree.ButtonDisplayStyle.Always;
       ultraTreeNodeColumn2.Format = "C0";
       ultraTreeNodeColumn2.Key = "Cost";
       ultraTreeNodeColumn2.LayoutInfo.PreferredCellSize = new System.Drawing.Size(74, 19);
@@ -2455,16 +2457,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.treeCostItemFactor.Location = new System.Drawing.Point(0, 29);
       this.treeCostItemFactor.Name = "treeCostItemFactor";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.treeCostItemFactor, new System.Drawing.Size(121, 90));
-      this.treeCostItemFactor.Size = new System.Drawing.Size(923, 450);
+      this.treeCostItemFactor.Size = new System.Drawing.Size(923, 413);
       this.treeCostItemFactor.TabIndex = 0;
       // 
       // ultraGridBagLayoutPanel1
       // 
       this.ultraGridBagLayoutPanel1.Controls.Add(this.tabCosts);
       this.ultraGridBagLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ultraGridBagLayoutPanel1.Location = new System.Drawing.Point(4, 148);
+      this.ultraGridBagLayoutPanel1.Location = new System.Drawing.Point(4, 158);
       this.ultraGridBagLayoutPanel1.Name = "ultraGridBagLayoutPanel1";
-      this.ultraGridBagLayoutPanel1.Size = new System.Drawing.Size(925, 540);
+      this.ultraGridBagLayoutPanel1.Size = new System.Drawing.Size(925, 530);
       this.ultraGridBagLayoutPanel1.TabIndex = 1;
       // 
       // tabCosts
@@ -2483,7 +2485,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabCosts.Name = "tabCosts";
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.tabCosts, new System.Drawing.Size(200, 93));
       this.tabCosts.SharedControlsPage = this.ultraTabSharedControlsPage1;
-      this.tabCosts.Size = new System.Drawing.Size(925, 540);
+      this.tabCosts.Size = new System.Drawing.Size(925, 530);
       this.tabCosts.TabIndex = 3;
       ultraTab1.Key = "Costs";
       ultraTab1.TabPage = this.ultraTabPageControl1;
@@ -2506,7 +2508,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       this.ultraTabSharedControlsPage1.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabSharedControlsPage1.Name = "ultraTabSharedControlsPage1";
-      this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(923, 515);
+      this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(923, 505);
       // 
       // _ChildFormTemplate_Toolbars_Dock_Area_Left
       // 
@@ -2515,9 +2517,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this._ChildFormTemplate_Toolbars_Dock_Area_Left.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Left;
       this._ChildFormTemplate_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
       this._ChildFormTemplate_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 4;
-      this._ChildFormTemplate_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 148);
+      this._ChildFormTemplate_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 158);
       this._ChildFormTemplate_Toolbars_Dock_Area_Left.Name = "_ChildFormTemplate_Toolbars_Dock_Area_Left";
-      this._ChildFormTemplate_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 540);
+      this._ChildFormTemplate_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 530);
       this._ChildFormTemplate_Toolbars_Dock_Area_Left.ToolbarsManager = this.toolbarManager;
       // 
       // toolbarManager
@@ -2650,9 +2652,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this._ChildFormTemplate_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
       this._ChildFormTemplate_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
       this._ChildFormTemplate_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
-      this._ChildFormTemplate_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(929, 148);
+      this._ChildFormTemplate_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(929, 158);
       this._ChildFormTemplate_Toolbars_Dock_Area_Right.Name = "_ChildFormTemplate_Toolbars_Dock_Area_Right";
-      this._ChildFormTemplate_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 540);
+      this._ChildFormTemplate_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 530);
       this._ChildFormTemplate_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
       // 
       // _ChildFormTemplate_Toolbars_Dock_Area_Top
@@ -2663,7 +2665,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this._ChildFormTemplate_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
       this._ChildFormTemplate_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
       this._ChildFormTemplate_Toolbars_Dock_Area_Top.Name = "_ChildFormTemplate_Toolbars_Dock_Area_Top";
-      this._ChildFormTemplate_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(933, 148);
+      this._ChildFormTemplate_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(933, 158);
       this._ChildFormTemplate_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
       // 
       // _ChildFormTemplate_Toolbars_Dock_Area_Bottom
@@ -2685,8 +2687,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.Controls.Add(this.ultraGridBagLayoutPanel1);
       this.Controls.Add(this._ChildFormTemplate_Toolbars_Dock_Area_Left);
       this.Controls.Add(this._ChildFormTemplate_Toolbars_Dock_Area_Right);
-      this.Controls.Add(this._ChildFormTemplate_Toolbars_Dock_Area_Top);
       this.Controls.Add(this._ChildFormTemplate_Toolbars_Dock_Area_Bottom);
+      this.Controls.Add(this._ChildFormTemplate_Toolbars_Dock_Area_Top);
       this.Name = "CostsPage";
       this.Load += new System.EventHandler(this.CostsPage_Load);
       this.VisibleChanged += new System.EventHandler(this.CostsPage_VisibleChanged);
