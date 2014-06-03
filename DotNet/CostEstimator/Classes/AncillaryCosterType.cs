@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
-  enum AncillaryCosterType
+  public enum AncillaryCosterType
   {
     Model,
     Alt,

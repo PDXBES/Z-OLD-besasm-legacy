@@ -33,6 +33,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private Model _Model;
 
     private PipeCoster _PipeCoster = new PipeCoster();
+
+    private Segment _Segment;
+    private Conflict _Conflict;
     #endregion
 
     #region Constructors
@@ -42,7 +45,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="altPackage">The alternative package being processed</param>
     public AncillaryCoster(AlternativePackage altPackage)
     {
-      _AncillaryCosterType = AncillaryCosterType.Alt;
+      Type = AncillaryCosterType.Alt;
       _AltPackage = altPackage;
       _Model = null;
     } // AncillaryCoster(altPackage)
@@ -53,14 +56,110 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="model">The model being processed</param>
     public AncillaryCoster(Model model)
     {
-      _AncillaryCosterType = AncillaryCosterType.Model
+      Type = AncillaryCosterType.Model;
       _Model = model;
       _AltPackage = null;
     } // AncillaryCoster(model)
 
-    public AncillaryCoster(Conflict)
+    public AncillaryCoster(Segment segment, Conflict conflict, int lengthFt, float diamWidthIn, float USIE, float DSIE,
+      string material, string USNode, string DSNode)
     {
-      _AncillaryCosterType = AncillaryCosterType.Rehab
+      Type = AncillaryCosterType.Rehab;
+      _Segment = segment;
+      _Conflict = conflict;
+
+      DataAccess.ModelDataSet.MdlLinksDataTable tempLinksTable = new DataAccess.ModelDataSet.MdlLinksDataTable();
+      DataAccess.ModelDataSet.MdlLinksRow tempLinksRow = tempLinksTable.NewMdlLinksRow();
+      tempLinksRow.MLinkID = 1;
+      tempLinksRow.LinkID = 1;
+      tempLinksRow.IsSpecLink = false;
+      tempLinksRow.Height = 0.0;
+      tempLinksRow.LinkType = "C";
+      tempLinksRow.Length = lengthFt;
+      tempLinksRow.DiamWidth = diamWidthIn;
+      tempLinksRow.UsIE = USIE;
+      tempLinksRow.DsIE = DSIE;
+      tempLinksRow.Material = material.ToString();
+      tempLinksRow.USNode = USNode;
+      tempLinksRow.DSNode = DSNode;
+      _Link = new Link(tempLinksRow);
+
+      DataAccess.ModelDataSet.MdlPipXPDataTable tempTable = new DataAccess.ModelDataSet.MdlPipXPDataTable();
+      DataAccess.ModelDataSet.MdlPipXPRow tempRow = tempTable.NewMdlPipXPRow();
+      tempRow.MLinkID = conflict.ID;
+      tempRow.USNode = conflict.USNodeID;
+      tempRow.DSNode = conflict.DSNodeID;
+      tempRow.COMPKEY = conflict.HansenCompkey;
+      tempRow.xWtr = conflict.NumWaterCrossings;
+      tempRow.xWMinD = conflict.WaterCrossingMinDiamWidthIn;
+      tempRow.xWMaxD = conflict.WaterCrossingMaxDiamWidthIn;
+      tempRow.pWtr = conflict.NumWaterParallels;
+      tempRow.pWtrMaxD = conflict.WaterParallelsMaxDiamWidthIn;
+      tempRow.pFt2Wtr = conflict.DistFtToNearestWaterParallel;
+      tempRow.xSewer = conflict.NumSewerCrossings;
+      tempRow.xSwrMinD = conflict.SewerCrossingMinDiamWidthIn;
+      tempRow.xSwrMaxD = conflict.SewerCrossingMaxDiamWidthIn;
+      tempRow.pSewer = conflict.NumSewerParallels;
+      tempRow.pSwrMaxD = conflict.SewerParallelsMaxDiamWidthIn;
+      tempRow.pFt2Swr = conflict.DistFtToNearestSewerParallel;
+      tempRow.xStrt = conflict.NumStreetCrossings;
+      tempRow.xArt = conflict.NumArterialCrossings;
+      tempRow.xMJArt = conflict.NumMajorArterialCrossings;
+      tempRow.xFrwy = conflict.NumFreewayCrossings;
+      tempRow.pStrt = conflict.NumStreetParallels;
+      tempRow.pStrtTyp = conflict.StreetParallelsType;
+      tempRow.pFt2Strt = conflict.DistFtToNearestStreetParallel;
+      tempRow.pTraffic = conflict.StreetParallelsTrafficCount;
+      tempRow.uxCLx = conflict.NumStreetsWithUSNodeAtIntersection;
+      tempRow.uxFt2CLx = conflict.DistToStreetsWithUSNodeAtIntersection;
+      tempRow.dxCLx = conflict.NumStreetsWithDSNodeAtIntersection;
+      tempRow.dxFt2CLx = conflict.DistToStreetsWithDSNodeAtIntersection;
+      tempRow.xFiber = conflict.NumFiberCrossings;
+      tempRow.pFiber = conflict.NumFiberParallels;
+      tempRow.pFt2Fiber = conflict.DistFtToNearestFiberParallel;
+      tempRow.xGas = conflict.NumGasCrossings;
+      tempRow.pGas = conflict.NumGasParallels;
+      tempRow.pFt2Gas = conflict.DistFtToNearestGasParallel;
+      tempRow.xRail = conflict.NumRailCrossings;
+      tempRow.pRail = conflict.NumRailParallels;
+      tempRow.pFt2Rail = conflict.DistFtToNearestRailParallel;
+      tempRow.xLRT = conflict.NumLRTCrossings;
+      tempRow.pLRT = conflict.NumLRTParallels;
+      tempRow.pFt2LRT = conflict.DistFtToNearestLRTParallel;
+      tempRow.xEmt = conflict.NumEMTCrossings;
+      tempRow.pEmt = conflict.NumEMTParallels;
+      tempRow.pFt2Emt = conflict.DistFtToNearestEMTParallel;
+      tempRow.xEzonC = conflict.InConservationZone ? 1 : 0;
+      tempRow.xEzonP = conflict.InPreservationZone ? 1 : 0;
+      tempRow.xFtEzonC = conflict.LengthFtInsideConservationZone;
+      tempRow.xFtEzonP = conflict.LengthFtInsidePreservationZone;
+      tempRow.xEzAreaC = conflict.AreaSqFtInsideConservationZone;
+      tempRow.xEzAreaP = conflict.AreaSqFtInsidePreservationZone;
+      tempRow.uxMS4 = conflict.USNodeInMS4 ? 1 : 0;
+      tempRow.uxUIC = conflict.USNodeInUIC ? 1 : 0;
+      tempRow.uDepth = conflict.USDepth;
+      tempRow.dDepth = conflict.DSDepth;
+      tempRow.xPipSlope = conflict.PipeSlope;
+      tempRow.gSlope = (Int16)(conflict.GroundSlope * 100);
+      tempRow.xEcsi = conflict.NearContaminationSite ? 1 : 0;
+      tempRow.xFt2Ecsi = conflict.DistFtToContaminationSite;
+      tempRow.xEcsiLen = conflict.LengthFtInsideContaminationSite;
+      tempRow.xEcsiVol = conflict.VolumeCuFtInsideContaminationSite;
+      tempRow.xSchl = conflict.NearSchool ? 1 : 0;
+      tempRow.xFt2Schl = conflict.DistFtToNearestSchool;
+      tempRow.xHosp = conflict.NearHospital ? 1 : 0;
+      tempRow.xFt2Hosp = conflict.DistFtToNearestHospital;
+      tempRow.xPol = conflict.NearPoliceStation ? 1 : 0;
+      tempRow.xFt2Pol = conflict.DistFtToNearestPoliceStation;
+      tempRow.xFire = conflict.NearFireStation ? 1 : 0;
+      tempRow.xFt2Fire = conflict.DistFtToNearestFireStation;
+      tempRow.xBldg = conflict.NearBuilding ? 1 : 0;
+      tempRow.xFt2Bldg = conflict.DistFtToNearestBuilding;
+      tempRow.xHyd = conflict.NearHydrant ? 1 : 0;
+      tempRow.xFt2Hyd = conflict.DistFtToNearestHydrant;
+      tempRow.HardArea = conflict.InHardArea ? 1 : 0;
+
+      _PipXP = new PipXP(tempRow);
     }
     #endregion
 
@@ -277,7 +376,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return new ConflictPackage(_Model, _Link, _PipXP);
+        return Type == AncillaryCosterType.Rehab 
+          ? new ConflictPackage(_Segment, _Conflict, _PipXP)
+          : new ConflictPackage(_Model, _Link, _PipXP);
       }
     } // CurrentConflictPackage
 

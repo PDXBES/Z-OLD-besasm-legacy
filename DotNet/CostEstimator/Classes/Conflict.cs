@@ -63,6 +63,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public bool InPreservationZone { get; private set; }
     public Int16 LengthFtInsideConservationZone { get; private set; }
     public Int16 LengthFtInsidePreservationZone { get; private set; }
+    public Int16 AreaSqFtInsideConservationZone { get; private set; }
+    public Int16 AreaSqFtInsidePreservationZone { get; private set; }
 
     public bool USNodeInMS4 { get; private set; }
     public bool USNodeInUIC { get; private set; }
@@ -156,6 +158,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       InPreservationZone = Convert.ToInt16(reader["xEzonP"] != DBNull.Value ? reader["xEzonP"] : 0) != 0;
       LengthFtInsideConservationZone = Convert.ToInt16(reader["xEzAreaC"] != DBNull.Value ? reader["xEzAreaC"] : 0);
       LengthFtInsidePreservationZone = Convert.ToInt16(reader["xEzAreaP"] != DBNull.Value ? reader["xEzAreaP"] : 0);
+      AreaSqFtInsideConservationZone = Convert.ToInt16(reader["xEzAreaC"] != DBNull.Value ? reader["xEzAreaC"] : 0);
+      AreaSqFtInsidePreservationZone = Convert.ToInt16(reader["xEzAreaP"] != DBNull.Value ? reader["xEzAreaP"] : 0);
+
 
       USNodeInMS4 = Convert.ToInt16(reader["uxMS4"] != DBNull.Value ? reader["uxMS4"] : 0) != 0;
       USNodeInUIC = Convert.ToInt16(reader["uxUIC"] != DBNull.Value ? reader["uxUIC"] : 0) != 0;

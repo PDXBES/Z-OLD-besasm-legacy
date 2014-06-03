@@ -2107,46 +2107,56 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                   throw new Exception("Cannot add CostItemFactor");
               }
 
-              //// Ancillary CostItemFactors
-              //AncillaryCoster ancillaryCoster = new AncillaryCoster(model);
-              //ancillaryCoster.Link = link;
-              //ancillaryCoster.PipXP = model.ConflictFromLink(link);
+              // Ancillary CostItemFactors
+              currentStage = "Setting up ancillary costs";
+              AncillaryCoster ancillaryCoster = 
+                new AncillaryCoster(
+                  currentSegment,
+                  conflictsTable[currentSegment.ID],
+                  (Int16)currentSegment.LengthFt,
+                  currentSegment.PipeDiamWidth,
+                  currentSegment.USElevation,
+                  currentSegment.DSElevation,
+                  currentSegment.Material,
+                  string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
+                  string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID));
 
-              //List<AncillaryCost> ancillaryCosts = ancillaryCoster.ModelAncillaryCosts;
-              //if (ancillaryCosts.Count == 0)
-              //{
-              //  if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
-              //    pipeAndManholeCostItemFactor.Comment = pipeAndManholeCostItemFactor + ";" + "No ancillary costs";
-              //  else
-              //    pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
-              //} // if
-              //else
-              //{
-              //  foreach (AncillaryCost ancillaryCost in ancillaryCosts)
-              //  {
-              //    CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
-              //    CostItem poolItem = AddCostItemToPool(ancillaryItem);
-              //    CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
-              //    AddCostItemFactorToPool(ancillaryCIF);
-              //    pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
-              //  } // foreach  (ancillaryCost)
-              //} // else
+              List<AncillaryCost> ancillaryCosts = ancillaryCoster.ModelAncillaryCosts;
+              if (ancillaryCosts.Count == 0)
+              {
+                if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
+                  pipeAndManholeCostItemFactor.Comment = 
+                    String.Format("{0};No ancillary costs", pipeAndManholeCostItemFactor);
+                else
+                  pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
+              } // if
+              else
+              {
+                foreach (AncillaryCost ancillaryCost in ancillaryCosts)
+                {
+                  CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
+                  CostItem poolItem = AddCostItemToPool(ancillaryItem);
+                  CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
+                  AddCostItemFactorToPool(ancillaryCIF);
+                  pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
+                } // foreach  (ancillaryCost)
+              } // else
 
-              //// Ancillary CostFactors
-              //currentStage = "Creating ancillary CostFactors";
-              //if (ancillaryCoster.PipXP != null)
-              //{
-              //  List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
-              //  foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
-              //  {
-              //    CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
-              //    CostFactor factorItem = AddFactorToPool(factor);
-              //    pipeAndManholeCostItemFactor.AddFactor(factorItem);
-              //  } // foreach  (ancillaryFactor)
-              //}
+              // Ancillary CostFactors
+              currentStage = "Creating ancillary CostFactors";
+              if (ancillaryCoster.PipXP != null)
+              {
+                List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
+                foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+                {
+                  CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
+                  CostFactor factorItem = AddFactorToPool(factor);
+                  pipeAndManholeCostItemFactor.AddFactor(factorItem);
+                } // foreach  (ancillaryFactor)
+              }
 
-              //foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
-              //  pipeAndManholeItem.AddFactor(kvpair.Value);
+              foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
+                pipeAndManholeItem.AddFactor(kvpair.Value);
 
               // Prepare report item
               currentStage = "Preparing report item";
@@ -2163,9 +2173,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               reportPipeItem.Manhole = currentSegment.SegUSNodeID == 0 ? manholeCostItemFactor : null;
               reportPipeItem.Pipe = pipeCostItemFactor;
               reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
-              //reportPipeItem.ConstructionDuration =
-              //ConstructionDurationCalculator.ConstructionDurationDays(
-              //ancillaryCoster.CurrentConflictPackage);
+              reportPipeItem.ConstructionDuration =
+                ConstructionDurationCalculator.ConstructionDurationDays(ancillaryCoster.CurrentConflictPackage);
 
             }
             catch (Exception e)

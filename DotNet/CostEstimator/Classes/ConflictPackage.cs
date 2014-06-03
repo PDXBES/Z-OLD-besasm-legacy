@@ -31,6 +31,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private Link _Link = null;
 
     private Segment _Segment = null;
+    private Conflict _Conflict = null;
 
     private PipeConflict _PipeConflict = null;
     #endregion
@@ -62,10 +63,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       _PipeConflict = pipXP;
     } // ConflictPackage(model, link, pipXP)
 
-    public ConflictPackage(Segment segment, Conflict conflict)
+    public ConflictPackage(Segment segment, Conflict conflict, PipXP pipXP)
     {
       _Segment = segment;
-
+      _Conflict = conflict;
+      _PipeConflict = pipXP;
     }
     #endregion
 
@@ -90,8 +92,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? (float)_Model.PipeDepth(_Link) :
-          (float)_AltPackage.PipeDepth(_AltLink);
+        return _Conflict == null ? (_AltPackage == null ? (float)_Model.PipeDepth(_Link) :
+          (float)_AltPackage.PipeDepth(_AltLink)) : (_Conflict.USDepth + _Conflict.DSDepth) / 2;
       } // get
     } // Depth
 
