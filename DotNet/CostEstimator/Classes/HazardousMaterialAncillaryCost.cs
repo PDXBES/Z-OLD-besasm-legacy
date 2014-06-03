@@ -28,6 +28,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     #region Variables
     public ConflictPackage _ConflictPackage;
+    private PipeCoster _coster;
     #endregion
 
     #region Constructors
@@ -35,9 +36,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create hazardous material ancillary cost
     /// </summary>
     /// <param name="altPipXP">Alt pip XP</param>
-    public HazardousMaterialAncillaryCost(ConflictPackage conflictPackage)
+    public HazardousMaterialAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster)
     {
       _ConflictPackage = conflictPackage;
+      _coster = coster;
     } // HazardousMaterialAncillaryCost(altPipXP)
     #endregion
 
@@ -101,16 +103,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         double affectedLength = _ConflictPackage.Conflicts.IsNearContaminationSite ?
         (_ConflictPackage.Length < HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET ?
         _ConflictPackage.Length : HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET) : 0;
-        PipeCoster pipeCoster = new PipeCoster();
-        pipeCoster.InsideDiameter = _ConflictPackage.Diameter;
-        pipeCoster.Material = _ConflictPackage.PipeMaterial;
-        pipeCoster.Depth = _ConflictPackage.Depth;
+        _coster.InsideDiameter = _ConflictPackage.Diameter;
+        _coster.Material = _ConflictPackage.PipeMaterial;
+        _coster.Depth = _ConflictPackage.Depth;
 
-        if (pipeCoster.ExcavationVolume <= 0 || _ConflictPackage.Length <= 0)
+        if (_coster.ExcavationVolume <= 0 || _ConflictPackage.Length <= 0)
           return 0;
         else
           return (float)((affectedLength / _ConflictPackage.Length) *
-                                  (pipeCoster.ExcavationVolume * _ConflictPackage.Length));
+                                  (_coster.ExcavationVolume * _ConflictPackage.Length));
       } // get
     } // Units
 

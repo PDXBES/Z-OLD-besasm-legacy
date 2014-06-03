@@ -26,26 +26,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public const double BOREJACK_SLOWERDIAMETER_IN = 30;
     public const double BOREJACK_FAST_BUILD_RATE_PER_DAY_FT = 125;
     public const double BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT = 75;
-
+    private PipeCoster _coster = null;
     #region Properties
     /// <summary>
     /// Duration of construction based on build rates of components (mainline,
     /// manhole, pavement, and crossings)
     /// </summary>
     /// <returns>Number of fractional days needed to build pipe</returns>
-    public static float ConstructionDurationDays(ConflictPackage conflictPackage)
+    public float ConstructionDurationDays(ConflictPackage conflictPackage, PipeCoster coster)
     {
-      PipeCoster pipeCoster = new PipeCoster();
+      _coster = coster;
 
-      pipeCoster.InsideDiameter = conflictPackage.Diameter;
-      pipeCoster.Depth = conflictPackage.Depth;
-      pipeCoster.Material = conflictPackage.PipeMaterial;
+      _coster.InsideDiameter = conflictPackage.Diameter;
+      _coster.Depth = conflictPackage.Depth;
+      _coster.Material = conflictPackage.PipeMaterial;
 
       float numDays = 0;
 
       if (conflictPackage.Depth > BOREJACK_DEPTH_FT)
       {
-        BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage);
+        BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage, _coster);
         numDays = testBoring.IsMicroTunnel ?
           (float)Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
           conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
@@ -58,7 +58,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         double manholeConstructionDurationDays = conflictPackage.Depth /
         MANHOLE_BUILD_RATE_PER_DAY_FT;
         // Mainline at 140 cy per day
-        double mainlineConstructionDurationDays = pipeCoster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
+        double mainlineConstructionDurationDays = _coster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
         // Utility crossings add 0.5 days per conflict
         int numUtilityCrossings =
         (conflictPackage.Conflicts == null) ? 0 :

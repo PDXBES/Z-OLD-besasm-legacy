@@ -82,6 +82,7 @@
     <Compile Include="InflowControlCoster.cs" />
     <Compile Include="ParallelRelocationAncillaryCost.cs" />
     <Compile Include="PipeCoster.cs" />
+    <Compile Include="RehabItemType.cs" />
     <Compile Include="ReportFocusAreaInfo.cs" />
     <Compile Include="ReportGenericItem.cs" />
     <Compile Include="ReportInflowControlItem.cs" />

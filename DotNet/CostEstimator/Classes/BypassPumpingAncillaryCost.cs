@@ -24,6 +24,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     #region Variables
     ConflictPackage _ConflictPackage;
+    PipeCoster _coster = null;
+    ConstructionDurationCalculator _constructionDurationCalculator = null;
     #endregion
 
     #region Constructors
@@ -31,9 +33,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create bypass pumping ancillary cost
     /// </summary>
     /// <param name="altLink">Alt link</param>
-    public BypassPumpingAncillaryCost(ConflictPackage conflictPackage)
+    public BypassPumpingAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster,
+      ConstructionDurationCalculator constructionDurationCalculator)
     {
       _ConflictPackage = conflictPackage;
+      _coster = coster;
+      _constructionDurationCalculator = constructionDurationCalculator;
     } // BypassPumpingAncillaryCost(altLink)
     #endregion
 
@@ -123,7 +128,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return ConstructionDurationCalculator.ConstructionDurationDays(_ConflictPackage);
+        return _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster);
       } // get
     } // Units
 

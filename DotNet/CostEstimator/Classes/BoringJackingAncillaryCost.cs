@@ -27,14 +27,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private static double BORINGJACKINGMULTIPLIER = 2.5;
     private static double MICROTUNNELMULTIPLIER = 3.0;
-
+    private PipeCoster _coster = null;
     #region Constructors
     /// <summary>
     /// Create boring jacking ancillary cost
     /// </summary>
-    public BoringJackingAncillaryCost(ConflictPackage conflictPackage)
+    public BoringJackingAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster)
     {
       _ConflictPackage = conflictPackage;
+      _coster = coster;
     } // BoringJackingAncillaryCost()
     #endregion
 
@@ -81,13 +82,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        PipeCoster pipeCoster = new PipeCoster();
-        pipeCoster.InsideDiameter = _ConflictPackage.Diameter;
-        pipeCoster.Material = _ConflictPackage.PipeMaterial;
-        pipeCoster.Depth = _ConflictPackage.Depth;
+        _coster.InsideDiameter = _ConflictPackage.Diameter;
+        _coster.Material = _ConflictPackage.PipeMaterial;
+        _coster.Depth = _ConflictPackage.Depth;
 
         double multiplier = IsMicroTunnel ? MICROTUNNELMULTIPLIER : BORINGJACKINGMULTIPLIER;
-        return (float)((double)pipeCoster.DirectConstructionCost * multiplier);
+        return (float)((double)_coster.DirectConstructionCost * multiplier);
       } // get
     } // UnitCost
 

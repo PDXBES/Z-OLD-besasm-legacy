@@ -80,7 +80,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? (float)_Link.Diameter : (float)_AltLink.Diameter;
+        return _Conflict == null ? (_AltPackage == null ? (float)_Link.Diameter : (float)_AltLink.Diameter) :
+          _Segment.PipeDiamWidth;
       } // get
     } // Diameter
 
@@ -105,8 +106,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? (float)_Link.Length :
-          (float)_AltLink.Length;
+        return _Conflict == null ? (_AltPackage == null ? (float)_Link.Length :
+          (float)_AltLink.Length) : _Segment.LengthFt;
       } // get
     } // Length
 
@@ -118,8 +119,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? (float)((_Link.USIE - _Link.DSIE) / _Link.Length) :
-          (float)((_AltLink.USIE - _AltLink.DSIE) / _AltLink.Length);
+        return _Conflict == null ? (_AltPackage == null ? (float)((_Link.USIE - _Link.DSIE) / _Link.Length) :
+          (float)((_AltLink.USIE - _AltLink.DSIE) / _AltLink.Length)) : 
+          (_Segment.USElevation - _Segment.DSElevation) / _Segment.LengthFt;
       }
     } // Slope
 
@@ -131,8 +133,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? PipeCoster.StringToPipeMaterial(_Link.Material) :
-        PipeCoster.StringToPipeMaterial(_AltLink.Material);
+        return _Conflict == null ? (_AltPackage == null ? PipeCoster.StringToPipeMaterial(_Link.Material) :
+          PipeCoster.StringToPipeMaterial(_AltLink.Material)) : PipeCoster.StringToPipeMaterial(_Segment.Material);
       }
     } // PipeMaterial
 
@@ -144,7 +146,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? _Link.USNodeName : _AltLink.USNodeName;
+        return _Conflict == null ? (_AltPackage == null ? _Link.USNodeName : _AltLink.USNodeName) :
+          _Segment.USNodeID;
       } // get
     } // USNode
 
@@ -156,7 +159,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? _Link.DSNodeName : _AltLink.DSNodeName;
+        return _Conflict == null ? (_AltPackage == null ? _Link.DSNodeName : _AltLink.DSNodeName) :
+          _Segment.DSNodeID;
       } // get
     } // DSNode
 
@@ -168,7 +172,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _AltPackage == null ? _Link.MLinkID : 0;
+        return _Conflict == null ? (_AltPackage == null ? _Link.MLinkID : 0) : 0;
       } // get
     } // MstLinkID
 

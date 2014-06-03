@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemsAnalysis", "SystemsAnalysis", "{E18F2027-1743-445D-8D77-B66A116C26CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}"
@@ -178,5 +178,8 @@ Global
 		{B6E1DEF7-D4EB-4D0A-8867-A324FE226D34} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 		{19DE0713-65B7-4D46-A537-49704F93CB90} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 		{9AE8BF25-3ABF-402D-BC63-841E8588D20C} = {E18F2027-1743-445D-8D77-B66A116C26CA}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
