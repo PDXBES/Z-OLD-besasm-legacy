@@ -1869,11 +1869,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         conn.Open();
         OleDbDataReader reader = null;
-        OleDbCommand command = new OleDbCommand("SELECT * FROM " + conflictsTableName, conn);
+        OleDbCommand command = new OleDbCommand("SELECT * FROM [" + conflictsTableName + "]", conn);
         reader = command.ExecuteReader();
 
         OleDbDataReader countReader = null;
-        OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM " + conflictsTableName, 
+        OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM [" + conflictsTableName + "]", 
           conn);
         countReader = countCommand.ExecuteReader();
         countReader.Read();
@@ -1990,11 +1990,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           currentStage = "Setting up connection";
           conn.Open();
           OleDbDataReader reader = null;
-          OleDbCommand command = new OleDbCommand("SELECT * FROM " + segmentsTableName, conn);
+          OleDbCommand command = new OleDbCommand("SELECT * FROM [" + segmentsTableName +"]", conn);
           reader = command.ExecuteReader();
 
           OleDbDataReader countReader = null;
-          OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM " + segmentsTableName,
+          OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM [" + segmentsTableName + "]",
             conn);
           countReader = countCommand.ExecuteReader();
           countReader.Read();

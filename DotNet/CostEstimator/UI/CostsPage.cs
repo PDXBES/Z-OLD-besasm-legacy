@@ -562,7 +562,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// </summary>
     private void ExportPipeCosts()
     {
-      dlgSave.Title = "Sa.ve pipe costs as text file";
+      dlgSave.Title = "Save pipe costs as text file";
       dlgSave.DefaultExt = "csv";
       if (dlgSave.ShowDialog() == DialogResult.OK)
       {

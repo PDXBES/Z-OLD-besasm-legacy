@@ -42,6 +42,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="altPackage">The alternative package being processed</param>
     public AncillaryCoster(AlternativePackage altPackage)
     {
+      _AncillaryCosterType = AncillaryCosterType.Alt;
       _AltPackage = altPackage;
       _Model = null;
     } // AncillaryCoster(altPackage)
@@ -52,12 +53,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="model">The model being processed</param>
     public AncillaryCoster(Model model)
     {
+      _AncillaryCosterType = AncillaryCosterType.Model
       _Model = model;
       _AltPackage = null;
     } // AncillaryCoster(model)
+
+    public AncillaryCoster(Conflict)
+    {
+      _AncillaryCosterType = AncillaryCosterType.Rehab
+    }
     #endregion
 
     #region Properties
+    // Type of ancillary coster
+    public AncillaryCosterType Type { get; private set; }
     /// <summary>
     /// Returns the current AltPipXP record
     /// </summary>

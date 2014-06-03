@@ -30,6 +30,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private Model _Model = null;
     private Link _Link = null;
 
+    private Segment _Segment = null;
+
     private PipeConflict _PipeConflict = null;
     #endregion
 
@@ -59,6 +61,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       _Link = link;
       _PipeConflict = pipXP;
     } // ConflictPackage(model, link, pipXP)
+
+    public ConflictPackage(Segment segment, Conflict conflict)
+    {
+      _Segment = segment;
+
+    }
     #endregion
 
     #region Properties

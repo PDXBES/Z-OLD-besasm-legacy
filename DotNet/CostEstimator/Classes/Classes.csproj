@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AncillaryCost.cs" />
     <Compile Include="AncillaryCoster.cs" />
+    <Compile Include="AncillaryCosterType.cs" />
     <Compile Include="AncillaryFactor.cs" />
     <Compile Include="BoringJackingAncillaryCost.cs" />
     <Compile Include="BypassPumpingAncillaryCost.cs" />
