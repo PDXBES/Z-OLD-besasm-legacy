@@ -1071,7 +1071,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             throw new Exception("Cannot add CostItemFactor");
 
           // Ancillary CostItemFactors
-          AncillaryCoster ancillaryCoster = new AncillaryCoster(altPackage, constructionDurationCalculator);
+          AncillaryCoster ancillaryCoster = new AncillaryCoster(altPackage, _PipeCoster, constructionDurationCalculator);
           ancillaryCoster.AltLink = altLink;
           ancillaryCoster.AltPipXP = altPackage.AltConflictFromAltLink(altLink);
 
@@ -1709,7 +1709,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             // Ancillary CostItemFactors
             currentStage = "Creating ancillary CostItemFactors";
-            AncillaryCoster ancillaryCoster = new AncillaryCoster(model, constructionDurationCalculator);
+            AncillaryCoster ancillaryCoster = new AncillaryCoster(model, _PipeCoster, constructionDurationCalculator);
             ancillaryCoster.Link = link;
             ancillaryCoster.PipXP = model.ConflictFromLink(link);
 
@@ -2018,6 +2018,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             currentSegment.Material,
             string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
             string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
+            _PipeCoster,
             constructionDurationCalculator);
 
         List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
@@ -2106,6 +2107,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       string segmentsTableName,
       string conflictsTableDB,
       string conflictsTableName,
+      int numRecords,
       out string errorMessage)
     {
       try
@@ -2126,41 +2128,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         string conflictsTableFileName = Path.Combine(modelPath, conflictsTableDB);
         var conflictsTable = ReadConflictsTable(bw, conflictsTableFileName, conflictsTableName);
        
-        // Set up whole pipe estimate
-        currentStage = "Setting up whole pipe estimate";
-        CostItemFactor wholePipeRehabEstimate = 
-          new CostItemFactor("WholePipe " + Path.GetFileName(modelPath));
-        _CostItemFactors.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
-        _Estimates.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
-
-        CostItemFactor wholePipeDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
-        _CostItemFactors.Add(wholePipeDirectConstructionCIF.ID, wholePipeDirectConstructionCIF);
-        wholePipeRehabEstimate.AddCostItemFactor(wholePipeDirectConstructionCIF);
-
-        CostItemFactor wholePipeOtherDirectConstructionCIF = 
-          new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
-        _CostItemFactors.Add(wholePipeOtherDirectConstructionCIF.ID, wholePipeOtherDirectConstructionCIF);
-        wholePipeRehabEstimate.AddCostItemFactor(wholePipeOtherDirectConstructionCIF);
-
-        // Set up liner estimate
-        currentStage = "Setting up liner estimate";
-        CostItemFactor linerRehabEstimate =
-          new CostItemFactor("Liner" + Path.GetFileName(modelPath));
-        _CostItemFactors.Add(linerRehabEstimate.ID, linerRehabEstimate);
-        _Estimates.Add(linerRehabEstimate.ID, linerRehabEstimate);
-
-        CostItemFactor linerDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
-        _CostItemFactors.Add(linerDirectConstructionCIF.ID, linerDirectConstructionCIF);
-        linerRehabEstimate.AddCostItemFactor(linerDirectConstructionCIF);
-
-        CostItemFactor linerOtherDirectConstructionCIF = new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
-        _CostItemFactors.Add(linerOtherDirectConstructionCIF.ID, linerOtherDirectConstructionCIF);
-        linerRehabEstimate.AddCostItemFactor(linerOtherDirectConstructionCIF);
-
         // Process segments
         int segmentCounter = 0;
 
         DateTime startTime = DateTime.Now;
+
+        const int increment = 50000;
+        int fromID = 1;
+        int toID = fromID + increment - 1;
 
         string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
           segmentsTableDB + @";Persist Security Info=False";
@@ -2168,68 +2143,117 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           currentStage = "Setting up connection";
           conn.Open();
-          OleDbDataReader reader = null;
-          OleDbCommand command = new OleDbCommand("SELECT * FROM [" + segmentsTableName +"]", conn);
-          reader = command.ExecuteReader();
 
-          OleDbDataReader countReader = null;
-          OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM [" + segmentsTableName + "]",
-            conn);
-          countReader = countCommand.ExecuteReader();
-          countReader.Read();
-          int totalCount = Convert.ToInt32(countReader[0]);
-
-          while (reader.Read() && ! bw.CancellationPending)
+          while (fromID < numRecords)
           {
-            Segment currentSegment = null;
-            try
+            ResetProject();
+
+            // Set up whole pipe estimate
+            currentStage = "Setting up whole pipe estimate";
+            CostItemFactor wholePipeRehabEstimate =
+              new CostItemFactor("WholePipe " + Path.GetFileName(modelPath));
+            _CostItemFactors.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
+            _Estimates.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
+
+            CostItemFactor wholePipeDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
+            _CostItemFactors.Add(wholePipeDirectConstructionCIF.ID, wholePipeDirectConstructionCIF);
+            wholePipeRehabEstimate.AddCostItemFactor(wholePipeDirectConstructionCIF);
+
+            CostItemFactor wholePipeOtherDirectConstructionCIF =
+              new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
+            _CostItemFactors.Add(wholePipeOtherDirectConstructionCIF.ID, wholePipeOtherDirectConstructionCIF);
+            wholePipeRehabEstimate.AddCostItemFactor(wholePipeOtherDirectConstructionCIF);
+
+            // Set up liner estimate
+            currentStage = "Setting up liner estimate";
+            CostItemFactor linerRehabEstimate =
+              new CostItemFactor("Liner" + Path.GetFileName(modelPath));
+            _CostItemFactors.Add(linerRehabEstimate.ID, linerRehabEstimate);
+            _Estimates.Add(linerRehabEstimate.ID, linerRehabEstimate);
+
+            CostItemFactor linerDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
+            _CostItemFactors.Add(linerDirectConstructionCIF.ID, linerDirectConstructionCIF);
+            linerRehabEstimate.AddCostItemFactor(linerDirectConstructionCIF);
+
+            CostItemFactor linerOtherDirectConstructionCIF = new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
+            _CostItemFactors.Add(linerOtherDirectConstructionCIF.ID, linerOtherDirectConstructionCIF);
+            linerRehabEstimate.AddCostItemFactor(linerOtherDirectConstructionCIF);
+
+            OleDbDataReader reader = null;
+            OleDbCommand command = new OleDbCommand(
+              string.Format("SELECT * FROM [{0}] WHERE (ID >= {1} AND ID <= {2})",
+              segmentsTableName, fromID, toID), conn);
+            reader = command.ExecuteReader();
+
+            OleDbDataReader countReader = null;
+            OleDbCommand countCommand = new OleDbCommand(
+              string.Format("SELECT COUNT(*) FROM [{0}] WHERE (ID >= {1} AND ID <= {2})",
+              segmentsTableName, fromID, toID), conn);
+            countReader = countCommand.ExecuteReader();
+            countReader.Read();
+            int totalCount = Convert.ToInt32(countReader[0]);
+
+
+            while (reader.Read() && !bw.CancellationPending)
             {
-              segmentCounter++;
-              if (segmentCounter % 1000 == 0)
+              Segment currentSegment = null;
+              try
               {
-                double fractionDone = (double)segmentCounter / (double)totalCount;
-                int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
-                int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
-                int durationLeft = expectedDuration - elapsedDuration;
-                bw.ReportProgress((int)(fractionDone * 100),
-                  string.Format("Reading segments: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
-                  segmentCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
-                  startTime, DateTime.Now));
+                segmentCounter++;
+                //if (segmentCounter % 1000 == 0)
+                //{
+                //  double fractionDone = (double)segmentCounter / (double)totalCount;
+                //  int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
+                //  int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
+                //  int durationLeft = expectedDuration - elapsedDuration;
+                //  bw.ReportProgress((int)(fractionDone * 100),
+                //    string.Format("Reading segments: {0} out of {1} {8}-{9}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
+                //    segmentCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
+                //    startTime, DateTime.Now, fromID, toID));
+                //}
+
+                currentSegment = new Segment(reader);
+
+                GenerateRehabCIF(conflictsTable, wholePipeDirectConstructionCIF, currentSegment,
+                  RehabItemType.WholePipe, constructionDurationCalculator);
+                GenerateRehabCIF(conflictsTable, linerDirectConstructionCIF, currentSegment,
+                  RehabItemType.Liner, constructionDurationCalculator);
               }
+              catch (Exception e)
+              {
+                throw;
+                _IsDirty = true;
+                string currentSegmentMessage = "";
+                if (currentSegment != null)
+                  currentSegmentMessage = string.Format("{0} {1}->{2}:", currentSegment.ID,
+                    currentSegment.USNodeID, currentSegment.DSNodeID);
 
-              currentSegment = new Segment(reader);
-
-              GenerateRehabCIF(conflictsTable, wholePipeDirectConstructionCIF, currentSegment, 
-                RehabItemType.WholePipe, constructionDurationCalculator);
-              GenerateRehabCIF(conflictsTable, linerDirectConstructionCIF, currentSegment, 
-                RehabItemType.Liner, constructionDurationCalculator);
+                errorMessage = currentSegment != null ?
+                string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, e.Message) :
+                e.Message;
+                return false;
+              }
             }
-            catch (Exception e)
+
+            foreach (KeyValuePair<int, CostItemFactor> kvpair in _Estimates)
             {
-              throw;
-              _IsDirty = true;
-              string currentSegmentMessage = "";
-              if (currentSegment != null)
-                currentSegmentMessage = string.Format("{0} {1}->{2}:", currentSegment.ID,
-                  currentSegment.USNodeID, currentSegment.DSNodeID);
-
-              errorMessage = currentSegment != null ?
-              string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, e.Message) :
-              e.Message;
-              return false;
+              int index = _ProjectEstimate.AddCostItemFactor(kvpair.Value);
+              if (index == -1)
+                throw new Exception("Cannot add CostItemFactor");
+              _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool(DESC_CONTINGENCY));
+              _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Const mgt, Insp, Test"));
+              _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Design"));
+              _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("PI, I&C, Easements, Environmental"));
+              _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Startup/closeout"));
             }
-          }
-
-          foreach (KeyValuePair<int, CostItemFactor> kvpair in _Estimates)
-          {
-            int index = _ProjectEstimate.AddCostItemFactor(kvpair.Value);
-            if (index == -1)
-              throw new Exception("Cannot add CostItemFactor");
-            _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool(DESC_CONTINGENCY));
-            _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Const mgt, Insp, Test"));
-            _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Design"));
-            _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("PI, I&C, Easements, Environmental"));
-            _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Startup/closeout"));
+            string fileSet = string.Format("{0}", (int)((double)fromID / ((double)numRecords / (double)increment) + 1));
+            fromID += increment;
+            toID += increment;
+            int percentDone = (int)((double)fromID / (double)numRecords * 100.0);
+            List<string> progressStrings = new List<string>();
+            progressStrings.Add(fileSet);
+            progressStrings.Add(segmentsTableDB);
+            bw.ReportProgress(percentDone, fileSet);
           }
         }
 
