@@ -32,7 +32,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private Link _Link;
     private Model _Model;
 
-    private PipeCoster _PipeCoster = new PipeCoster();
+    private PipeCoster _PipeCoster;
 
     private Segment _Segment;
     private Conflict _Conflict;
@@ -45,32 +45,35 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create ancillary coster for an alternative package
     /// </summary>
     /// <param name="altPackage">The alternative package being processed</param>
-    public AncillaryCoster(AlternativePackage altPackage, ConstructionDurationCalculator constructionDurationCalculator)
+    public AncillaryCoster(AlternativePackage altPackage, PipeCoster coster, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Alt;
       _AltPackage = altPackage;
       _Model = null;
       _constructionDurationCalculator = constructionDurationCalculator;
+      _PipeCoster = coster;
     } // AncillaryCoster(altPackage)
 
     /// <summary>
     /// Create ancillary coster for a model
     /// </summary>
     /// <param name="model">The model being processed</param>
-    public AncillaryCoster(Model model, ConstructionDurationCalculator constructionDurationCalculator)
+    public AncillaryCoster(Model model, PipeCoster coster, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Model;
       _Model = model;
       _AltPackage = null;
+      _PipeCoster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
     } // AncillaryCoster(model)
 
     public AncillaryCoster(Segment segment, Conflict conflict, int lengthFt, float diamWidthIn, float USIE, float DSIE,
-      string material, string USNode, string DSNode, ConstructionDurationCalculator constructionDurationCalculator)
+      string material, string USNode, string DSNode, PipeCoster coster, ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Rehab;
       _Segment = segment;
       _Conflict = conflict;
+      _PipeCoster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
 
       DataAccess.ModelDataSet.MdlLinksDataTable tempLinksTable = new DataAccess.ModelDataSet.MdlLinksDataTable();

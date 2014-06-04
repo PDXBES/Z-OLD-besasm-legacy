@@ -26,6 +26,7 @@ using SystemsAnalysis.Utils.MapInfoUtils;
 using SystemsAnalysis.Analysis.CostEstimator.Classes;
 using SystemsAnalysis.Modeling;
 using System.Diagnostics;
+using System.Data.OleDb;
 
 #endregion
 
@@ -1034,10 +1035,31 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       lblProgress.Text = "Loading rehab data";
       prgMainProgress.Value = 0;
       tabMain.SelectedTab = tabMain.Tabs["Progress"];
+
+      // Determine number of records
+      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+        segmentsFile + @";Persist Security Info=False";
+      int totalCount = 0;
+      using (OleDbConnection conn = new OleDbConnection(connectionString))
+      {
+        conn.Open();
+        OleDbDataReader countReader = null;
+        OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM [" + segmentsTable + "]",
+          conn);
+        countReader = countCommand.ExecuteReader();
+        countReader.Read();
+        totalCount = Convert.ToInt32(countReader[0]);
+      }
+
       LoadRehabPackage loadRehabPackage = new LoadRehabPackage(segmentsFile, segmentsTable,
-        conflictsFile, conflictsTable);
+        conflictsFile, conflictsTable, totalCount);
 
       bkgWorkerLoadRehab.RunWorkerAsync(loadRehabPackage);
+      //tabMain.SelectedTab = tabMain.Tabs["Costs"];
+      //string fileToWrite = Path.Combine(
+      //            Path.GetDirectoryName(segmentsFile), string.Format("PipeCosts-{0:G3}.csv", set));
+      //CostsPage costsPage = _mainPages["Costs"] as CostsPage;
+      //costsPage.WritePipeCosts(fileToWrite);
     }
     /// <summary>
     /// Setup project for cost grid
@@ -1552,7 +1574,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       bool noError = _project.CreateEstimateFromRehab(bw,
         Path.GetFullPath(loadRehabPackage.SegmentsDBFileName), loadRehabPackage.SegmentsDBFileName,
         loadRehabPackage.SegmentsTableName, loadRehabPackage.ConflictsDBFileName,
-        loadRehabPackage.ConflictsTableName, out error);
+        loadRehabPackage.ConflictsTableName, loadRehabPackage.NumRecords, out error);
       e.Result = new ErrorInfo(noError, error);
     }
 
@@ -1560,11 +1582,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     {
       prgMainProgress.Value = e.ProgressPercentage;
       prgMainProgress.Refresh();
+      List<string> progressStrings = null;
+      string set = string.Empty;
       if (e.UserState != null)
       {
-        lblProgress.Text = (string)e.UserState;
+        progressStrings = (List<string>)e.UserState;
+        set = string.Format("Set {0}", progressStrings[0]);
+        lblProgress.Text = set;
         lblProgress.Refresh();
       }
+
+      tabMain.SelectedTab = tabMain.Tabs["Costs"];
+      string fileToWrite = Path.Combine(
+                  Path.GetDirectoryName(progressStrings[1]), string.Format("PipeCosts-{0:G3}.csv", Convert.ToInt16(set)));
+      CostsPage costsPage = _mainPages["Costs"] as CostsPage;
+      costsPage.WritePipeCosts(fileToWrite);
     }
 
     private void bkgWorkerLoadRehab_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

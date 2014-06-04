@@ -557,6 +557,51 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
         gridCosts.ActiveRow.Update();
     }
 
+    public void WritePipeCosts(string exportFile)
+    {
+      try
+      {
+        System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Hiding grid");
+        gridCosts.Hide();
+        try
+        {
+          using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+          {
+            List<ReportPipeItem> pipeItems = _project.ReportPipeItems();
+            pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
+            "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
+            foreach (ReportPipeItem item in pipeItems)
+            {
+              string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
+              try
+              {
+                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
+                itemNameItems[0], itemNameItems[1], itemNameItems[2],
+                item.DirectConstructionCost,
+                item.ConstructionDuration,
+                item.TotalConstructionCost));
+              } // try
+              catch (Exception e)
+              {
+                MessageBox.Show(String.Format("{0}\n\n{1}",
+                string.Format("Problem writing item {0}", item.Name), e.Message));
+              } // catch
+            }
+            // foreach  (item)
+            pipeCostsStream.Close();
+          }
+        }
+        finally
+        {
+          System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Showing grid");
+          gridCosts.Show();
+        } // finally
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show("A problem occurred while writing the file:\n\n" + e.Message);
+      } // catch
+    }
     /// <summary>
     /// Export pipe costs
     /// </summary>
@@ -564,57 +609,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     {
       dlgSave.Title = "Save pipe costs as text file";
       dlgSave.DefaultExt = "csv";
-      if (dlgSave.ShowDialog() == DialogResult.OK)
-      {
-        try
-        {
-          System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Hiding grid");
-          gridCosts.Hide();
-          try
-          {
-            using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
-            {
-              List<ReportPipeItem> pipeItems = _project.ReportPipeItems();
-              pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
-              "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
-              foreach (ReportPipeItem item in pipeItems)
-              {
-                string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
-                try
-                {
-                  pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
-                  itemNameItems[0], itemNameItems[1], itemNameItems[2],
-                  item.DirectConstructionCost,
-                  item.ConstructionDuration,
-                  item.TotalConstructionCost));
-                } // try
-                catch (Exception e)
-                {
-                  MessageBox.Show(String.Format("{0}\n\n{1}",
-                  string.Format("Problem writing item {0}", item.Name), e.Message));
-                } // catch
-              }
-              // foreach  (item)
-              pipeCostsStream.Close();
-            }
-          }
-          finally
-          {
-            System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Showing grid");
-            gridCosts.Show();
-          } // finally
-        }
-        catch (Exception e)
-        {
-          MessageBox.Show("A problem occurred while writing the file:\n\n" + e.Message);
-        } // catch
-      } // if
+      if (dlgSave.ShowDialog() != DialogResult.OK)
+        return;
+      string exportFile = dlgSave.FileName;
+
+      WritePipeCosts(exportFile);
     } // ExportPipeCosts()
 
-    /// <summary>
-    /// Export detailed costs
-    /// </summary>
-    private void ExportDetailedCosts()
+    public void WriteDetailedCosts(string exportFile)
     {
       // Assemble pipe costs
       List<CostItemFactor> pipeList = _project.PipeItems();
@@ -667,65 +669,73 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       } // foreach  (item)
 
       // Do the export
+      System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
+      gridCosts.Hide();
+      try
+      {
+        using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+        {
+          foreach (CostItemFactor item in pipeList)
+          {
+            char[] separators = { ' ', '-' };
+            string[] tokens = item.Name.Split(separators);
+            string MLinkID = "", USNode = "", DSNode = "";
+            if (tokens.Length >= 3)
+            {
+              MLinkID = tokens[0];
+              USNode = tokens[1];
+              DSNode = tokens[2];
+            } // if
+
+            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
+            MLinkID, USNode, DSNode, item.Cost, item.Factor));
+            if (pipeCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
+            if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
+            if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
+            if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
+            {
+              foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
+              {
+                string ancillaryName = string.Empty;
+                if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
+                  ancillaryName = "Boring/jacking";
+                else
+                  if (ancillaryCIF.Name.StartsWith("Microtunneling"))
+                    ancillaryName = "Microtunnel";
+                  else
+                    ancillaryName = ancillaryCIF.Name;
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, ancillaryCIF.Cost,
+                ancillaryName));
+              } // foreach  (ancillaryCIF)
+            } // if
+          } // foreach  (item)
+        } // using (pipeCostsStream)
+      } // try
+      finally
+      {
+        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
+        gridCosts.Show();
+      } // finally
+    }
+    /// <summary>
+    /// Export detailed costs
+    /// </summary>
+    private void ExportDetailedCosts()
+    {
       dlgSave.Title = "Save pipe costs as text file";
       dlgSave.DefaultExt = "csv";
-      if (dlgSave.ShowDialog() == DialogResult.OK)
-      {
-        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
-        gridCosts.Hide();
-        try
-        {
-          using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
-          {
-            foreach (CostItemFactor item in pipeList)
-            {
-              char[] separators = { ' ', '-' };
-              string[] tokens = item.Name.Split(separators);
-                string MLinkID = "", USNode = "", DSNode = "";
-              if (tokens.Length >= 3)
-              {
-                MLinkID = tokens[0];
-                USNode = tokens[1];
-                DSNode = tokens[2];
-              } // if
+      if (dlgSave.ShowDialog() != DialogResult.OK)
+        return;
+      string exportFile = dlgSave.FileName;
 
-              pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
-              MLinkID, USNode, DSNode, item.Cost, item.Factor));
-              if (pipeCIFs[item] != null)
-                pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
-                MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
-              if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-                pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
-                MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
-              if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-                pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
-                MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
-              if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
-              {
-                foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
-                {
-                  string ancillaryName = string.Empty;
-                  if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
-                    ancillaryName = "Boring/jacking";
-                  else
-                    if (ancillaryCIF.Name.StartsWith("Microtunneling"))
-                      ancillaryName = "Microtunnel";
-                    else
-                      ancillaryName = ancillaryCIF.Name;
-                  pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
-                  MLinkID, USNode, DSNode, ancillaryCIF.Cost,
-                  ancillaryName));
-                } // foreach  (ancillaryCIF)
-              } // if
-            } // foreach  (item)
-          } // using (pipeCostsStream)
-        } // try
-        finally
-        {
-          System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
-          gridCosts.Show();
-        } // finally
-      } // if
+      WriteDetailedCosts(exportFile);
     } // ExportDetailedCosts()
     #endregion
 
