@@ -2134,7 +2134,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl2.Controls.Add(this.ultraGridBagLayoutPanel2);
       this.ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl2.Name = "ultraTabPageControl2";
-      this.ultraTabPageControl2.Size = new System.Drawing.Size(923, 478);
+      this.ultraTabPageControl2.Size = new System.Drawing.Size(923, 505);
       // 
       // ultraGridBagLayoutPanel2
       // 
@@ -2147,7 +2147,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel2.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel2.Name = "ultraGridBagLayoutPanel2";
-      this.ultraGridBagLayoutPanel2.Size = new System.Drawing.Size(923, 478);
+      this.ultraGridBagLayoutPanel2.Size = new System.Drawing.Size(923, 505);
       this.ultraGridBagLayoutPanel2.TabIndex = 1;
       // 
       // cmbApplyTo
@@ -2188,7 +2188,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint5.OriginY = 3;
       gridBagConstraint5.SpanX = 2;
       this.ultraGridBagLayoutPanel2.SetGridBagConstraint(this.ultraGridBagLayoutPanel3, gridBagConstraint5);
-      this.ultraGridBagLayoutPanel3.Location = new System.Drawing.Point(0, 450);
+      this.ultraGridBagLayoutPanel3.Location = new System.Drawing.Point(0, 477);
       this.ultraGridBagLayoutPanel3.Name = "ultraGridBagLayoutPanel3";
       this.ultraGridBagLayoutPanel2.SetPreferredSize(this.ultraGridBagLayoutPanel3, new System.Drawing.Size(200, 28));
       this.ultraGridBagLayoutPanel3.Size = new System.Drawing.Size(923, 28);
@@ -2333,7 +2333,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridOtherDirectConstruction.Location = new System.Drawing.Point(0, 57);
       this.gridOtherDirectConstruction.Name = "gridOtherDirectConstruction";
       this.ultraGridBagLayoutPanel2.SetPreferredSize(this.gridOtherDirectConstruction, new System.Drawing.Size(550, 185));
-      this.gridOtherDirectConstruction.Size = new System.Drawing.Size(923, 385);
+      this.gridOtherDirectConstruction.Size = new System.Drawing.Size(923, 412);
       this.gridOtherDirectConstruction.TabIndex = 0;
       this.gridOtherDirectConstruction.Text = "ultraGrid1";
       // 
@@ -2356,7 +2356,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl3.Controls.Add(this.ultraGridBagLayoutPanel4);
       this.ultraTabPageControl3.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl3.Name = "ultraTabPageControl3";
-      this.ultraTabPageControl3.Size = new System.Drawing.Size(923, 478);
+      this.ultraTabPageControl3.Size = new System.Drawing.Size(923, 505);
       // 
       // ultraGridBagLayoutPanel4
       // 
@@ -2367,7 +2367,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel4.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel4.Name = "ultraGridBagLayoutPanel4";
-      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(923, 478);
+      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(923, 505);
       this.ultraGridBagLayoutPanel4.TabIndex = 1;
       // 
       // ultraLabel3
@@ -2392,7 +2392,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint11.OriginX = 0;
       gridBagConstraint11.OriginY = 2;
       this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.ultraGridBagLayoutPanel5, gridBagConstraint11);
-      this.ultraGridBagLayoutPanel5.Location = new System.Drawing.Point(0, 450);
+      this.ultraGridBagLayoutPanel5.Location = new System.Drawing.Point(0, 477);
       this.ultraGridBagLayoutPanel5.Name = "ultraGridBagLayoutPanel5";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.ultraGridBagLayoutPanel5, new System.Drawing.Size(200, 28));
       this.ultraGridBagLayoutPanel5.Size = new System.Drawing.Size(923, 28);
@@ -2457,7 +2457,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.treeCostItemFactor.Location = new System.Drawing.Point(0, 29);
       this.treeCostItemFactor.Name = "treeCostItemFactor";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.treeCostItemFactor, new System.Drawing.Size(121, 90));
-      this.treeCostItemFactor.Size = new System.Drawing.Size(923, 413);
+      this.treeCostItemFactor.Size = new System.Drawing.Size(923, 440);
       this.treeCostItemFactor.TabIndex = 0;
       // 
       // ultraGridBagLayoutPanel1
