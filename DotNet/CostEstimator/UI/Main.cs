@@ -1591,12 +1591,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
         lblProgress.Text = set;
         lblProgress.Refresh();
       }
-
-      tabMain.SelectedTab = tabMain.Tabs["Costs"];
-      string fileToWrite = Path.Combine(
-                  Path.GetDirectoryName(progressStrings[1]), string.Format("PipeCosts-{0:G3}.csv", Convert.ToInt16(set)));
-      CostsPage costsPage = _mainPages["Costs"] as CostsPage;
-      costsPage.WritePipeCosts(fileToWrite);
     }
 
     private void bkgWorkerLoadRehab_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
