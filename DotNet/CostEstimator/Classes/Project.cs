@@ -1915,13 +1915,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       return conflictsTable;
     }
 
-    private void GenerateRehabCIF(
+    private bool GenerateRehabCIF(
       Dictionary<int, Conflict> conflictsTable, 
       CostItemFactor wholePipeDirectConstructionCIF, 
       Segment currentSegment, 
       RehabItemType rehabType, 
-      ConstructionDurationCalculator constructionDurationCalculator)
+      ConstructionDurationCalculator constructionDurationCalculator,
+      out string errorMessage)
     {
+      errorMessage = string.Empty;
       string currentStage = string.Empty;
       try
       {
@@ -2076,6 +2078,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
         reportPipeItem.ConstructionDuration =
           constructionDurationCalculator.ConstructionDurationDays(ancillaryCoster.CurrentConflictPackage, _PipeCoster);
+
+        return true;
       }
       catch (Exception ex)
       {
@@ -2085,14 +2089,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           currentSegmentMessage = string.Format("{0} {1}->{2}:", currentSegment.ID,
             currentSegment.USNodeID, currentSegment.DSNodeID);
 
-        string errorMessage = currentSegment != null ?
-        string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, ex.Message) :
-          ex.Message;
+        errorMessage = currentSegment != null ?
+          string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, ex.Message) :
+            ex.Message;
+        return false;
       }
     }
 
-    public void WriteDetailedCosts(string exportFile)
+    public void WriteDetailedCosts(string exportFile, out string errorMessage)
     {
+      errorMessage = string.Empty;
       // Assemble pipe costs
       List<CostItemFactor> pipeList = PipeItems();
       Dictionary<CostItemFactor, CostItemFactor> pipeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
@@ -2145,12 +2151,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
       // Do the export
       System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
+      string currentItem = string.Empty;
       try
       {
         using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
         {
           foreach (CostItemFactor item in pipeList)
           {
+            currentItem = item.Name;
             char[] separators = { ' ', '-' };
             string[] tokens = item.Name.Split(separators);
             string MLinkID = "", USNode = "", DSNode = "";
@@ -2192,14 +2200,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           } // foreach  (item)
         } // using (pipeCostsStream)
       } // try
+      catch (Exception e)
+      {
+        errorMessage = string.Format("Error writing detail [{0}]", currentItem);
+      }
       finally
       {
         System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
       } // finally
     }
 
-    public void WritePipeCosts(string exportFile)
+    public void WritePipeCosts(string exportFile, out string errorMessage)
     {
+      errorMessage = string.Empty;
       try
       {
         System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Hiding grid");
@@ -2261,6 +2274,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       int numRecords,
       out string errorMessage)
     {
+      errorMessage = string.Empty;
       try
       {
         string currentStage = "Start: Create Estimate from Rehab";
@@ -2277,7 +2291,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         DateTime startTime = DateTime.Now;
 
-        const int increment = 1000;
+        const int increment = 50000;
         int fromID = 1;
         int toID = fromID + increment - 1;
 
@@ -2343,7 +2357,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             countReader.Read();
             int totalCount = Convert.ToInt32(countReader[0]);
 
-
+            string readErrorMessage = string.Empty;
             while (reader.Read() && !bw.CancellationPending)
             {
               Segment currentSegment = null;
@@ -2365,13 +2379,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 currentSegment = new Segment(reader);
 
                 GenerateRehabCIF(conflictsTable, wholePipeDirectConstructionCIF, currentSegment,
-                  RehabItemType.WholePipe, constructionDurationCalculator);
+                  RehabItemType.WholePipe, constructionDurationCalculator, out readErrorMessage);
                 GenerateRehabCIF(conflictsTable, linerDirectConstructionCIF, currentSegment,
-                  RehabItemType.Liner, constructionDurationCalculator);
+                  RehabItemType.Liner, constructionDurationCalculator, out readErrorMessage);
+
+                if (readErrorMessage.Length > 0)
+                  throw new Exception("Read error " + readErrorMessage);
               }
               catch (Exception e)
               {
-                throw;
                 _IsDirty = true;
                 string currentSegmentMessage = "";
                 if (currentSegment != null)
@@ -2379,8 +2395,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     currentSegment.USNodeID, currentSegment.DSNodeID);
 
                 errorMessage = currentSegment != null ?
-                string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, e.Message) :
-                e.Message;
+                  string.Format("{0} {1} {2}", currentStage, currentSegmentMessage, e.Message) :
+                  e.Message;
                 return false;
               }
             }
@@ -2406,14 +2422,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             string pipeCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("Pipe-{0}.csv", fileSet));
             string detailedCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("PipeDetails-{0}.csv", fileSet));
-            WritePipeCosts(pipeCostsFileName);
-            WriteDetailedCosts(detailedCostsFileName);
+            string writeError = string.Empty;
+            WritePipeCosts(pipeCostsFileName, out writeError);
+            WriteDetailedCosts(detailedCostsFileName, out writeError);
+            if (writeError.Length > 0)
+              errorMessage = writeError;
+              return false;
 
             bw.ReportProgress(percentDone, progressStrings);
           }
         }
 
-        errorMessage = string.Empty;
         _IsDirty = true;
         return true;
       }
