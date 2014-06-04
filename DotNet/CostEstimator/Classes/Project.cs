@@ -233,6 +233,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       ResetIDGenerators();
       _ProjectEstimate = new CostItemFactor("Project");
+      _Estimates = new SortedList<int, CostItemFactor>();
       _StandardCostFactorPool.Clear();
       _CostFactorPool.Clear();
       _CostItemPool.Clear();
@@ -1888,17 +1889,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           try
           {
             conflictCounter++;
-            if (conflictCounter % 10000 == 0)
-            {
-              double fractionDone = (double)conflictCounter / (double)totalCount;
-              int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
-              int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
-              int durationLeft = expectedDuration - elapsedDuration;
-              bw.ReportProgress((int)(fractionDone * 100),
-                string.Format("Reading conflicts: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
-                conflictCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
-                startTime, DateTime.Now));
-            }
+            //if (conflictCounter % 10000 == 0)
+            //{
+            //  double fractionDone = (double)conflictCounter / (double)totalCount;
+            //  int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
+            //  int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
+            //  int durationLeft = expectedDuration - elapsedDuration;
+            //  bw.ReportProgress((int)(fractionDone * 100),
+            //    string.Format("Reading conflicts: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
+            //    conflictCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
+            //    startTime, DateTime.Now));
+            //}
 
             Conflict newConflict = new Conflict(reader);
             conflictsTable.Add(newConflict.ID, newConflict);
@@ -2090,6 +2091,156 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       }
     }
 
+    public void WriteDetailedCosts(string exportFile)
+    {
+      // Assemble pipe costs
+      List<CostItemFactor> pipeList = PipeItems();
+      Dictionary<CostItemFactor, CostItemFactor> pipeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> lateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> manholeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs = new Dictionary<CostItemFactor, List<CostItemFactor>>();
+      foreach (CostItemFactor item in pipeList)
+      {
+        if (item.ReportItemType == ReportItemType.Pipe)
+        {
+          List<CostItemFactor> subItems = item.ChildCostItemFactors;
+          CostItemFactor pipeCIF = null;
+          CostItemFactor manholeCIF = null;
+          CostItemFactor lateralCIF = null;
+          List<CostItemFactor> ancillaryCIFList = new List<CostItemFactor>();
+          foreach (CostItemFactor subItem in subItems)
+          {
+            if (subItem.Name.StartsWith("Pipe"))
+            {
+              pipeCIF = subItem;
+              pipeCIFs.Add(item, pipeCIF);
+
+              List<CostItemFactor> pipeSubItems = pipeCIF.ChildCostItemFactors;
+              foreach (CostItemFactor pipeSubItem in pipeSubItems)
+              {
+                if (pipeSubItem.Name.StartsWith("Lateral"))
+                {
+                  lateralCIF = pipeSubItem;
+                  lateralCIFs.Add(item, lateralCIF);
+                }
+              }
+            } // if
+            else
+              if (subItem.Name.StartsWith("Manhole"))
+              {
+                manholeCIF = subItem;
+                manholeCIFs.Add(item, manholeCIF);
+              } // if
+              else
+              {
+                ancillaryCIFList.Add(subItem);
+              } // else
+          } // foreach  (subItem)
+          if (ancillaryCIFList.Count > 0)
+            ancillaryCIFs.Add(item, ancillaryCIFList);
+          else
+            ancillaryCIFs.Add(item, new List<CostItemFactor>());
+        } // if
+      } // foreach  (item)
+
+      // Do the export
+      System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
+      try
+      {
+        using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+        {
+          foreach (CostItemFactor item in pipeList)
+          {
+            char[] separators = { ' ', '-' };
+            string[] tokens = item.Name.Split(separators);
+            string MLinkID = "", USNode = "", DSNode = "";
+            if (tokens.Length >= 3)
+            {
+              MLinkID = tokens[0];
+              USNode = tokens[1];
+              DSNode = tokens[2];
+            } // if
+
+            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
+            MLinkID, USNode, DSNode, item.Cost, item.Factor));
+            if (pipeCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
+            if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
+            if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
+              MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
+            if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
+            {
+              foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
+              {
+                string ancillaryName = string.Empty;
+                if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
+                  ancillaryName = "Boring/jacking";
+                else
+                  if (ancillaryCIF.Name.StartsWith("Microtunneling"))
+                    ancillaryName = "Microtunnel";
+                  else
+                    ancillaryName = ancillaryCIF.Name;
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, ancillaryCIF.Cost,
+                ancillaryName));
+              } // foreach  (ancillaryCIF)
+            } // if
+          } // foreach  (item)
+        } // using (pipeCostsStream)
+      } // try
+      finally
+      {
+        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
+      } // finally
+    }
+
+    public void WritePipeCosts(string exportFile)
+    {
+      try
+      {
+        System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Hiding grid");
+        try
+        {
+          using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+          {
+            List<ReportPipeItem> pipeItems = ReportPipeItems();
+            pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
+            "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
+            foreach (ReportPipeItem item in pipeItems)
+            {
+              string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
+              try
+              {
+                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
+                itemNameItems[0], itemNameItems[1], itemNameItems[2],
+                item.DirectConstructionCost,
+                item.ConstructionDuration,
+                item.TotalConstructionCost));
+              } // try
+              catch (Exception e)
+              {
+                throw;
+              } // catch
+            }
+            // foreach  (item)
+            pipeCostsStream.Close();
+          }
+        }
+        finally
+        {
+          System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Showing grid");
+        } // finally
+      }
+      catch (Exception e)
+      {
+        throw;
+      } // catch
+    }
+
     /// <summary>
     /// Creates a cost estimate from a rehab segmentations table and accompanying conflicts table
     /// </summary>
@@ -2113,13 +2264,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       try
       {
         string currentStage = "Start: Create Estimate from Rehab";
-        // Set up project info
-        if (Directory.Exists(modelPath))
-        {
-          _ProjectInfo.Source = modelPath;
-          _ProjectInfo.BaseENR = _PipeCoster.BaseENR;
-          _ProjectInfo.ENR = _PipeCoster.CurrentENR;
-        }
 
         ConstructionDurationCalculator constructionDurationCalculator =
           new ConstructionDurationCalculator();
@@ -2133,7 +2277,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         DateTime startTime = DateTime.Now;
 
-        const int increment = 50000;
+        const int increment = 1000;
         int fromID = 1;
         int toID = fromID + increment - 1;
 
@@ -2147,6 +2291,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           while (fromID < numRecords)
           {
             ResetProject();
+            // Set up project info
+            _ProjectInfo.BaseENR = _PipeCoster.BaseENR;
+            _ProjectInfo.ENR = _PipeCoster.CurrentENR;
+            CreateStandardFactors();
+            CreateFactors();
+            _ProjectInfo.CostEstimator = Environment.UserName;
 
             // Set up whole pipe estimate
             currentStage = "Setting up whole pipe estimate";
@@ -2246,14 +2396,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("PI, I&C, Easements, Environmental"));
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Startup/closeout"));
             }
-            string fileSet = string.Format("{0}", (int)((double)fromID / ((double)numRecords / (double)increment) + 1));
+            string fileSet = string.Format("{0}", (int)((double)fromID / (double)increment + 1));
             fromID += increment;
             toID += increment;
             int percentDone = (int)((double)fromID / (double)numRecords * 100.0);
             List<string> progressStrings = new List<string>();
             progressStrings.Add(fileSet);
             progressStrings.Add(segmentsTableDB);
-            bw.ReportProgress(percentDone, fileSet);
+
+            string pipeCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("Pipe-{0}.csv", fileSet));
+            string detailedCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("PipeDetails-{0}.csv", fileSet));
+            WritePipeCosts(pipeCostsFileName);
+            WriteDetailedCosts(detailedCostsFileName);
+
+            bw.ReportProgress(percentDone, progressStrings);
           }
         }
 
