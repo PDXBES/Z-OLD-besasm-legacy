@@ -165,8 +165,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       USNodeInMS4 = Convert.ToInt16(reader["uxMS4"] != DBNull.Value ? reader["uxMS4"] : 0) != 0;
       USNodeInUIC = Convert.ToInt16(reader["uxUIC"] != DBNull.Value ? reader["uxUIC"] : 0) != 0;
 
-      USDepth = Convert.ToSingle(reader["uDepth"] != DBNull.Value ? reader["uDepth"] : 0.0);
-      DSDepth = Convert.ToSingle(reader["dDepth"] != DBNull.Value ? reader["dDepth"] : 0.0);
+      USDepth = Convert.ToSingle(reader["uDepth"] != DBNull.Value ?
+        (Convert.ToSingle(reader["uDepth"]) < 0.0 ? 0.0 : reader["uDepth"]) : 0.0);
+      DSDepth = Convert.ToSingle(reader["dDepth"] != DBNull.Value ?
+        (Convert.ToSingle(reader["dDepth"]) < 0.0 ? 0.0 : reader["dDepth"]) : 0.0);
+      //USDepth = Convert.ToSingle(reader["uDepth"] != DBNull.Value ? reader["uDepth"] : 0.0);
+      //DSDepth = Convert.ToSingle(reader["dDepth"] != DBNull.Value ? reader["dDepth"] : 0.0);
       PipeSlope = Convert.ToSingle(reader["xPipSlope"] != DBNull.Value ? reader["xPipSlope"] : 0.0);
       GroundSlope = Convert.ToSingle(reader["gSlope"] != DBNull.Value ? reader["gSlope"] : 0.0);
 
