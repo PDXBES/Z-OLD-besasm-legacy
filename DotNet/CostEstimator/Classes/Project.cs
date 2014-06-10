@@ -2077,7 +2077,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.Pipe = pipeCostItemFactor;
         reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
         reportPipeItem.ConstructionDuration =
-          constructionDurationCalculator.ConstructionDurationDays(ancillaryCoster.CurrentConflictPackage, _PipeCoster);
+          constructionDurationCalculator.ConstructionDurationDays(
+            ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true);
 
         return true;
       }
