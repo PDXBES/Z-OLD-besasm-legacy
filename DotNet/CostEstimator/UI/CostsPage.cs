@@ -575,7 +575,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
               try
               {
-                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
+                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4:F2}",
                 itemNameItems[0], itemNameItems[1], itemNameItems[2],
                 item.DirectConstructionCost,
                 item.ConstructionDuration,
