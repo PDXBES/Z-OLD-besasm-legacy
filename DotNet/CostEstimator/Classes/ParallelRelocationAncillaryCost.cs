@@ -58,20 +58,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           return string.Empty;
         }
 
-        string waterPipeType = string.Empty;
+        string waterPipeType;
         if (isInConflict)
-        {
-          if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 12)
-            waterPipeType = "(<= 12 in)";
-          else
-            if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 21)
-              waterPipeType = "(> 12 in, =< 21 in)";
-            else
-              if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 33)
-                waterPipeType = "(> 21 in, =< 33 in)";
-              else
-                waterPipeType = "(> 33 in)";
-        } // if
+          waterPipeType = string.Format("({0:F0} in)", _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches);
+        else
+          waterPipeType = string.Empty; // if
 
         return "Parallel water relocation " + waterPipeType;
       } // get
@@ -109,19 +100,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         if (isInConflict)
         {
-          if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 12)
-            return 1000 / 2;
-          else
-            if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 21)
-              return 2500 / 2;
-            else
-              if (_ConflictPackage.Conflicts.LargestWaterParallelDiameterInches <= 33)
-                return 5000 / 2;
-              else
-                return 7500 / 2;
+          float diam = _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches;
+          return 7.9126f * diam + 74.093f;
         } // if
         else
-          return 0;
+          return 0.0f;
       }
     } // UnitCost
 
