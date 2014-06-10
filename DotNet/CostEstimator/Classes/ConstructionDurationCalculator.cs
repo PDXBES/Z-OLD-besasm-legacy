@@ -28,12 +28,25 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public const double BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT = 75;
     private PipeCoster _coster = null;
     #region Properties
+
+    /// <summary>
+    /// Duration of construction based on build rates of components (mainling, manhole, pavement, and crossings)
+    /// </summary>
+    /// <param name="conflictPackage"></param>
+    /// <param name="coster"></param>
+    /// <returns>Number of integral days needed to build pipe</returns>
+    public float ConstructionDurationDays(ConflictPackage conflictPackage, PipeCoster coster)
+    {
+      return ConstructionDurationDays(conflictPackage, coster, returnFraction: false);
+    }
+
     /// <summary>
     /// Duration of construction based on build rates of components (mainline,
     /// manhole, pavement, and crossings)
     /// </summary>
     /// <returns>Number of fractional days needed to build pipe</returns>
-    public float ConstructionDurationDays(ConflictPackage conflictPackage, PipeCoster coster)
+    public float ConstructionDurationDays(ConflictPackage conflictPackage, PipeCoster coster,
+      bool returnFraction)
     {
       _coster = coster;
 
@@ -70,7 +83,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         // Pavement repair at 250 feet per day
         double pavementRepairDurationDays = conflictPackage.Length / PAVEMENT_REPAIR_RATE_PER_DAY_FT;
 
-        numDays = (float)Math.Ceiling(
+        numDays = returnFraction ? 
+          (float)(manholeConstructionDurationDays +
+          mainlineConstructionDurationDays +
+          utilityCrossingDurationDays +
+          pavementRepairDurationDays)
+          :
+          (float)Math.Ceiling(
           manholeConstructionDurationDays +
           mainlineConstructionDurationDays +
           utilityCrossingDurationDays +
