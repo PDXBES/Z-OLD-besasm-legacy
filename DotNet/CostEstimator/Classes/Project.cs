@@ -2415,7 +2415,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             string fileSet = string.Format("{0}", (int)((double)fromID / (double)increment + 1));
             fromID += increment;
             toID += increment;
-            int percentDone = (int)((double)fromID / (double)numRecords * 100.0);
+            int percentDone = Math.Min(100, (int)((double)fromID / (double)numRecords * 100.0));
             List<string> progressStrings = new List<string>();
             progressStrings.Add(fileSet);
             progressStrings.Add(segmentsTableDB);
@@ -2426,8 +2426,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             WritePipeCosts(pipeCostsFileName, out writeError);
             WriteDetailedCosts(detailedCostsFileName, out writeError);
             if (writeError.Length > 0)
+            {
               errorMessage = writeError;
               return false;
+            }
 
             bw.ReportProgress(percentDone, progressStrings);
           }
@@ -2438,7 +2440,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       }
       catch (Exception e)
       {
-        throw;
+        throw e;
       }
     }
     /// <summary>
