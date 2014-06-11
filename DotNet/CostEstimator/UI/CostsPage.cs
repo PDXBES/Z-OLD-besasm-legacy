@@ -575,11 +575,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
               try
               {
-                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4:F2}",
-                itemNameItems[0], itemNameItems[1], itemNameItems[2],
-                item.DirectConstructionCost,
-                item.ConstructionDuration,
-                item.TotalConstructionCost));
+                string writePipeLine = string.Format("{0},{1},{2},{3:F0},{5:F0},{4:F2}",
+                                itemNameItems[0], itemNameItems[1], itemNameItems[2],
+                                item.DirectConstructionCost,
+                                item.ConstructionDuration,
+                                item.TotalConstructionCost);
+                pipeCostsStream.WriteLine(writePipeLine);
               } // try
               catch (Exception e)
               {
@@ -690,14 +691,23 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
             MLinkID, USNode, DSNode, item.Cost, item.Factor));
             if (pipeCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
+            {
+              string writePipeCIF = string.Format("\"Pipe\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, pipeCIFs[item].Cost);
+              pipeCostsStream.WriteLine(writePipeCIF);
+            }
             if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
+            {
+              string writeLateralCIF = string.Format("\"Lateral\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, lateralCIFs[item].Cost);
+              pipeCostsStream.WriteLine(writeLateralCIF);
+            }
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
+            {
+              string writeManholeCIF = string.Format("\"Manhole\",{0},{1},{2},{3:#}",
+                MLinkID, USNode, DSNode, manholeCIFs[item].Cost);
+              pipeCostsStream.WriteLine(writeManholeCIF);
+            }
             if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
             {
               foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
@@ -710,9 +720,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
                     ancillaryName = "Microtunnel";
                   else
                     ancillaryName = ancillaryCIF.Name;
-                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
-                MLinkID, USNode, DSNode, ancillaryCIF.Cost,
-                ancillaryName));
+                string writeAncillaryCIF = string.Format("\"{4}\",{0},{1},{2},{3:#}",
+                  MLinkID, USNode, DSNode, ancillaryCIF.Cost,
+                  ancillaryName);
+                pipeCostsStream.WriteLine(writeAncillaryCIF);
               } // foreach  (ancillaryCIF)
             } // if
           } // foreach  (item)
