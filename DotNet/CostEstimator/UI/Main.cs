@@ -1582,12 +1582,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     {
       prgMainProgress.Value = e.ProgressPercentage;
       prgMainProgress.Refresh();
-      List<string> progressStrings = null;
       string set = string.Empty;
       if (e.UserState != null)
       {
-        progressStrings = (List<string>)e.UserState;
-        set = string.Format("Set {0}", progressStrings[0]);
+        set = (string)e.UserState;
         lblProgress.Text = set;
         lblProgress.Refresh();
       }
