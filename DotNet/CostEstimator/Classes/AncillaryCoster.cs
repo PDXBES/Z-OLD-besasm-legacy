@@ -38,6 +38,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private Conflict _Conflict;
 
     private ConstructionDurationCalculator _constructionDurationCalculator = null;
+    private bool _suppressSurfaceAncillaries = false;
     #endregion
 
     #region Constructors
@@ -58,7 +59,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create ancillary coster for a model
     /// </summary>
     /// <param name="model">The model being processed</param>
-    public AncillaryCoster(Model model, PipeCoster coster, ConstructionDurationCalculator constructionDurationCalculator)
+    public AncillaryCoster(
+      Model model, 
+      PipeCoster coster, 
+      ConstructionDurationCalculator constructionDurationCalculator)
     {
       Type = AncillaryCosterType.Model;
       _Model = model;
@@ -67,8 +71,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       _constructionDurationCalculator = constructionDurationCalculator;
     } // AncillaryCoster(model)
 
-    public AncillaryCoster(Segment segment, Conflict conflict, int lengthFt, float diamWidthIn, float USIE, float DSIE,
-      string material, string USNode, string DSNode, PipeCoster coster, ConstructionDurationCalculator constructionDurationCalculator)
+    public AncillaryCoster(
+      Segment segment, 
+      Conflict conflict, 
+      int lengthFt, 
+      float diamWidthIn, 
+      float USIE, 
+      float DSIE,
+      string material, 
+      string USNode, 
+      string DSNode, 
+      PipeCoster coster, 
+      ConstructionDurationCalculator constructionDurationCalculator,
+      bool suppressSurfaceAncillaries)
     {
       Type = AncillaryCosterType.Rehab;
       _Segment = segment;
@@ -168,6 +183,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       tempRow.HardArea = conflict.InHardArea ? 1 : 0;
 
       _PipXP = new PipXP(tempRow);
+
+      _suppressSurfaceAncillaries = suppressSurfaceAncillaries;
     }
     #endregion
 
@@ -265,15 +282,31 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="conflictPackage">Conflict package from link that will be used to get ancillary costs</param>
     private void GetAncillaryCosts(List<AncillaryCost> ancillaryCosts, ConflictPackage conflictPackage, PipeCoster coster)
     {
-      ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage, coster).AncillaryCost);
-      ancillaryCosts.Add(
-        new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
-      ancillaryCosts.Add(new ParallelRelocationAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(new CrossingRelocationAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(
-        new BypassPumpingAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
-      ancillaryCosts.Add(new EnvironmentalMitigationAncillaryCost(conflictPackage).AncillaryCost);
-      ancillaryCosts.Add(new HazardousMaterialAncillaryCost(conflictPackage, coster).AncillaryCost);
+      if (!_suppressSurfaceAncillaries)
+      {
+        ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage, coster).AncillaryCost);
+        ancillaryCosts.Add(
+          new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+        ancillaryCosts.Add(new ParallelRelocationAncillaryCost(conflictPackage).AncillaryCost);
+        ancillaryCosts.Add(new CrossingRelocationAncillaryCost(conflictPackage).AncillaryCost);
+        ancillaryCosts.Add(new EnvironmentalMitigationAncillaryCost(conflictPackage).AncillaryCost);
+        ancillaryCosts.Add(new HazardousMaterialAncillaryCost(conflictPackage, coster).AncillaryCost);
+        ancillaryCosts.Add(
+          new BypassPumpingAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+      }
+      if (_suppressSurfaceAncillaries)
+      {
+        ancillaryCosts.Add(new TrafficControlAncillaryCost(
+          conflictPackage, coster, _constructionDurationCalculator, isLiner: true).AncillaryCost);
+        ancillaryCosts.Add(
+          new BypassPumpingAncillaryCost(
+            conflictPackage, coster, _constructionDurationCalculator, isLiner: true).AncillaryCost);
+      }
+      if (_suppressSurfaceAncillaries && _Segment != null && _Segment.SegUSNodeID == 0)
+      {
+        ancillaryCosts.Add(
+          new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+      }
 
       // Clean up the list (nulls might be there if an ancillary cost comes back null
       for (int i = ancillaryCosts.Count - 1; i >= 0; i--)
@@ -288,9 +321,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="ancillaryFactors">Reference to list that will contain ancillary factors</param>
     /// <param name="conflictPackage">Conflict package from link that will be used to get ancillary factors</param>
-    private static void GetAncillaryFactors(List<AncillaryFactor> ancillaryFactors, ConflictPackage conflictPackage)
+    private void GetAncillaryFactors(List<AncillaryFactor> ancillaryFactors, ConflictPackage conflictPackage)
     {
-      ancillaryFactors.Add(new DifficultAreaAncillaryFactor(conflictPackage).AncillaryFactor);
+      if (!_suppressSurfaceAncillaries)
+        ancillaryFactors.Add(new DifficultAreaAncillaryFactor(conflictPackage).AncillaryFactor);
 
       for (int i = ancillaryFactors.Count - 1; i >= 0 ; i--)
       {

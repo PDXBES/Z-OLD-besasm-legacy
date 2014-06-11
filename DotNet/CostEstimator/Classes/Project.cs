@@ -1917,11 +1917,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private bool GenerateRehabCIF(
       Dictionary<int, Conflict> conflictsTable, 
-      CostItemFactor wholePipeDirectConstructionCIF, 
+      CostItemFactor parentDirectConstructionCIF, 
       Segment currentSegment, 
       RehabItemType rehabType, 
       ConstructionDurationCalculator constructionDurationCalculator,
-      out string errorMessage)
+      out string errorMessage,
+      bool isLiner)
     {
       errorMessage = string.Empty;
       string currentStage = string.Empty;
@@ -1956,11 +1957,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID,
           pipeAndManholeCostItemFactor);
         int pipeAndManholeIndex =
-          wholePipeDirectConstructionCIF.AddCostItemFactor(pipeAndManholeCostItemFactor);
+          parentDirectConstructionCIF.AddCostItemFactor(pipeAndManholeCostItemFactor);
         if (pipeAndManholeIndex == -1)
           throw new Exception("Cannot add CostItemFactor");
         CostItemFactor pipeAndManholeItem =
-          wholePipeDirectConstructionCIF.ChildCostItemFactor(pipeAndManholeIndex);
+          parentDirectConstructionCIF.ChildCostItemFactor(pipeAndManholeIndex);
 
         currentStage = "Setting up manhole CIF";
         CostItem manholeCostItem = null;
@@ -2022,7 +2023,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
             string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
             _PipeCoster,
-            constructionDurationCalculator);
+            constructionDurationCalculator, 
+            isLiner);
 
         List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
         if (ancillaryCosts.Count == 0)
@@ -2078,7 +2080,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
         reportPipeItem.ConstructionDuration =
           constructionDurationCalculator.ConstructionDurationDays(
-            ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true);
+          ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:true,
+          numSegments: ((int)currentSegment.PipeLength % 10 == 0 ? 
+          (int)currentSegment.PipeLength % 10 : 
+          (int)currentSegment.PipeLength % 10 + 1));
 
         return true;
       }
@@ -2303,8 +2308,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           currentStage = "Setting up connection";
           conn.Open();
 
+          int set = 0;
+          int totalSets = numRecords % increment == 0 ? numRecords / increment :
+            numRecords / increment + 1;
+
           while (fromID < numRecords)
           {
+            set++;
             ResetProject();
             // Set up project info
             _ProjectInfo.BaseENR = _PipeCoster.BaseENR;
@@ -2365,24 +2375,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               try
               {
                 segmentCounter++;
-                //if (segmentCounter % 1000 == 0)
-                //{
-                //  double fractionDone = (double)segmentCounter / (double)totalCount;
-                //  int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
-                //  int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
-                //  int durationLeft = expectedDuration - elapsedDuration;
-                //  bw.ReportProgress((int)(fractionDone * 100),
-                //    string.Format("Reading segments: {0} out of {1} {8}-{9}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
-                //    segmentCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
-                //    startTime, DateTime.Now, fromID, toID));
-                //}
 
                 currentSegment = new Segment(reader);
 
                 GenerateRehabCIF(conflictsTable, wholePipeDirectConstructionCIF, currentSegment,
-                  RehabItemType.WholePipe, constructionDurationCalculator, out readErrorMessage);
+                  RehabItemType.WholePipe, constructionDurationCalculator, out readErrorMessage, isLiner:false);
                 GenerateRehabCIF(conflictsTable, linerDirectConstructionCIF, currentSegment,
-                  RehabItemType.Liner, constructionDurationCalculator, out readErrorMessage);
+                  RehabItemType.Liner, constructionDurationCalculator, out readErrorMessage, isLiner: true);
 
                 if (readErrorMessage.Length > 0)
                   throw new Exception("Read error " + readErrorMessage);
@@ -2417,9 +2416,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             fromID += increment;
             toID += increment;
             int percentDone = Math.Min(100, (int)((double)fromID / (double)numRecords * 100.0));
-            List<string> progressStrings = new List<string>();
-            progressStrings.Add(fileSet);
-            progressStrings.Add(segmentsTableDB);
 
             string pipeCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("Pipe-{0}.csv", fileSet));
             string detailedCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("PipeDetails-{0}.csv", fileSet));
@@ -2432,7 +2428,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               return false;
             }
 
-            bw.ReportProgress(percentDone, progressStrings);
+            double fractionDone = (double)set / (double)totalSets;
+            int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes);
+            int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes / fractionDone);
+            int durationLeft = expectedDuration - elapsedDuration;
+            string progress = string.Format("Writing set: {0} out of {1}, {2} minutes left",
+              set, totalSets, durationLeft);
+            bw.ReportProgress((int)(fractionDone * 100), progress);
           }
         }
 
