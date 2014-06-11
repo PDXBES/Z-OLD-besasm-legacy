@@ -323,8 +323,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="conflictPackage">Conflict package from link that will be used to get ancillary factors</param>
     private void GetAncillaryFactors(List<AncillaryFactor> ancillaryFactors, ConflictPackage conflictPackage)
     {
-      if (!_suppressSurfaceAncillaries)
-        ancillaryFactors.Add(new DifficultAreaAncillaryFactor(conflictPackage).AncillaryFactor);
+      ancillaryFactors.Add(new DifficultAreaAncillaryFactor(conflictPackage).AncillaryFactor);
 
       for (int i = ancillaryFactors.Count - 1; i >= 0 ; i--)
       {

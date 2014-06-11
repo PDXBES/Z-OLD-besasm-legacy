@@ -34,6 +34,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public ConflictPackage _ConflictPackage;
     private PipeCoster _coster;
     private ConstructionDurationCalculator _constructionDurationCalculator;
+    private bool _isLiner;
     #endregion
 
     #region Constructors
@@ -41,11 +42,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create traffic control ancillary cost
     /// </summary>
     public TrafficControlAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster,
-      ConstructionDurationCalculator constructionDurationCalculator)
+      ConstructionDurationCalculator constructionDurationCalculator, bool isLiner = false)
     {
       _ConflictPackage = conflictPackage;
       _coster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
+      _isLiner = false;
     } // TrafficControlAncillaryCost()
     #endregion
 
@@ -146,7 +148,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfUsNodeInIntersection :
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection > baseStreets ?
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
-        return _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster) *
+        return (_isLiner ? 3 : _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster)) *
           (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
       } // get
     } // Units

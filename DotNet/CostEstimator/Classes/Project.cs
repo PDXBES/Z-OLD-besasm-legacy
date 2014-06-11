@@ -1889,17 +1889,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           try
           {
             conflictCounter++;
-            //if (conflictCounter % 10000 == 0)
-            //{
-            //  double fractionDone = (double)conflictCounter / (double)totalCount;
-            //  int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
-            //  int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
-            //  int durationLeft = expectedDuration - elapsedDuration;
-            //  bw.ReportProgress((int)(fractionDone * 100),
-            //    string.Format("Reading conflicts: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
-            //    conflictCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
-            //    startTime, DateTime.Now));
-            //}
+            if (conflictCounter % 10000 == 0)
+            {
+              double fractionDone = (double)conflictCounter / (double)totalCount;
+              int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes);
+              int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).TotalMinutes / fractionDone);
+              int durationLeft = expectedDuration - elapsedDuration;
+              bw.ReportProgress((int)(fractionDone * 100),
+                string.Format("Reading conflicts: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
+                conflictCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
+                startTime, DateTime.Now));
+            }
 
             Conflict newConflict = new Conflict(reader);
             conflictsTable.Add(newConflict.ID, newConflict);
@@ -2082,8 +2082,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           constructionDurationCalculator.ConstructionDurationDays(
           ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:true,
           numSegments: ((int)currentSegment.PipeLength % 10 == 0 ? 
-          (int)currentSegment.PipeLength % 10 : 
-          (int)currentSegment.PipeLength % 10 + 1));
+          (int)currentSegment.PipeLength / 10 : 
+          (int)currentSegment.PipeLength / 10 + 1));
 
         return true;
       }
@@ -2234,7 +2234,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
               try
               {
-                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
+                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4:F2}",
                 itemNameItems[0], itemNameItems[1], itemNameItems[2],
                 item.DirectConstructionCost,
                 item.ConstructionDuration,
