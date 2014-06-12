@@ -36,7 +36,7 @@
   </PostinstrumentEvent>
   <Binaries>
     <ProjBinary>
-      <Path>UI\obj\Release\CostEstimator.exe</Path>
+      <Path>UI\obj\Debug\CostEstimator.exe</Path>
       <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
       <Instrument>true</Instrument>
       <Sample>true</Sample>
@@ -48,8 +48,8 @@
       <LaunchProject>true</LaunchProject>
       <OverrideProjectSettings>false</OverrideProjectSettings>
       <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>UI\bin\Release\CostEstimator.exe</ExecutablePath>
-      <StartupDirectory>UI\bin\Release\</StartupDirectory>
+      <ExecutablePath>UI\bin\Debug\CostEstimator.exe</ExecutablePath>
+      <StartupDirectory>UI\bin\Debug\</StartupDirectory>
       <Arguments>
       </Arguments>
       <NetAppHost>IIS</NetAppHost>
@@ -73,6 +73,9 @@
     </Report>
     <Report>
       <Path>CostEstimator140603(1).vsp</Path>
+    </Report>
+    <Report>
+      <Path>CostEstimator140612.vsp</Path>
     </Report>
   </Reports>
   <Launches>

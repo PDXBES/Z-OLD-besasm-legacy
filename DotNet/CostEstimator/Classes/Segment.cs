@@ -18,6 +18,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public Single USFtFromUSNode { get; private set; }
     public Single DSFtFromUSNode { get; private set; }
     public Int16 CutNumber { get; private set; }
+    public Int16 NumCuts { get; private set; }
     public string UnitID { get; private set; }
     public string UnitType { get; private set; }
     public Int16 CompType { get; private set; }
@@ -52,6 +53,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       USFtFromUSNode = Convert.ToSingle(reader["fm"] != DBNull.Value ? reader["fm"] : 0.0);
       DSFtFromUSNode = Convert.ToSingle(reader["to_"] != DBNull.Value ? reader["to_"] : 0.0);
       CutNumber = Convert.ToInt16(reader["cutno"] != DBNull.Value ? reader["cutno"] : 0);
+      NumCuts = Convert.ToInt16(reader["tot_segs"] != DBNull.Value ? reader["tot_segs"] : 0);
       UnitID = reader["UNITID"] != null ? reader["UNITID"].ToString() : string.Empty;
       UnitType = reader["UNITTYPE"] != null ? reader["UNITTYPE"].ToString() : string.Empty;
       CompType = Convert.ToInt16(reader["COMPTYPE"] != DBNull.Value ? reader["COMPTYPE"] : 0);
