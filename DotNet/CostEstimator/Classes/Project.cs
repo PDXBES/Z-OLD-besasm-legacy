@@ -2080,10 +2080,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
         reportPipeItem.ConstructionDuration =
           constructionDurationCalculator.ConstructionDurationDays(
-          ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:true,
-          numSegments: ((int)currentSegment.PipeLength % 10 == 0 ? 
-          (int)currentSegment.PipeLength / 10 : 
-          (int)currentSegment.PipeLength / 10 + 1));
+          ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:isLiner,
+          numSegments: ((int)currentSegment.NumCuts));
 
         return true;
       }
@@ -2102,7 +2100,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       }
     }
 
-    public void WriteDetailedCosts(string exportFile, out string errorMessage)
+    public void WriteDetailedCostsRehab(string exportFile, out string errorMessage)
     {
       errorMessage = string.Empty;
       // Assemble pipe costs
@@ -2175,17 +2173,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               DSNode = tokens[2];
             } // if
 
-            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#},{4:#}",
-            MLinkID, USNode, DSNode, item.Cost, item.Factor));
+            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{5},{1},{2},{3:#},{4:#}",
+              MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, item.Cost, item.Factor,
+              MLinkID.Substring(MLinkID.Length-1, 1)));
             if (pipeCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{4},{1},{2},{3:#}",
+              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
+              MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, lateralCIFs[item].Cost));
+              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{4},{1},{2},{3:#}",
+              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, lateralCIFs[item].Cost,
+              MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}",
-              MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{4},{1},{2},{3:#}",
+              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
+              MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
             {
               foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
@@ -2198,9 +2200,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     ancillaryName = "Microtunnel";
                   else
                     ancillaryName = ancillaryCIF.Name;
-                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
-                MLinkID, USNode, DSNode, ancillaryCIF.Cost,
-                ancillaryName));
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{5},{1},{2},{3:#}",
+                MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, ancillaryCIF.Cost,
+                ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1)));
               } // foreach  (ancillaryCIF)
             } // if
           } // foreach  (item)
@@ -2216,7 +2218,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       } // finally
     }
 
-    public void WritePipeCosts(string exportFile, out string errorMessage)
+    public void WritePipeCostsRehab(string exportFile, out string errorMessage)
     {
       errorMessage = string.Empty;
       try
@@ -2227,18 +2229,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
           {
             List<ReportPipeItem> pipeItems = ReportPipeItems();
-            pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
+            pipeCostsStream.WriteLine("ID,Type,USNode,DSNode," +
             "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
             foreach (ReportPipeItem item in pipeItems)
             {
               string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
               try
               {
-                pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4:F2}",
-                itemNameItems[0], itemNameItems[1], itemNameItems[2],
+                pipeCostsStream.WriteLine(string.Format("{0},{6},{1},{2},{3:F0},{5:F0},{4:F4}",
+                itemNameItems[0].Substring(0, itemNameItems[0].Length-1),
+                itemNameItems[1],
+                itemNameItems[2],
                 item.DirectConstructionCost,
                 item.ConstructionDuration,
-                item.TotalConstructionCost));
+                item.TotalConstructionCost,
+                itemNameItems[0].Substring(itemNameItems[0].Length-1,1)));
               } // try
               catch (Exception e)
               {
@@ -2412,7 +2417,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("PI, I&C, Easements, Environmental"));
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Startup/closeout"));
             }
-            string fileSet = string.Format("{0}", (int)((double)fromID / (double)increment + 1));
+            string fileSet = string.Format("{0:000}", (int)((double)fromID / (double)increment + 1));
             fromID += increment;
             toID += increment;
             int percentDone = Math.Min(100, (int)((double)fromID / (double)numRecords * 100.0));
@@ -2420,8 +2425,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             string pipeCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("Pipe-{0}.csv", fileSet));
             string detailedCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("PipeDetails-{0}.csv", fileSet));
             string writeError = string.Empty;
-            WritePipeCosts(pipeCostsFileName, out writeError);
-            WriteDetailedCosts(detailedCostsFileName, out writeError);
+            WritePipeCostsRehab(pipeCostsFileName, out writeError);
+            WriteDetailedCostsRehab(detailedCostsFileName, out writeError);
             if (writeError.Length > 0)
             {
               errorMessage = writeError;
