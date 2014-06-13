@@ -2024,7 +2024,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
             _PipeCoster,
             constructionDurationCalculator, 
-            isLiner);
+            isLiner,
+            hasManhole: !isLiner && currentSegment.SegUSNodeID == 0);
 
         List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
         if (ancillaryCosts.Count == 0)
@@ -2081,7 +2082,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.ConstructionDuration =
           constructionDurationCalculator.ConstructionDurationDays(
           ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:isLiner,
-          numSegments: ((int)currentSegment.NumCuts));
+          numSegments: ((int)currentSegment.NumCuts), 
+          hasManhole: (!isLiner && currentSegment.SegUSNodeID == 0));
 
         return true;
       }
@@ -2177,17 +2179,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, item.Cost, item.Factor,
               MLinkID.Substring(MLinkID.Length-1, 1)));
             if (pipeCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{4},{1},{2},{3:#}",
-              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
-              MLinkID.Substring(MLinkID.Length - 1, 1)));
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
+                MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{4},{1},{2},{3:#}",
-              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, lateralCIFs[item].Cost,
-              MLinkID.Substring(MLinkID.Length - 1, 1)));
+              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, 
+                lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{4},{1},{2},{3:#}",
-              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
-              MLinkID.Substring(MLinkID.Length - 1, 1)));
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
+                MLinkID.Substring(MLinkID.Length - 1, 1)));
             if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
             {
               foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
@@ -2200,9 +2203,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     ancillaryName = "Microtunnel";
                   else
                     ancillaryName = ancillaryCIF.Name;
-                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{5},{1},{2},{3:#}",
-                MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, ancillaryCIF.Cost,
-                ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1)));
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{5},{1},{2},{3:#},",
+                  MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, ancillaryCIF.Cost,
+                  ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1)));
               } // foreach  (ancillaryCIF)
             } // if
           } // foreach  (item)
@@ -2210,7 +2213,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       } // try
       catch (Exception e)
       {
-        errorMessage = string.Format("Error writing detail [{0}]", currentItem);
+        errorMessage = string.Format("Error writing detail [{0}]: {1}", currentItem, e.Message);
       }
       finally
       {

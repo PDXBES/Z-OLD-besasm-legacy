@@ -35,19 +35,28 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private PipeCoster _coster;
     private ConstructionDurationCalculator _constructionDurationCalculator;
     private bool _isLiner;
+    private bool _hasManhole;
+    private bool _isSegment;
     #endregion
 
     #region Constructors
     /// <summary>
     /// Create traffic control ancillary cost
     /// </summary>
-    public TrafficControlAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster,
-      ConstructionDurationCalculator constructionDurationCalculator, bool isLiner = false)
+    public TrafficControlAncillaryCost(
+      ConflictPackage conflictPackage, 
+      PipeCoster coster,
+      ConstructionDurationCalculator constructionDurationCalculator, 
+      bool isLiner = false,
+      bool hasManhole = true,
+      bool isSegment = false)
     {
       _ConflictPackage = conflictPackage;
       _coster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
-      _isLiner = false;
+      _isLiner = isLiner;
+      _hasManhole = hasManhole;
+      _isSegment = isSegment;
     } // TrafficControlAncillaryCost()
     #endregion
 
@@ -148,7 +157,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfUsNodeInIntersection :
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection > baseStreets ?
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
-        return (_isLiner ? 3 : _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster)) *
+        return (_isLiner ? _constructionDurationCalculator.ConstructionDurationDays(
+          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment, isLiner:true,
+          numSegments: _ConflictPackage.NumSegments) : _constructionDurationCalculator.ConstructionDurationDays(
+          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
           (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
       } // get
     } // Units

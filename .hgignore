@@ -28,3 +28,5 @@ DotNet/ArcSpooler/packages/NUnit.2.6.3/*
 Fortran/*/*.o
 DotNet/CostEstimator/UpgradeLog.XML
 DotNet/CostEstimator/_UpgradeReport_Files/*
+DotNet/CostEstimator/packages/NUnit.2.6.3/*
+*.vsp
