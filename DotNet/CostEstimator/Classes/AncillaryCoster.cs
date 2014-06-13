@@ -39,6 +39,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private ConstructionDurationCalculator _constructionDurationCalculator = null;
     private bool _suppressSurfaceAncillaries = false;
+    private bool _hasManhole = false;
     #endregion
 
     #region Constructors
@@ -83,13 +84,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       string DSNode, 
       PipeCoster coster, 
       ConstructionDurationCalculator constructionDurationCalculator,
-      bool suppressSurfaceAncillaries)
+      bool suppressSurfaceAncillaries,
+      bool hasManhole = true)
     {
       Type = AncillaryCosterType.Rehab;
       _Segment = segment;
       _Conflict = conflict;
       _PipeCoster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
+      _hasManhole = hasManhole;
 
       DataAccess.ModelDataSet.MdlLinksDataTable tempLinksTable = new DataAccess.ModelDataSet.MdlLinksDataTable();
       DataAccess.ModelDataSet.MdlLinksRow tempLinksRow = tempLinksTable.NewMdlLinksRow();
@@ -286,26 +289,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage, coster).AncillaryCost);
         ancillaryCosts.Add(
-          new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+          new TrafficControlAncillaryCost(
+            conflictPackage, coster, _constructionDurationCalculator, hasManhole: _hasManhole, isSegment: (_Segment != null)).AncillaryCost);
         ancillaryCosts.Add(new ParallelRelocationAncillaryCost(conflictPackage).AncillaryCost);
         ancillaryCosts.Add(new CrossingRelocationAncillaryCost(conflictPackage).AncillaryCost);
         ancillaryCosts.Add(new EnvironmentalMitigationAncillaryCost(conflictPackage).AncillaryCost);
         ancillaryCosts.Add(new HazardousMaterialAncillaryCost(conflictPackage, coster).AncillaryCost);
         ancillaryCosts.Add(
-          new BypassPumpingAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+          new BypassPumpingAncillaryCost(
+            conflictPackage, coster, _constructionDurationCalculator, hasManhole: _hasManhole, isSegment: (_Segment != null)).AncillaryCost);
       }
       if (_suppressSurfaceAncillaries)
       {
-        ancillaryCosts.Add(new TrafficControlAncillaryCost(
-          conflictPackage, coster, _constructionDurationCalculator, isLiner: true).AncillaryCost);
+        if (_Segment != null && _Segment.SegUSNodeID == 0)
+        {
+          ancillaryCosts.Add(new TrafficControlAncillaryCost(
+            conflictPackage, coster, _constructionDurationCalculator, isLiner: true, hasManhole: _hasManhole, isSegment:true).AncillaryCost);
+        }
         ancillaryCosts.Add(
           new BypassPumpingAncillaryCost(
-            conflictPackage, coster, _constructionDurationCalculator, isLiner: true).AncillaryCost);
-      }
-      if (_suppressSurfaceAncillaries && _Segment != null && _Segment.SegUSNodeID == 0)
-      {
-        ancillaryCosts.Add(
-          new TrafficControlAncillaryCost(conflictPackage, coster, _constructionDurationCalculator).AncillaryCost);
+            conflictPackage, coster, _constructionDurationCalculator, isLiner: true, hasManhole: _hasManhole, isSegment:true).AncillaryCost);
       }
 
       // Clean up the list (nulls might be there if an ancillary cost comes back null

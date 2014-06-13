@@ -51,7 +51,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       PipeCoster coster,
       bool returnFraction = false,
       bool isLiner = false,
-      int numSegments = 1
+      int numSegments = 1,
+      bool hasManhole = true
       )
     {
       _coster = coster;
@@ -80,8 +81,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         else
         {
           // 1 day per 10 ft vertical of manhole
-          double manholeConstructionDurationDays = conflictPackage.Depth /
-          MANHOLE_BUILD_RATE_PER_DAY_FT;
+          double manholeConstructionDurationDays = hasManhole ?
+            Math.Ceiling(conflictPackage.Depth / MANHOLE_BUILD_RATE_PER_DAY_FT) : 
+            0;
           // Mainline at 140 cy per day
           double mainlineConstructionDurationDays = _coster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
           // Utility crossings add 0.5 days per conflict

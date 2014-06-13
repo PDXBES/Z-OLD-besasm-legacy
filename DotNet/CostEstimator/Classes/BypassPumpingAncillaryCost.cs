@@ -27,6 +27,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     PipeCoster _coster = null;
     ConstructionDurationCalculator _constructionDurationCalculator = null;
     bool _isLiner = false;
+    bool _hasManhole = true;
+    bool _isSegment = false;
     #endregion
 
     #region Constructors
@@ -38,12 +40,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       ConflictPackage conflictPackage, 
       PipeCoster coster,
       ConstructionDurationCalculator constructionDurationCalculator, 
-      bool isLiner = false)
+      bool isLiner = false,
+      bool hasManhole = true,
+      bool isSegment = false)
     {
       _ConflictPackage = conflictPackage;
       _coster = coster;
       _constructionDurationCalculator = constructionDurationCalculator;
       _isLiner = isLiner;
+      _hasManhole = hasManhole;
+      _isSegment = isSegment;
     } // BypassPumpingAncillaryCost(altLink)
     #endregion
 
@@ -133,8 +139,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _isLiner ? 3 : 
-          _constructionDurationCalculator.ConstructionDurationDays(_ConflictPackage, _coster);
+        return _isLiner ?
+          _constructionDurationCalculator.ConstructionDurationDays(
+            _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction:_isSegment, isLiner:true,             numSegments:_ConflictPackage.NumSegments) : 
+          _constructionDurationCalculator.ConstructionDurationDays(
+          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment);
       } // get
     } // Units
 

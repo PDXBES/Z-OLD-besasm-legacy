@@ -177,6 +177,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     } // MstLinkID
 
     /// <summary>
+    /// Number of segments
+    /// </summary>
+    public int NumSegments
+    {
+      get
+      {
+        return _Segment == null ? 1 : _Segment.NumCuts;
+      }
+    }
+    /// <summary>
     /// Conflict information
     /// </summary>
     /// <returns>Pipe conflict record</returns>
