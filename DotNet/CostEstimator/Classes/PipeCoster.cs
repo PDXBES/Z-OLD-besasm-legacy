@@ -1822,6 +1822,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           new UnitCost((float)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
           if (outsideCIPPCostTable)
             _OutsideTableMessages.Add("CIPP Cost", "Outside CIPP cost table");
+          DirectConstructionCostItems.Add("Lateral", new UnitCost(_DefaultLateralCostPerFt, "ft", 1));
           break;
         case PipeMaterial.Pipeburst:
           _OutsideTableMessages.Clear();

@@ -39,6 +39,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       set; // set
     } // ID
 
+    public int GlobalID { get; set; }
     /// <summary>
     /// Material type
     /// </summary>
