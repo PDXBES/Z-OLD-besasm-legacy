@@ -2071,6 +2071,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         ReportPipeItem reportPipeItem = pipeAndManholeCostItemFactor.Data as ReportPipeItem;
         reportPipeItem.Name = string.Format("{0}", pipeAndManholeCostItemFactor.Name);
         reportPipeItem.ID = currentSegment.ID;
+        reportPipeItem.GlobalID = currentSegment.GlobalID;
         reportPipeItem.MaterialType = _PipeCoster.Material.ToString();
         reportPipeItem.DiameterIn = _PipeCoster.InsideDiameter;
         reportPipeItem.DepthFt = _PipeCoster.Depth;
@@ -2165,6 +2166,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           foreach (CostItemFactor item in pipeList)
           {
             currentItem = item.Name;
+            ReportPipeItem reportData = item.Data as ReportPipeItem;
             char[] separators = { ' ', '-' };
             string[] tokens = item.Name.Split(separators);
             string MLinkID = "", USNode = "", DSNode = "";
@@ -2177,20 +2179,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{5},{1},{2},{3:#},{4:#}",
               MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, item.Cost, item.Factor,
-              MLinkID.Substring(MLinkID.Length-1, 1)));
+              MLinkID.Substring(MLinkID.Length-1, 1), reportData.GlobalID));
             if (pipeCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{4},{1},{2},{3:#},",
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
-                MLinkID.Substring(MLinkID.Length - 1, 1)));
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{4},{1},{2},{3:#},",
+              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, 
                 lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1)));
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{4},{1},{2},{3:#},",
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
-                MLinkID.Substring(MLinkID.Length - 1, 1)));
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
             {
               foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
@@ -2203,9 +2205,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     ancillaryName = "Microtunnel";
                   else
                     ancillaryName = ancillaryCIF.Name;
-                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{5},{1},{2},{3:#},",
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{6},{5},{1},{2},{3:#},",
                   MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, ancillaryCIF.Cost,
-                  ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1)));
+                  ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
               } // foreach  (ancillaryCIF)
             } // if
           } // foreach  (item)
@@ -2232,21 +2234,22 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
           {
             List<ReportPipeItem> pipeItems = ReportPipeItems();
-            pipeCostsStream.WriteLine("ID,Type,USNode,DSNode," +
+            pipeCostsStream.WriteLine("ID,Type,GlobalID,USNode,DSNode," +
             "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
             foreach (ReportPipeItem item in pipeItems)
             {
               string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
               try
               {
-                pipeCostsStream.WriteLine(string.Format("{0},{6},{1},{2},{3:F0},{5:F0},{4:F4}",
+                pipeCostsStream.WriteLine(string.Format("{0},{6},{7},{1},{2},{3:F0},{5:F0},{4:F4}",
                 itemNameItems[0].Substring(0, itemNameItems[0].Length-1),
                 itemNameItems[1],
                 itemNameItems[2],
                 item.DirectConstructionCost,
                 item.ConstructionDuration,
                 item.TotalConstructionCost,
-                itemNameItems[0].Substring(itemNameItems[0].Length-1,1)));
+                itemNameItems[0].Substring(itemNameItems[0].Length-1,1),
+                item.GlobalID));
               } // try
               catch (Exception e)
               {
