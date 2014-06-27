@@ -2177,7 +2177,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               DSNode = tokens[2];
             } // if
 
-            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{5},{1},{2},{3:#},{4:#}",
+            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{6},{5},{1},{2},{3:#},{4:#.#####}",
               MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, item.Cost, item.Factor,
               MLinkID.Substring(MLinkID.Length-1, 1), reportData.GlobalID));
             if (pipeCIFs[item] != null)
@@ -2185,7 +2185,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral\",{0},{5},{4},{1},{2},{3:#},",
+              pipeCostsStream.WriteLine(string.Format("\"Lateral (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, 
                 lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
