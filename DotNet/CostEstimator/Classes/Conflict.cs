@@ -156,8 +156,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
       InConservationZone = Convert.ToInt16(reader["xEzonC"] != DBNull.Value ? reader["xEzonC"] : 0) != 0;
       InPreservationZone = Convert.ToInt16(reader["xEzonP"] != DBNull.Value ? reader["xEzonP"] : 0) != 0;
-      LengthFtInsideConservationZone = Convert.ToInt16(reader["xEzAreaC"] != DBNull.Value ? reader["xEzAreaC"] : 0);
-      LengthFtInsidePreservationZone = Convert.ToInt16(reader["xEzAreaP"] != DBNull.Value ? reader["xEzAreaP"] : 0);
+      LengthFtInsideConservationZone = Convert.ToInt16(reader["xFtEzonC"] != DBNull.Value ? reader["xFtEzonC"] : 0);
+      LengthFtInsidePreservationZone = Convert.ToInt16(reader["xFtEzonP"] != DBNull.Value ? reader["xFtEzonP"] : 0);
       AreaSqFtInsideConservationZone = Convert.ToInt16(reader["xEzAreaC"] != DBNull.Value ? reader["xEzAreaC"] : 0);
       AreaSqFtInsidePreservationZone = Convert.ToInt16(reader["xEzAreaP"] != DBNull.Value ? reader["xEzAreaP"] : 0);
 
