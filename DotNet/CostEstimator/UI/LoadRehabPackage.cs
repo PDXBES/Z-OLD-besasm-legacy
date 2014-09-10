@@ -12,19 +12,22 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     public string ConflictsDBFileName { get; private set; }
     public string ConflictsTableName { get; private set; }
     public int NumRecords { get; private set; }
+    public int BeginID { get; private set; }
 
     public LoadRehabPackage(
       string segmentsDBFileName,
       string segmentsTableName,
       string conflictsDBFileName,
       string conflictsTableName,
-      int numRecords)
+      int numRecords,
+      int beginID)
     {
       SegmentsDBFileName = segmentsDBFileName;
       SegmentsTableName = segmentsTableName;
       ConflictsDBFileName = conflictsDBFileName;
       ConflictsTableName = conflictsTableName;
       NumRecords = numRecords;
+      BeginID = beginID;
     }
   }
 }
