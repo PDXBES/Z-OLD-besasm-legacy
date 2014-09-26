@@ -1,0 +1,1 @@
+"SetLogOptions(T,T,T,T), mFileIsOpen[0]"

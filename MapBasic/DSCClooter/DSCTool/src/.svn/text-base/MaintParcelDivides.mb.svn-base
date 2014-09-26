@@ -1,0 +1,2060 @@
+include "MapBasic.def"
+include "Menu.def"
+include "Icons.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGOpenUtils.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGLogger.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGMTabUtil.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\INIUtils.def"
+
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGGlobal.def"
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGModMake.def"
+
+declare sub menuitem_get_raw_divide_filename
+declare sub menuitem_process_dividefile_for_master
+declare sub menuitem_append_processed_dividefile_to_master
+declare sub menuitem_killDSCDividesMaint
+
+define M_PARKPLUS TRUE
+define M_AREA_TOLERANCE 0.04
+define M_AREA_MINDIFF 100
+define M_DEBUG TRUE
+define M_INI_SECTION "DivideMaint"
+define M_PRINT_INTERVAL 100
+define M_ERROR  -1
+define M_INIT				1
+define M_GETFILE		2
+define M_CHECKED		3
+define M_APPEND			4
+
+declare Sub CreateDivideAppendTable(ByVal LP as string, ByVal Alias as string )
+declare sub CreateICAppendTable_VEG(ByVal LP as string, ByVal Alias as string )
+declare sub CreateICAppendTable_DW(ByVal LP as string, ByVal Alias as string )
+declare sub cleanupic(byval strdivtarget as string, byval strICtarget as string)
+declare sub Initialize_DSC_Divides_Tool
+declare Sub MkZingerFromMstDscId(ByVal UpdateMstDscId as integer)
+'declare sub InitOpenUtilGlobals
+
+declare function getMItabpath() as string
+declare function Initialize_Target_Divides() as integer
+declare function Check_Divide_Areas() as integer
+declare function Finalize_Checked_Divides() as integer
+declare function CreateDivideIC(byval ICtarget as string, byval strIC as string) as integer
+declare function Append_Divides_and_ICs() as integer
+declare function getImpFract(zoning as string, lotsqft as integer, parkplus As logical) As Float
+declare function MaxOfInts(Int1 as Integer, Int2 as Integer) as Integer
+
+Dim alwaysVerifyDiscoClass as logical
+Dim mScratchDir as string
+Dim mAddPendingDir as string
+Dim mAddCompleteDir as string
+Dim mAddFailedDir as string
+Dim mDividePolyPath as string
+Dim sDSCChanges as string
+
+global mState as integer
+global sMstDSC as String
+global smst_DSCDivides as String
+global sModifiedDSC as String
+global AllMasters As Logical
+global StayInvisible as logical
+global gTempDir as String
+
+
+Dim mMasterOpenNDX(5) as integer
+Dim mMasterWriteNDX(3) as integer
+Dim mFailedRecs as integer
+
+Dim sareatol as integer
+
+'------------------------------------------------------------------------------
+sub menuitem_get_raw_divide_filename()
+	dim msg as string
+	dim Attempt as integer
+	Attempt = M_GETFILE
+
+	'msg = getErrorDesc(attempt) 
+	if msg <> "" then
+		NOTE msg
+		exit sub
+	end if
+	
+	mDividePolyPath = getMItabpath() 
+  
+  if mDividePolyPath <> "" 
+  	then mState = Attempt 
+  end if
+  
+end sub
+'------------------------------------------------------------------------------
+sub menuitem_process_dividefile_for_master()
+  dim rc as integer
+  dim strgdate as string	
+  dim msg as string
+  dim Attempt as integer
+	
+  Attempt = M_CHECKED
+	
+  Close Table ModifiedDSC
+	
+  mDividePolyPath = sModifiedDSC
+
+  'msg = getErrorDesc(Attempt) 
+  if msg <> "" then
+    NOTE msg
+    exit sub
+  end if
+	
+  ' set progress in INI File
+  strgdate = curdate() & " " & time(24)
+  rc = WriteINI(gmstINIfullpath, "Admin", "DSCDividesUpdateStart", strgdate)
+  ' and initialize others to blank
+  strgdate = ""
+  rc = WriteINI(gmstINIfullpath, "Admin", "DSCDividesUpdateDone", strgdate)
+  
+  sDSCChanges = "_" & format$(curdate(),"0") & "_" & mid$(Time(24),1,2) & mid$(Time(24),4,2) &  mid$(Time(24),7,2)
+  
+  'open up the table that has the divides in it
+  Open Table mDividePolyPath as _RawDividePolys
+  'create an append table and place it in the scratch directory
+  call  CreateDivideAppendTable(gtempdir & "\" & sDSCChanges & ".tab", "DSCChanges" )
+
+  'place the Parcel numbers of the divides into the append table
+  Insert Into DSCChanges (COL1, COL2, COL3) Select COL2, COL3, COL1 From _RawDividePolys
+  'END PROGRAM
+
+  'OK To DROP _RawDividePolys anytime but we close it if testing
+  if M_DEBUG then
+  	close table _RawDividePolys
+  else
+  	drop table  _RawDividePolys
+  end if
+  
+  print "Initializing Target Divides"
+  if Initialize_Target_Divides() <> RETURNSUCCESS then
+    mState = M_ERROR
+    NOTE "Check failed"
+    exit sub
+  end if
+
+  print "Checking Divide Areas"
+  if Check_Divide_Areas() <> RETURNSUCCESS then
+    print "Check_Divide_Areas Failed"
+    mState = M_ERROR
+    NOTE "Check failed"
+    exit sub
+  end if
+
+  if Finalize_Checked_Divides() <> RETURNSUCCESS then
+    print "Finalize_Checked_Divides"
+    mState = M_ERROR
+    NOTE "Check failed"
+    exit sub
+  end if
+
+  call CreateICAppendTable_VEG(gtempdir & "\" & sDSCChanges & "_VEG.tab", "DSCChanges_VEG" )
+  call CreateICAppendTable_DW(gtempdir & "\" & sDSCChanges & "_DW.tab", "DSCChanges_DW" )
+
+  if  CreateDivideIC("DSCChanges_VEG", "discoveg") = RETURNFAILURE then
+    mState = M_ERROR
+    NOTE "Check failed"
+    exit sub
+  end if
+
+  if  CreateDivideIC("DSCChanges_DW", "drywell") = RETURNFAILURE then
+    mState = M_ERROR
+    NOTE "Check failed"
+    exit sub
+  end if
+
+  msg = "Divide Processing Complete"& chr$(13)
+
+  if mFailedRecs > 0 then
+    msg = msg  &
+    mFailedRecs & " failed records saved to:" & chr$(13)
+    & gtempdir & "\" & "F_" & pathtotablename$(mDividePolyPath) & ".TAB"
+  			
+    print msg
+    mState = M_CHECKED
+
+    'exit sub
+    call menuitem_append_processed_dividefile_to_master
+  else
+    msg = msg & "no records failed"
+		
+    print msg
+    mState = M_CHECKED
+	
+    call menuitem_append_processed_dividefile_to_master
+    end if
+end sub
+'------------------------------------------------------------------------------
+sub menuitem_append_processed_dividefile_to_master
+  dim rc as integer
+  dim msg as string
+  dim attempt as integer
+
+  attempt = M_APPEND
+  'msg = getErrorDesc(attempt)
+  if msg <> "" then
+    NOTE msg
+    exit sub
+  end if
+
+  rc =  Append_Divides_and_ICs()
+
+  if rc = RETURNSUCCESS then
+    Note "divides and ICs appended"
+    mState = M_INIT
+  else
+    mState = M_ERROR
+  end if
+	
+  'Close table _RawDividePolys
+  Open table mDividePolyPath as ModifiedDSC
+  'delete from ModifiedDSC
+	
+  Add Map Layer ModifiedDSC
+  Set Map Layer ModifiedDSC Display Global
+  Commit Table ModifiedDSC
+end sub
+'------------------------------------------------------------------------------
+function Append_Divides_and_ICs() as integer
+  dim ThisPID as integer
+  dim ThisDSCID as integer
+  dim ThisRow as integer
+  dim newDivideID as integer
+  dim msg as string
+  dim iParcelID as Integer
+  dim iDSCID as Integer
+
+  Dim iAltZingID as Integer
+  Dim iLinkID as Integer
+  Dim sLinkType as String
+  Dim iSource as Integer
+  Dim iDivideID as Integer
+
+  if M_DEBUG then
+    'call setlogoptions(TRUE, TRUE, TRUE, TRUE)
+  end if
+	
+  'Get the identifiers from the new divides table
+  Select ParcelID, DivideID, DSCID from DSCChanges order by ParcelID into _delPIDlist 'group by ParcelID order by ParcelID into _delPIDlist
+	
+  'loop through all of the objects in the divides table
+  dim delPIDListCount as integer
+  dim delPIDListIndex as integer
+  delPIDListCount = tableinfo(_delPIDlist,TAB_INFO_NROWS)
+  delPIDListIndex = 1
+	
+  Fetch first from _delPIDlist
+  For delPIDListIndex = 1 to delPIDListCount
+    Fetch Rec delPIDListIndex From _delPIDlist
+    'record the identifiers from the divides table
+    ThisPID = _delPIDlist.ParcelID
+    ThisDSCID = _delPIDlist.DSCID
+    newDivideID =_delPIDlist.DivideID
+    if M_DEBUG then
+      'Call Loggit("delete and replace " & ThisDSCID) 
+    else
+      'print "deleting " & ThisDSCID
+    end if
+		
+    'DELETE DIVIDES	that already exist in mst DSC
+    'Print ThisDSCID
+    select * from mst_DSC where ParcelID = ThisPID and (DivideID = newDivideID or DivideID = 0) into _deleteset	
+		
+    Insert Into mst_DSCdivides
+    (
+      ParcelID,
+      DivideID,
+      DSCID,
+      discoSiteID,
+      DiscoClass,
+      ToMLinkSan,
+      ToMLinkStorm,
+      PipeFlowTypeSan,
+      PipeFlowTypeStorm,
+      SanSwrCrown,
+      Frac2SwrBeg,
+      FloodRefElev,
+      FalseBFRisk,
+      RNO,
+      OWNER1,
+      OWNER2,
+      OWNER3,
+      OWNERADDR,
+      OWNERCITY,
+      OWNERSTATE,
+      OWNERZIP,
+      SITEADDR,
+      SITECITY,
+      SITE_STATE,
+      SITEZIP,
+      FloodRefElev_2,
+      isVacant,
+      ZoneEX,
+      ZoneCP,
+      GenEX,
+      GenCP,
+      PZsqft,
+      ImpFractEX,
+      ImpFractCP,
+      ImpFractFB,
+      AreaFt,
+      RfAreaFtEX,
+      RfAreaFtFB,
+      PkAreaFtEX,
+      PkAreaFtFB,
+      BaseflowEXcfs,
+      BaseflowFBcfs,
+      BaseflowDMcfs,
+      GrowthState,
+      IncIA4FB,
+      gisBasin,
+      ICFtRoofEX,
+      ICFtRoofFB,
+      ICFtParkEX,
+      ICFtParkFB,
+      EICFtRoofEX,
+      EICFtParkEX,
+      EICFtRoofFB,
+      EICFtParkFB,
+      Sewerable,
+      Septic,
+      PZone,
+      HasBasement,
+      PropertyID
+    ) 	
+    select	
+      ParcelID,
+      DivideID,
+      DSCID,
+      discoSiteID,
+      DiscoClass,
+      ToMLinkSan,
+      ToMLinkStorm,
+      PipeFlowTypeSan,
+      PipeFlowTypeStorm,
+      SanSwrCrown,
+      Frac2SwrBeg,
+      FloodRefElev,
+      FalseBFRisk,
+      RNO,
+      OWNER1,
+      OWNER2,
+      OWNER3,
+      OWNERADDR,
+      OWNERCITY,
+      OWNERSTATE,
+      OWNERZIP,
+      SITEADDR,
+      SITECITY,
+      SITE_STATE,
+      SITEZIP,
+      FloodRefElev_2,
+      isVacant,
+      ZoneEX,
+      ZoneCP,
+      GenEX,
+      GenCP,
+      PZsqft,
+      ImpFractEX,
+      ImpFractCP,
+      ImpFractFB,
+      AreaFt,
+      RfAreaFtEX,
+      RfAreaFtFB,
+      PkAreaFtEX,
+      PkAreaFtFB,
+      BaseflowEXcfs,
+      BaseflowFBcfs,
+      BaseflowDMcfs,
+      GrowthState,
+      IncIA4FB,
+      gisBasin,
+      ICFtRoofEX,
+      ICFtRoofFB,
+      ICFtParkEX,
+      ICFtParkFB,
+      EICFtRoofEX,
+      EICFtParkEX,
+      EICFtRoofFB,
+      EICFtParkFB,
+      Sewerable,
+      Septic,
+      PZone,
+      HasBasement,
+      PropertyID
+    from _deleteset
+		
+    if tableinfo(_deleteset,TAB_INFO_NROWS) > 0 then
+      msg = "deleting divide: " & str$(ThisDSCID)
+      Call Loggit(msg) 
+      delete from _deleteset
+    end if
+		
+    close table _deleteset
+
+  Next	
+  close table _delPIDlist
+
+  Call Loggit("inserting into mst_DSC")
+  
+  Dim iP As Integer
+  Dim iD As Integer
+  'Fetch first from DeleteFromMstDSC
+  'do while not EOT(DeleteFromMstDSC)
+    'iP = DeleteFromMstDSC.ParcelID
+    'iD = DeleteFromMstDSC.DivideID
+		
+    'if Allmasters = true then
+      'DELETE VEG ICs
+      select * from DiscoVeg,DeleteFromMstDSC where (DiscoVeg.ParcelID = DeleteFromMstDSC.ParcelID) and (DiscoVeg.divideid <>0) and (DiscoVeg.divideid = DeleteFromMstDSC.divideid) into _deleteset
+      if tableinfo(_deleteset,TAB_INFO_NROWS) > 0 then
+        Update _deleteset Set SqFt = -1
+        Select * from DiscoVeg where SqFt = -1 into deletethis
+        Delete From deletethis
+        msg = "deleting veg_ICs"
+        Call Loggit(msg) 
+			  
+        close table _deleteset
+        close table deletethis
+      end if							
+		
+      'DELETE DRYWELL ICs
+      select * from Drywell,DeleteFromMstDSC where (Drywell.ParcelID = DeleteFromMstDSC.ParcelID) and (Drywell.divideid <>0) and (Drywell.divideid = DeleteFromMstDSC.divideid) into _deleteset
+      if tableinfo(_deleteset,TAB_INFO_NROWS) > 0 then
+        Update _deleteset Set SqFt = -1
+        Select * from Drywell where SqFt = -1 into deletethis
+        Delete From deletethis
+        msg = "deleting drywell_ICs"
+        Call Loggit(msg)
+			  
+        close table _deleteset
+        close table deletethis 
+      end if						
+	    
+      'DELETE Green Roof ICs	
+      select * from GrnRoof,DeleteFromMstDSC where (GrnRoof.ParcelID = DeleteFromMstDSC.ParcelID) and (GrnRoof.divideid <>0) and (GrnRoof.divideid = DeleteFromMstDSC.divideid) into _deleteset
+      if tableinfo(_deleteset,TAB_INFO_NROWS) > 0 then
+        Update _deleteset Set SqFt = -1
+        Select * from GrnRoof where SqFt = -1 into deletethis
+        Delete From deletethis
+        msg = "deleting greenroof_ICs"
+        Call Loggit(msg) 
+			  
+        close table _deleteset
+        close table deletethis
+      end if
+								
+      select mst_DSC.ParcelID, mst_DSC.DivideID from mst_DSC,DeleteFromMstDSC where (mst_DSC.ParcelID = DeleteFromMstDSC.ParcelID) and (mst_DSC.divideid = DeleteFromMstDSC.divideid OR mst_DSC.divideid =0) into _deletesetb
+      if tableinfo(_deletesetb,TAB_INFO_NROWS) > 0 then
+        Update _deletesetb Set ParcelID = -1
+        Select * from mst_DSC where ParcelID = -1 into deletethisb
+        Delete From deletethisb
+        msg = "deleting DSCs"
+        Call Loggit(msg) 
+			  
+        close table _deletesetb
+        close table deletethisb
+      end if
+			
+      Print "Finished with Select 1"
+
+      Insert Into mst_DSC
+      (
+        ParcelID,
+        DivideID,
+        DSCID,
+        discoSiteID,
+        DiscoClass,
+        ToMLinkSan,
+        ToMLinkStorm,
+        PipeFlowTypeSan,
+        PipeFlowTypeStorm,
+        SanSwrCrown,
+        Frac2SwrBeg,
+        FloodRefElev,
+         FalseBFRisk,
+        RNO,
+        OWNER1,
+        OWNER2,
+        OWNER3,
+        OWNERADDR,
+        OWNERCITY,
+        OWNERSTATE,
+        OWNERZIP,
+        SITEADDR,
+        SITECITY,
+        SITE_STATE,
+        SITEZIP,
+        FloodRefElev_2,
+        isVacant,
+        ZoneEX,
+        ZoneCP,
+        GenEX,
+        GenCP,
+        PZsqft,
+        ImpFractEX,
+        ImpFractCP,
+        ImpFractFB,
+        AreaFt,
+        RfAreaFtEX,
+        RfAreaFtFB,
+        PkAreaFtEX,
+        PkAreaFtFB,
+        BaseflowEXcfs,
+        BaseflowFBcfs,
+        BaseflowDMcfs,
+        GrowthState,
+        IncIA4FB,
+        gisBasin,
+        ICFtRoofEX,
+        ICFtRoofFB,
+        ICFtParkEX,
+        ICFtParkFB,
+        EICFtRoofEX,
+        EICFtParkEX,
+        EICFtRoofFB,
+        EICFtParkFB,
+        Sewerable,
+        Septic,
+        PZone,
+        HasBasement,
+        PropertyID
+      ) 	
+      select
+        ParcelID,
+    DivideID,
+    DSCID,
+    discoSiteID,
+    DiscoClass,
+    ToMLinkSan,
+    ToMLinkStorm,
+    PipeFlowTypeSan,
+    PipeFlowTypeStorm,
+    SanSwrCrown,
+    Frac2SwrBeg,
+    FloodRefElev,
+    FalseBFRisk,
+    RNO,
+    OWNER1,
+    OWNER2,
+    OWNER3,
+    OWNERADDR,
+    OWNERCITY,
+    OWNERSTATE,
+    OWNERZIP,
+    SITEADDR,
+    SITECITY,
+    SITE_STATE,
+    SITEZIP,
+    FloodRefElev_2,
+    isVacant,
+    ZoneEX,
+    ZoneCP,
+    GenEX,
+    GenCP,
+    PZsqft,
+    ImpFractEX,
+    ImpFractCP,
+    ImpFractFB,
+    AreaFt,
+    RfAreaFtEX,
+    RfAreaFtFB,
+    PkAreaFtEX,
+    PkAreaFtFB,
+    BaseflowEXcfs,
+    BaseflowFBcfs,
+    BaseflowDMcfs,
+    GrowthState,
+    IncIA4FB,
+    gisBasin,
+    ICFtRoofEX,
+
+    ICFtRoofFB,
+    ICFtParkEX,
+    ICFtParkFB,
+    EICFtRoofEX,
+    EICFtParkEX,
+    EICFtRoofFB,
+    EICFtParkFB,
+    Sewerable,
+    Septic,
+    PZone,
+    HasBasement,
+    PropertyID
+	from DSCChanges
+
+	Call Loggit("saving mst_DSC")
+	commit table mst_DSC
+	
+	Select ParcelID, Min(DivideID) "Source" From DSCChanges Group By ParcelID Into LowestDivideIDs
+	
+	Add Column DSCChanges (Source) From LowestDivideIDs Set To Source Where ParcelID = ParcelID
+	
+	Select * From DSCChanges into DSCChangesHelper
+	
+	Fetch first from DSCChangesHelper
+
+	do while not (EOT(DSCChangesHelper))
+		'iParcelID = DSCChanges.ParcelID
+		'iSource = DSCChanges.Source
+		'iDSCID = iParcelID * 100 + Source
+		'iDivideID = DSCChanges.DivideID
+		'This query may select two objects, one for sanitary and one for storm.
+		'Select * From mst_dsc_zingers where DSCID = iDSCID into TheZingers
+		'iDSCID = iParcelID * 100 + iDivideID
+
+		Call MkZingerFromMstDscId(DSCChangesHelper.DSCID)
+
+		'I need to have an object from mst_DSC selected
+		'Select * From mst_dsc where DSCID = iDSCID
+		'Fetch first from TheZingers
+		'do while not EOT(TheZingers)
+			'now I have the divide that I am trying to make a zinger for
+			'I have a list of the zingers coming from the original parcel (or divide)
+			'I should get all of the info for creating the new zinger,
+			'then if the dSCID of the new zinger will be the same as the DSCID of the
+			'old zinger AND the LinkType are the same for the new zinger and the old zinger,
+			'then delete the old zinger and any associated zinger with a divideID of 0
+			'.  Then insert the new zinger regardless
+			'of whether there was an matching old zinger.
+			
+			'The info required to make the new zinger is
+			'DSCID, LinkID, LinkType, Endpoint
+			'iLinkID = TheZingers.LinkID
+			'sLinkType = TheZingers.LinkType
+			'arrowx2 = ObjectNodeX(TheZingers.obj, 1, 2)
+			'arrowy2 = ObjectNodeY(TheZingers.obj, 1, 2)
+			'Now I need to know the centroid of the DSC object
+			
+			
+			'if ToMLinkStorm <> 0 then
+			'	sFlowTO = "toSTORM"
+			'end if
+			'if ToMLinkSan <> 0 then
+			'	sFlowTO = "toSAN"
+			'end if
+			
+			'Fetch next from TheZingers
+		'loop
+		
+		Fetch next from DSCChangesHelper
+	loop
+
+	'pack table mst_DSC graphic data
+	'drop index mst_DSC (ParcelID)
+  'drop index mst_DSC (DivideID)
+  'Create Index On mst_DSC (ParcelID)
+  'Create Index On mst_DSC (DivideID)
+
+	'record that we are about to save the "divides to append" table
+	Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath)) 
+	
+	'Save the "divides to append" table
+	Commit Table DSCChanges As  gtempdir & "\C_" & pathtotablename$(mDividePolyPath)  TYPE NATIVE Charset "WindowsLatin1"
+	drop table DSCChanges
+	
+	'I'm gonna ignore this case for now
+	'if Allmasters = true then
+		if TableInfo("DSCChanges_VEG",TAB_INFO_NROWS) > 0 then
+			Insert Into DiscoVeg
+			(
+				ParcelID,
+				DivideID,
+				RoofRPark,
+	      assumeKey,
+				TimeFrame,
+				ApplyAreaTF,
+				ValidFromDate,
+				ValidToDate,
+				SqFt,
+				Effectiveness,
+				Comment,
+				AppendDate
+			) select
+				ParcelID,
+				DivideID,
+				RoofRPark,
+				assumeKey,
+				TimeFrame,
+				ApplyAreaTF,
+				ValidFromDate,
+				ValidToDate,
+				SqFt,
+				Effectiveness,
+				Comment,
+				AppendDate
+			from "DSCChanges_VEG"	
+			
+			Call Loggit("saving  discoveg")
+			commit table DiscoVeg
+			'pack table discoveg data
+			
+			'drop index DiscoVeg (ParcelID)
+	    'drop index DiscoVeg (DivideID)
+	    'Create Index On DiscoVeg (ParcelID)
+	    'Create Index On DiscoVeg (DivideID)
+	
+		Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath) & "_VEG" ) 
+			
+			Commit Table "DSCChanges_VEG"	As  gtempdir & "\C_" & pathtotablename$(mDividePolyPath)  & "_VEG" TYPE NATIVE Charset "WindowsLatin1"
+	    	  
+		end if
+		drop table "DSCChanges_VEG"
+		if TableInfo("DSCChanges_DW",TAB_INFO_NROWS) > 0 then
+		
+			Insert Into Drywell
+			(
+				ParcelID,
+				DivideID,
+				RoofRPark,
+				assumeKey,
+				TimeFrame,
+				ApplyAreaTF,
+				ValidFromDate,
+				ValidToDate,
+				SqFt,
+				Comment,
+				AppendDate
+			) select
+				ParcelID,
+				DivideID,
+				RoofRPark,
+				assumeKey,
+				TimeFrame,
+				ApplyAreaTF,
+				ValidFromDate,
+				ValidToDate,
+				SqFt,
+				Comment,
+				AppendDate
+				from "DSCChanges_DW"
+			
+			Call Loggit("saving  discoveg")
+			
+			commit table DRYWELL
+			'pack table Drywell data
+		'	
+			'drop index Drywell(ParcelID)
+	    'drop index Drywell (DivideID)
+	    'Create Index On Drywell (ParcelID)
+	    'Create Index On Drywell (DivideID)
+	    
+	    Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath) & "_DW" ) 
+			Commit Table "DSCChanges_DW"	As  gtempdir & "\C_" &  pathtotablename$(mDividePolyPath) & "_DW" TYPE NATIVE Charset "WindowsLatin1"
+			
+		end if
+	'end if
+	
+	drop table "DSCChanges_DW"
+	close table DeleteFromMstDSC
+	commit table CleaveLand
+	commit table mst_DSCDivides
+	
+	
+	Append_Divides_and_ICs = RETURNSUCCESS
+	mState = M_INIT
+	
+end function
+
+'------------------------------------------------------------------------------
+sub menuitem_killDSCDividesMaint()
+  close all interactive
+  end program
+end sub   
+'------------------------------------------------------------------------------
+'
+'	Initialize_Target_Divides
+' PRE:
+'
+' POST:
+'	 	The selection set called _UpdateDivideTargets is open 
+'		The targets have a parcelID
+'		Existing building and parking areas are set
+'	
+'
+function Initialize_Target_Divides() as integer
+  dim nrecs as integer
+
+  ' Reset message window
+  set window message position (2,13) units "cm" width 4 front 
+  Open Window Message
+
+  '-----------------------------------------------------------------------------
+  ' Select any divide that is within any parcel that contains a divide where updateatts="T"
+  ' If a single divide is selected within a parcel all divides within will be updated
+  '-----------------------------------------------------------------------------
+  
+  Print "selecting divdes"
+  Select * from DSCChanges into _UpdateDivideTargets
+	
+  ' Update parcel ID, Zones
+  'This seems to be what needs to change.  Update from master DSC, not master parcels
+  Print "  Updating from mst_dsc"
+  Add Column _UpdateDivideTargets (ParcelID ) From mst_DSC Set To ParcelID Where contains
+  'Add Column _UpdateDivideTargets (ParcelID ) From mst_DSC Set To ParcelID Where contains
+  Add Column _UpdateDivideTargets (DivideID ) From mst_DSC Set To DivideID Where contains
+  Add Column _UpdateDivideTargets (DSCID ) From mst_DSC Set To ParcelID*100 + DivideID Where contains
+  Add Column _UpdateDivideTargets (discoSiteID ) From mst_DSC Set To discoSiteID Where contains
+  Add Column _UpdateDivideTargets (DiscoClass ) From mst_DSC Set To DiscoClass Where contains
+  Add Column _UpdateDivideTargets (ToMLinkSan ) From mst_DSC Set To ToMLinkSan Where contains
+  Add Column _UpdateDivideTargets (ToMLinkStorm ) From mst_DSC Set To ToMLinkStorm Where contains
+  Add Column _UpdateDivideTargets (PipeFlowTypeSan ) From mst_DSC Set To PipeFlowTypeSan Where contains
+  Add Column _UpdateDivideTargets (PipeFlowTypeStorm ) From mst_DSC Set To PipeFlowTypeStorm Where contains
+  Add Column _UpdateDivideTargets (SanSwrCrown ) From mst_DSC Set To SanSwrCrown Where contains
+  Add Column _UpdateDivideTargets (Frac2SwrBeg ) From mst_DSC Set To Frac2SwrBeg Where contains
+  Add Column _UpdateDivideTargets (FloodRefElev ) From mst_DSC Set To FloodRefElev Where contains
+  Add Column _UpdateDivideTargets (FalseBFRisk ) From mst_DSC Set To FalseBFRisk Where contains
+  Add Column _UpdateDivideTargets (RNO ) From mst_DSC Set To RNO Where contains
+  Add Column _UpdateDivideTargets (OWNER1 ) From mst_DSC Set To OWNER1 Where contains
+  Add Column _UpdateDivideTargets (OWNER2 ) From mst_DSC Set To OWNER2 Where contains
+  Add Column _UpdateDivideTargets (OWNER3 ) From mst_DSC Set To OWNER3 Where contains
+  Add Column _UpdateDivideTargets (OWNERADDR ) From mst_DSC Set To OWNERADDR Where contains
+  Add Column _UpdateDivideTargets (OWNERCITY ) From mst_DSC Set To OWNERCITY Where contains
+  Add Column _UpdateDivideTargets (OWNERSTATE ) From mst_DSC Set To OWNERSTATE Where contains
+  Add Column _UpdateDivideTargets (OWNERZIP ) From mst_DSC Set To OWNERZIP Where contains
+  Add Column _UpdateDivideTargets (SITEADDR ) From mst_DSC Set To SITEADDR Where contains
+  Add Column _UpdateDivideTargets (SITECITY ) From mst_DSC Set To SITECITY Where contains
+  Add Column _UpdateDivideTargets (SITE_STATE ) From mst_DSC Set To SITE_STATE Where contains
+  Add Column _UpdateDivideTargets (SITEZIP ) From mst_DSC Set To SITEZIP Where contains
+  Add Column _UpdateDivideTargets (FloodRefElev_2 ) From mst_DSC Set To FloodRefElev_2 Where contains
+  Add Column _UpdateDivideTargets (isVacant ) From mst_DSC Set To isVacant Where contains
+  Add Column _UpdateDivideTargets (ZoneEX ) From mst_DSC Set To ZoneEX Where contains
+  Add Column _UpdateDivideTargets (ZoneCP ) From mst_DSC Set To ZoneCP Where contains
+  Add Column _UpdateDivideTargets (GenEX ) From mst_DSC Set To GenEX Where contains
+  Add Column _UpdateDivideTargets (GenCP ) From mst_DSC Set To GenCP Where contains
+  Add Column _UpdateDivideTargets (PZsqft ) From mst_DSC Set To PZsqft Where contains
+  Add Column _UpdateDivideTargets (ImpFractEX ) From mst_DSC Set To ImpFractEX Where contains
+  Add Column _UpdateDivideTargets (ImpFractCP ) From mst_DSC Set To ImpFractCP Where contains
+  Add Column _UpdateDivideTargets (ImpFractFB ) From mst_DSC Set To ImpFractFB Where contains
+  Add Column _UpdateDivideTargets (AreaFt ) From mst_DSC Set To AreaFt Where contains
+  Add Column _UpdateDivideTargets (RfAreaFtEX ) From mst_DSC Set To RfAreaFtEX Where contains
+  Add Column _UpdateDivideTargets (RfAreaFtFB ) From mst_DSC Set To RfAreaFtFB Where contains
+  Add Column _UpdateDivideTargets (PkAreaFtEX ) From mst_DSC Set To PkAreaFtEX Where contains
+  Add Column _UpdateDivideTargets (PkAreaFtFB ) From mst_DSC Set To PkAreaFtFB Where contains
+  Add Column _UpdateDivideTargets (BaseflowEXcfs ) From mst_DSC Set To BaseflowEXcfs Where contains
+  Add Column _UpdateDivideTargets (BaseflowFBcfs ) From mst_DSC Set To BaseflowFBcfs Where contains
+  Add Column _UpdateDivideTargets (BaseflowDMcfs ) From mst_DSC Set To BaseflowDMcfs Where contains
+  Add Column _UpdateDivideTargets (GrowthState ) From mst_DSC Set To GrowthState Where contains
+  Add Column _UpdateDivideTargets (IncIA4FB ) From mst_DSC Set To IncIA4FB Where contains
+  Add Column _UpdateDivideTargets (gisBasin ) From mst_DSC Set To gisBasin Where contains
+  Add Column _UpdateDivideTargets (ICFtRoofEX ) From mst_DSC Set To ICFtRoofEX Where contains
+  Add Column _UpdateDivideTargets (ICFtRoofFB ) From mst_DSC Set To ICFtRoofFB Where contains
+  Add Column _UpdateDivideTargets (ICFtParkEX ) From mst_DSC Set To ICFtParkEX Where contains
+  Add Column _UpdateDivideTargets (ICFtParkFB ) From mst_DSC Set To ICFtParkFB Where contains
+  Add Column _UpdateDivideTargets (EICFtRoofEX ) From mst_DSC Set To EICFtRoofEX Where contains
+  Add Column _UpdateDivideTargets (EICFtParkEX ) From mst_DSC Set To EICFtParkEX Where contains
+  Add Column _UpdateDivideTargets (EICFtRoofFB ) From mst_DSC Set To EICFtRoofFB Where contains
+  Add Column _UpdateDivideTargets (EICFtParkFB ) From mst_DSC Set To EICFtParkFB Where contains
+  Add Column _UpdateDivideTargets (Sewerable ) From mst_DSC Set To Sewerable Where contains
+  Add Column _UpdateDivideTargets (Septic ) From mst_DSC Set To Septic Where contains
+  Add Column _UpdateDivideTargets (PZone ) From mst_DSC Set To PZone Where contains
+  Add Column _UpdateDivideTargets (HasBasement ) From mst_DSC Set To HasBasement Where contains
+  Add Column _UpdateDivideTargets (PropertyID ) From mst_DSC Set To PropertyID Where contains
+
+  Update _UpdateDivideTargets
+    Set DivideQCFlag = "F", DivideQCStatus = "XXX"
+
+  ' Update divide area
+  Print "  Updating divide area"
+  Update _UpdateDivideTargets Set AreaFt = area(obj, "sq ft")
+
+  ' Update building areas
+  Print "  Updating building area"
+  Select * From Impervious Where GenSource = "BLDG" Into TheBuildings
+
+  Add Column _UpdateDivideTargets (RfAreaFtEX) From TheBuildings
+    Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+  Close Table TheBuildings
+
+  ' Update parking areas
+  Print "  Updating parking area"
+  Select * From Impervious Where GenSource = "PRKG" Into TheParkingLots
+  Add Column _UpdateDivideTargets (PkAreaFtEX) From TheParkingLots
+    Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+  Close Table TheParkingLots
+
+  Print "  Saving Divides"
+  Commit Table _UpdateDivideTargets
+  Create Index on DSCChanges(ParcelID)
+  Create Index on DSCChanges(DivideID)
+  Create Index on DSCChanges(DSCID)
+  Initialize_Target_Divides = RETURNSUCCESS
+end function
+'------------------------------------------------------------------------------
+' PURPOSE:
+'		Ensure the divide areas add up to the parcel ares
+'
+' PRE:
+'	 	The selection set called _UpdateDivideTargets is open
+'		The targets have a parcelID
+'		Existing building and parking areas are set
+'
+' POST:
+'		All records in _UpdateDivideTargets are in one of two catagories
+'		Success
+'			- divide areaFT and rfAreaFtEX and pkAreaFtEX adds up to parcel fields
+'			- the QC flag is 000
+'		Failure
+' 		- NOT (divide areaFT and rfAreaFtEX and pkAreaFtEX adds up to parcel fields)
+'			- the QC flag is NOT 000
+'
+'
+' QC Flag states
+'
+'    Note that X indicates no checks
+'
+'	Total  Roof  Parking  WHAT IT IS
+'   P      E      E			  PARCEL area is less than existing PARCEL roof and parking (divides not checked)
+'   P      F      F			  PARCEL area is less than future PARCEL roof and parking (divides not checked)
+'	  P      H      X       PARCEL EXISTING roof area > FUTURE roof
+'	  P      X      H       PARCEL EXISTING parking area > FUTURE parking
+'	  0      X      X       Either the parcel area or the sum of divides area = 0
+'   L      X      X       Sum of divides area outside of tolerance (low)
+'   H      X      X       Sum of divides area outside of tolerance (high)      
+' 	T      L      X       Sum of divides ROOF area outside of tolerance (low)        
+' 	T      H      X       Sum of divides ROOF area outside of tolerance (high)        
+'   T      T      L       Sum of divides PARKING area outside of tolerance (low)
+'   T      T      H       Sum of divides PARKING area outside of tolerance (high)
+'   T      T      T       Everything is fine
+'
+'
+'  Note on gotos in this function
+'		if we skip the parcel temp tables are cleaned up at the GOTO  
+
+'		if we skip the roof or parking temp tables are cleaned up at the end of the loop
+'
+'
+function Check_Divide_Areas() as integer
+  dim nrows, thisrow, mycount as integer
+  dim ThisPID as integer
+  dim ThisDID as integer
+  dim areadiff, adjustment, areanew, arealeft as integer
+  dim strQCstatus, msg as string
+  dim sfailed as string
+	
+  select ParcelID, DivideID from _UpdateDivideTargets into _ParcelIDset group by ParcelID, DivideID into _ParcelIDset order by ParcelID
+  if tableinfo("_ParcelIDset",TAB_INFO_NROWS) = 0 then
+    close table _ParcelIDset
+    print " NO DIVIDES TO CHECK"
+    Check_Divide_Areas = RETURNCAUTION
+    exit function
+  end if
+	
+  MyCount = 0
+  Fetch First from _ParcelIDset
+  Do While Not (EOT(_ParcelIDset))
+    ThisPID = _ParcelIDset.ParcelID
+    ThisDID = _ParcelIDset.DivideID
+    if M_DEBUG = TRUE then
+      print "Check_Divide_Areas: " & ThisPID
+    end if
+
+    'get the dsc information 
+    Select	
+      AreaFt,
+      DivideID,
+      RfAreaFtEX, 
+      PkAreaFtEX,
+      RfAreaFtFB,
+      PkAreaFtFB,
+      ICFtRoofEX,
+      ICFtRoofFB,
+      ICFtParkEX,
+      ICFtParkFB,
+      EICFtRoofEX,
+      EICFtParkEX,
+      EICFtRoofFB,
+      EICFtParkFB
+    from mst_DSC 
+    where ParcelID = ThisPID and DivideID = ThisDID
+    into _ThisParcel
+
+    Select	
+      sum(AreaFt) "AreaFt", 
+      sum(RfAreaFtEX) "RfAreaFtEX", 
+      sum(PkAreaFtEX) "PkAreaFtEX",
+      DivideID,
+      RfAreaFtFB,
+      PkAreaFtFB,
+      ICFtRoofEX,
+      ICFtRoofFB,
+      ICFtParkEX,
+      ICFtParkFB,
+      EICFtRoofEX,
+      EICFtParkEX,
+      EICFtRoofFB,
+      EICFtParkFB
+    from _ThisParcel 
+    where DivideID = ThisDID
+    into _ThisParcel1
+
+    ' make sure you got a parcel
+    nrows = tableinfo("_ThisParcel",TAB_INFO_NROWS)	
+    if nrows < 1 then
+      print ThisPID & " master parcels - nrows = " & nrows & " UNREACHED"  
+      close table _ThisParcel
+      close table _ThisParcel1
+      goto Check_Divides_Skip_Parcel
+    end if
+		
+    'update _ThisDivideSet set DivideQCStatus = strQCstatus
+		
+    ' Update building areas
+    Print "  Updating Parcel building area"
+    Select * From Impervious Where GenSource = "BLDG" Into TheBuildings
+	
+    Add Column _ThisParcel (RfAreaFtEX) From TheBuildings
+      Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+    Close Table TheBuildings
+	
+    ' Update parking areas
+    Print "  Updating Parcel parking area"
+    Select * From Impervious Where GenSource = "PRKG" Into TheParkingLots
+    Add Column _ThisParcel (PkAreaFtEX) From TheParkingLots
+      Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+    Close Table TheParkingLots
+
+    ' now get the divides to be created that are related to this parcel
+    select * from _UpdateDivideTargets where ParcelID = ThisPID and DivideID = ThisDID into _ThisDivideSet
+
+    ' there must be at least one but check anyway 
+    nrows = tableinfo("_ThisDivideSet",TAB_INFO_NROWS)
+    if nrows = 0 then
+      call loggit(ThisPID & " no divides found SHOULD BE UNREACHED")
+      close table _ThisDivideSet
+      close table _ThisParcel
+      close table _ThisParcel1
+      goto Check_Divides_Skip_Parcel
+    end if
+
+    ' get the totals for the divides
+    select 	
+      sum(AreaFt) "SumAreaFt", 
+      sum(RfAreaFtEX) "sumRfEX", 
+      sum(PkAreaFtEX) "sumPkEX" 
+    from _ThisDivideSet
+    into _ThisDivideSet_Totals
+		
+    ' if no area in either parcel or sum of divides then we can't go on
+    if (_ThisDivideSet_Totals.SumAreaFt < 1) or (_ThisParcel1.AreaFt < 1 )then
+      print ThisPID & " Total Area Fails"
+      strQCStatus = "0XX"			
+      update _ThisDivideSet set DivideQCStatus = strQCstatus
+      close table _ThisDivideSet_Totals
+      close table _ThisDivideSet
+      close table _ThisParcel
+      close table _ThisParcel1
+      goto Check_Divides_Skip_Parcel
+    end if
+
+    ' check area diff and adjust the value if within tolerance
+    areadiff = _ThisParcel1.AreaFt - _ThisDivideSet_Totals.SumAreaFt
+    if M_DEBUG then 
+      print ThisPID & " Diff:" & areadiff 
+    end if
+    'exit sub
+    if (areadiff = 0) then
+      'no adjustments needed
+      update _ThisDivideSet Set DivideQCstatus = "TXX"
+    else
+      'verify the difference is within tolerance
+      if ( abs(areadiff) >  M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel1.AreaFt) then
+        'the areas are too different to fix so skip
+        if M_DEBUG then print "   EXCEEDED tolerance" end if
+        if areadiff > 0 then
+          strQCstatus = "LXX"
+        else
+          strQCstatus = "HXX"
+        end if
+        update _ThisDivideSet Set DivideQCstatus = strQCstatus
+        close table _ThisDivideSet
+        close table _ThisParcel
+        close table _ThisParcel1
+        goto Check_Divides_Skip_Parcel
+      else
+        'adjust divide areas to match parcel
+        arealeft = areadiff
+        Fetch First from _ThisDivideSet
+
+        Do while NOT EOT(_ThisDivideSet)
+          thisrow = _thisDivideSet.ROWID
+          adjustment = areadiff * _ThisDivideSet.Areaft / _ThisParcel1.AreaFt
+          arealeft = arealeft - adjustment
+
+          areanew =  adjustment +  _ThisDivideSet.Areaft
+          update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
+          if M_DEBUG then 
+            print "   AL:" & arealeft & " AN:" & areanew & " AJ:" & adjustment 
+          end if
+          Fetch Next from _ThisDivideSet
+        loop
+          
+        if arealeft <> 0 then
+          Fetch Last from _ThisDivideSet
+          thisrow = _thisDivideSet.ROWID
+          areanew =  _ThisDivideSet.Areaft + arealeft
+          update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
+        end if
+          
+        update _ThisDivideSet Set DivideQCstatus = "TXX"
+
+      end if
+    end if
+
+    'ASSERT: the total areas are OK
+    ' if no roof area then no need to do this
+    if (_ThisDivideSet_Totals.SumRfEX = 0) and (_ThisParcel.RfAreaFtEX = 0 )then
+      print ThisPID & " No roof area"
+      strQCStatus = "TTX"
+      update _ThisDivideSet set DivideQCStatus = strQCstatus
+
+      goto Check_Divides_Skip_Roof
+    end if
+
+    ' check roof ex diff and adjust the value if within tolerance
+    areadiff = _ThisParcel.RfAreaFtEX - _ThisDivideSet_Totals.SumRfEX
+    if M_DEBUG then 
+      print ThisPID & " Roof Diff:" & areadiff 
+    end if
+		
+    'exit sub
+		
+    if (areadiff = 0) then
+      'no adjustments needed
+      update _ThisDivideSet Set DivideQCstatus = "TTX"
+			
+    elseif(areadiff <> 0) then
+      'verify the difference is within tolerance
+      if (_ThisParcel.RfAreaFtEX = 0) OR
+            ((abs(areadiff) >  M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.RfAreaFtEX)) then
+        'EITHER the areas are too different to fix OR there is no roof in the PARCEL
+        if M_DEBUG then 
+          print "   EXCEEDED tolerance for roof" 
+        end if
+            
+        if areadiff > 0 then
+          strQCstatus = "TLX"
+        else
+          strQCstatus = "THX"
+        end if
+        'exit sub
+        update _ThisDivideSet Set DivideQCstatus = strQCstatus
+        close table _ThisDivideSet
+        goto Check_Divides_Skip_Parcel
+      else
+        'adjust divide areas to match parcel
+        arealeft = areadiff
+        Fetch First from _ThisDivideSet
+
+        Do while NOT EOT(_ThisDivideSet)
+          thisrow = _thisDivideSet.ROWID
+
+          adjustment = areadiff * _ThisDivideSet.RfAreaFtEX / _ThisParcel.RfAreaFtEX
+          arealeft = arealeft - adjustment
+          areanew =  adjustment +  _ThisDivideSet.RfAreaFtEX
+          update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
+          if M_DEBUG then 
+            print "   RL:" & arealeft & " RN:" & areanew & " RJ:" & adjustment 
+          end if
+                
+          Fetch Next from _ThisDivideSet
+        loop
+
+        if arealeft <> 0 then
+          Fetch Last from _ThisDivideSet
+          thisrow = _thisDivideSet.ROWID
+          areanew =  _ThisDivideSet.RfAreaFtEX + arealeft
+          update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
+        end if
+            
+        update _ThisDivideSet Set DivideQCstatus = "TTX"
+
+      end if
+    end if
+
+Check_Divides_Skip_Roof:
+    'ASSERT: ROOF EX is OK
+    ' if no parking area then no need to do this
+    if (_ThisDivideSet_Totals.SumPkEX = 0) and (_ThisParcel.PkAreaFtEX = 0 )then
+      print ThisPID & " No parking area"
+      strQCStatus = "TTT"
+      update _ThisDivideSet set DivideQCStatus = strQCstatus
+
+      goto Check_Divides_Skip_Parking
+    end if
+
+    ' check parking diff and adjust the value if within tolerance
+
+    areadiff = _ThisParcel.PkAreaFtEX - _ThisDivideSet_Totals.SumPkEX
+    if M_DEBUG then 
+      print ThisPID & " Park Diff:" & areadiff 
+    end if
+
+    if (areadiff = 0) then
+      'no adjustments needed
+      update _ThisDivideSet Set DivideQCstatus = "TTT"
+
+    else
+      'verify the difference is within tolerance
+      if (_ThisParcel.PkAreaFtEX = 0) OR
+            ((abs(areadiff) >  M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.PkAreaFtEX)) then
+        'EITHER the areas are too different to fix OR there is no park in the PARCEL
+        if M_DEBUG then 
+          print "   EXCEEDED tolerance for parking" 
+        end if
+        if areadiff > 0 then
+          strQCstatus = "TTL"
+        else
+          strQCstatus = "TTH"
+        end if
+        update _ThisDivideSet Set DivideQCstatus = strQCstatus
+        close table _ThisDivideSet
+				
+        'end program
+        goto Check_Divides_Skip_Parcel
+
+      else
+        'adjust divide areas to match parcel
+        arealeft = areadiff
+        Fetch First from _ThisDivideSet
+
+        Do while NOT EOT(_ThisDivideSet)
+          thisrow = _thisDivideSet.ROWID
+          adjustment = areadiff * _ThisDivideSet.PkAreaFtEX / _ThisParcel.PkAreaFtEX
+          arealeft = arealeft - adjustment
+          areanew =  adjustment +  _ThisDivideSet.PkAreaFtEX
+          update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
+          if M_DEBUG then 
+            print "   PL:" & arealeft & " PN:" & areanew & " PJ:" & adjustment 
+          end if
+          Fetch Next from _ThisDivideSet
+        loop
+
+        if arealeft <> 0 then
+          Fetch Last from _ThisDivideSet
+          thisrow = _thisDivideSet.ROWID
+          areanew =  _ThisDivideSet.PkAreaFtEX + arealeft
+          update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
+        end if
+        update _ThisDivideSet Set DivideQCstatus = "TTT"
+      end if
+    end if
+
+Check_Divides_Skip_Parking:
+    'you must do these if you got here without a goto Check_Divides_Skip_Parcel
+    close table _ThisParcel
+    close table _ThisParcel1
+    close table _ThisDivideSet_Totals
+    close table _ThisDivideSet
+
+Check_Divides_Skip_Parcel:
+    Fetch Next from _ParcelIDset
+  Loop
+	
+  commit table DSCChanges
+  close table _ParcelIDset
+  close table _UpdateDivideTargets
+	
+  sfailed = "F_" & pathtotablename$(mDividePolyPath) 
+  
+  Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailed
+  Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailedDelete
+  
+  mFailedRecs = tableinfo(_sfailed, TAB_INFO_NROWS)
+  if mFailedRecs > 0 then
+    Commit Table _sfailed As  gtempdir & "\" & "F_" & pathtotablename$(mDividePolyPath) & ".TAB" TYPE NATIVE Charset "WindowsLatin1"
+    Print "Append Failed"
+    'this deletes the recs from smart table
+    delete from _sfailedDelete
+    
+    Open table mDividePolyPath as ModifiedDSC 
+  else
+    call loggit ("All records passed area tests")
+  end if
+  
+  close table _sfailed
+  
+  commit table DSCChanges
+  pack table DSCChanges graphic data
+  
+  if mfailedRecs > 0 then
+    msg = mFailedRecs & " failed records saved to:" & chr$(13) 
+        & gtempdir & "\" & sfailed & ".TAB"
+  else
+    msg = "All records passed check"			
+  end if
+	
+  Check_Divide_Areas = RETURNSUCCESS
+	
+end function
+'-------------------------------------------------------------------------------
+'
+' PRE
+'		DSCChanges is open and has good divides
+'
+'
+function Finalize_Checked_Divides() as integer
+  dim nrows, thisrow, mycount as integer
+  dim ThisPID as integer
+  dim ThisDID as integer
+  dim newDivideID as Integer
+  dim DeltaRf, DeltaPk, ThisRfFB, ThisPkFB, PervEX_Parcel, PervEX_divide as integer
+  dim Rfarealeft, Pkarealeft as integer
+  dim iICFtRoofEX, iICFtRoofFB, iICFtParkEX, iICFtParkFB, iEICFtRoofEX, iEICFtParkEX, iEICFtRoofFB, iEICFtParkFB as integer
+  dim Apportion as logical
+  dim ThisDeltaRf, ThisDeltaPK as integer
+	
+  dim ThisBaseFlowEXcfs,ThisBaseFlowFBcfs, ThisBaseFlowDMcfs as float
+  dim ThisZoneEX,	ThisZoneCP,	ThisGenEX, ThisGenCP as string
+  dim ThisFloodRefElev as float
+  dim ThisGridQAQC as string
+  dim ThisMaxBldGrid,	ThisAvgParcelElev as float
+  dim ThisEFFMethod, ThisFFOverride as string
+  dim ThisOrigFinishFloor as float
+  Dim oRegion As Object
+  Dim iToMLinkSan as Integer
+  Dim iToMLinkStorm as Integer
+	
+  'Create the of objects to delete from mst_DSC (EMPTY)
+  CREATE TABLE DeleteFromMstDSC USING mst_DSC FILE  gTempDir & "DeleteDSC.TAB"
+	
+  'Get the current DivideID and ParcelID of the DSCs to split, along with the new objects they will become
+  ', place this data into _ParcelIDset
+  commit table DSCChanges
+  pack table DSCChanges Graphic Data
+  select ParcelID, DivideID from DSCChanges group by ParcelID, DivideID into _ParcelIDset order by ParcelID, DivideID			
+	
+  if tableinfo("_ParcelIDset",TAB_INFO_NROWS) = 0 then
+    close table _ParcelIDset
+    call loggit (" NO DIVIDES TO FINALIZE")
+    Finalize_Checked_Divides = RETURNCAUTION
+    exit function
+  end if
+	
+  MyCount = 0
+  dim recordNumber as integer
+  RecordNumber = tableinfo("_ParcelIDset",TAB_INFO_NROWS)
+  dim currentCount as integer
+  currentCount = 1
+  For CurrentCount = 1 to RecordNumber
+    Fetch Rec CurrentCount From _ParcelIDset
+    'For each of the future objects we are going to be splitting
+    'Perform the following loop
+    'Do While Not (EOT(_ParcelIDset))
+  
+    'Remember what ParcelID and DivideID we are operating on
+    ThisPID = _ParcelIDset.ParcelID
+    ThisDID = _ParcelIDset.DivideID
+    if M_DEBUG = TRUE then
+      print "Finalize_Checked_Divides: " & ThisPID
+    end if
+
+    'get the parcel information.  This should give us the unbroken
+    'DSC that is about to be split 
+    Select	*
+    from mst_DSC 
+    where ParcelID = ThisPID and DivideID = ThisDID
+    into _ThisParcel
+		
+    Fetch Rec CurrentCount From _ParcelIDset
+    'Make sure there is a Parcel in mst_DSC with the ParcelID and divideID that we are looking for
+    'Do not update more than the current future object we are looking at in the current outer loop
+    nrows = tableinfo("_ThisParcel",TAB_INFO_NROWS)
+    if nrows < 1 then
+      print ThisPID & " master parcels - nrows = " & nrows & " UNREACHED"			
+      Finalize_Checked_Divides = RETURNFAILURE
+      exit function
+    end if
+
+    ' now get the divides related to this parcel
+    ' NOTE!! order by descending so that the last record has the greatest PERVIOUS area
+    select
+      ParcelID,
+      DivideID,
+      DSCID,
+      ToMLinkSan,
+      ToMLinkStorm,
+      areaFt,
+      RfAreaFtEX,
+      PkAreaFtEX,
+      RfAreaFtFB,
+      PkAreaFtFB,
+      Frac2SwrBeg,
+      RfAreaFtFB + PkAreaFtFB "ImpArea",
+      BaseFlowEXcfs,
+      BaseFlowFBcfs,
+      BaseFlowDMcfs,
+      ICFtRoofEX,
+      ICFtRoofFB,
+      ICFtParkEX,
+      ICFtParkFB,
+      EICFtRoofEX,
+      EICFtParkEX,
+      EICFtRoofFB,
+      EICFtParkFB,
+      ZoneEX,
+      ZoneCP,
+      GenEX,
+      GenCP,
+      FloodRefElev,
+      GridQAQC,
+      MaxBldGrid,
+      AvgParcelElev,
+      EFFMethod,
+      FFOverride,
+      OrigFinishFloor,
+      SanSwrCrown,
+      FalseBFRisk,
+      obj
+
+      from DSCChanges
+      where ParcelID = ThisPID  and DivideID = ThisDID into _ThisDivideSet
+      order by "ImpArea" Desc
+			
+      Fetch Rec CurrentCount From _ParcelIDset
+
+      ' there must be at least one but check anyway
+      nrows = tableinfo("_ThisDivideSet",TAB_INFO_NROWS)
+      if nrows = 0 then
+        print ThisPID & " no divides found UNREACHED"
+        close table _ThisDivideSet
+        close table _ThisParcel			
+        Finalize_Checked_Divides = RETURNFAILURE
+        exit function
+      elseif nrows = 1 then
+        print ThisPID & " Only one divide found, invalid state UNREACHED"
+        close table _ThisDivideSet
+        close table _ThisParcel			
+        Finalize_Checked_Divides = RETURNFAILURE
+        exit function
+      else
+        call loggit("Dividing DSC " & (thisPID*100 + thisDID) & " into " & nrows & " divides.")
+      end if
+
+      ' ALGORITHM: Apportion the change in area by the ratio of (PervEX_Divide/PervEX_Parcel) * delta
+      '
+      PervEX_Parcel = _ThisParcel.AreaFt - (_ThisParcel.PkAreaFtEX + _ThisParcel.RfAreaFtEX)
+      DeltaRf = _ThisParcel.RfAreaFtFB - _ThisParcel.RfAreaFtEX
+      DeltaPk = _ThisParcel.PkAreaFtFB - _ThisParcel.PkAreaFtEX
+
+      if DeltaRf < 0 or DeltaPk < 0 then
+        call loggit("Roof and Parking Cannot Decrease")
+        close table _ThisDivideSet			
+        close table _ThisParcel
+        Finalize_Checked_Divides = RETURNFAILURE
+        exit function
+      end if
+
+      if PervEX_Parcel > 0 and ((DeltaRf > 0) or (DeltaPk > 0)) then
+        Apportion = TRUE
+      else
+        Apportion = FALSE
+      end if
+
+      if M_DEBUG then 
+        print "  Apportion " & str$(apportion) 
+      end if
+      
+      if M_DEBUG then print "  PervEX_Parcel " & PervEX_Parcel &  ", D_rf " & DeltaRf &", D_pk " & DeltaPk end if
+        RfareaLeft = DeltaRf
+        PkareaLeft = DeltaPk
+
+        newDivideID = 0		
+		
+        Dim i as Integer	
+        Dim divideSetCount as Integer
+        divideSetCount = tableinfo("_ThisDivideSet",TAB_INFO_NROWS)
+        For i = 1 to divideSetCount
+           Fetch Rec i From _ThisDivideSet
+           thisrow = _ThisDivideSet.RowID
+			
+           'This code maintains the correct divideID field
+           'If the property has previously been divided, we must ensure that
+           'we are keeping the primary divideID, while increasing the corresponding
+           'split to a divideID greater than the largest divideID for this parcel
+           IF newDivideID = 0 THEN
+             IF ThisDID = 0 THEN
+               newDivideID = 1
+             ELSE
+               newDivideID = ThisDID
+             END IF
+           
+             Insert Into DeleteFromMstDSC SELECT * FROM _ThisParcel
+           ELSE
+             'Get the maximum divideID for this divideset
+             Select Max(DivideID) From mst_DSC Where ParcelID = ThisPID INTO DSCNumber
+             Select Max(DivideID) From DSCChanges Where ParcelID = ThisPID INTO DSCNumberb
+             
+             If DSCNumberb.COL1 > DSCNumber.COL1  THEN
+               newDivideID = DSCNumberb.COL1 + 1
+             ELSE
+               newDivideID = DSCNumber.COL1 + 1
+             END IF
+           END IF
+			
+           Fetch Rec currentCount From _ParcelIDSet
+           Fetch Rec i From _ThisDivideSet
+
+           if Apportion then
+             PervEX_Divide = _ThisDivideSet.AreaFt - (_ThisDivideSet.PkAreaFtEX + _ThisDivideSet.RfAreaFtEx)
+
+             ThisDeltaRf = PervEX_Divide/PervEX_Parcel * DeltaRf
+             ThisDeltaPk = PervEX_Divide/PervEX_Parcel * DeltaPk
+
+             'The < 0 check will only occur if RfArea or PK area in divide is slightly greater than divide area
+             if ThisDeltaRf < 0 Then 
+               ThisDeltaRf = 0 
+             end if
+				
+             if ThisDeltaPk < 0 Then 
+               ThisDeltaPk = 0 
+             end if
+
+             ThisRfFB = ThisDeltaRf + _ThisDivideSet.RfAreaFtEx
+             ThisPkFB = ThisDeltaPk + _ThisDivideSet.PkAreaFtEx
+
+             if M_DEBUG then 
+               print "  PervEX_divide " & PervEX_Divide &  ", RFFB " & ThisRFFB & ", PKFB " & ThisPKFB 
+             end if
+
+             RfareaLeft = RfareaLeft - ThisDeltaRf
+             PkareaLeft = PkareaLeft - ThisDeltaPk
+
+             if M_DEBUG then 
+               print "  RfareaLeft " & RfareaLeft &  ", PkareaLeft" & PkareaLeft  
+             end if
+           else
+             ' no change
+             ThisRfFB = _ThisDivideSet.RfAreaFtEx
+             ThisPkFB = _ThisDivideSet.PkAreaFtEx
+           end if
+			
+           print "Assigning baseflow for " & (thispid * 100 + newDivideID)
+           print "_ThisDivideSet.AreaFt = " & _ThisDivideSet.AreaFt
+			
+           Fetch Rec 1 From _ThisParcel
+			
+           if _ThisDivideSet.AreaFt = 0 then
+             print "Warning: Divide area = 0"
+           end if
+           
+           if _ThisParcel.AreaFt = 0 then
+             print "Error: Parcel area = 0"
+           end if
+			
+           dim ratio as float
+           dim parcelArea as float
+           dim divideArea as float
+           parcelArea = _ThisParcel.AreaFt
+           divideArea = _ThisDivideSet.AreaFt
+           ratio = divideArea/parcelArea
+           ThisBaseFlowEXcfs = _ThisParcel.BaseFlowEXcfs * ratio
+           ThisBaseFlowFBcfs = _ThisParcel.BaseFlowFBcfs * ratio
+           ThisBaseFlowDMcfs = _ThisParcel.BaseFlowDMcfs * ratio
+           iICFtRoofEX = _ThisParcel.ICFtRoofEX * ratio
+           iICFtRoofFB = _ThisParcel.ICFtRoofFB * ratio
+           iICFtParkEX = _ThisParcel.ICFtParkEX * ratio
+           iICFtParkFB = _ThisParcel.ICFtParkFB * ratio
+           iEICFtRoofEX = _ThisParcel.EICFtRoofEX * ratio
+           iEICFtParkEX = _ThisParcel.EICFtParkEX * ratio
+           iEICFtRoofFB = _ThisParcel.EICFtRoofFB * ratio
+           iEICFtParkFB = _ThisParcel.EICFtParkFB * ratio
+           iToMLinkSan = _ThisParcel.ToMLinkSan
+           iToMLinkStorm = _ThisParcel.ToMLinkStorm
+
+           ' Get the base information from the parcel
+           'Get ToMLinkSan or ToMLinkStorm so we know what MLinkID we are looking for
+           '
+           Dim iMLinkID as Integer
+           Dim fSanSwrCrown as Float
+           Dim lFalseBFRisk as Logical
+           if _ThisParcel.ToMLinkSan <> 0 Then
+             iMLinkID = _ThisParcel.ToMLinkSan
+             Select * From mst_Links WHERE MLinkID = iMLinkID into mLink
+             fSanSwrCrown = mLink.USIE - (_ThisParcel.Frac2SwrBeg*(mLink.USIE-mLink.DSIE)) + mLink.DiamWidth
+             if ThisFloodRefElev - fSanSwrCrown < 8 then
+               lFalseBFRisk = true
+             else
+               lFalseBFRisk = false
+             end if
+           else
+             lFalseBFRisk = true
+           end if
+
+           ThisZoneEX = _ThisParcel.ZoneEX
+           ThisZoneCP =_ThisParcel.ZoneCP
+           ThisGenEX =_ThisParcel.GenEX
+           ThisGenCP =_ThisParcel.GenCP
+           ThisFloodRefElev =_ThisParcel.FloodRefElev
+
+           ' write the divide
+           update _ThisDivideSet Set
+             DivideID = newDivideID,
+             DSCID = ThisPID*100+newDivideID,
+             ToMLinkSan = iToMLinkSan,
+             ToMLinkStorm = iToMLinkStorm,
+             RfAreaFtFB = ThisRfFB,
+             PkAreaFtFB = ThisPkFB,
+             BaseFlowEXcfs = ThisBaseFlowEXcfs,
+             BaseFlowFBcfs = ThisBaseFlowFBcfs,
+             BaseFlowDMcfs = ThisBaseFlowDMcfs,
+             ICFtRoofEX = iICFtRoofEX,
+             ICFtRoofFB = iICFtRoofFB,
+             ICFtParkEX = iICFtParkEX,
+             ICFtParkFB = iICFtParkFB,
+             EICFtRoofEX = iEICFtRoofEX,
+             EICFtParkEX = iEICFtParkEX,
+             EICFtRoofFB = iEICFtRoofFB,
+             EICFtParkFB = iEICFtParkFB,
+             ZoneEX = ThisZoneEX,
+             ZoneCP = ThisZoneCP,
+             GenEX = ThisGenEX,
+             GenCP = ThisGenCP,
+             FloodRefElev = ThisFloodRefElev
+             where ROWID = thisRow
+
+           Next
+		
+           ' this takes care of any rounding errors
+           ' the last record has the greatest PERVIOUS area so if we need to subtract a little
+           '	we know it won't end up negative	
+           if Apportion and (Rfarealeft <> 0 or Pkarealeft <> 0 )then
+             if M_DEBUG then 
+               print "  --> adjust RfareaLeft " & RfareaLeft &  ", PkareaLeft" & PkareaLeft  
+             end if
+               
+             'Fetch First From _ThisDivideSet
+             Select * From _ThisDivideSet into _AlternateDivideSet
+             Dim loopCounter as integer
+             loopCounter = 0
+             For loopCounter = 1 to DivideSetCount
+               Fetch Rec loopCounter From _AlternateDivideSet
+               thisrow = _AlternateDivideSet.RowID	
+               if (Rfarealeft<> 0) and (_AlternateDivideSet.RfAreaFtFB + Rfarealeft > _AlternateDivideSet.RfAreaFtEX) then
+                 ThisRfFB = _AlternateDivideSet.RfAreaFtFB + Rfarealeft
+                 Rfarealeft = 0 
+                 update _AlternateDivideSet Set RfAreaFtFB = ThisRfFB	where ROWID = thisrow
+               end if
+				
+               if (Pkarealeft<> 0) and (_AlternateDivideSet.PkAreaFtFB + Pkarealeft > _AlternateDivideSet.PkAreaFtEX) then
+                 ThisPkFB = _AlternateDivideSet.PkAreaFtFB + Pkarealeft
+                 Pkarealeft = 0 
+                 update _AlternateDivideSet Set PkAreaFtFB = ThisPkFB where ROWID = thisrow
+               end if
+             Next
+           end if
+		
+           if RfareaLeft <> 0 or PKareaLeft <> 0 then 
+             call Loggit("--> adjustment unsuccessful: RfareaLeft " & RfareaLeft &  ", PkareaLeft" & PkareaLeft) 
+           end if
+		
+           close table _ThisDivideSet			
+           close table _ThisParcel		
+			
+	   'Fetch Next From _ParcelIDset
+         Next
+	
+	 'End Program
+         Commit Table DeleteFromMstDSC
+         close table _ParcelIDset
+		
+         Finalize_Checked_Divides = RETURNSUCCESS
+	
+end function
+'-------------------------------------------------------------------------------
+'Assert: the target table is open and its name is 
+'ApportionIC h
+
+Function CreateDivideIC(byval ICtarget as string, byval strIC as string) as integer
+								
+  Dim mycount  as integer
+  
+  Dim CurrentParcelID as Integer
+  Dim CurrentDivideID as Integer
+  Dim ICRoofRPark as String
+  Dim ICassumeKey as String
+	
+  Dim ICTimeFrame as String
+  Dim ICApplyAreaTF as String
+	
+  Dim ICValidFromDate as String
+  Dim ICValidToDate as String
+  Dim ICSqFt as Integer
+  Dim ICComment as String
+  Dim ICAppendDate as String
+
+  Dim ICEffectiveness as Float
+  Dim ICParcelArea as Integer
+	
+  Dim ICStoreNodeName as String
+  Dim ICStoreAreaBottomSqFt as Float
+  Dim ICStoreAreaTopSqFt as Float
+  Dim ICStorageDepth as Float
+  Dim ICOrifice1Area as Float
+  Dim ICOrifice1ConnNode as String
+  Dim ICOrifice2Area as Float
+  Dim ICOrifice2ConnNode as String
+  Dim ICOrificeElAboveBottom as Float
+  Dim ICOflowConnection as String
+  Dim ICInfiltrationRateInHr as Float
+
+  Dim nrows as Integer
+  Dim dividend, divisor, ICratio as float
+  Dim DivICsqft as Integer
+
+  MyCount = 0
+
+  pack table strIC data
+
+  Select ParcelID from DSCChanges
+  	group by ParcelID
+  into _ParcelIDset
+
+  do case strIC
+  case "DiscoVeg"
+    Select *
+      from DiscoVeg, _ParcelIDset
+      where DiscoVeg.ParcelID=_ParcelIDset.ParcelID and DiscoVeg.DivideID = 0
+      into _ICset
+
+  case "Drywell"
+    Select *
+      from Drywell, _ParcelIDset
+      where Drywell.ParcelID=_ParcelIDset.ParcelID and Drywell.DivideID = 0
+      into _ICset
+      order by Drywell.ParcelID
+  case else
+    call loggit("UNREACHED in CreateDivideIC -- illegal argument " & strIC)
+    CreateDivideIC = RETURNFAILURE
+    close table _ParcelIDset
+    exit function
+  end case
+
+  if tableinfo("_ICset",TAB_INFO_NROWS)	= 0 then
+    call loggit("no records found for " & strIC)
+  end if
+
+  Fetch first from _ICset
+  Do while not EOT(_ICSet)
+    CurrentParcelID = _ICSet.ParcelID
+    CurrentDivideID = _ICSet.DivideID
+    ICRoofRPark = _ICset.RoofRPark
+    ICassumeKey = _ICset.assumeKey
+    ICValidFromDate = _ICset.ValidFromDate
+    ICValidToDate = _ICset.ValidToDate
+    ICTimeFrame = _ICset.TimeFrame
+    ICApplyAreaTF = _ICset.ApplyAreaTF
+    ICComment = _ICset.Comment
+    ICAppendDate = _ICset.AppendDate
+    ICSQft = _ICset.Sqft
+
+    call loggit("Parcel: " & CurrentParcelID & " , ICArea: " & ICSQft &  " , IC: " & strIC & " , R/P: " & ICRoofRPark & " , areaTF: " & ICApplyAreaTF) 
+
+    select
+      ParcelID,
+      SUM(RfAreaFtEx) "RAFE",
+      SUM(RfAreaFtFB) "RAFF",
+      SUM(PkAreaFtEx) "PAFE",
+      SUM(PkAreaFtFB) "PAFF",
+      SUM(RfAreaFtFB - RfAreaFtEX) "P_dRoof",
+      SUM(PkAreaFtFB - PkAreaFtEX) "P_dPark"
+      from mst_dsc
+      where ParcelID = CurrentParcelID
+      into _ThisParcel
+      Group by ParcelID
+
+      nrows = tableinfo("_ThisParcel",TAB_INFO_NROWS)
+      if nrows <> 1 then
+        call loggit ("UNREACHED in CreateDivideIC nrows = " & nrows)
+        close table _ThisParcel
+
+        CreateDivideIC = RETURNFAILURE
+        exit function
+      end if
+
+      select
+        ParcelID,
+        DivideID,
+        AreaFt,
+        RfAreaFtEX,
+        PkAreaFtEX,
+        RfAreaFtFB,
+        PkAreaFtFB,
+        RfAreaFtFB - RfAreaFtEX "D_dRoof",
+        PkAreaFtFB - PkAreaFtEX "D_dPark"
+        from DSCChanges
+        Where ParcelID = CurrentParcelID
+        into _divideSet
+        Order by DivideID
+
+      Fetch First from _divideSet
+      Do while Not EOT(_divideSet)
+        CurrentDivideID = _divideSet.DivideID
+        dividend = 0
+        divisor = 0
+        ICratio = 0
+        DivICsqft = 0
+
+        if M_Debug then call loggit("  DivideID: " & CurrentDivideID) end if
+          'COLLINS START HERE
+          do case ICRoofRPark
+            case "R"
+            do case ICApplyAreaTF
+              case "EX"
+                dividend = _divideset.RfAreaFtEX
+                divisor = _thisParcel.RAFE
+              case "FU"
+                dividend = _divideset.D_dRoof
+                divisor = _thisParcel.P_dRoof
+              case else
+                call loggit("UNREACHED ICApplyAreaTF: " & ICApplyAreaTF)
+            end case
+            case "P"
+            do case ICApplyAreaTF
+              case "EX"
+                dividend = _divideset.PkAreaFtEX
+                divisor = _thisParcel.PAFE
+              case "FU"
+                dividend = _divideset.D_dPark
+                divisor = _thisParcel.P_dPark
+              case else
+                call loggit("UNREACHED ICApplyAreaTF: " & ICApplyAreaTF)
+            end case 'ApplyAreaTF
+            case else
+              call loggit("UNREACHED ICRoofRPark: " & ICRoofRPark)
+          end case 'ICroofRPark
+
+			if (divisor <= 0) or (dividend * (1 - M_AREA_TOLERANCE ) > divisor) then
+				call loggit("UNREACHED dividend / divisor: " & dividend & "/" & divisor)
+			else
+
+				if dividend > divisor then
+					dividend = divisor
+				end if
+
+				if dividend < 0  then
+					dividend = 0
+				end if
+
+				ICratio = (dividend/divisor)
+				DivICsqft = ICSqft * ICratio	
+
+			end if
+			
+			if M_Debug then call loggit("    Divide --------") end if
+			if M_Debug then call loggit("      D RoofEX: " & _divideset.RfAreaFtEX  ) end if
+			if M_Debug then call loggit("      D RoofFB: " & _divideset.RfAreaFtFB  ) end if
+			if M_Debug then call loggit("      D ParkEX: " & _divideset.PkAreaFtEX  ) end if
+			if M_Debug then call loggit("      D ParkFB: " & _divideset.PkAreaFtFB  ) end if
+
+			if M_Debug then call loggit("    Parcel --------") end if
+			if M_Debug then call loggit("      P RoofEX: " & _thisParcel.RAFE ) end if
+			if M_Debug then call loggit("      P RoofFB: " & _thisParcel.RAFF ) end if
+			if M_Debug then call loggit("      P ParkEX: " & _thisParcel.PAFE ) end if
+			if M_Debug then call loggit("      P ParkFB: " & _thisParcel.PAFF ) end if
+
+			if M_Debug then call loggit("    Ratio ---------") end if
+			if M_Debug then call loggit("      dividend / divisor: " & dividend & "/" & divisor) end if
+			if M_Debug then call loggit("      ICRatio: " & ICratio) end if
+			if M_Debug then call loggit("      ICdivide: " & DivICsqft) end if
+
+			If DivICsqft > 0 then
+
+
+				Do case strIC
+	    		case "DiscoVeg"
+	    		
+	    		ICEffectiveness = _ICset.Effectiveness
+		     
+	    		Insert Into ICtarget
+			   		(ParcelID, DivideID,  RoofRPark, assumeKey, ValidFromDate, 
+			   		ValidToDate, TimeFrame, ApplyAreaTF, SqFt,	Effectiveness, Comment, AppendDate)
+			  	Values 
+			   		(CurrentParcelID, CurrentDivideID, ICRoofRPark,  ICassumeKey, ICValidFromDate,
+			   			ICValidToDate, ICTimeFrame, ICApplyAreaTF, DivICSqFt, ICEffectiveness, ICComment, ICAppendDate)
+				
+				case  "Drywell" ' "GrnRoof" later
+					Insert Into ICtarget
+			    	(ParcelID, DivideID, RoofRPark, assumeKey, ValidFromDate, 
+			    	ValidToDate, TimeFrame, ApplyAreaTF, SqFt, Comment, AppendDate)
+			  	Values 
+			    	(CurrentParcelID, CurrentDivideID, ICRoofRPark, ICassumeKey, ICValidFromDate,
+				  		ICValidToDate, ICTimeFrame, ICApplyAreaTF, DivICSqFt, ICComment, ICAppendDate)
+
+  		  end Case
+      end if
+
+			Fetch Next From _Divideset
+		Loop	'divideset
+		close table _ThisParcel
+
+		close table _divideset
+		Fetch Next from _ICset
+	loop
+	close table _ICset
+	close table _ParcelIDset
+	CreateDivideIC = RETURNSUCCESS
+
+End Function
+'------------------------------------------------------------------------------
+function getMItabpath() as string
+  dim myfile as string
+
+  myfile = FileOpenDlg(gtempdir, "","tab","Select Parcel Divides file")
+
+  if not FileExists(myfile) then
+    Call Loggit ("no file selected")
+    getMItabpath = ""
+		gstrReturnStatus = "ERROR"
+    exit function
+  end if
+
+  Call Loggit ("got " & myfile)	
+
+	getMItabpath = myfile
+
+end function
+'------------------------------------------------------------------------------
+Sub CreateDivideAppendTable(ByVal LP as string, ByVal Alias as string )
+  Dim		Msg as string
+
+  Msg = "LP: " & LP & " Alias: " & Alias
+  call loggit(msg)
+	
+  Create Table   Alias
+    (
+    ParcelID Integer ,
+    DivideID Integer ,
+    DSCID Integer ,
+    discoSiteID Integer ,
+    DiscoClass Char (1) ,
+    ToMLinkSan Integer ,
+    ToMLinkStorm Integer ,
+    PipeFlowTypeSan Char (1) ,
+    PipeFlowTypeStorm Char (1) ,
+    SanSwrCrown Float ,
+    Frac2SwrBeg Float ,
+    FloodRefElev Float ,
+    FalseBFRisk Logical ,
+    RNO Char (35)  ,
+    OWNER1 Char (35) ,
+    OWNER2 Char (35) ,
+    OWNER3 Char (35) ,
+    OWNERADDR Char (35) ,
+    OWNERCITY Char (28) ,
+    OWNERSTATE Char (2) ,
+    OWNERZIP Char (10) ,
+    SITEADDR Char (37)  ,
+    SITECITY Char (30) ,
+    SITE_STATE Char (6) ,
+    SITEZIP Char (8) ,
+    FloodRefElev_2 Float ,
+    isVacant Logical ,
+    ZoneEX Char (5) ,
+    ZoneCP Char (5) ,
+    GenEX Char (3) ,
+    GenCP Char (3) ,
+    PZsqft Integer ,
+    ImpFractEX Float ,
+    ImpFractCP Float ,
+    ImpFractFB Float ,
+    AreaFt Integer ,
+    RfAreaFtEX Integer ,
+    RfAreaFtFB Integer ,
+    PkAreaFtEX Integer ,
+    PkAreaFtFB Integer ,
+    BaseflowEXcfs Float ,
+    BaseflowFBcfs Float ,
+    BaseflowDMcfs Float ,
+    GrowthState Integer ,
+    IncIA4FB Logical ,
+    gisBasin Char (6) ,
+    ICFtRoofEX Integer ,
+    ICFtRoofFB Integer ,
+    ICFtParkEX Integer ,
+    ICFtParkFB Integer ,
+    EICFtRoofEX Float ,
+    EICFtParkEX Float ,
+    EICFtRoofFB Float ,
+    EICFtParkFB Float,
+    Sewerable Integer,
+    Septic Logical,
+    PZone Logical,
+    HasBasement Integer,
+    PropertyID Char (7),
+    DivideQCFlag Logical,
+    DivideQCStatus Char (3),
+    GridQAQC Char (10),
+    AvgParcelElev Float,
+    EFFMethod Char (15),
+    FFOverride Char (15),
+    OrigFinishFloor Float,
+    MaxBldGrid Float
+	  )
+  File LP
+  Type Native
+
+  Create Map 
+	For   Alias
+	
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+  
+	Call Loggit (" Divide Append table create... " & LP)
+	
+end sub
+'------------------------------------------------------------------------------
+Sub CreateICAppendTable_VEG(ByVal LP as string, ByVal Alias as string )
+  Dim		Msg as string
+  
+  Msg = "LP: " & LP & " Alias: " & Alias
+  call loggit(msg)
+
+	Create Table   Alias
+  (	ParcelID Integer,
+		DivideID Integer,
+		RoofRPark Char(1),
+		assumeKey Char (4),
+		TimeFrame Char(2),
+		ApplyAreaTF char(2),
+		ValidFromDate Char(8),
+		ValidToDate Char(8),
+		SqFt Integer,
+		Effectiveness Float,
+		Comment Char(16),
+		AppendDate Char(8)
+	)
+	FILE LP
+	TYPE NATIVE
+
+	Call Loggit (" Divide Append table create... " & LP)
+
+end sub
+'------------------------------------------------------------------------------
+Sub CreateICAppendTable_DW(ByVal LP as string, ByVal Alias as string )
+  Dim		Msg as string
+
+  Msg = "LP: " & LP & " Alias: " & Alias
+  call loggit(msg)
+
+	Create Table alias
+	(	ParcelID Integer,
+		DivideID Integer,
+		RoofRPark Char(1),
+		assumeKey Char (4),
+		TimeFrame Char(2),
+		ApplyAreaTF char(2),
+		ValidFromDate Char(8),
+		ValidToDate Char(8),
+		SqFt Integer,
+		Comment Char(16),
+		AppendDate Char(8)
+	)
+	FILE LP
+	TYPE NATIVE
+
+	Call Loggit (" Divide Append table create... " & LP)
+end sub

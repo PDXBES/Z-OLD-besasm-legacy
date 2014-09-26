@@ -1,0 +1,6 @@
+# LF95.FIG: user default options for Lahey/Fujitsu Fortran 95
+# Place your default options here. You may remove these comment lines.
+# See the LF95 User's Guide for more information.
+# Use only one of the following compiler switches to specify the target
+# platform (-tp is the default):
+ -f95 -nchk -trace -sav -nstchk -o1 -nw -tp

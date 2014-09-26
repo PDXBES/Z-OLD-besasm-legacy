@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualRain", "VirtualRain.csproj", "{D9D3742C-B5C4-42DB-97EF-0E6BF18C5323}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C799FB4-86DC-4D66-A76E-847C91716A55}"
+	ProjectSection(SolutionItems) = preProject
+		VirtualRain.ico = VirtualRain.ico
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9D3742C-B5C4-42DB-97EF-0E6BF18C5323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D3742C-B5C4-42DB-97EF-0E6BF18C5323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D3742C-B5C4-42DB-97EF-0E6BF18C5323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D3742C-B5C4-42DB-97EF-0E6BF18C5323}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

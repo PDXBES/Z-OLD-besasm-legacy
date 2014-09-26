@@ -1,0 +1,206 @@
+#
+# MKMF template makefile for protected mode executables.
+#
+FC        = f77l3
+LINKER    = 386link
+PROGRAM   = 32xtran4.exe
+DEST      = .
+EXTHDRS         =
+FFLAGS    =
+HDRS            =
+LDFLAGS   = -80486 -FULLWARN -STUB RUNB
+LDMAP     = nul
+LIBS      =
+MAKEFILE  = Makefile
+OBJS            = blkdata.obj blkmn.obj boundpx.obj cdfree.obj cdsub.obj \
+                  ckfilepx.obj curve.obj dated.obj depthx.obj endoff.obj \
+                  error.obj extranpx.obj flcond.obj fldetm.obj frecal.obj \
+                  frflow.obj getcur.obj getdep.obj getsum.obj head.obj \
+                  htidespx.obj hydrad.obj ierror.obj indat11p.obj \
+                  indat12p.obj \
+                  indat2px.obj indat3px.obj inface.obj inflowpx.obj \
+                  jdate.obj leapin.obj leaping.obj mainext.obj ndate.obj \
+                  ntime.obj output.obj pine.obj power.obj pplot.obj \
+                  rgate.obj rgfree.obj rginit.obj rginpt.obj rgopen.obj \
+                  rgout.obj rgsect.obj rgsub.obj scale.obj stime.obj \
+                  strip.obj subcal.obj subflw.obj syinpt.obj syphon.obj \
+                  tblup.obj tidcf.obj transxpx.obj xroute.obj yroute.obj \
+                  zroute.obj
+SRCS            = blkdata.for blkmn.for boundpx.for cdfree.for cdsub.for \
+                  ckfilepx.for curve.for dated.for depthx.for endoff.for \
+                  error.for extranpx.for flcond.for fldetm.for frecal.for \
+                  frflow.for getcur.for getdep.for getsum.for head.for \
+                  htidespx.for hydrad.for ierror.for indat11p.for \
+                  indat12p.for \
+                  indat2px.for indat3px.for inface.for inflowpx.for \
+                  jdate.for leapin.for leaping.for mainext.for ndate.for \
+                  ntime.for output.for pine.for power.for pplot.for \
+                  rgate.for rgfree.for rginit.for rginpt.for rgopen.for \
+                  rgout.for rgsect.for rgsub.for scale.for stime.for \
+                  strip.for subcal.for subflw.for syinpt.for syphon.for \
+                  tblup.for tidcf.for transxpx.for xroute.for yroute.for \
+                  zroute.for
+
+###   For make to take advantage of compiler response files, uncomment
+###   the next four lines, and the additional three lines listed after
+###   the '$(PROGRAM):   $(OBJS) $(LIBS)' line.
+###.BEFORE:
+###       DEL F77L3.RSP
+###.for.obj:
+###       ECHO $<,$@ $(FFLAGS) >>F77L3.RSP
+
+
+$(PROGRAM):     $(OBJS) $(LIBS)
+###       !IF -e F77L3.RSP
+###           $(FC) @F77L3.RSP
+###       !ENDIF
+          $(LINKER) $(OBJS) -EXE $@ -MAP $(LDMAP) -LIB $(LIBS) $(LDFLAGS)
+
+clean:;         @del -f $(OBJS)
+
+depend:;   @mkmf -f $(MAKEFILE) PROGRAM=$(PROGRAM) DEST=$(DEST)
+
+install:   $(PROGRAM)
+                @echo Installing $(PROGRAM) in $(DEST)
+                @if not $(DEST)x==.x copy $(PROGRAM) $(DEST)
+### OPUS MKMF:  Do not remove this line!  Automatic dependencies follow.
+
+blkdata.obj: BD.INC SURCHG.INC TAPES.INC
+
+blkmn.obj: INTER.INC TAPES.INC
+
+boundpx.obj: BD.INC BND.INC CONTR.INC JUNC.INC LRG.INC ORF.INC PIPE.INC \
+         PUMP.INC RDGATE.INC RINGAT.INC SIPHON.INC STORE.INC SURCHG.INC \
+         TAPES.INC TIDE.INC VOLDAT.INC WEIR.INC
+
+cdfree.obj: DISCOF.INC LRG.INC RDGATE.INC RGFLOW.INC TAPES.INC
+
+cdsub.obj: DISCOF.INC LRG.INC RDGATE.INC RGFLOW.INC TAPES.INC
+
+ckfilepx.obj: TAPES.INC
+
+curve.obj: LAB.INC
+
+dated.obj: STIMER.INC
+
+depthx.obj: BD.INC CONTR.INC FLODAT.INC PIPE.INC TAPES.INC
+
+endoff.obj: CONTR.INC LRG.INC RDGATE.INC TAPES.INC
+
+error.obj: TAPES.INC
+
+extranpx.obj: BD.INC BND.INC CONTR.INC EXSTAT.INC INTER.INC JUNC.INC \
+         ORF.INC PIPE.INC STIMER.INC SURCHG.INC TAPES.INC TIDE.INC
+
+flcond.obj: CONST.INC LRG.INC PIPE.INC RDGATE.INC RGFLOW.INC RGINTK.INC \
+         RINGAT.INC TAPES.INC
+
+fldetm.obj: CONST.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC RINGAT.INC \
+         TAPES.INC
+
+frecal.obj: CONST.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC TAPES.INC
+
+frflow.obj: CONST.INC DISCOF.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC \
+         TAPES.INC
+
+getcur.obj: FLODAT.INC TAPES.INC
+
+head.obj: BD.INC CONTR.INC EXSTAT.INC JUNC.INC PIPE.INC TAPES.INC
+
+htidespx.obj: CONTR.INC TAPES.INC TIDE.INC
+
+hydrad.obj: BD.INC CONTR.INC FLODAT.INC JUNC.INC PIPE.INC TAPES.INC
+
+ierror.obj: TAPES.INC
+
+indat1bc.obj: BD.INC BND.INC CONTR.INC FLODAT.INC HYFLOW.INC INTER.INC \
+         JUNC.INC ORF.INC OUT.INC PDXTRN.INC PIPE.INC PUMP.INC STORE.INC \
+         SURCHG.INC TAPES.INC TIDE.INC WEIR.INC
+
+indat2px.obj: BD.INC BND.INC CONTR.INC HYFLOW.INC JUNC.INC ORF.INC OUT.INC \
+         PDXTRN.INC PIPE.INC PUMP.INC STORE.INC SURCHG.INC TAPES.INC \
+         TIDE.INC VOLDAT.INC WEIR.INC
+
+indat3px.obj: BD.INC BND.INC CONTR.INC HYFLOW.INC INTER.INC JUNC.INC \
+         ORF.INC OUT.INC PDXTRN.INC PIPE.INC PUMP.INC STIMER.INC STORE.INC \
+         SURCHG.INC TAPES.INC TIDE.INC WEIR.INC
+
+inface.obj: INTER.INC TAPES.INC
+
+inflowpx.obj: CONTR.INC HYFLOW.INC INTER.INC JUNC.INC LRG.INC ORF.INC \
+         OUT.INC PDXTRN.INC PIPE.INC RDGATE.INC RGFLOW.INC RINGAT.INC \
+         STIMER.INC TAPES.INC
+
+leapin.obj: CONTR.INC JUNC.INC LEAPW.INC PIPE.INC TAPES.INC
+
+leaping.obj: CONTR.INC JUNC.INC LEAPW.INC PIPE.INC STIMER.INC TAPES.INC
+
+mainext.obj: TAPES.INC
+
+ndate.obj: STIMER.INC
+
+ntime.obj: STIMER.INC
+
+output.obj: CONTR.INC EXSTAT.INC JUNC.INC LAB.INC LRG.INC OUT.INC \
+         PDXTRN.INC PIPE.INC RGPRNT.INC STIMER.INC STORE.INC TAPES.INC
+
+pplot.obj: CONTR.INC LAB.INC PLTARY.INC TAPES.INC
+
+rgate.obj: LRG.INC RDGATE.INC RGFLOW.INC RINGAT.INC TAPES.INC
+
+rgfree.obj: CONST.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC RGINTK.INC \
+         RINGAT.INC TAPES.INC
+
+rginit.obj: CONST.INC CONTR.INC LRG.INC RDGATE.INC RGFLOW.INC RGINTK.INC \
+         RINGAT.INC TAPES.INC
+
+rginpt.obj: CONTR.INC JUNC.INC LRG.INC PIPE.INC RDGATE.INC RGFLOW.INC \
+         RGINTK.INC RINGAT.INC TAPES.INC
+
+rgopen.obj: LRG.INC RDGATE.INC RINGAT.INC TAPES.INC
+
+rgout.obj: CONTR.INC LRG.INC OUT.INC PDXTRN.INC PIPE.INC RGPRNT.INC \
+         TAPES.INC
+
+rgsect.obj: CONST.INC LRG.INC PIPE.INC RDGATE.INC RGINTK.INC RINGAT.INC \
+         TAPES.INC
+
+rgsub.obj: CONST.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC RINGAT.INC \
+         TAPES.INC
+
+scale.obj: TAPES.INC
+
+stime.obj: STIMER.INC
+
+strip.obj: TAPES.INC
+
+subcal.obj: CONST.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC TAPES.INC
+
+subflw.obj: CONST.INC DISCOF.INC FLCOMN.INC LRG.INC RDGATE.INC RGFLOW.INC \
+         TAPES.INC
+
+syinpt.obj: CONTR.INC JUNC.INC PIPE.INC SIPHON.INC TAPES.INC
+
+syphon.obj: CONST.INC CONTR.INC SIPHON.INC TAPES.INC
+
+tblup.obj: LRG.INC RINGAT.INC TAPES.INC
+
+tidcf.obj: CONTR.INC TAPES.INC TIDE.INC
+
+transxpx.obj: BD.INC BND.INC CONTR.INC EXSTAT.INC HYFLOW.INC INTER.INC \
+         JUNC.INC LEAPW.INC LRG.INC ORF.INC OUT.INC PDXTRN.INC PIPE.INC \
+         PUMP.INC RDGATE.INC RGFLOW.INC RGPRNT.INC RINGAT.INC STIMER.INC \
+         STORE.INC SURCHG.INC TAPES.INC TIDE.INC VOLDAT.INC
+
+xroute.obj: BD.INC BND.INC CONTR.INC EXSTAT.INC FLODAT.INC HYFLOW.INC \
+         JUNC.INC LRG.INC OUT.INC PIPE.INC PUMP.INC SIPHON.INC STORE.INC \
+         SURCHG.INC TAPES.INC TIDE.INC
+
+yroute.obj: BD.INC BND.INC CONTR.INC EXSTAT.INC FLODAT.INC HYFLOW.INC \
+         JUNC.INC LRG.INC ORF.INC OUT.INC PIPE.INC PUMP.INC SIPHON.INC \
+         STORE.INC SURCHG.INC TAPES.INC TIDE.INC
+
+zroute.obj: BD.INC BND.INC CONTR.INC EXSTAT.INC FLODAT.INC HYFLOW.INC \
+         JUNC.INC LRG.INC ORF.INC OUT.INC PIPE.INC PUMP.INC SIPHON.INC \
+         STORE.INC SURCHG.INC TAPES.INC TIDE.INC
+
