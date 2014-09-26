@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConveyanceIterationLog" targetNamespace="http://tempuri.org/ConveyanceIteration.xsd" xmlns:mstns="http://tempuri.org/ConveyanceIteration.xsd" xmlns="http://tempuri.org/ConveyanceIteration.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConveyanceIterationLog" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ConveyanceIterationLog" msprop:Generator_DataSetName="ConveyanceIterationLog">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Iteration" msprop:Generator_UserTableName="Iteration" msprop:Generator_RowDeletedName="IterationRowDeleted" msprop:Generator_RowChangedName="IterationRowChanged" msprop:Generator_RowClassName="IterationRow" msprop:Generator_RowChangingName="IterationRowChanging" msprop:Generator_RowEvArgName="IterationRowChangeEvent" msprop:Generator_RowEvHandlerName="IterationRowChangeEventHandler" msprop:Generator_TableClassName="IterationDataTable" msprop:Generator_TableVarName="tableIteration" msprop:Generator_RowDeletingName="IterationRowDeleting" msprop:Generator_TablePropName="Iteration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IterationNum" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="IterationNum" msprop:Generator_ColumnVarNameInTable="columnIterationNum" msprop:Generator_ColumnPropNameInRow="IterationNum" msprop:Generator_ColumnPropNameInTable="IterationNumColumn" type="xs:int" />
+              <xs:element name="XPXFile" msprop:Generator_UserColumnName="XPXFile" msprop:Generator_ColumnVarNameInTable="columnXPXFile" msprop:Generator_ColumnPropNameInRow="XPXFile" msprop:Generator_ColumnPropNameInTable="XPXFileColumn" type="xs:string" />
+              <xs:element name="XMLFile" msprop:Generator_UserColumnName="XMLFile" msprop:Generator_ColumnVarNameInTable="columnXMLFile" msprop:Generator_ColumnPropNameInRow="XMLFile" msprop:Generator_ColumnPropNameInTable="XMLFileColumn" type="xs:string" />
+              <xs:element name="SWMMOutput" msprop:Generator_UserColumnName="SWMMOutput" msprop:Generator_ColumnVarNameInTable="columnSWMMOutput" msprop:Generator_ColumnPropNameInRow="SWMMOutput" msprop:Generator_ColumnPropNameInTable="SWMMOutputColumn" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Iteration" />
+      <xs:field xpath="mstns:IterationNum" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

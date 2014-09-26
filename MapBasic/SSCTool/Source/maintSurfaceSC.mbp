@@ -1,0 +1,6 @@
+[Link] 
+Application=..\exe\maintSurfaceSC.mbx 
+Module=maintSurfaceSC.mbo
+Module=..\..\Common\source\EMGMTabUtil.MBO
+Module=..\..\Common\Source\INIUtils.MBO
+Module=..\..\Common\Source\EMGlogger.MBO

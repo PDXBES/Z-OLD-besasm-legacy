@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="EngineConfiguration" targetNamespace="SystemsAnalysis.Utils.MapInfoUtils.MapInfoEngineGUI.EngineConfiguration"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="SystemsAnalysis.Utils.MapInfoUtils.MapInfoEngineGUI.EngineConfiguration"
+	xmlns:mstns="SystemsAnalysis.Utils.MapInfoUtils.MapInfoEngineGUI.EngineConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="EngineConfiguration" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="MapBasicFramework" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Library" minOccurs="0" form="qualified" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="LibraryName" type="xs:string" minOccurs="1" form="qualified" maxOccurs="1" />
+										<xs:element name="Location" type="xs:string" minOccurs="1" form="qualified" maxOccurs="1" />
+										<xs:element name="GlobalVariable" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence></xs:sequence>
+												<xs:attribute name="Name" type="xs:string" />
+												<xs:attribute name="Value" type="xs:string" />
+												<xs:attribute name="RelativeTo" msprop:nullValue="_empty">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Alternative" />
+															<xs:enumeration value="BaseModel" />
+															<xs:enumeration value="OutputModel" />
+															<xs:enumeration value="AlternativeConfiguration" />
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ExecGroup" minOccurs="1" maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Create" />
+													<xs:enumeration value="Edit" />
+													<xs:enumeration value="Apply" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Function" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Name" type="xs:string" minOccurs="1" form="qualified" maxOccurs="1" />
+													<xs:element name="CommandID" type="xs:string" minOccurs="1" form="qualified" maxOccurs="1" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="AltEngineConfigurationKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Library" />
+			<xs:field xpath="mstns:LibraryName" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

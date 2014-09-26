@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="SanitaryAnalysisTools.ClickEventArgs" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ClickEventArgs.cs</FileName>
+      <HashCode>AEAAAABACAAAAAgAAAAAAAAAAAAAAAAAAABgAAAAYAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.LayerManagerCommand" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LayerManagerCommand.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAADAAAACgCAAAAACACAgAABAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.LayerManagerGUI" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LayerManagerGUI.cs</FileName>
+      <HashCode>AAAEACAOBCQAAJAAABCAAAADAAAAAIgAAAAQAAABAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.RdiiDisconnectExtension" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>RdiiDisconnectExtension.cs</FileName>
+      <HashCode>AAAgkICAAIAggMCgAACAAQYAkAIEIAAgICQgBQBJAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SanitaryAnalysisTools.SanToolbar" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SanToolbar.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAACCAgAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.UpdateHasNearbySW">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>UpdateHasNearbySW.cs</FileName>
+      <HashCode>AAAABAAAAAAAAAAAAADAAAACgCAAAAACACQgAABAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.UpdateMaybeNearbySW" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>UpdateMaybeNearbySW.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACgCAAAAAAACAgAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SanitaryAnalysisTools.UpdateNoNearbySW" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>UpdateNoNearbySW.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACgCAAAAAAACAgAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="SanitaryAnalysisTools.OnClickEventHandler" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>RdiiDisconnectExtension.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="SanitaryAnalysisTools.OnMouseDownEventHandler" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>RdiiDisconnectExtension.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="SanitaryAnalysisTools.OnMouseMoveEventHandler" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>RdiiDisconnectExtension.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="SanitaryAnalysisTools.OnMouseUpEventHandler" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>RdiiDisconnectExtension.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+</ClassDiagram>

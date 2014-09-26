@@ -1,0 +1,401 @@
+'mapbasic fillename = DSCCleaver.mb 
+include "MapBasic.def"
+include "Menu.def"
+include "Icons.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGCoordSys.def"
+'include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGOpenUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGLogger.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGMTabUtil.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\INIUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGGlobal.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGModMake.def"
+global gIconFile as String
+global gTempDir as String
+global gmstINIfullpath as String
+declare sub main
+declare sub ButtonSelectDivideDSC
+declare sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
+declare sub DSCCleaver 'Should exist in DSCCleaver.mbo
+declare sub InitializeCleaverSourceData
+declare sub InitDSCCleaverToolpad
+declare sub Initialize_DSC_Divides_Tool
+declare sub menuitem_process_dividefile_for_master
+declare sub menuitem_DeleteModifications
+declare sub SetSanFLOW
+declare sub SetStormFLOW
+declare sub RefreshDSCZingers
+declare sub ProcessBatchFile
+declare function VerifyDSCSelection() as logical
+global mState as integer
+global sMstDSC as String
+global smst_DSCDivides as String
+global sModifiedDSC as String
+global AllMasters as logical
+global DscReady as Logical
+global PipReady as Logical			
+global alwaysVerifyDiscoClass as logical
+global UserClickedSplitDSCOnce as Logical
+global StayInvisible as logical
+define M_PARKPLUS TRUE
+define M_AREA_TOLERANCE 0.04
+define M_AREA_MINDIFF 100
+define M_DEBUG TRUE
+define M_INI_SECTION "DivideMaint"
+define M_WORKSPACE_SECTION "Workspaces"
+define M_PRINT_INTERVAL 100
+define M_ERROR  -1
+define M_INIT				1
+define M_GETFILE		2
+define M_CHECKED		3
+define M_APPEND			4
+
+'-------------
+sub Main
+	UserClickedSplitDSCOnce = false
+	StayInvisible = false
+	print "Entering mst_dsc Cleaver"
+	Close All 
+  'Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+	call DSCCleaver
+	
+	gmstINIfullpath = applicationdirectory$() + "MaintDSCDivides.ini"
+	
+	'call Initialize_DSC_Divides_Tool()
+	mState = M_INIT
+End sub
+'-----------
+'Starting point for the DSC Toolpad
+sub DSCCleaver
+	
+	Call SetStdCoordSys()
+
+	Set distance units "ft"
+	Set area units "sq ft"
+	
+	Close All
+	
+	Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+  
+  gmstINIfullpath = applicationdirectory$() + "MaintDSCDivides.ini"
+	
+	'call Initialize_DSC_Divides_Tool()
+	Call InitializeCleaverSourceData()
+  
+	Call InitDSCCleaverToolpad
+	OnError GOTO skipPad
+		
+	Note "The DSC Cleaver has prepared the editing files for you."
+					
+	Add Map Layer mst_dsc_zingers
+	Set Map Layer mst_dsc_zingers Global Line (1,59,32960) 
+	Set Map Layer mst_dsc_zingers Display Global
+		
+	If StayInvisible = true then
+		Call menuitem_process_dividefile_for_master
+	end if
+
+	mState = M_INIT
+
+Exit Sub
+skipPad:
+	Print "Cleaver Err: "& Err() & " " & Error$()
+	Resume Next
+
+End Sub
+'-----------------------
+Sub InitializeCleaverSourceData
+	giconfile = ReadINI(gmstINIfullpath, "Admin", "IconFile", "NONE")
+	gtempdir = ReadINI(gmstINIfullpath, "Admin", "TempDir", "NONE")
+		
+	dim sDSCPath as String
+	dim sDividePath as String
+	dim sMstLinks as String
+	dim sMstDSCDivides as String
+	dim sWorkspacePath as String
+	dim sDSCZingerPath as String
+	dim sImpervious as String
+	dim sDiscoVeg as String
+	dim sGrnRoof as String
+	dim sDryWell as String
+
+	'find the mst_dsc_ac file
+	sMstDSC = ReadINI(gmstINIfullpath, "MasterFiles", "DSC", "NONE")
+	
+	'find the record of DSC changes
+	sMstDSCDivides = ReadINI(gmstINIfullpath, "MasterFiles", "DSCDivides", "NONE")
+	
+	'find the record of DSC changes
+	sMstLinks = ReadINI(gmstINIfullpath, "MasterFiles", "Links", "NONE")
+	
+	'find the Impervious Layer
+	sImpervious = ReadINI(gmstINIfullpath, "MasterFiles", "Impervious", "NONE")
+	
+	'find the DiscoVeg Layer
+	sDiscoVeg = ReadINI(gmstINIfullpath, "MasterFiles", "DiscoVeg", "NONE")
+	
+	'find the GrnRoof Layer
+	sGrnRoof = ReadINI(gmstINIfullpath, "MasterFiles", "GrnRoof", "NONE")
+	
+	'find the DryWell Layer
+	sDryWell = ReadINI(gmstINIfullpath, "MasterFiles", "DryWell", "NONE")
+	
+	Call Loggit("Opening mst_DSC from " & sMstDSC)
+ 	Open Table sMstDSC as mst_DSC
+	Call Loggit("Opening mst_DSCDivides from " & sMstDSCDivides)
+	Open Table sMstDSCDivides as mst_DSCDivides
+	Call Loggit("Opening mst_links from " & sMstLinks)
+	Open Table sMstLinks as mst_links
+	Call Loggit("Opening Impervious from " & sImpervious)
+	Open Table sImpervious as Impervious
+	Call Loggit("Opening DiscoVeg from " & sDiscoVeg)
+	Open Table sDiscoVeg as DiscoVeg
+	Call Loggit("Opening GrnRoof from " & sGrnRoof)
+	Open Table sGrnRoof as GrnRoof
+	Call Loggit("Opening Drywell from " & sDryWell)
+	Open Table sDryWell as DryWell
+	
+	'--Create the temp directory for the intermediate modification files.
+	'--These commands will only create new directories.  If the directory already exists,
+	'--no change will be made.
+	'Run Program "command.com /c cd c:\temp"
+	'Run Program "command.com /c md "& gtempdir & ""
+	Print gtempdir
+		
+	Call Loggit("Creating scratch table ModifiedDSC in " & gTempDir)
+	CREATE TABLE ModifiedDSC USING mst_DSC FILE gTempDir & "\ModifiedDSC_ac" Type Access Database gTempDir & "\ModifiedDSC_ac.mdb" Table "ModifiedDSC"
+	CREATE MAP for ModifiedDSC
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+	sModifiedDSC = gTempDir & "\ModifiedDSC_ac"
+	
+	Call Loggit("Creating scratch table CleaveLand_ac in " & gTempDir)
+	CREATE TABLE CleaveLand USING mst_DSC FILE gTempDir & "\CleaveLand_ac" Type Access Database gTempDir & "\CleaveLand_ac.mdb" Table "CleaveLand"
+	CREATE MAP for CleaveLand
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+	
+	' get the scratch directory	
+  sWorkspacePath = ReadINI(gmstINIfullpath, "Workspaces", "Workspace_1", "NONE")
+  Call Loggit("Opening workspace " & sWorkspacePath)
+  if sWorkspacePath = "NONE" then
+    print "Workspace Key not found in Workspaces Section, INI File " & gmstINIFullPath
+    end program
+  end if
+  Run Application sWorkspacePath
+    
+  Print "Opening DSC Zinger Table"
+  sDSCZingerPath = ReadINI(gmstINIfullpath, "MasterFiles", "DSCZingers", "NONE")
+  Call Loggit("Opening DSC Zinger Table " & sDSCZingerPath)  
+	Open Table sDSCZingerPath as mst_dsc_zingers
+	
+	'TODO: Create indices on mst_dsc.parcelid, mst_dsc.divideid, mst_dsc.dscid
+	'TODO: Create any other appropriate indices
+End Sub
+'-------------------------------------------------------------------------------------------------
+Sub InitDSCCleaverToolpad
+	DscReady=0
+	PipReady=0 
+	alwaysVerifyDiscoClass = 1
+	
+	
+	print "Iconfile : " & gIconFile
+	Create ButtonPad "Master DSC Cleaving Tools" As
+		ToolButton HelpMsg  "\n Divide a DSC"	ID 900010	Icon 110 File gIconFile	Calling ButtonSelectDivideDSC
+							Drawmode	DM_CUSTOM_POLYLINE	Cursor	MI_CURSOR_CROSSHAIR
+		PushButton HelpMsg  "\n Erase all changes to a parcel"	ID 90011	Icon 114 File gIconFile Calling menuitem_DeleteModifications
+
+		PushButton HelpMsg  "\n Process and save changes"	ID 80502	Icon 112 File gIconFile Calling menuitem_process_dividefile_for_master
+		
+		PushButton HelpMsg 	"\n Process a batch file" ID 90012 Icon 80 File gIconFile Calling ProcessBatchFile
+		Separator
+		
+		ToolButton HelpMsg  "\n Redirect Sanitary Flow"	ID 90008	Icon 66 File gIconFile	Calling SetSanFLOW 
+							Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR								
+		ToolButton HelpMsg  "\n Redirect Storm Flow"	ID 90018	Icon 68 File gIconFile	Calling SetStormFLOW 
+							Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR								
+	  						Separator	  								
+		PushButton HelpMsg  "\n Refresh Zingers"	ID 80502	Icon 74 File gIconFile Calling RefreshDSCZingers							
+			Title "Master DSC Editing Tools" 	Width 10	Hide	Float position(7,1.5) 'units "in"	
+	
+	Alter ButtonPad "Master DSC Editing Tools" Show
+End Sub
+'---------------------------------------------------------
+sub menuitem_DeleteModifications
+	dim iDSCID as Integer
+	dim iDivideID as Integer
+	dim iParcelID as Integer
+	Dim oRegion As Object
+	Dim iRegion As Object
+	Dim iNumDSC As Integer
+	Dim iToMLinkSan As Integer
+	Dim iToMLinkStorm As Integer
+
+	OnError GOTO skipmenuitem_DeleteModifications
+	
+	Select * from selection into qySaver
+	
+	Call SetStdCoordSys()
+
+	If Selectioninfo(SEL_INFO_NROWS) > 0 THEN		
+		'Verify selected items is a DSC
+		IF Selectioninfo(1) not like "%mst_dsc%" THEN
+			IF Selectioninfo(1) not like "%ModifiedDSC%" THEN
+				Print "DSC Not selected."
+				Exit Sub
+			END IF
+		End If
+		
+		IF Selectioninfo(SEL_INFO_NROWS) <> 1 THEN
+			Print "Must select only one DSC object"
+			Exit Sub
+		End If
+	End if
+	
+	iParcelID = qySaver.ParcelID
+
+	Select * From ModifiedDSC where ParcelID = iParcelID into DeleteCuzUserAskedTo	
+	Delete From DeleteCuzUserAskedTo
+	
+	Commit Table ModifiedDSC
+Exit Sub
+skipmenuitem_DeleteModifications:
+	Print "menuitem_DeleteModifications Err: "& Err() & " " & Error$()
+	Resume Next
+
+End Sub
+'---------------------------------------------------------
+'Entry point for divide operation
+sub ButtonSelectDivideDSC
+	dim iDSCID as Integer
+	dim iDivideID as Integer
+	dim iParcelID as Integer
+	Dim oRegion As Object
+	Dim iRegion As Object
+	Dim iNumDSC As Integer
+	Dim iToMLinkSan As Integer
+	Dim iToMLinkStorm As Integer
+
+	oRegion = CommandInfo(CMD_INFO_CUSTOM_OBJ)
+	'Before this sub is called, the user must have selected one (1) DSC to
+	'split.  Inside of this sub, the user will  have to draw the polyline that
+	'represents the split.  Once the polyline is complete (how will the sub
+	'detect that the polyline is complete?)
+	OnError GOTO skipButtonSelectDivideDSC
+	Alter ButtonPad "Master DSC Editing Tools" Show
+	Select * from selection into qySaver
+	iParcelID = qySaver.ParcelID
+	iDSCID = qySaver.DSCID
+	iDivideID = qySaver.DivideID
+	iRegion = qySaver.Obj
+	iToMLinkSan = qySaver.ToMLinkSan
+	iToMLinkStorm = qySaver.ToMLinkStorm
+	
+	Call SetStdCoordSys()
+	
+	Select * From qySaver where qySaver.obj Contains Part oRegion
+	If Selectioninfo(SEL_INFO_NROWS) > 0 THEN		
+		'Verify selected items is a DSC
+		IF Selectioninfo(1) not like "%mst_dsc%" THEN
+			IF Selectioninfo(1) not like "%ModifiedDSC%" THEN
+				Print "DSC Not selected."
+				Exit Sub
+			END IF
+		End If
+		
+		IF Selectioninfo(SEL_INFO_NROWS) <> 1 THEN
+			Print "Must select only one DSC object"
+			Exit Sub
+		End If
+		
+		IF Selectioninfo(1) like "%mst_DSC%" THEN
+			Select * From ModifiedDSC where ParcelID = iParcelID
+			IF Selectioninfo(SEL_INFO_NROWS) > 0 THEN
+				Note "Cannot cleave more than one divide from any given master parcel!"
+				Exit Sub
+			ELSE
+				Insert Into ModifiedDSC Select * From qySaver
+			END IF
+		END IF
+
+		'The selected DSC object should be saved into a temporary table, and
+		'when the user commits to the changes, the objects in the temporary
+		'table should be placed into the 'Original DSC' table (the table that
+		'keeps track of the 'DivideID = 0' objects.
+
+		'Copy the selected object to the temporary table
+		
+		Insert Into mst_DSCDivides Select * From qySaver
+		Insert Into CleaveLand (OBJ) Values (oRegion)
+	
+		'It appears that all of the objects are being saved correctly.  Now just perform the split.
+		'I need to make a target out of the object I recently placed into ModifiedDSC.  This
+		'Means that I need to know the unique identifier for the object, this should be DSCID
+		Select * From ModifiedDSC Where ModifiedDSC.obj  Contains  iRegion AND ParcelID = iParcelID
+		IF Selectioninfo(SEL_INFO_NROWS) > 0 THEN
+			update Selection set ParcelID = 1
+		END IF
+		
+		iNumDSC = tableinfo(ModifiedDSC,TAB_INFO_NROWS)
+
+		Set target on
+		Select * From CleaveLand
+		Create Cutter Into Target
+			Objects Split Into Target
+				Data
+					ParcelID = iParcelID,
+					DivideID = iDivideID,
+					DSCID = iDSCID,
+					ToMlinkSan = iToMLinkSan,
+					ToMlinkStorm = iToMLinkStorm
+
+		Select * From ModifiedDSC where ParcelID = 0 OR ParcelID = 1
+		Delete From Selection
+		Delete From CleaveLand
+		Commit Table ModifiedDSC
+		'Close Table ModifiedDSC
+		IF tableinfo(ModifiedDSC,TAB_INFO_NROWS) = iNumDSC then
+			Note "No split performed.  You may not have drawn your cutting" & chr$(10) & "line over the DSC you selected."
+		END IF
+	ELSE
+		Note "No split performed.  You may not have drawn your cutting" & chr$(10) & "line over the DSC you selected."
+	END IF
+
+Exit Sub
+skipButtonSelectDivideDSC:
+	Print "ButtonSelectDivideDSC Err: "& Err() & " " & Error$()
+	Resume Next
+
+End Sub
+'---------------------------------------------------------
+'Sub RefreshDSCZingers
+
+'End Sub
+'This program should have a more accomodating workspace.  
+'The proper workspace should include a set of
+'windows that show the user the appropriate modifiable layers.
+'
+'Basic layers:
+'		mst_DSC
+'		mst_DSCDivides
+'		the divide layer that the user is writing to
+'		Consider:
+'			Master Links
+'			Master nodes
+'			Streets
+'			veg/drywell/roof/parking
+'			...etc
+'
+'Layers which should be selectable:
+'		under what conditions would it be inappropriate for users to select
+'		certain objects from mst_DSC?  Are there any DSC objects that should
+'		NEVER be split?  One type in particular comes to mind:
+'		DSC that have 99 total divides already.  These are not accounted for
+'		in the DSCID field (it only accounts for 0-99).
+	
+sub ProcessBatchFile
+		StayInvisible = true
+		close table ModifiedDSC
+		'Ask the user where they can find the splits file
+		Note "Please select the location of the file that contains the intended splits."
+		sModifiedDSC = FileOpenDlg( "C:" ,  "" ,  "TAB" ,  "Locate DSC splits" )
+		Open Table sModifiedDSC as ModifiedDSC
+
+end sub

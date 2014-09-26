@@ -1,0 +1,812 @@
+'
+' 11/8/2002 Collins.  Add Vfract and Vflow to mdl_surf
+'	routine to build model tables,
+'	other table service routines.
+'
+'	12Mar03	Cautley
+'		add TraceVisit to many tables, for version 2.1
+'	22Mar03	Cautley
+'		modify for version 2.1 tables.
+'			SurfSC, DSC, Links
+'			Create inflow control tables in model
+'	24Mar03	Cautley
+'		testing, fixing
+'	25Mar03
+'		ERD 3.10 changes (special links)		
+' 28Mar03	Collins
+'   get rid of baseflowFB field
+'   add various fields to mdl_DSC and mdl_surfSC (the c_ fields) these are required for deck building
+'	16Apr03	Cautley
+'		in inflow control tables, all SqFt are integer not float
+' 26May03	Collins
+'   add various C_ fields to mdl_DSC to speed up linking between mdl_dirsc and mdl_surfSC
+'
+' 22Mar04	Collins
+'   add new tables for infiltration and curb extension ICs
+'
+' 21Mar06 JHB
+'	Changed Access version to 4.0
+'
+include "MapBasic.def"
+include "..\inc\EMGModMake.def"
+include "..\inc\EMGGlobal.def"
+include "..\inc\TableUtils.def"
+include "..\inc\INIUtils.def"
+include "..\inc\EMGLogger.def"
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	Private declares and variables for this module
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'		Following will build the model tables.
+'		Folders must already exist.
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Sub CreateModelTables()
+Dim 	OKToGO as logical
+Dim		Msg as string
+
+Dim		TraceTabPath as string
+
+Dim		mdlLinksPath as string
+Dim		mdlLinksMDBPath as string
+Dim		mdlLinksTable as string
+
+Dim		mdlLinkResPath as string
+Dim		mdlLinkResMDBPath as string
+Dim		mdlLinkResTable as string
+
+Dim		mdlNodesPath as string
+Dim		mdlNodesMDBPath as string
+Dim		mdlNodesTable as string
+
+Dim		mdlNodeResPath as string
+Dim		mdlNodeResMDBPath as string
+Dim		mdlNodeResTable as string
+
+Dim 		mdlSpecLinksPath as string
+Dim		mdlSpecLinksMDBPath as string
+Dim		mdlSpecLinksTable as string
+
+Dim 		mdlSpecLinkDataPath as string
+Dim		mdlSpecLinkDataMDBPath as string
+Dim		mdlSpecLinkDataTable as string
+
+Dim 		mdlSpecNodeDataPath as string
+Dim		mdlSpecNodeDataMDBPath as string
+Dim		mdlSpecNodeDataTable as string
+
+Dim 		mdlDefineTagsPath as string
+Dim		mdlDefineTagsMDBPath as string
+Dim		mdlDefineTagsTable as string
+
+Dim		mdlLateralsPath as string
+Dim		mdlLateralsMDBPath as string
+Dim		mdlLateralsTable as string
+
+Dim		mdlLatEndsPath as string
+Dim		mdlLatEndsMDBPath as string
+Dim		mdlLatEndsTable as string
+
+Dim		mdlDirSCPath as string
+Dim		mdlDirSCMDBPath as string
+Dim		mdlDirSCTable as string
+
+Dim		mdlICDiscoVegPath as string
+Dim		mdlICDiscoVegMDBPath as string
+Dim		mdlICDiscoVegTable as string
+
+Dim		mdlICGrnRoofPath as string
+Dim		mdlICGrnRoofMDBPath as string
+Dim		mdlICGrnRoofTable as string
+
+Dim		mdlICDrywellPath as string
+Dim		mdlICDrywellMDBPath as string
+Dim		mdlICDrywellTable as string
+
+Dim		mdlICStorePath as string
+Dim		mdlICStoreMDBPath as string
+Dim		mdlICStoreTable as string
+
+Dim		mdlICInfiltPath as string
+Dim		mdlICInfiltMDBPath as string
+Dim		mdlICInfiltTable as string
+
+Dim		mdlICSWPlntPath as String
+Dim		mdlICSWPlntMDBPath as String
+Dim 	mdlICSWPlntTable as String
+
+Dim		mdlICngtoRedirPath as string
+Dim		mdlICngtoRedirMDBPath as string
+Dim		mdlICngtoRedirTable as string
+
+Dim		mdlSurfSCPath as string
+Dim		mdlSurfSCMDBPath as string
+Dim		mdlSurfSCTable as string
+
+Dim		mdlSurfZingPath as string
+Dim		mdlSurfZingTable as string
+
+dim		strTemp as string
+Dim		ModelINIPath as string
+Dim		FullPath as string
+Dim		AliasName as string
+Dim		TableName as string
+Dim		PathName as string
+
+	Call Loggit("Hello from CreateModelTables...")
+
+	' Check that all required data is present and ready to go
+
+	OKTOGO = TRUE
+	if len(gmdlRootFolder) = 0 then
+		OKToGO = FALSE
+		Call loggit( "gmdlRootFolder not specified.")
+	end if
+	if not OKToGO then
+		call Loggit( "FAILURE:  At least one required global not set.")
+		gstrReturnStatus = "FAILURE"
+		exit sub
+	end if
+	
+	' All is in order, proceed...
+	close all interactive
+
+	gmdlRootFolder = FixFolderSlash(gmdlRootFolder)
+
+	ModelINIPath = gmdlRootFolder & "model.ini"
+	FullPath = ReadINI(ModelINIPath, "treeverse","tracefile", "")
+
+	gmdlTracePath = FullPath
+
+	AliasName = "mdl_Trace"
+	TableName = PathToTableName$(FullPath)
+	PathName = PathToDirectory$(FullPath)
+
+	TraceTabPath = gmdlRootFolder & "Links\" & "mdl_trace.tab"
+
+	strTemp = gmdlRootFolder & "Links\" & "mdl_Links_ac"
+	mdlLinksPath = strTemp & ".tab"
+	mdlLinksMDBPath = strTemp & ".mdb"
+	mdlLinksTable = PathToTableName$(mdlLinksPath)
+	gmdlLinksPath = mdlLinksPath
+
+	strTemp = gmdlRootFolder & "Links\" & "mdl_LinkRes_ac"
+	mdlLinkResPath = strTemp & ".tab"
+	mdlLinkResMDBPath = strTemp & ".mdb"
+	mdlLinkResTable = PathToTableName$(mdlLinkResPath)
+
+	strTemp = gmdlRootFolder & "Nodes\" & "mdl_nodes_ac"
+	mdlNodesPath = strTemp & ".tab"
+	mdlNodesMDBPath = strTemp & ".mdb"
+	mdlNodesTable = PathToTableName$(mdlNodesPath)
+
+	strTemp = gmdlRootFolder & "Nodes\" & "mdl_NodeRes_ac"
+	mdlNodeResPath = strTemp & ".tab"
+	mdlNodeResMDBPath = strTemp & ".mdb"
+	mdlNodeResTable = PathToTableName$(mdlNodeResPath)
+
+	strTemp = gmdlRootFolder & "Links\" & "mdl_SpecLinks_ac"
+	mdlSpecLinksPath = strTemp & ".tab"
+	mdlSpecLinksMDBPath = strTemp & ".mdb"
+	mdlSpecLinksTable = PathToTableName$(mdlSpecLinksPath)
+
+	strTemp = gmdlRootFolder & "Links\" & "mdl_SpecLinkData_ac"
+	mdlSpecLinkDataPath = strTemp & ".tab"
+	mdlSpecLinkDataMDBPath = strTemp & ".mdb"
+	mdlSpecLinkDataTable = PathToTableName$(mdlSpecLinkDataPath)
+
+	strTemp = gmdlRootFolder & "Nodes\" & "mdl_SpecNodeData_ac"
+	mdlSpecNodeDataPath = strTemp & ".tab"
+	mdlSpecNodeDataMDBPath = strTemp & ".mdb"
+	mdlSpecNodeDataTable = PathToTableName$(mdlSpecNodeDataPath)
+
+	strTemp = gmdlRootFolder & "Nodes\" & "mdl_DefineTags_ac"
+	mdlDefineTagsPath = strTemp & ".tab"
+	mdlDefineTagsMDBPath = strTemp & ".mdb"
+	mdlDefineTagsTable = PathToTableName$(mdlDefineTagsPath)
+
+	strTemp = gmdlRootFolder & "Laterals\" & "mdl_Laterals_ac"
+	mdlLateralsPath = strTemp & ".tab"
+	mdlLateralsMDBPath = strTemp & ".mdb"
+	mdlLateralsTable = PathToTableName$(mdlLateralsPath)
+
+	strTemp = gmdlRootFolder & "Laterals\" & "mdl_LateralEndPts"
+	mdlLatEndsPath = strTemp & ".tab"
+	mdlLatEndsMDBPath = strTemp & ".mdb"
+	mdlLatEndsTable = PathToTableName$(mdlLatEndsPath)
+	
+	strTemp = gmdlRootFolder & "DSC\" & "mdl_DirSC_ac"
+	mdlDirSCPath = strTemp & ".tab"
+	mdlDirSCMDBPath = strTemp & ".mdb"
+	mdlDirSCTable = PathToTableName$(mdlDirSCPath)
+
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_DiscoVeg_ac"
+	mdlICDiscoVegPath = strTemp & ".tab"
+	mdlICDiscoVegMDBPath = strTemp & ".mdb"
+	mdlICDiscoVegTable = PathToTableName$(mdlICDiscoVegPath)
+
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_GrnRoof_ac"
+	mdlICGrnRoofPath = strTemp & ".tab"
+	mdlICGrnRoofMDBPath = strTemp & ".mdb"
+	mdlICGrnRoofTable = PathToTableName$(mdlICGrnRoofPath)
+
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_DryWell_ac"
+	mdlICDryWellPath = strTemp & ".tab"
+	mdlICDryWellMDBPath = strTemp & ".mdb"
+	mdlICDryWellTable = PathToTableName$(mdlICDryWellPath)
+
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_Store_ac"
+	mdlICStorePath = strTemp & ".tab"
+	mdlICStoreMDBPath = strTemp & ".mdb"
+	mdlICStoreTable = PathToTableName$(mdlICStorePath)
+
+	' new table Mar 22 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_Infilt_ac"
+	mdlICInfiltPath = strTemp & ".tab"
+	mdlICInfiltMDBPath = strTemp & ".mdb"
+	mdlICInfiltTable = PathToTableName$(mdlICInfiltPath)
+
+	' new table Mar 22 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_SWPlnt_ac"
+	mdlICSWPlntPath = strTemp & ".tab"
+	mdlICSWPlntMDBPath = strTemp & ".mdb"
+	mdlICSWPlntTable = PathToTableName$(mdlICSWPlntPath)
+
+	' new table mar 31 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_NgtoRedir_ac"
+	mdlICngtoRedirPath = strTemp & ".tab"
+	mdlICngtoRedirMDBPath  = strTemp & ".mdb"
+	mdlICngtoRedirTable = PathToTableName$(mdlICNgtoRedirPath)
+
+
+	strTemp = gmdlRootFolder & "SurfSC\" & "mdl_SurfSC_ac"
+	mdlSurfSCPath = strTemp & ".tab"
+	mdlSurfSCMDBPath = strTemp & ".mdb"
+	mdlSurfSCTable = PathToTableName$(mdlSurfSCPath)
+	
+	strTemp = gmdlRootFolder & "SurfSC\" & "mdl_SurfZing"
+	mdlSurfZingpath = strTemp & ".Tab"
+	mdlSurfZingTable = PathToTableName$(mdlSurfZingPath)
+
+
+	'	Now, build the new model tables ....
+
+	Create Table   mdl_Links
+  (  
+	LinkID				integer,
+	USNode				char(6),
+	DSNode				char(6),
+	LinkType			char(2),
+	PipeFlowType		char(1),
+	MLinkID			integer,
+	SimLinkID			char(20),
+	CompKey			integer,
+	Length				Float,
+	DiamWidth			Float,
+	Height				Float,
+	PipeShape				char(4),
+	Material			char(6),
+	upsdpth			float,
+	dwndpth			float,
+	USIE				float,
+	DSIE				float,
+	AsBuilt			char(14),
+	Instdate			date,
+	FromX				float,
+	FromY				float,
+	ToX					float,
+	ToY					float,
+	Roughness			float,
+	LinkReach			char(255),
+	ReachElement		integer,
+	DataFlagSynth		integer,
+	DataQual			char(15),
+	IsSpecLink		logical,
+	HServStat			char(10),
+	TraceVisit		char(1),
+	DataSource		char(1),
+	Source char(255),
+	IsActive logical
+	)
+  File mdlLinksPath
+  Type Access Database  mdlLinksMDBPath Version 4.0 Table mdlLinksTable
+
+Create Map 
+	For   mdl_links 
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+
+Create Index on mdl_Links (MLinkID)
+Create Index on mdl_Links (LinkID)
+Create Index on mdl_Links (USNode)
+Create Index on mdl_Links (DSNode)
+
+set table mdl_links fastedit ON
+
+	call Loggit( "Model links table created... " & mdlLinksPath )
+
+'	link results is not mappable
+'Modified 6/20/2002 JAS
+'Create Table		mdl_LinkRes
+'	(
+'	LinkID			integer,
+'	CondName		char(10),
+'	DesignQ		float,
+'	DesignV		float,
+'	MaxD			float,
+'	MaxQ			float,
+'	TimeMaxQ		char(15),  'all space for hh:mm:ss p.m. formatting
+'	MaxV			float,
+'	TimeMaxV		char(15),
+'	QqRatio		float,
+'	MaxUsElev		float,
+'	MaxDsElev		float
+'	)
+'	File mdlLinkResPath
+'	Type Access Database mdlLinkResMDBPath Version 4.0 Table mdlLinkResTable
+'	call Loggit ("Model link results table created..." & mdlLinkResPath)
+'
+'Create Index on mdl_LinkRes (LinkID)
+
+Create Table   mdl_Nodes
+  (  
+	Node			char(6),
+	XCoord			float,
+	YCoord			float,
+	NodeType		Char(6),
+	GrndElev		float,
+	HasSpecNode	char(1),
+	HasSpecLink	char(1),
+	GageID			char(8),
+	TraceVisit	char(1),
+	IsActive logical
+	)
+  File mdlNodesPath
+  Type Access Database  mdlNodesMDBPath Version 4.0 Table mdlNodesTable
+
+Create Map 
+	For   mdl_Nodes
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+
+Create Index on mdl_Nodes (Node)
+
+Set Table mdl_Nodes FastEdit ON
+
+	Call Loggit( "Model nodes table created... " & mdlNodespath)
+
+'Modified 6/20/2002 JAS
+'Create Table		mdl_NodeRes
+'	(
+'	Node		char(6),
+'	GrElev		float,
+'	MaxCrown	float,
+'	MaxJElev	float,
+'	TimeOfMax	char(15),
+'	Surcharge	float,
+'	Freeboard	float,
+'	MaxArea	float
+'	)
+'	File mdlNodeResPath
+'	Type Access Database mdlNodeResMDBPath Version 4.0 Table mdlNodeResTable
+'	call Loggit( "Model Node Res table created... " & mdlNodeResPath )
+'Create Index on mdl_NodeRes (Node)
+
+Create Table		mdl_SpecLinks
+	(
+	Node			char(6),
+	ToLinkID		integer,
+	ToLinkNDX		integer,
+	SpecLinkType	char(2),
+	MSpecLinkID		integer,
+	IsActive logical,
+	SLID integer,
+	SLNode char(6)
+	)
+	File mdlSpecLinksPath
+	Type Access Database mdlSpecLinksMDBPath Version 4.0 Table mdlSpecLinksTable
+
+	call Loggit( "Model Special links table created... " & mdlSpecLinksPath )
+Create Index on mdl_SpecLinks (Node)
+Create Index on mdl_SpecLinks (ToLinkID)
+Create Index on mdl_SpecLinks (ToLinkNDX)
+Create Index on mdl_SpecLinks (SLID)
+
+Create Table		mdl_SpecLinkData
+	(
+	Node			char(6),
+	ToLinkID		integer,
+	ToLinkNDX		integer,
+	Tag			char(15),
+	TValue		char(30),
+	NValue		float,
+	SLID integer
+	)
+	File mdlSpecLinkDataPath
+	Type Access Database mdlSpecLinkDataMDBPath Version 4.0 Table mdlSpecLinkDataTable
+	call Loggit( "Model Special links Data table created... " & mdlSpecLinkDataPath )
+
+Create Index on mdl_SpecLinkData (Node)
+Create Index on mdl_SpecLinkData (ToLinkID)
+Create Index on mdl_SpecLinkData (ToLinkNDX)
+
+'Create Table		mdl_SpecNodeData
+'	(
+'	Node			char(6),
+'	NodeNDX		integer,
+'	Tag				char(15),
+'	TValue			Char(30),
+'	NValue			float
+'	)
+'	File mdlSpecNodeDataPath
+'	Type Access Database mdlSpecNodeDataMDBPath Version 4.0 Table mdlSpecNodeDataTable
+'	call Loggit( "Model Special Node Data table created... " & mdlSpecNodeDataPath ')
+'Create Index on mdl_SpecNodeData (Node)
+'Create Index on mdl_SpecNodeData (NodeNDX)
+
+'Create Table		mdl_DefineTags_ac
+'	(
+'	TagID			integer,
+'	Tag				char(15),
+'	Description	char(30),
+'	TextOrNum		char(1)
+'	)
+'	File mdlDefineTagsPath
+'	Type Access Database mdlDefineTagsMDBPath Version 4.0 Table mdlDefineTagsTable
+'	call Loggit( "Model Define Tags table created... " & mdlDefineTagsPath )
+
+Create Table		mdl_DirSC
+	(
+	ParcelID		integer,
+	DivideID		integer,
+	DSCID integer,
+	discoSiteID integer,
+	DiscoClass char(1),
+	ToLinkSan integer,
+	ToLinkStorm integer,
+	NGTOSan char(6),
+	NGTOStorm char(6),
+	PipeFlowTypeSan	char(1),
+	PipeFlowTypeStorm	char(1),
+	SanSwrCrown float,
+	Frac2SwrBeg float,
+	FloodRefElev	float,
+	FalseBFRisk logical,
+	GridQAQC		char(10),
+	MaxBldGrid		float,
+	AvgParcelElev	float,
+	EFFMethod		char(15),
+	FFOverride		char(15),
+	OrigFinishFloor	float,
+	HGL			float,
+	DeltaHGL		float,
+	HGLComment		char(20),
+	DataSourceFlags	char(100),
+	ZoneEX		char(5),
+	ZoneCP		char(5),
+	GenEX			char(3),
+	GenCP			char(3),
+	BaseFlow		float,
+	BaseFlowEX		float,
+	BaseFlowDM		float,
+	ICFtRoof		integer,
+	ICFtParking		integer,
+	ICFlag		char(8),
+	ImpFractEX		float,
+	ImpFractCP		float,
+	ImpFractFB		float,
+	AreaFt		float,
+	RfAreaFt		float,
+	PkAreaFt		float,
+	TraceVisit		char(1),
+	DSCPickedFlag	char(1),
+	UpdateAtts		logical,
+	c_RFtosurfFt integer,
+	c_PKtosurfFt integer,
+	c_RFtosurfImpFt integer,
+	c_PKtosurfImpFt integer,
+	IsActive logical,
+	Sewerable integer
+	)
+	File mdlDirSCPath
+	Type Access Database mdlDirSCMDBPath Version 4.0 Table mdlDirSCTable
+Create Map 
+	For   mdl_DirSC
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+
+	Call Loggit ( "Model DSC open ... " & mdlDirSCPath )
+Create Index on mdl_DirSC (ParcelID)
+Create Index on mdl_DirSC (DivideID)
+Create Index on mdl_DirSC (DSCID)
+
+'	Make the inflow control tables
+'
+' 12/10/2006 Remove these IC tables from MapInfo.  Create them directly
+' Problems in editing them from MapInfo are making them inconsistent, so
+' discourage edit of them in MapInfo by not making them compatible in
+' the first place
+'Create Table mdl_ic_DiscoVeg
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	Effectiveness		float,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'	)
+'	File	mdlICDiscoVegPath
+'	Type Access Database mdlICDiscoVegMDBPath Version 4.0 Table mdlICDiscoVegTable
+'  Create Index on mdl_ic_DiscoVeg (ParcelID)
+'  Create Index on mdl_ic_DiscoVeg (DivideID)
+'  Create Index on mdl_ic_DiscoVeg (DSCID)
+
+'Create Table mdl_ic_GrnRoof
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'	
+'	)
+'	File	mdlICGrnRoofPath
+'	Type Access Database mdlICGrnRoofMDBPath Version 4.0 Table mdlICGrnRoofTable
+'  Create Index on mdl_ic_GrnRoof (ParcelID)
+'  Create Index on mdl_ic_GrnRoof (DivideID)
+'
+'Create Table mdl_ic_DryWell
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'
+'	)
+'	File	mdlICDryWellPath
+'	Type Access Database mdlICDryWellMDBPath Version 4.0 Table mdlICDryWellTable
+'  Create Index on mdl_ic_DryWell (ParcelID)
+'  Create Index on mdl_ic_DryWell (DivideID)
+'
+'Create Table mdl_ic_Infilt
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'
+'	)
+'	File	mdlICInfiltPath
+'	Type Access Database mdlICInfiltMDBPath Version 4.0 Table mdlICInfiltTable
+'  Create Index on mdl_ic_Infilt (ParcelID)
+'  Create Index on mdl_ic_Infilt (DivideID)
+'
+'Create Table mdl_ic_SWPlnt
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'
+'	)
+'	File	mdlICSWPlntPath
+'	Type Access Database mdlICSWPlntMDBPath Version 4.0 Table mdlICSWPlntTable
+'  Create Index on mdl_ic_SWPlnt (ParcelID)
+'  Create Index on mdl_ic_SWPlnt (DivideID)
+
+
+'Create Table mdl_ic_NgtoRedir
+'	(
+'	SurfSCID integer, 
+'	ngto char(10)
+'	) File mdlICngtoRedirPath
+'  Type Access Database mdlICngtoRedirMDBPath Version 4.0 Table mdlICngtoRedirTable
+  
+'Create Table mdl_ic_Store
+'	(
+'	ParcelID		integer,
+'	DivideID		integer,
+'	DSCID integer,
+'	RoofRPark		char(1),
+'	assumeKey		char(4),
+'	TimeFrame char(2),
+'	ApplyAreaTF char(2),
+'	SqFt			integer,
+'	StoreNodeName		char(6),
+'	StoreAreaBottomSqFt		float,
+'	StoreAreaTopSqFt			float,
+'	StorageDepth			float,
+'	Orifice1Area			float,
+'	Orifice1ConnNode		char(6),
+'	Orifice2Area			float,
+'	Orifice2ConnNode			char(6),
+'	OrificeElAboveBottom	float,
+'	OFlowConnection			char(1),
+'	InfiltrationRateInHr		float,
+'	Comment char(16),
+'	AppendDate char(8),
+'	IsActive logical
+'
+'	)
+'	File	mdlICStorePath
+'	Type Access Database mdlICStoreMDBPath Version 4.0 Table mdlICStoreTable
+'  Create Index on mdl_ic_Store (ParcelID)
+'  Create Index on mdl_ic_Store (DivideID)
+
+
+'Call CreateLaterals (mdlLateralsPath, mdlLateralsMDBPath, mdlLateralsTable, "mdl_Laterals")
+
+
+'Create Table   mdl_LatEnds
+'  (
+'	LateralEndID		integer,
+'	ToOrFrom			char(1),
+'	LateralID			integer
+'	)
+'  File mdlLatEndsPath
+'  Type Native
+'
+'Create Map
+'	For   mdl_LatEnds
+'	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+'
+'Create Index on mdl_LatEnds (LateralID)
+'
+'	Call Loggit ("Model Lateral Ends created... " & mdlLatEndspath )
+
+'modified 11/08/2002 DJC
+
+Create Table   mdl_SurfSC
+  (
+	SurfSCID			integer,
+	NGTO				char(6),
+	Slope				float,
+	FlowLengthFt		float,
+	dH					float,
+	Imp_n				float,
+	Per_n				float,
+	Imp_sto			float,
+	Per_sto			float,
+	Suct				float,
+	Hydcon				float,
+	SMDMax				float,
+	issumped			logical,
+	totalgrossacres	float,
+	paveacres			float,
+	SWacres       	float,
+	SWAcresOther		float,
+	SWfactor      float,
+	PaveTreeAcres	float,
+	TraceVisit		char(1),
+	UpdateAtts		logical,
+	DataSource		Char(1),
+	ROWAcres		  float,
+	ROWAcresOther	float,
+	c_RFgrossacres float,
+  c_RFtosurfacres float,
+  c_RFtosurfIMPacres float,
+  c_PKgrossacres float,
+  c_PKtosurfacres float,
+  c_PKtosurfIMPacres float,
+	c_netacres float,
+	c_netIMPacres float,
+	IsActive Logical
+	)
+  File mdlSurfSCPath
+  Type Access Database  mdlSurfSCMDBPath Version 4.0 Table mdlSurfSCTable
+
+Create Map 
+	For   mdl_SurfSC
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+Create Index on mdl_SurfSC (NGTO)
+
+	call Loggit ("Model Surface Subcatchments created ... " & mdlSurfSCPath)
+
+Create Table mdl_SurfZing
+	(
+	SurfScID		integer,
+	Node			char(6)
+	)
+	File mdlSurfZingPath
+	Type Native
+
+Create Map
+	for mdl_SurfZing
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+
+	call Loggit ("Model Surface Zingers created ... " & mdlSurfZingPath)
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'
+'	Inputs:
+'		LP			Layer Path
+'		LMDBP		layer MDB Path
+'		LT			access table name
+'		Alias		table alias
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub CreateLaterals(ByVal LP as string, ByVal LMDBP as string, ByVal LT as string, ByVal Alias as string )
+Dim		Msg as string
+
+Msg = "LP: " & LP & " LMDBP: " & LMDBP & " LT: " & LT & " Alias: " & Alias
+call loggit(msg)
+
+Create Table   Alias
+  (
+	LateralID			integer,
+	ParcelID			integer,
+	DivideID			integer,
+	LinkID				integer,
+	MLinkID			integer,
+	MLateralID		integer,
+	LinkType			char(2),
+	PipeFlowType		char(1),
+	Created			date,
+	USFloodRefElev		float,
+	DSSewerIE			float,
+	SewerDiameter		float,
+	Frac2SwrBeg		float,
+	Pumped				char(1),
+	SwrQCFlag			char(1),
+	DSCQCFlag			char(1),
+	LatQCFlag			char(1),
+	QCDate				date,
+	LatPickedFlag		char(1),
+	LatSourceFlag		char(1),
+	TraceVisit			char(1)
+	)
+  File LP
+  Type Access Database  LMDBP Version 4.0 Table LT
+
+Create Map 
+	For   Alias
+	CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+Create Index on Alias (LateralID)
+Create Index on Alias (ParcelID)
+Create Index on Alias (DivideID)
+Create index on Alias (MLinkID)
+Create Index on Alias (MLateralID)
+
+	Call Loggit ("Model Laterals created... " & LP)
+
+'
+'	If you got here, nothing bombed
+'	not much error trapping as this is usually called via integrated mapping
+'	and error trapping doesn't work in that kind of context.
+'
+	gstrReturnStatus = "SUCCESS"
+ENd Sub
