@@ -88,6 +88,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// <summary>
   /// An Engineering News Record Construction Cost Index
   /// </summary>
+  [Serializable]
   public struct ENR
   {
     public int Value;

@@ -35,6 +35,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       : this()
     {
       _project = project;
+
     }
     #endregion
 
@@ -92,7 +93,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     private void FinalPage_Load(object sender, EventArgs e)
     {
       SortedList<string, CostItemFactor> sortedEstimateList =
-      new SortedList<string, CostItemFactor>();
+        new SortedList<string, CostItemFactor>();
       foreach (CostItemFactor estimate in _project.Estimates)
       {
         sortedEstimateList.Add(estimate.Name, estimate);
