@@ -18,6 +18,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// <summary>
   /// Cost Estimate Project metadata
   /// </summary>
+  [Serializable]
   public class ProjectInfo
   {
     #region Variables
