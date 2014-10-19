@@ -11,8 +11,8 @@
     <RootNamespace>SystemsAnalysis.Analysis.CostEstimator.UI</RootNamespace>
     <AssemblyName>CostEstimator</AssemblyName>
     <StartupObject>SystemsAnalysis.Analysis.CostEstimator.UI.Program</StartupObject>
-    <ManifestCertificateThumbprint>DA9320D69E162F19FD051507F937A46A99051E75</ManifestCertificateThumbprint>
-    <ManifestKeyFile>ArcSpooler.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>718A52F82AA6DDA66E0CA00E1DE01DA3DACD9ACA</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UI_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -39,7 +39,7 @@
     <ProductName>Cost Estimator</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>66</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -356,6 +356,7 @@
     <None Include="Properties\DataSources\SystemsAnalysis.Analysis.CostEstimator.Classes.ReportPipeItem.datasource" />
     <None Include="Properties\DataSources\SystemsAnalysis.Analysis.CostEstimator.Classes.ReportSummaryItem.datasource" />
     <None Include="Resources\CloseProject.png" />
+    <None Include="UI_1_TemporaryKey.pfx" />
     <None Include="UI_TemporaryKey.pfx" />
     <EmbeddedResource Include="BatchPage.resx">
       <SubType>Designer</SubType>

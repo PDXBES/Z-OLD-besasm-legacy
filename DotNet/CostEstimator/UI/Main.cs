@@ -1040,19 +1040,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
         segmentsFile + @";Persist Security Info=False";
       int totalCount = 0;
+      int beginID = 0;
       using (OleDbConnection conn = new OleDbConnection(connectionString))
       {
         conn.Open();
         OleDbDataReader countReader = null;
-        OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*) FROM [" + segmentsTable + "]",
+        OleDbCommand countCommand = new OleDbCommand("SELECT COUNT(*), MIN([ID]) FROM [" + segmentsTable + "]",
           conn);
         countReader = countCommand.ExecuteReader();
         countReader.Read();
         totalCount = Convert.ToInt32(countReader[0]);
+        beginID = Convert.ToInt32(countReader[1]);
       }
 
       LoadRehabPackage loadRehabPackage = new LoadRehabPackage(segmentsFile, segmentsTable,
-        conflictsFile, conflictsTable, totalCount);
+        conflictsFile, conflictsTable, totalCount, beginID);
 
       bkgWorkerLoadRehab.RunWorkerAsync(loadRehabPackage);
       //tabMain.SelectedTab = tabMain.Tabs["Costs"];
@@ -1574,7 +1576,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       bool noError = _project.CreateEstimateFromRehab(bw,
         Path.GetFullPath(loadRehabPackage.SegmentsDBFileName), loadRehabPackage.SegmentsDBFileName,
         loadRehabPackage.SegmentsTableName, loadRehabPackage.ConflictsDBFileName,
-        loadRehabPackage.ConflictsTableName, loadRehabPackage.NumRecords, out error);
+        loadRehabPackage.ConflictsTableName, loadRehabPackage.NumRecords, loadRehabPackage.BeginID,
+        out error);
       e.Result = new ErrorInfo(noError, error);
     }
 

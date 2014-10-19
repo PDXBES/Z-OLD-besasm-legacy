@@ -2289,6 +2289,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       string conflictsTableDB,
       string conflictsTableName,
       int numRecords,
+      int beginID,
       out string errorMessage)
     {
       errorMessage = string.Empty;
@@ -2309,7 +2310,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         DateTime startTime = DateTime.Now;
 
         const int increment = 50000;
-        int fromID = 1;
+        int fromID = beginID;
         int toID = fromID + increment - 1;
 
         string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
@@ -2323,7 +2324,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           int totalSets = numRecords % increment == 0 ? numRecords / increment :
             numRecords / increment + 1;
 
-          while (fromID < numRecords)
+          while (fromID < (numRecords + beginID))
           {
             set++;
             ResetProject();
@@ -2423,10 +2424,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("PI, I&C, Easements, Environmental"));
               _ProjectEstimate.ChildCostItemFactor(index).AddFactor(FactorFromPool("Startup/closeout"));
             }
-            string fileSet = string.Format("{0:000}", (int)((double)fromID / (double)increment + 1));
+            string fileSet = string.Format("{0:000}", (int)((double)(fromID - beginID) / (double)increment + 1));
             fromID += increment;
             toID += increment;
-            int percentDone = Math.Min(100, (int)((double)fromID / (double)numRecords * 100.0));
+            int percentDone = Math.Min(100, (int)((double)(fromID - beginID) / (double)numRecords * 100.0));
 
             string pipeCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("Pipe-{0}.csv", fileSet));
             string detailedCostsFileName = Path.Combine(Path.GetDirectoryName(segmentsTableDB), string.Format("PipeDetails-{0}.csv", fileSet));
