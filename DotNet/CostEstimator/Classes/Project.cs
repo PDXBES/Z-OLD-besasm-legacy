@@ -2120,6 +2120,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       Dictionary<CostItemFactor, CostItemFactor> pipeTVCleaningCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipePipeburstLateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipePipeburstTVCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> lateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> manholeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs = new Dictionary<CostItemFactor, List<CostItemFactor>>();
@@ -2139,6 +2141,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           CostItemFactor pipeAsphaltTrenchPatchCIF = null;
           CostItemFactor pipePipeZoneCIF = null;
           CostItemFactor pipeAboveZoneCIF = null;
+          CostItemFactor pipeCostCIF = null;
+          CostItemFactor pipeTrenchExcavationCIF = null;
           List<CostItemFactor> ancillaryCIFList = new List<CostItemFactor>();
           foreach (CostItemFactor subItem in subItems)
           {
@@ -2195,6 +2199,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                   pipeAboveZoneCIF = pipeSubItem;
                   pipeFillAbovePipeZoneCIFs.Add(item, pipeAboveZoneCIF);
                 }
+                else if (pipeSubItem.Name.StartsWith("Pipe cost"))
+                {
+                  pipeCostCIF = pipeSubItem;
+                  pipeCostCIFs.Add(item, pipeCostCIF);
+                }
+                else if (pipeSubItem.Name.StartsWith("Trench excavation"))
+                {
+                  pipeTrenchExcavationCIF = pipeSubItem;
+                  pipeTrenchExcavationCIFs.Add(item, pipeTrenchExcavationCIF);
+                }
               }
             } // if
             else
@@ -2249,7 +2263,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (pipeSawCuttingCIFs.ContainsKey(item) && pipeSawCuttingCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Sawcutting (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+              pipeCostsStream.WriteLine(string.Format("\"Sawcutting AC (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
                 pipeSawCuttingCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
@@ -2287,6 +2301,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               pipeCostsStream.WriteLine(string.Format("\"Above zone fill (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
                 pipeFillAbovePipeZoneCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeCostCIFs.ContainsKey(item) && pipeCostCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe material (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeCostCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeTrenchExcavationCIFs.ContainsKey(item) && pipeTrenchExcavationCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Trench excavation (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeTrenchExcavationCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
               pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{5},{4},{1},{2},{3:#},",
