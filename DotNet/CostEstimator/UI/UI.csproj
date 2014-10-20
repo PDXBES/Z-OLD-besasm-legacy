@@ -11,8 +11,8 @@
     <RootNamespace>SystemsAnalysis.Analysis.CostEstimator.UI</RootNamespace>
     <AssemblyName>CostEstimator</AssemblyName>
     <StartupObject>SystemsAnalysis.Analysis.CostEstimator.UI.Program</StartupObject>
-    <ManifestCertificateThumbprint>412E9635465CAF5CDAB4F19FF15E7DB09BAE84FC</ManifestCertificateThumbprint>
-    <ManifestKeyFile>UI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>718A52F82AA6DDA66E0CA00E1DE01DA3DACD9ACA</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UI_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -39,7 +39,7 @@
     <ProductName>Cost Estimator</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>66</ApplicationRevision>
+    <ApplicationRevision>69</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
