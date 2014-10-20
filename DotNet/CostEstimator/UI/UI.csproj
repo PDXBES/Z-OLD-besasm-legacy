@@ -11,8 +11,8 @@
     <RootNamespace>SystemsAnalysis.Analysis.CostEstimator.UI</RootNamespace>
     <AssemblyName>CostEstimator</AssemblyName>
     <StartupObject>SystemsAnalysis.Analysis.CostEstimator.UI.Program</StartupObject>
-    <ManifestCertificateThumbprint>718A52F82AA6DDA66E0CA00E1DE01DA3DACD9ACA</ManifestCertificateThumbprint>
-    <ManifestKeyFile>UI_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>412E9635465CAF5CDAB4F19FF15E7DB09BAE84FC</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UI_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -24,7 +24,7 @@
     </UpgradeBackupLocation>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <TargetZone>LocalIntranet</TargetZone>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>\\CASSIO\Modeling\Model_Programs\bin\CostEstimator\</PublishUrl>
     <Install>true</Install>
@@ -54,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -63,6 +64,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +73,7 @@
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -79,6 +82,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Infragistics4.Shared.v14.1, Version=14.1.20141.2019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
