@@ -1907,7 +1907,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           catch (Exception e)
           {
 
-            throw new Exception(string.Format("Read conflict error: {0}", conflictCounter));
+            throw new Exception(string.Format("Read conflict error: {0}; {1}", conflictCounter, e.Message));
           }
         }
       }
@@ -2011,54 +2011,59 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         // Ancillary CostItemFactors
         currentStage = "Setting up ancillary costs";
-        AncillaryCoster ancillaryCoster =
-          new AncillaryCoster(
-            currentSegment,
-            conflictsTable[currentSegment.ID],
-            (Int16)currentSegment.LengthFt,
-            currentSegment.PipeDiamWidth,
-            currentSegment.USElevation,
-            currentSegment.DSElevation,
-            currentSegment.Material,
-            string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
-            string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
-            _PipeCoster,
-            constructionDurationCalculator, 
-            isLiner,
-            hasManhole: !isLiner && currentSegment.SegUSNodeID == 0);
-
-        List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
-        if (ancillaryCosts.Count == 0)
+        
+        AncillaryCoster ancillaryCoster = null;
+        if (conflictsTable.ContainsKey(currentSegment.ID))
         {
-          if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
-            pipeAndManholeCostItemFactor.Comment =
-              String.Format("{0};No ancillary costs", pipeAndManholeCostItemFactor);
+          ancillaryCoster =
+            new AncillaryCoster(
+              currentSegment,
+              conflictsTable[currentSegment.ID],
+              (Int16)currentSegment.LengthFt,
+              currentSegment.PipeDiamWidth,
+              currentSegment.USElevation,
+              currentSegment.DSElevation,
+              currentSegment.Material,
+              string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegUSNodeID),
+              string.Format("{0}-{1:G4}", currentSegment.HansenCompKey, currentSegment.SegDSNodeID),
+              _PipeCoster,
+              constructionDurationCalculator,
+              isLiner,
+              hasManhole: !isLiner && currentSegment.SegUSNodeID == 0);
+
+          List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
+          if (ancillaryCosts.Count == 0)
+          {
+            if (pipeAndManholeCostItemFactor.Comment != null && pipeAndManholeCostItemFactor.Comment.Length > 0)
+              pipeAndManholeCostItemFactor.Comment =
+                String.Format("{0};No ancillary costs", pipeAndManholeCostItemFactor);
+            else
+              pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
+          } // if
           else
-            pipeAndManholeCostItemFactor.Comment = "No ancillaryCosts";
-        } // if
-        else
-        {
-          foreach (AncillaryCost ancillaryCost in ancillaryCosts)
           {
-            CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
-            CostItem poolItem = AddCostItemToPool(ancillaryItem);
-            CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
-            AddCostItemFactorToPool(ancillaryCIF);
-            pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
-          } // foreach  (ancillaryCost)
-        } // else
+            foreach (AncillaryCost ancillaryCost in ancillaryCosts)
+            {
+              CostItem ancillaryItem = new CostItem(ancillaryCost.Name, 1, ancillaryCost.UnitCost, ancillaryCost.Unit);
+              CostItem poolItem = AddCostItemToPool(ancillaryItem);
+              CostItemFactor ancillaryCIF = new CostItemFactor(ancillaryCost.Name, poolItem, null, ancillaryCost.Units);
+              AddCostItemFactorToPool(ancillaryCIF);
+              pipeAndManholeCostItemFactor.AddCostItemFactor(ancillaryCIF);
+            } // foreach  (ancillaryCost)
+          } // else
 
-        // Ancillary CostFactors
-        currentStage = "Creating ancillary CostFactors";
-        if (ancillaryCoster.PipXP != null)
-        {
-          List<AncillaryFactor> ancillaryFactors = ancillaryCoster.RehabAncillaryFactors;
-          foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+          // Ancillary CostFactors
+          currentStage = "Creating ancillary CostFactors";
+          if (ancillaryCoster.PipXP != null)
           {
-            CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
-            CostFactor factorItem = AddFactorToPool(factor);
-            pipeAndManholeCostItemFactor.AddFactor(factorItem);
-          } // foreach  (ancillaryFactor)
+            List<AncillaryFactor> ancillaryFactors = ancillaryCoster.RehabAncillaryFactors;
+            foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+            {
+              CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
+              CostFactor factorItem = AddFactorToPool(factor);
+              pipeAndManholeCostItemFactor.AddFactor(factorItem);
+            } // foreach  (ancillaryFactor)
+          }
         }
 
         foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
@@ -2080,11 +2085,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.Manhole = currentSegment.SegUSNodeID == 0 ? manholeCostItemFactor : null;
         reportPipeItem.Pipe = pipeCostItemFactor;
         reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
-        reportPipeItem.ConstructionDuration =
-          constructionDurationCalculator.ConstructionDurationDays(
-          ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:isLiner,
-          numSegments: ((int)currentSegment.NumCuts), 
-          hasManhole: (!isLiner && currentSegment.SegUSNodeID == 0));
+        if (ancillaryCoster != null)
+        reportPipeItem.ConstructionDuration = ancillaryCoster != null ?
+          (constructionDurationCalculator.ConstructionDurationDays(
+            ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:isLiner,
+            numSegments: ((int)currentSegment.NumCuts), 
+            hasManhole: (!isLiner && currentSegment.SegUSNodeID == 0))) : 
+          0;
 
         return true;
       }
@@ -2101,6 +2108,277 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             ex.Message;
         return false;
       }
+    }
+
+    private static string WriteCIFDetailedCostsRehabVertical(
+      string exportFile, 
+      List<CostItemFactor> pipeList, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeSawCuttingCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltRemovalCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeTruckHaulCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeTrenchShoringCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltBaseCourseCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltTrenchPatchCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipePipeZoneBackfillCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> lateralCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> manholeCIFs, 
+      Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs, 
+      string currentItem)
+    {
+      string errorMessage = string.Empty;
+      try
+      {
+        using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+        {
+          foreach (CostItemFactor item in pipeList)
+          {
+            currentItem = item.Name;
+            ReportPipeItem reportData = item.Data as ReportPipeItem;
+            char[] separators = { ' ', '-' };
+            string[] tokens = item.Name.Split(separators);
+            string MLinkID = "", USNode = "", DSNode = "";
+            if (tokens.Length >= 3)
+            {
+              MLinkID = tokens[0];
+              USNode = tokens[1];
+              DSNode = tokens[2];
+            } // if
+
+            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{6},{5},{1},{2},{3:#},{4:#.#####}",
+              MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, item.Cost, item.Factor,
+              MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Lateral (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeSawCuttingCIFs.ContainsKey(item) && pipeSawCuttingCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Sawcutting AC (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeSawCuttingCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeAsphaltRemovalCIFs.ContainsKey(item) && pipeAsphaltRemovalCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Asphalt removal (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeAsphaltRemovalCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeTruckHaulCIFs.ContainsKey(item) && pipeTruckHaulCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Truck haul excavation spoils (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeTruckHaulCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeTrenchShoringCIFs.ContainsKey(item) && pipeTrenchShoringCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Trench shoring (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeTrenchShoringCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeAsphaltBaseCourseCIFs.ContainsKey(item) && pipeAsphaltBaseCourseCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Asphalt trench patch base course (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeAsphaltBaseCourseCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeAsphaltTrenchPatchCIFs.ContainsKey(item) && pipeAsphaltTrenchPatchCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Asphalt trench patch (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeAsphaltTrenchPatchCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipePipeZoneBackfillCIFs.ContainsKey(item) && pipePipeZoneBackfillCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe zone backfill (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipePipeZoneBackfillCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeFillAbovePipeZoneCIFs.ContainsKey(item) && pipeFillAbovePipeZoneCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Above zone fill (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeFillAbovePipeZoneCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeCostCIFs.ContainsKey(item) && pipeCostCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Pipe material (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeCostCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeTrenchExcavationCIFs.ContainsKey(item) && pipeTrenchExcavationCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Trench excavation (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeTrenchExcavationCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
+              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
+            {
+              foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
+              {
+                string ancillaryName = string.Empty;
+                if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
+                  ancillaryName = "Boring/jacking";
+                else if (ancillaryCIF.Name.StartsWith("Microtunneling"))
+                  ancillaryName = "Microtunnel";
+                else if (ancillaryCIF.Name.StartsWith("Parallel water relocation"))
+                  ancillaryName = "Parallel water relocation";
+                else if (ancillaryCIF.Name.StartsWith("Bypass pumping (<= 3"))
+                  ancillaryName = "Bypass pumping 0-3";
+                else if (ancillaryCIF.Name.StartsWith("Bypass pumping (> 3"))
+                  ancillaryName = "Bypass pumping 3-7";
+                else if (ancillaryCIF.Name.StartsWith("Bypass pumping (> 7"))
+                  ancillaryName = "Bypass pumping 7-15";
+                else if (ancillaryCIF.Name.StartsWith("Bypass pumping (> 15"))
+                  ancillaryName = "Bypass pumping 15+";
+                else if (ancillaryCIF.Name.StartsWith("Traffic control"))
+                  ancillaryName = "Traffic control";
+                else
+                  ancillaryName = ancillaryCIF.Name;
+                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{6},{5},{1},{2},{3:#},",
+                  MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, ancillaryCIF.Cost,
+                  ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+              } // foreach  (ancillaryCIF)
+            } // if
+          } // foreach  (item)
+        } // using (pipeCostsStream)
+      } // try
+      catch (Exception e)
+      {
+        errorMessage = string.Format("Error writing detail [{0}]: {1}", currentItem, e.Message);
+      }
+      finally
+      {
+        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
+      } // finally
+      return errorMessage;
+    }
+
+    private static void WriteCIFPipeSubItem(
+      Dictionary<CostItemFactor, CostItemFactor> subItemDictionary, 
+      CostItemFactor item, 
+      StringBuilder line)
+    {
+      line.Append(subItemDictionary.ContainsKey(item) && subItemDictionary[item] != null ?
+        string.Format(",{0:#}", subItemDictionary[item].Cost * (item.Data as ReportPipeItem).Length) :
+        ",");
+    }
+
+    private static void WriteCIFPipeAncillaryFactor(
+      Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs, 
+      CostItemFactor item,
+      string ancillaryName,
+      StringBuilder line)
+    {
+      line.Append(
+        ancillaryCIFs.ContainsKey(item) &&
+          ancillaryCIFs[item].Exists(x => x.Name.StartsWith(ancillaryName)) ?
+          string.Format(",{0}", ancillaryCIFs[item].Find(x => x.Name.StartsWith(ancillaryName)).Cost) :
+          ",");
+    }
+
+    private static string WriteCIFDetailedCostsRehabHorizontal(
+      string exportFile,
+      List<CostItemFactor> pipeList,
+      Dictionary<CostItemFactor, CostItemFactor> pipeCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeSawCuttingCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltRemovalCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeTruckHaulCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeTrenchShoringCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltBaseCourseCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltTrenchPatchCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipePipeZoneBackfillCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> lateralCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> manholeCIFs,
+      Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs,
+      string currentItem)
+    {
+      string errorMessage = string.Empty;
+      try
+      {
+        using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
+        {
+          string header = "MLinkID,GlobalID,Type,USNode,DSNode,Cost,Factor,Pipe," +
+            "Lateral,SawcuttingAC,AsphaltRemoval,TruckHaul,TrenchShoring,AsphaltBaseCourse," +
+            "AsphaltTrenchPatch,PipeZoneBackfill,FillAbovePipeZone,PipeMaterial," +
+            "TrenchExcavation,Manhole,BoringJacking,Microtunneling,TrafficControl," +
+            "ParallelWaterRelocation,CrossingRelocation,EnvironmentalMitigation," +
+            "HazardousMaterials,BypassPumping_3,BypassPumping3_7,BypassPumping7_15," +
+            "BypassPumping15_,ConstructionDuration";
+          pipeCostsStream.WriteLine(header);
+
+          StringBuilder line = new StringBuilder();
+          foreach (CostItemFactor item in pipeList)
+          {
+            currentItem = item.Name;
+            ReportPipeItem reportData = item.Data as ReportPipeItem;
+            char[] separators = { ' ', '-' };
+            string[] tokens = item.Name.Split(separators);
+            string MLinkID = "", USNode = "", DSNode = "";
+            if (tokens.Length >= 3)
+            {
+              MLinkID = tokens[0];
+              USNode = tokens[1];
+              DSNode = tokens[2];
+            } // if
+
+            line.Clear();
+            line.AppendFormat("{0},{1},{2},{3},{4},{5:#},{6:#.#####}",
+              MLinkID.Substring(0, MLinkID.Length - 1),
+              reportData.GlobalID,
+              MLinkID.Substring(MLinkID.Length - 1, 1), 
+              USNode, 
+              DSNode, 
+              item.Cost, 
+              item.Factor);
+            line.Append(pipeCIFs.ContainsKey(item) && pipeCIFs[item] != null ?
+              string.Format(",{0:#}", pipeCIFs[item].Cost) :
+              string.Empty);
+            WriteCIFPipeSubItem(lateralCIFs, item, line);
+            WriteCIFPipeSubItem(pipeSawCuttingCIFs, item, line);
+            WriteCIFPipeSubItem(pipeAsphaltRemovalCIFs, item, line);
+            WriteCIFPipeSubItem(pipeTruckHaulCIFs, item, line);
+            WriteCIFPipeSubItem(pipeTrenchShoringCIFs, item, line);
+            WriteCIFPipeSubItem(pipeAsphaltBaseCourseCIFs, item, line);
+            WriteCIFPipeSubItem(pipeAsphaltTrenchPatchCIFs, item, line);
+            WriteCIFPipeSubItem(pipePipeZoneBackfillCIFs, item, line);
+            WriteCIFPipeSubItem(pipeFillAbovePipeZoneCIFs, item, line);
+            WriteCIFPipeSubItem(pipeCostCIFs, item, line);
+            WriteCIFPipeSubItem(pipeTrenchExcavationCIFs, item, line);
+            line.Append(manholeCIFs.ContainsKey(item) && manholeCIFs[item] != null ?
+              string.Format(",{0:#}", manholeCIFs[item].Cost) :
+              ",");
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Boring/jacking", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Microtunneling", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Traffic control", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Parallel water relocation", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Crossing relocation", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Environmental mitigation", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Hazardous materials", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Bypass pumping (<= 3", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Bypass pumping (> 3", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Bypass pumping (> 7", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Bypass pumping (> 15", line);
+            line.AppendFormat(",{0}", reportData.ConstructionDuration);
+
+            pipeCostsStream.WriteLine(line.ToString());
+          } // foreach  (item)
+        } // using (pipeCostsStream)
+      } // try
+      catch (Exception e)
+      {
+        errorMessage = string.Format("Error writing detail [{0}]: {1}", currentItem, e.Message);
+      }
+      finally
+      {
+        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
+      } // finally
+      return errorMessage;
     }
 
     public void WriteDetailedCostsRehab(string exportFile, out string errorMessage)
@@ -2232,123 +2510,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       // Do the export
       System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
       string currentItem = string.Empty;
-      try
-      {
-        using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
-        {
-          foreach (CostItemFactor item in pipeList)
-          {
-            currentItem = item.Name;
-            ReportPipeItem reportData = item.Data as ReportPipeItem;
-            char[] separators = { ' ', '-' };
-            string[] tokens = item.Name.Split(separators);
-            string MLinkID = "", USNode = "", DSNode = "";
-            if (tokens.Length >= 3)
-            {
-              MLinkID = tokens[0];
-              USNode = tokens[1];
-              DSNode = tokens[2];
-            } // if
-
-            pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{6},{5},{1},{2},{3:#},{4:#.#####}",
-              MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, item.Cost, item.Factor,
-              MLinkID.Substring(MLinkID.Length-1, 1), reportData.GlobalID));
-            if (pipeCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, pipeCIFs[item].Cost,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (lateralCIFs.ContainsKey(item) && lateralCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Lateral (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, 
-                lateralCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeSawCuttingCIFs.ContainsKey(item) && pipeSawCuttingCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Sawcutting AC (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeSawCuttingCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeAsphaltRemovalCIFs.ContainsKey(item) && pipeAsphaltRemovalCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Asphalt removal (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeAsphaltRemovalCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeTruckHaulCIFs.ContainsKey(item) && pipeTruckHaulCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Truck haul excavation spoils (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeTruckHaulCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeTrenchShoringCIFs.ContainsKey(item) && pipeTrenchShoringCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Trench shoring (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeTrenchShoringCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeAsphaltBaseCourseCIFs.ContainsKey(item) && pipeAsphaltBaseCourseCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Asphalt trench patch base course (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeAsphaltBaseCourseCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeAsphaltTrenchPatchCIFs.ContainsKey(item) && pipeAsphaltTrenchPatchCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Asphalt trench patch (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeAsphaltTrenchPatchCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipePipeZoneBackfillCIFs.ContainsKey(item) && pipePipeZoneBackfillCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe zone backfill (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipePipeZoneBackfillCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeFillAbovePipeZoneCIFs.ContainsKey(item) && pipeFillAbovePipeZoneCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Above zone fill (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeFillAbovePipeZoneCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeCostCIFs.ContainsKey(item) && pipeCostCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Pipe material (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeCostCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (pipeTrenchExcavationCIFs.ContainsKey(item) && pipeTrenchExcavationCIFs[item] != null)
-              pipeCostsStream.WriteLine(string.Format("\"Trench excavation (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
-                pipeTrenchExcavationCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
-              pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{5},{4},{1},{2},{3:#},",
-                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
-                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-            if (ancillaryCIFs.ContainsKey(item) && (ancillaryCIFs[item].Count > 0))
-            {
-              foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
-              {
-                string ancillaryName = string.Empty;
-                if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
-                  ancillaryName = "Boring/jacking";
-                else if (ancillaryCIF.Name.StartsWith("Microtunneling"))
-                  ancillaryName = "Microtunnel";
-                else if (ancillaryCIF.Name.StartsWith("Parallel water relocation"))
-                  ancillaryName = "Parallel water relocation";
-                else if (ancillaryCIF.Name.StartsWith("Bypass pumping"))
-                  ancillaryName = "Bypass pumping";
-                else if (ancillaryCIF.Name.StartsWith("Traffic control"))
-                  ancillaryName = "Traffic control";
-                else
-                  ancillaryName = ancillaryCIF.Name;
-                pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{6},{5},{1},{2},{3:#},",
-                  MLinkID.Substring(0, MLinkID.Length-1), USNode, DSNode, ancillaryCIF.Cost,
-                  ancillaryName, MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
-              } // foreach  (ancillaryCIF)
-            } // if
-          } // foreach  (item)
-        } // using (pipeCostsStream)
-      } // try
-      catch (Exception e)
-      {
-        errorMessage = string.Format("Error writing detail [{0}]: {1}", currentItem, e.Message);
-      }
-      finally
-      {
-        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
-      } // finally
+      errorMessage = 
+        WriteCIFDetailedCostsRehabHorizontal(
+          exportFile, pipeList, pipeCIFs, pipeSawCuttingCIFs, pipeAsphaltRemovalCIFs, pipeTruckHaulCIFs,
+          pipeTrenchShoringCIFs, pipeAsphaltBaseCourseCIFs, pipeAsphaltTrenchPatchCIFs,
+          pipePipeZoneBackfillCIFs, pipeFillAbovePipeZoneCIFs, pipeCostCIFs, pipeTrenchExcavationCIFs,
+          lateralCIFs, manholeCIFs, ancillaryCIFs, currentItem);
     }
 
     public void WritePipeCostsRehab(string exportFile, out string errorMessage)
