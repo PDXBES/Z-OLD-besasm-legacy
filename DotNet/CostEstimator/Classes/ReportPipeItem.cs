@@ -40,6 +40,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     } // ID
 
     public int GlobalID { get; set; }
+
+    public int CompKey { get; set; }
+
     /// <summary>
     /// Material type
     /// </summary>
@@ -191,6 +194,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       xw.WriteStartElement("id");
       xw.WriteValue(ID);
+      xw.WriteEndElement();
+
+      xw.WriteStartElement("compkey");
+      xw.WriteValue(CompKey);
       xw.WriteEndElement();
 
       xw.WriteStartElement("name");
