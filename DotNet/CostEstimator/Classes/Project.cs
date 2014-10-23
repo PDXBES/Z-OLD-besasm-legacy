@@ -2621,7 +2621,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           int totalSets = numRecords % increment == 0 ? numRecords / increment :
             numRecords / increment + 1;
 
-          while (fromID < (numRecords + beginID))
+          while (set < totalSets)
           {
             set++;
             ResetProject();
@@ -2665,17 +2665,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             OleDbDataReader reader = null;
             OleDbCommand command = new OleDbCommand(
-              string.Format("SELECT * FROM [{0}] WHERE (ID >= {1} AND ID <= {2})",
-              segmentsTableName, fromID, toID), conn);
+              string.Format("SELECT TOP {1} * FROM (SELECT TOP {2} * FROM [{0}] ORDER BY [ID]) T ORDER BY [ID] DESC",
+              segmentsTableName, increment, set * increment), conn);
             reader = command.ExecuteReader();
 
-            OleDbDataReader countReader = null;
-            OleDbCommand countCommand = new OleDbCommand(
-              string.Format("SELECT COUNT(*) FROM [{0}] WHERE (ID >= {1} AND ID <= {2})",
-              segmentsTableName, fromID, toID), conn);
-            countReader = countCommand.ExecuteReader();
-            countReader.Read();
-            int totalCount = Convert.ToInt32(countReader[0]);
+            //OleDbDataReader countReader = null;
+            //OleDbCommand countCommand = new OleDbCommand(
+            //  string.Format("SELECT COUNT(*) FROM [{0}] WHERE (ID >= {1} AND ID <= {2})",
+            //  segmentsTableName, fromID, toID), conn);
+            //countReader = countCommand.ExecuteReader();
+            //countReader.Read();
+            //int totalCount = Convert.ToInt32(countReader[0]);
 
             string readErrorMessage = string.Empty;
             while (reader.Read() && !bw.CancellationPending)
