@@ -2077,6 +2077,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.Name = string.Format("{0}", pipeAndManholeCostItemFactor.Name);
         reportPipeItem.ID = currentSegment.ID;
         reportPipeItem.GlobalID = currentSegment.GlobalID;
+        reportPipeItem.CompKey = currentSegment.HansenCompKey;
         reportPipeItem.MaterialType = _PipeCoster.Material.ToString();
         reportPipeItem.DiameterIn = _PipeCoster.InsideDiameter;
         reportPipeItem.DepthFt = _PipeCoster.Depth;
@@ -2303,7 +2304,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         using (StreamWriter pipeCostsStream = new StreamWriter(exportFile))
         {
-          string header = "MLinkID,GlobalID,Type,USNode,DSNode,Cost,Factor,Pipe," +
+          string header = "MLinkID,Compkey,GlobalID,Type,USNode,DSNode,Cost,Factor,Pipe," +
             "Lateral,SawcuttingAC,AsphaltRemoval,TruckHaul,TrenchShoring,AsphaltBaseCourse," +
             "AsphaltTrenchPatch,PipeZoneBackfill,FillAbovePipeZone,PipeMaterial," +
             "TrenchExcavation,Manhole,BoringJacking,Microtunneling,TrafficControl," +
@@ -2328,14 +2329,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             } // if
 
             line.Clear();
-            line.AppendFormat("{0},{1},{2},{3},{4},{5:#},{6:#.#####}",
+            line.AppendFormat("{0},{7},{1},{2},{3},{4},{5:#},{6:#.#####}",
               MLinkID.Substring(0, MLinkID.Length - 1),
               reportData.GlobalID,
               MLinkID.Substring(MLinkID.Length - 1, 1), 
               USNode, 
               DSNode, 
               item.Cost, 
-              item.Factor);
+              item.Factor,
+              reportData.CompKey);
             line.Append(pipeCIFs.ContainsKey(item) && pipeCIFs[item] != null ?
               string.Format(",{0:#}", pipeCIFs[item].Cost) :
               string.Empty);
