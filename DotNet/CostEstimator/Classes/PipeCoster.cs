@@ -170,7 +170,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   public class PipeCoster
   {
     #region Constants
-    #endregion
+        private const int DEFAULT_AC_WIDTH = 4;
+
+#endregion
     #region Variables
     private float _SawcuttingACPavementPerSqFt;
     private float _AsphaltRemovalPerSqYd;
@@ -185,22 +187,23 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private float _SpoilsFactor;
 
     private Dictionary<PipeMaterial, SortedList<float, float>> _InsideDiameterToOutsideDiameterTable =
-    new Dictionary<PipeMaterial, SortedList<float, float>>();
+      new Dictionary<PipeMaterial, SortedList<float, float>>();
     private SortedList<float, float> _InsideDiameterToManholeDiameterTable =
-    new SortedList<float, float>();
+      new SortedList<float, float>();
     private SortedList<float, float> _OutsideDiameterToTrenchWidthTable =
-    new SortedList<float, float>();
+      new SortedList<float, float>();
     private SortedList<float, float> _DepthToTrenchExcavationCostPerCuYd =
-    new SortedList<float, float>();
+      new SortedList<float, float>();
     private Dictionary<PipeMaterial, SortedList<float, float>> _PipeCostTable =
-    new Dictionary<PipeMaterial, SortedList<float, float>>();
+      new Dictionary<PipeMaterial, SortedList<float, float>>();
     private float _DefaultLateralCostPerFt;
     private SortedList<float, SortedList<float, float>> _LateralCostTable =
-    new SortedList<float, SortedList<float, float>>();
+      new SortedList<float, SortedList<float, float>>();
     private SortedList<float, ManholeCosts> _ManholeCostsTable =
-    new SortedList<float, ManholeCosts>();
+      new SortedList<float, ManholeCosts>();
     private SortedList<float, ManholeDepthFactorDiameterRange> _ManholeDepthFactorsTable =
-    new SortedList<float, ManholeDepthFactorDiameterRange>();
+      new SortedList<float, ManholeDepthFactorDiameterRange>();
+    private SortedList<float, float> _TVCleaningTable = new SortedList<float, float>();
 
     private float _LateralLessThanEqualTo24InDiamCost;
     private float _LateralGreaterThan24InDiamCost;
@@ -208,6 +211,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private float _TvCleanGreaterThan24InDiamCost;
     private float _PipeburstLateralCost;
     private float _PipeburstTVCleanLessThanEqualTo24InDiamCost;
+
 
     private SortedList<float, float> _FlowDiversionCostsTable =
     new SortedList<float, float>();
@@ -890,6 +894,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               break;
           }
         }
+
+        xpathQuery = "/PipeCostOptions/TVCleaningTable/*";
+        xpathIter = pipeCostRefNav.Select(xpathQuery);
+        while (xpathIter.MoveNext())
+        {
+          string diamAsString = xpathIter.Current.GetAttribute("Diam", string.Empty);
+          float diam = diamAsString == string.Empty ? 0 : (float)Convert.ToDouble(diamAsString);
+          float cost = (float)xpathIter.Current.ValueAsDouble;
+
+          _TVCleaningTable.Add(diam, cost);
+        }
       } // while
 
       xpathQuery = "/PipeCostOptions/TrenchlessCIPPConstants/*";
@@ -1191,6 +1206,43 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           } // else
         } // else
     } // TrenchWidthFromOutsideDiameter(outsideDiameter, outsideTable)
+
+    public float TVCleaningCost(double diameter, out bool outsideTable)
+    {
+      if (diameter < _TVCleaningTable.Keys[0])
+      {
+        outsideTable = true;
+        return _TVCleaningTable.Values[0];
+      }
+      else if (diameter > _TVCleaningTable.Keys[_TVCleaningTable.Count - 1])
+      {
+        outsideTable = true;
+        return _TVCleaningTable.Values[_TVCleaningTable.Count - 1];
+      }
+      else
+      {
+        int foundIndex = -1;
+        for (int i = 0; i < _TVCleaningTable.Count; i++)
+        {
+          if (_TVCleaningTable.Keys[i] >= diameter)
+          {
+            foundIndex = i;
+            break;
+          }
+        }
+
+        if (foundIndex > -1)
+        {
+          outsideTable = false;
+          return _TVCleaningTable.Values[foundIndex];
+        }
+        else
+        {
+          outsideTable = true;
+          return -1;
+        }
+      }
+    }
 
     /// <summary>
     /// Trench excavation cost per cu yd from pipe depth
@@ -1747,6 +1799,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       bool outsidePipeCostTable;
       bool outsideCIPPCostTable;
       bool outsidePipeburstCostTable;
+      bool outsideTVCleaningTable;
 
       DirectConstructionCostItems.Clear();
 
@@ -1785,36 +1838,32 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add("Sawcutting AC pavement",
-          new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", TrenchBaseWidth));
+            new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", Math.Max(DEFAULT_AC_WIDTH, TrenchBaseWidth)));
           DirectConstructionCostItems.Add(string.Format("Asphalt removal {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((float)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
+            new UnitCost((float)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
           DirectConstructionCostItems.Add(string.Format("Trench excavation {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((float)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
+            new UnitCost((float)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
           DirectConstructionCostItems.Add(string.Format("Truck haul excavation spoils {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((float)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
+            new UnitCost((float)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
           DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth),
-          new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth));
+            new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth));
           DirectConstructionCostItems.Add(string.Format("Pipe cost {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((float)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
+            new UnitCost((float)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
           if (outsidePipeCostTable)
             _OutsideTableMessages.Add("Pipe Cost", "Outside pipe cost table");
           DirectConstructionCostItems.Add(string.Format("Pipe zone backfill {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((float)((double)(_InsideDiameter <= 12 ?
-          _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd :
-          _PipeZoneBackfillGreater12InDiamPerCuYd)), "cuyd", PipeZoneVolume));
+            new UnitCost((float)((double)(_InsideDiameter <= 12 ?
+            _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd :
+            _PipeZoneBackfillGreater12InDiamPerCuYd)), "cuyd", PipeZoneVolume));
           DirectConstructionCostItems.Add(string.Format("Above zone fill {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((float)((double)(_InsideDiameter <= 12 ?
-          _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd :
-          _FillAbovePipeZoneGreater12InDiamPerCuYd)), "cuyd", AboveZoneVolume));
+            new UnitCost((float)((double)(_InsideDiameter <= 12 ?
+            _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd :
+            _FillAbovePipeZoneGreater12InDiamPerCuYd)), "cuyd", AboveZoneVolume));
           DirectConstructionCostItems.Add("Lateral", new UnitCost(_DefaultLateralCostPerFt, "ft", 1));
-          //DirectConstructionCostItems.Add(string.Format("Lateral {0:F0} ft deep {1:F0} in inside diam", _Depth, _InsideDiameter),
-          //  new UnitCost((float)((double)LateralCost(_InsideDiameter, _Depth, out outsideLateralCostTable)), "ea"));
-          //if (outsideLateralCostTable)
-          //  _OutsideTableMessages.Add("Lateral Cost", "Outside lateral cost table");
           DirectConstructionCostItems.Add(string.Format("Asphalt trench patch base course {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((float)((double)_AsphaltTrenchPatchBaseCoursePerCuYd), "cuyd", AsphaltBaseVolume));
+            new UnitCost((float)((double)_AsphaltTrenchPatchBaseCoursePerCuYd), "cuyd", AsphaltBaseVolume));
           DirectConstructionCostItems.Add(string.Format("Asphalt trench patch {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((float)((double)_AsphaltTrenchPathPerSqYd), "sqyd", AsphaltPatchSurfaceArea / 9));
+            new UnitCost((float)((double)_AsphaltTrenchPathPerSqYd), "sqyd", AsphaltPatchSurfaceArea / 9));
           break;
         case PipeMaterial.CIPP:
           _OutsideTableMessages.Clear();
@@ -1823,19 +1872,25 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           new UnitCost((float)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
           if (outsideCIPPCostTable)
             _OutsideTableMessages.Add("CIPP Cost", "Outside CIPP cost table");
+
           DirectConstructionCostItems.Add("Lateral", new UnitCost(_DefaultLateralCostPerFt, "ft", 1));
+
+          DirectConstructionCostItems.Add(string.Format("TV cleaning", _InsideDiameter),
+            new UnitCost((float)((double)TVCleaningCost(_InsideDiameter, out outsideTVCleaningTable)), "ft"));
+          if (outsideTVCleaningTable)
+            _OutsideTableMessages.Add("TV Cleaning Cost", "Outside tv cleaning cost table");
           break;
         case PipeMaterial.Pipeburst:
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add(string.Format("Pipeburst pipe cost {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((float)((double)PipeburstPipeCost(_InsideDiameter, out outsidePipeburstCostTable)), "ft"));
+            new UnitCost((float)((double)PipeburstPipeCost(_InsideDiameter, out outsidePipeburstCostTable)), "ft"));
           if (outsidePipeburstCostTable)
             _OutsideTableMessages.Add("Pipeburst Cost", "Outside pipeburst cost table");
           DirectConstructionCostItems.Add("Lateral (pipeburst)",
-          new UnitCost((float)((double)_PipeburstLateralCost), "ea"));
+            new UnitCost((float)((double)_PipeburstLateralCost), "ea"));
           DirectConstructionCostItems.Add(string.Format("TV cleaning {0:F0} in inside diameter", _InsideDiameter),
-          new UnitCost((float)((double)(_PipeburstTVCleanLessThanEqualTo24InDiamCost)), "ft"));
+            new UnitCost((float)((double)(_PipeburstTVCleanLessThanEqualTo24InDiamCost)), "ft"));
           break;
       } // switch
 

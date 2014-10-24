@@ -51,7 +51,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       PipeCoster coster,
       bool returnFraction = false,
       bool isLiner = false,
-      int numSegments = 1,
+      float segmentLength = 1.0f,
+      float pipeLength = 1.0f,
       bool hasManhole = true
       )
     {
@@ -65,7 +66,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
       if (isLiner)
       {
-        return (float)(LINER_BUILD_TOTAL_DAYS / (double)numSegments);
+        return (float)(LINER_BUILD_TOTAL_DAYS * ((double)segmentLength/(double)pipeLength));
       }
       else
       {

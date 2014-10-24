@@ -186,6 +186,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         return _Segment == null ? 1 : _Segment.NumCuts;
       }
     }
+
+    public float PipeLength
+    {
+      get
+      {
+        return _Segment == null ? Length : _Segment.PipeLength;
+      }
+    }
     /// <summary>
     /// Conflict information
     /// </summary>

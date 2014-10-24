@@ -141,7 +141,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         return _isLiner ?
           _constructionDurationCalculator.ConstructionDurationDays(
-            _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction:_isSegment, isLiner:true,             numSegments:_ConflictPackage.NumSegments) : 
+            _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction:_isSegment, isLiner:true,
+            segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : 
           _constructionDurationCalculator.ConstructionDurationDays(
           _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment);
       } // get
