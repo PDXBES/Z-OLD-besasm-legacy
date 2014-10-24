@@ -159,7 +159,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
         return (_isLiner ? _constructionDurationCalculator.ConstructionDurationDays(
           _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment, isLiner:true,
-          numSegments: _ConflictPackage.NumSegments) : _constructionDurationCalculator.ConstructionDurationDays(
+          segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : _constructionDurationCalculator.ConstructionDurationDays(
           _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
           (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
       } // get

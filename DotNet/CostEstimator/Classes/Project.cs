@@ -2090,7 +2090,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         reportPipeItem.ConstructionDuration = ancillaryCoster != null ?
           (constructionDurationCalculator.ConstructionDurationDays(
             ancillaryCoster.CurrentConflictPackage, _PipeCoster, returnFraction: true, isLiner:isLiner,
-            numSegments: ((int)currentSegment.NumCuts), 
+            segmentLength: currentSegment.LengthFt, pipeLength: currentSegment.PipeLength, 
             hasManhole: (!isLiner && currentSegment.SegUSNodeID == 0))) : 
           0;
 
@@ -2125,6 +2125,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs, 
       Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs, 
       Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs, 
+      Dictionary<CostItemFactor, CostItemFactor> pipeLinerTVCleaningCIFs,
       Dictionary<CostItemFactor, CostItemFactor> lateralCIFs, 
       Dictionary<CostItemFactor, CostItemFactor> manholeCIFs, 
       Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs, 
@@ -2211,6 +2212,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
                 pipeTrenchExcavationCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
                 MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
+            if (pipeLinerTVCleaningCIFs.ContainsKey(item) && pipeLinerTVCleaningCIFs[item] != null)
+              pipeCostsStream.WriteLine(string.Format("\"Liner TV Cleaning (part of pipe)\",{0},{5},{4},{1},{2},{3:#},",
+                MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode,
+                pipeLinerTVCleaningCIFs[item].Cost * (item.Data as ReportPipeItem).Length,
+                MLinkID.Substring(MLinkID.Length - 1, 1), reportData.GlobalID));
             if (manholeCIFs.ContainsKey(item) && (manholeCIFs[item] != null))
               pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{5},{4},{1},{2},{3:#},",
                 MLinkID.Substring(0, MLinkID.Length - 1), USNode, DSNode, manholeCIFs[item].Cost,
@@ -2294,6 +2300,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs,
       Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs,
       Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs,
+      Dictionary<CostItemFactor, CostItemFactor> pipeLinerTVCleaningCIFs,
       Dictionary<CostItemFactor, CostItemFactor> lateralCIFs,
       Dictionary<CostItemFactor, CostItemFactor> manholeCIFs,
       Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs,
@@ -2307,7 +2314,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           string header = "MLinkID,Compkey,GlobalID,Type,USNode,DSNode,Cost,Factor,Pipe," +
             "Lateral,SawcuttingAC,AsphaltRemoval,TruckHaul,TrenchShoring,AsphaltBaseCourse," +
             "AsphaltTrenchPatch,PipeZoneBackfill,FillAbovePipeZone,PipeMaterial," +
-            "TrenchExcavation,Manhole,BoringJacking,Microtunneling,TrafficControl," +
+            "TrenchExcavation,LinerTVCleaning,Manhole,BoringJacking,Microtunneling,TrafficControl," +
             "ParallelWaterRelocation,CrossingRelocation,EnvironmentalMitigation," +
             "HazardousMaterials,BypassPumping_3,BypassPumping3_7,BypassPumping7_15," +
             "BypassPumping15_,ConstructionDuration";
@@ -2352,6 +2359,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             WriteCIFPipeSubItem(pipeFillAbovePipeZoneCIFs, item, line);
             WriteCIFPipeSubItem(pipeCostCIFs, item, line);
             WriteCIFPipeSubItem(pipeTrenchExcavationCIFs, item, line);
+            WriteCIFPipeSubItem(pipeLinerTVCleaningCIFs, item, line);
             line.Append(manholeCIFs.ContainsKey(item) && manholeCIFs[item] != null ?
               string.Format(",{0:#}", manholeCIFs[item].Cost) :
               ",");
@@ -2397,7 +2405,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       Dictionary<CostItemFactor, CostItemFactor> pipeAsphaltTrenchPatchCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipePipeZoneBackfillCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
-      Dictionary<CostItemFactor, CostItemFactor> pipeTVCleaningCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> pipeLinerTVCleaningCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipePipeburstLateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipePipeburstTVCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
@@ -2423,6 +2431,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           CostItemFactor pipeAboveZoneCIF = null;
           CostItemFactor pipeCostCIF = null;
           CostItemFactor pipeTrenchExcavationCIF = null;
+          CostItemFactor pipeLinerTVCleaningCIF = null;
           List<CostItemFactor> ancillaryCIFList = new List<CostItemFactor>();
           foreach (CostItemFactor subItem in subItems)
           {
@@ -2489,6 +2498,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                   pipeTrenchExcavationCIF = pipeSubItem;
                   pipeTrenchExcavationCIFs.Add(item, pipeTrenchExcavationCIF);
                 }
+                else if (pipeSubItem.Name.StartsWith("TV cleaning"))
+                {
+                  pipeLinerTVCleaningCIF = pipeSubItem;
+                  pipeLinerTVCleaningCIFs.Add(item, pipeLinerTVCleaningCIF);
+                }
               }
             } // if
             else
@@ -2517,7 +2531,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           exportFile, pipeList, pipeCIFs, pipeSawCuttingCIFs, pipeAsphaltRemovalCIFs, pipeTruckHaulCIFs,
           pipeTrenchShoringCIFs, pipeAsphaltBaseCourseCIFs, pipeAsphaltTrenchPatchCIFs,
           pipePipeZoneBackfillCIFs, pipeFillAbovePipeZoneCIFs, pipeCostCIFs, pipeTrenchExcavationCIFs,
-          lateralCIFs, manholeCIFs, ancillaryCIFs, currentItem);
+          pipeLinerTVCleaningCIFs, lateralCIFs, manholeCIFs, ancillaryCIFs, currentItem);
     }
 
     public void WritePipeCostsRehab(string exportFile, out string errorMessage)

@@ -746,6 +746,20 @@
     <tvCleanLessThanEqualTo24InDiamCost>0</tvCleanLessThanEqualTo24InDiamCost>
     <tvCleanGreaterThan24InDiamCost>0</tvCleanGreaterThan24InDiamCost>
   </TrenchlessCIPPConstants>
+  <TVCleaningTable>
+    <DiameterRecord Diam="8">2.35</DiameterRecord>
+    <DiameterRecord Diam="10">2.70</DiameterRecord>
+    <DiameterRecord Diam="12">2.96</DiameterRecord>
+    <DiameterRecord Diam="15">3.31</DiameterRecord>
+    <DiameterRecord Diam="18">3.84</DiameterRecord>
+    <DiameterRecord Diam="21">4.04</DiameterRecord>
+    <DiameterRecord Diam="24">4.51</DiameterRecord>
+    <DiameterRecord Diam="27">4.96</DiameterRecord>
+    <DiameterRecord Diam="30">5.40</DiameterRecord>
+    <DiameterRecord Diam="36">6.20</DiameterRecord>
+    <DiameterRecord Diam="42">6.44</DiameterRecord>
+    <DiameterRecord Diam="48">6.68</DiameterRecord>
+  </TVCleaningTable>
   <TrenchlessPipeburstConstants>
     <lateralCost>15</lateralCost>
     <tvCleanLessThanEqualTo24InDiamCost>5</tvCleanLessThanEqualTo24InDiamCost>
