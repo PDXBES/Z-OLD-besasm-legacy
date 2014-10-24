@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="EMGAATS_TLB">
+  <const name="EMGAATSMajorVersion" type="Integer">
+    <value>
+      $1
+    </value>
+  </const>
+  <const name="EMGAATSMinorVersion" type="Integer">
+    <value>
+      $0
+    </value>
+  </const>
+  <interface name="CobjMICB" alias="ICobjMICB" namespace="EMGAATS_TLB">
+    <procedure name="setstatustext" visibility="public" procflags="abstract virtual" callconv="safecall">
+      <parameters>
+        <parameter name="txt" type="WideString" paramflags="const" />
+      </parameters>
+    </procedure>
+  </interface>
+  <interface name="ICobjMICB">
+    <procedure name="setstatustext" visibility="public" procflags="abstract virtual" callconv="safecall">
+      <parameters>
+        <parameter name="txt" type="WideString" paramflags="const" />
+      </parameters>
+    </procedure>
+  </interface>
+  <interface name="ICobjMICBDisp" dispatch="true" symflags="platform">
+    <procedure name="setstatustext" visibility="automated" procflags="abstract automated virtual">
+      <parameters>
+        <parameter name="txt" type="WideString" paramflags="const" />
+      </parameters>
+    </procedure>
+  </interface>
+  <class name="CoCobjMICB">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <function name="Create" visibility="public" procflags="class">
+        <parameters>
+          <retval type="ICobjMICB" />
+        </parameters>
+      </function>
+      <function name="CreateRemote" visibility="public" procflags="class">
+        <parameters>
+          <parameter name="MachineName" type="string" paramflags="const" />
+          <retval type="ICobjMICB" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+</namespace>

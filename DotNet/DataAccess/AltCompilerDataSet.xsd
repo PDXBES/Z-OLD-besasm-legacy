@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AltCompilerDataSet" targetNamespace="http://tempuri.org/AltCompilerDataSet.xsd" xmlns:mstns="http://tempuri.org/AltCompilerDataSet.xsd" xmlns="http://tempuri.org/AltCompilerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="modeling_devConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Public" Name="modeling_devConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SystemsAnalysis.DataAccess.Properties.Settings.GlobalReference.Default.modeling_devConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SP_RP_BSBRTableAdapter" GeneratorDataComponentClassName="SP_RP_BSBRTableAdapter" Name="SP_RP_BSBR" UserDataComponentName="SP_RP_BSBRTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="modeling_devConnectionString (Settings)" DbObjectName="MODELING_DEV.ModelAdmin.SP_RP_BSBR" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, san_swr_crown_ft,
+                          storm, basin, use_flag, hgl_comp_rp_id, focus_area
+FROM            SP_RP_BSBR</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="dsc_id" DataSetColumn="dsc_id" />
+              <Mapping SourceColumn="parcel_id" DataSetColumn="parcel_id" />
+              <Mapping SourceColumn="divide_id" DataSetColumn="divide_id" />
+              <Mapping SourceColumn="us_jelev_ft" DataSetColumn="us_jelev_ft" />
+              <Mapping SourceColumn="ds_jelev_ft" DataSetColumn="ds_jelev_ft" />
+              <Mapping SourceColumn="frac_2swr_beg" DataSetColumn="frac_2swr_beg" />
+              <Mapping SourceColumn="calculated_hgl_ft" DataSetColumn="calculated_hgl_ft" />
+              <Mapping SourceColumn="calculated_dhgl_ft" DataSetColumn="calculated_dhgl_ft" />
+              <Mapping SourceColumn="surcharge_ft" DataSetColumn="surcharge_ft" />
+              <Mapping SourceColumn="flood_ref_elev_ft" DataSetColumn="flood_ref_elev_ft" />
+              <Mapping SourceColumn="san_swr_crown_ft" DataSetColumn="san_swr_crown_ft" />
+              <Mapping SourceColumn="storm" DataSetColumn="storm" />
+              <Mapping SourceColumn="basin" DataSetColumn="basin" />
+              <Mapping SourceColumn="use_flag" DataSetColumn="use_flag" />
+              <Mapping SourceColumn="focus_area" DataSetColumn="focus_area" />
+              <Mapping SourceColumn="hgl_comp_rp_id" DataSetColumn="hgl_comp_rp_id" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AltCompilerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="AltCompilerDataSet" msprop:Generator_DataSetName="AltCompilerDataSet" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SP_RP_BSBR" msprop:Generator_UserTableName="SP_RP_BSBR" msprop:Generator_RowDeletedName="SP_RP_BSBRRowDeleted" msprop:Generator_RowChangedName="SP_RP_BSBRRowChanged" msprop:Generator_RowClassName="SP_RP_BSBRRow" msprop:Generator_RowChangingName="SP_RP_BSBRRowChanging" msprop:Generator_RowEvArgName="SP_RP_BSBRRowChangeEvent" msprop:Generator_RowEvHandlerName="SP_RP_BSBRRowChangeEventHandler" msprop:Generator_TableClassName="SP_RP_BSBRDataTable" msprop:Generator_TableVarName="tableSP_RP_BSBR" msprop:Generator_RowDeletingName="SP_RP_BSBRRowDeleting" msprop:Generator_TablePropName="SP_RP_BSBR">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="dsc_id" msprop:Generator_UserColumnName="dsc_id" msprop:Generator_ColumnVarNameInTable="columndsc_id" msprop:Generator_ColumnPropNameInRow="dsc_id" msprop:Generator_ColumnPropNameInTable="dsc_idColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="parcel_id" msprop:Generator_UserColumnName="parcel_id" msprop:Generator_ColumnVarNameInTable="columnparcel_id" msprop:Generator_ColumnPropNameInRow="parcel_id" msprop:Generator_ColumnPropNameInTable="parcel_idColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="divide_id" msprop:Generator_UserColumnName="divide_id" msprop:Generator_ColumnVarNameInTable="columndivide_id" msprop:Generator_ColumnPropNameInRow="divide_id" msprop:Generator_ColumnPropNameInTable="divide_idColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="us_jelev_ft" msprop:Generator_UserColumnName="us_jelev_ft" msprop:Generator_ColumnVarNameInTable="columnus_jelev_ft" msprop:Generator_ColumnPropNameInRow="us_jelev_ft" msprop:Generator_ColumnPropNameInTable="us_jelev_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ds_jelev_ft" msprop:Generator_UserColumnName="ds_jelev_ft" msprop:Generator_ColumnVarNameInTable="columnds_jelev_ft" msprop:Generator_ColumnPropNameInRow="ds_jelev_ft" msprop:Generator_ColumnPropNameInTable="ds_jelev_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="frac_2swr_beg" msprop:Generator_UserColumnName="frac_2swr_beg" msprop:Generator_ColumnVarNameInTable="columnfrac_2swr_beg" msprop:Generator_ColumnPropNameInRow="frac_2swr_beg" msprop:Generator_ColumnPropNameInTable="frac_2swr_begColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="calculated_hgl_ft" msprop:Generator_UserColumnName="calculated_hgl_ft" msprop:Generator_ColumnVarNameInTable="columncalculated_hgl_ft" msprop:Generator_ColumnPropNameInRow="calculated_hgl_ft" msprop:Generator_ColumnPropNameInTable="calculated_hgl_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="calculated_dhgl_ft" msprop:Generator_UserColumnName="calculated_dhgl_ft" msprop:Generator_ColumnVarNameInTable="columncalculated_dhgl_ft" msprop:Generator_ColumnPropNameInRow="calculated_dhgl_ft" msprop:Generator_ColumnPropNameInTable="calculated_dhgl_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="surcharge_ft" msprop:Generator_UserColumnName="surcharge_ft" msprop:Generator_ColumnVarNameInTable="columnsurcharge_ft" msprop:Generator_ColumnPropNameInRow="surcharge_ft" msprop:Generator_ColumnPropNameInTable="surcharge_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="flood_ref_elev_ft" msprop:Generator_UserColumnName="flood_ref_elev_ft" msprop:Generator_ColumnVarNameInTable="columnflood_ref_elev_ft" msprop:Generator_ColumnPropNameInRow="flood_ref_elev_ft" msprop:Generator_ColumnPropNameInTable="flood_ref_elev_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="san_swr_crown_ft" msprop:Generator_UserColumnName="san_swr_crown_ft" msprop:Generator_ColumnVarNameInTable="columnsan_swr_crown_ft" msprop:Generator_ColumnPropNameInRow="san_swr_crown_ft" msprop:Generator_ColumnPropNameInTable="san_swr_crown_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="storm" msprop:Generator_UserColumnName="storm" msprop:Generator_ColumnVarNameInTable="columnstorm" msprop:Generator_ColumnPropNameInRow="storm" msprop:Generator_ColumnPropNameInTable="stormColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="basin" msprop:Generator_UserColumnName="basin" msprop:Generator_ColumnVarNameInTable="columnbasin" msprop:Generator_ColumnPropNameInRow="basin" msprop:Generator_ColumnPropNameInTable="basinColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="use_flag" msprop:Generator_UserColumnName="use_flag" msprop:Generator_ColumnVarNameInTable="columnuse_flag" msprop:Generator_ColumnPropNameInRow="use_flag" msprop:Generator_ColumnPropNameInTable="use_flagColumn" type="xs:short" minOccurs="0" />
+              <xs:element name="focus_area" msprop:Generator_UserColumnName="focus_area" msprop:nullValue="_null" msprop:Generator_ColumnVarNameInTable="columnfocus_area" msprop:Generator_ColumnPropNameInTable="focus_areaColumn" msprop:Generator_ColumnPropNameInRow="focus_area" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="hgl_comp_rp_id" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="hgl_comp_rp_id" msprop:Generator_ColumnPropNameInRow="hgl_comp_rp_id" msprop:Generator_ColumnVarNameInTable="columnhgl_comp_rp_id" msprop:Generator_ColumnPropNameInTable="hgl_comp_rp_idColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

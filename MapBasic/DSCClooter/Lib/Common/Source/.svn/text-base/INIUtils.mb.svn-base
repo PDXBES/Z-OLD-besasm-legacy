@@ -1,0 +1,40 @@
+Include "Mapbasic.def"
+include "..\inc\INIUtils.def"
+
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Function ReadINI(Byval File as string, byval Section as string, byval key as string, ByVal Default as string) as string
+dim	KeyValue as string
+dim	Result as smallint
+dim	StrLen as integer
+dim	 Filename as string
+
+	Filename = File
+   'print "Filename: " + Filename & " Section: " & Section & " key: " & key
+	KeyValue = "                                                                                                                              "
+	StrLen = len(KeyValue)
+
+	Result = GetPrivateProfileString(Section, Key, Default, 
+		KeyValue, StrLen, Filename  )
+	'print "got " + result + ":" + keyvalue
+	ReadINI = KeyValue
+
+end function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Function WriteINI(Byval File as string, byval Section as string, byval key as string, byval Value as string) as integer
+
+dim	Result as smallint
+dim	StrLen as integer
+dim	 Default, Filename as string
+
+	Filename = File
+	Default = ""
+
+	Result = WritePrivateProfileString(Section, Key, 
+		Value, Filename  )
+	WriteINI = Result
+
+end function
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

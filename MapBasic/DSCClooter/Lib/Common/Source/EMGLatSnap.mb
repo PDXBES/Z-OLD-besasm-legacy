@@ -1,0 +1,1124 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2002, 2003  
+'	City of Portland, OR Bureau of Environmental Services 
+'	and CH2M HILL, Inc.
+'
+'
+'	1/22/03	DFC	When snapping to Master, add check for timeframe.
+'				this version only traces existing, so only allow snap to EX, CE timeframes in links.
+'				Current version of laterals has no time frame, assume all is equal to EX.
+'
+'	12Mar03	Cautley
+'		set TraceVisit flag = "T" in parcel trace
+'
+'	17Mar03	Cautley
+'		Set TraceVisit = "T" when a good model parcel is found,
+'		will be used in a "re-trace" situation where all TraceVisits are set to "F"
+'		to start with.
+'
+'		Fix logic check on return code when creating lateral end points in SnapToDSC
+'
+'	18Mar03	Cautley
+'		Use Timeframe compatability matrix when checking and snapping laterals.
+'	24Mar03	Cautley
+'		remove unused centroid() calls
+'		update DSC fields
+'		DSC timeframe (just choice of EX or FB fields, though) from lateral.timeframe
+' 27Mar03	Collins
+'   the timeframe code is changed to refer to the global timeframe 
+'   this is done because time frame of the lateral is not the same as time frame of the parcel
+'	
+' 28Mar03	Collins
+'   get rid of baseflowFB field
+'
+' 27May03	Collins
+'   get value of BaseflowDM
+'	
+'
+'	Actual Lateral Computation Code
+'
+Include "MapBasic.def"
+include "..\inc\EMGLaterals.def"
+Include "..\inc\EMGLatSnap.def"
+Include "..\inc\EMGCoordSys.def"
+Include "..\inc\EMGLineGeo.def"
+Include "..\inc\EMGCircleGeo.def"
+Include "..\inc\EMGLogger.def"
+include "..\inc\EMGLatShare.def"
+Include "..\inc\EMGMTabUtil.def"
+
+Include "..\inc\EMGGlobal.def"
+
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	SnapLatToSewer
+'
+'		Finds nearest appropriate sewer (within limit)
+'		extends or truncates lateral to "snap" to sewer
+'		computes link related data and stores in lateral
+'
+'	Input:
+'		tblSewers			Name of the Sewers layer
+'		TheLateral			lateral "Type"
+'		ObjectChanged		TRUE if lateral object was updated
+'	Returns
+'		True if successful
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function SnapLatToSewer(
+		tblSewers as string, 
+		TheLateral as Lateral, 			' not all fields filled in, always
+		ObjectChanged as logical
+		) as logical
+Dim 	LatEndX, LatEndY as float
+Dim 	LatBegX, LatBegY as float
+Dim	lResult as logical
+dim 	IntersectPline as object
+Dim	SewerPLine as object
+Dim 	LatLinkID as integer
+Dim	NumPoints as integer
+Dim 	IntersectPointX, IntersectPointY as float
+
+Dim	Radius as float
+dim 	SrchBuffer as object
+Dim	NumPipes as integer
+
+Dim	LatLinkType as string
+Dim 	InterLineBegX, InterLineBegY, InterLineEndX, InterLineEndY as float
+Dim	NumSects as integer
+Dim	LastNode as integer
+Dim	LineEndX, LineEndY as float
+Dim	OShootRatio as float
+Dim	TempLine as object
+Dim 	TempLength as float
+Dim	SewerBegX, SewerBegY, SewerEndX, SewerEndY as float
+Dim 	Msg as String
+Dim 	DeltaX, DeltaY, XX, YY, Theta as float
+Dim	SignX, SignY as float
+Dim 	RedPen as Pen
+Dim	BlueBrush as Brush
+Dim 	SelectCMD as string
+
+Dim	NodeNum as integer
+Dim	NodeDist as float
+Dim	NodeFract as float
+Dim	SewerObj as object
+Dim	ThePoint as object
+Dim	NodeTableName as string
+Dim	LinkTableName as string
+Dim	AliasLinkID as alias
+
+Dim	LinkTF as string
+Dim	LatTF as string
+
+	if gstrLateralContext = "MASTER" then
+		NodeTableName = "mst_nodes"
+		LinkTableName = "mst_links"
+		AliasLinkID = "MLinkID"
+	else
+		NodeTableName = "mdl_nodes"
+		LinkTableName = "mdl_links"
+		AliasLinkID = "LinkID"
+	end if
+
+	SnapLatToSewer = False
+	ObjectChanged = False
+
+	Msg = "------------------------------------"
+	Call Loggit(Msg)
+
+	Msg = "Snapping " + str$(TheLateral.LateralID) + " to " + str$(TheLateral.LinkID)
+	call Loggit(msg)
+
+	Msg = "Snap tolerance: " + SNAP_TOLERANCE
+	call loggit(msg)
+
+	Call SetStdCoordSys()
+
+
+	OShootRatio = LINE_EXTEND_RATIO
+	lResult = CalcEnds (TheLateral.LateralObj, LatBegX, LatBegY, LatEndX, LatEndY)
+
+	'	Is lateral supposed to be connected already?
+
+	LatLinkID = TheLateral.LinkID
+	if LatLinkID <> 0 then
+		if gstrLateralContext = "MASTER" then
+			Select 
+				obj, LinkType, CompKey, RowID, 
+				MLinkID, DiamWidth, USIE, DSIE, TimeFrame
+			from tblSewers 
+			where MLinkID = LatLinkID into _NearPipes
+		else
+			Select 
+				obj, LinkType, CompKey, RowID, 
+				LinkID, MLinkID, DiamWidth, USIE, DSIE 
+			from tblSewers 
+			where LinkID = LatLinkID into _NearPipes
+		end if
+
+		if EOT(_NearPipes) then
+			msg =  "Failed to find my sewer: " + str$(LatLinkID)
+			call loggit(msg)
+			
+			goto NeedSewer
+		end if
+		SewerPline = _NearPipes.obj
+
+		IntersectPline = IntersectNodes(SewerPline, TheLateral.LateralObj, INCL_CROSSINGS)
+		NumPoints = ObjectInfo(IntersectPline, OBJ_INFO_NPNTS)
+		if NumPoints <> 1 then
+			Msg = "Lateral does not intersect its sewer at exactly one point: " + str$(NumPoints)
+			call Loggit(msg)
+			goto NeedSewer
+		end if
+		' get the coordinates of the intersection
+		IntersectPointX = ObjectNodeX(IntersectPline, 1, 1)
+		IntersectPointY = ObjectNodeY(IntersectPline, 1, 1)
+
+		msg = "Compare " + IntersectPointX + ", " + IntersectPointY +
+			" to " + LatEndX + ", " + LatEndY
+		call loggit(msg)
+
+		if abs(IntersectPointX - LatEndX) < SNAP_TOLERANCE and abs(IntersectPointY - LatEndY) < SNAP_TOLERANCE then
+
+			'  check that timeframe is OK... in master...
+			if gstrLateralContext = "MASTER" then
+				LinkTF = _NearPipes.TimeFrame
+				LatTF = _LatSet.TimeFrame
+				msg = "Comparing LinkTF " + LinkTF + " to LatTF " + LatTF
+				call loggit(msg)
+				Do Case LatTF
+					case "AB"
+						msg = "Lateral is abandonded, this is not good"
+						call loggit(msg)
+						goto NeedSewer
+					case "EX"
+						Do Case LinkTF
+							Case "EX", "CE"
+								' were OK, do nothing
+							case Else
+								msg = "link TF not compatible."
+								call loggit(msg)
+								goto NeedSewer
+						end case
+					case "CE"
+						Do Case LinkTF
+							Case "EX", "CE"
+								' were OK, do nothing
+							case Else
+								msg = "link TF not compatible."
+								call loggit(msg)
+								goto NeedSewer
+						end case
+					case "FC"
+						Do Case LinkTF
+							Case "EX", "FC", "FU"
+								' were OK, do nothing
+							case Else
+								msg = "link TF not compatible."
+								call loggit(msg)
+								goto NeedSewer
+						end case
+					case "FU"
+						Do Case LinkTF
+							Case "EX", "FC", "FU"
+								' were OK, do nothing
+							case Else
+								msg = "link TF not compatible."
+								call loggit(msg)
+								goto NeedSewer
+						end case
+				end case
+			end if
+			SnaplatToSewer = true
+			call loggit( "cha-ching!")
+			SnapLatToSewer = true
+			' 	don't leave now, fall through to way below to get information to update lateral with
+			'	exit function
+		else
+			call loggit( "Lat not close enough to sewer")
+			goto NeedSewer
+		end if
+
+	else
+'		Need to find my sewer, I don't know what it is...
+NeedSewer:
+		TheLateral.SwrQCFlag = "F"
+		TheLateral.MLinkID = 0
+		radius = SEARCH_STEP
+		Do While TRUE
+			SrchBuffer = MakeCircle(LatEndX, LatEndY, radius)
+			' what type we're looking for depends on what type we are.
+			' if we dont know about ourselves, snap to anything
+			' Otherwise, snap only to the same link type as you are
+			' Also, need to use timeframe compatability matrix.
+			'	Note: I've never had luck using a variable
+			'	for the "in" clause in MapInfo SQL  (too bad)
+			'  If the matrix changes you may not be able to combine
+			'  the cases as we have here.
+			' note that timeframe only applies in master context -- models
+			' are always of a single time ...
+			'
+			LatLinkType = TheLateral.LinkType
+			LatTF = TheLateral.TimeFrame
+			Do Case RTrim$(Ltrim$(LatLinkType))
+				case  "", "X"
+					msg = "Searching for closest Sewer, any type"
+					call loggit (msg)
+					if gstrLateralContext = "MASTER" then
+						Do Case LatTF
+							case "EX", "CE"
+								Select obj, LinkType, CompKey, RowID, MLinkID, DiamWidth, USIE, DSIE 
+									FROM tblSewers
+									Where obj Intersects SrchBuffer
+									and LinkType in ("S", "C", "D", "IS", "IC", "ID")
+									and TimeFrame in ("EX", "CE")
+								 	into _NearPipes
+							case "FC", "FU"
+								Select obj, LinkType, CompKey, RowID, MLinkID, DiamWidth, USIE, DSIE 
+									FROM tblSewers
+									Where obj Intersects SrchBuffer
+									and LinkType in ("S", "C", "D", "IS", "IC", "ID")
+									and TimeFrame in ("EX", "FC", "FU")
+								 	into _NearPipes
+						end case
+					else
+						Select obj, LinkType, CompKey, RowID, LinkID, MLinkID, DiamWidth, USIE, DSIE 
+							FROM tblSewers
+							Where obj Intersects SrchBuffer
+							and LinkType in ("S", "C", "D", "IS", "IC", "ID")
+						 	into _NearPipes
+					end if
+				case else			
+					msg =  "Searching for " & LatLinkType & " in " & tblSewers
+					Call Loggit (msg)
+					if gstrLateralContext = "MASTER" then
+						Do Case LatTF
+							case "EX", "CE"
+								Select obj, LinkType, CompKey, RowID, MLinkID, DiamWidth, USIE, DSIE 
+									FROM tblSewers
+									Where obj Intersects SrchBuffer
+									and LinkType = LatLinkType
+									and TimeFrame in ("EX", "CE")
+								 	into _NearPipes
+							case "FC", "FU"
+								Select obj, LinkType, CompKey, RowID, MLinkID, DiamWidth, USIE, DSIE 
+									FROM tblSewers
+									Where obj Intersects SrchBuffer
+									and LinkType = LatLinkType
+									and TimeFrame in ("EX", "FC", "FU")
+								 	into _NearPipes
+						end case
+
+					else
+						Select obj, LinkType, CompKey, RowID, LinkID, MLinkID, DiamWidth, USIE, DSIE 
+							FROM tblSewers
+							Where obj Intersects SrchBuffer
+							and LinkType = LatLinkType
+						 	into _NearPipes
+					end if
+			End Case
+
+			NumPipes = TableInfo(_NearPipes, TAB_INFO_NROWS)
+			' have we found any interesting pipes?
+			If NumPipes > 0 then
+				exit do
+			end if
+			' otherwise, increase the radius of the search
+			radius = radius + SEARCH_STEP
+			if radius > SEARCH_MAX then
+				call loggit( "Max radius reached, no pipe found")
+				SnapLatToSewer = False
+				exit function
+			end if
+			msg = "Search radius increased to: " + radius
+			call loggit(msg)
+		Loop
+
+		RedPen = MakePen(1.5, 5, RED)
+		BlueBrush = MakeBrush(01, CYAN, BLUE)
+		Alter Object SrchBuffer Info OBJ_INFO_PEN, RedPen
+		Alter Object SrchBuffer Info OBJ_INFO_BRUSH, BlueBrush
+		'insert into Cosmetic1 (
+		'	obj
+		') values (
+		'	SrchBuffer
+		')
+
+		'  We know we have at least one pipe,
+		'  How many possible pipes are there??
+		if NumPipes > 1 then
+		' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 	
+		' *** have more than one candidate pipe
+		'		Assert:  	SrchBuffer contains the search element that was used to find links
+		'					_NearPipes contains the links that intersect SrchBuffer
+		'
+		'		At End:	_NearPipes contains the link you want to snap the lateral to
+		'
+Dim		NumNodes as integer
+Dim		FoundNode as string
+Dim		NearLinkCount as integer
+Dim		AbsLatDeltaX, AbsLatDeltaY as float
+Dim		InfLink1BegX, InfLink1BegY as float
+Dim		InfLink2BegX, InfLink2BegY as float
+Dim		JunkX, JunkY as float
+Dim		InfluentLink1, InfluentLink2 as object
+Dim		AbsLink1DeltaX, AbsLink1DeltaY as float
+Dim		AbsLink2DeltaX, AbsLink2DeltaY as float
+Dim		LinkID1, LinkID2 as integer
+
+			call loggit("More than one link logic entered")
+
+			' **** This logic is described in the visio file LateralSnapDesign.vsd, page 2
+
+			' Is there a single node in the search circle?
+			Select * from NodeTableName
+			where obj within SrchBuffer
+			into _NearNodes
+
+			NumNodes = TableInfo(_NearNodes, TAB_INFO_NROWS)
+			Do Case NumNodes
+				case 0
+					' just pick the first link...
+					msg = "Multiple links, no node, just use first one found"
+					call loggit(msg)
+					'	which means, just fall through
+				case 1
+					' find links with current node as the "To" node
+					FoundNode = _NearNodes.Node
+					select * from LinkTableName
+					where DSNode = FoundNode
+					into _NearNodeLinks
+					NearLinkCount = TableInfo(_NearNodeLinks, TAB_INFO_NROWS)
+					do case NearLinkCount
+						case 1
+							' just one link has node as "to"... pick that link.
+							call loggit("Just one upstream link, use it")
+							select * from _NearNodeLinks
+							into _NearPipes
+							do case ucase$(gstrLateralContext)
+								case "MASTER"
+									msg = "Lateral ID: " & str$(TheLateral.LateralID) & " to link " & str$(_NearPipes.MLinkID)
+								case "MODEL"
+									msg = "Lateral ID: " & str$(TheLateral.LateralID) & " to link " & str$(_NearPipes.LinkID)
+							end case
+							call loggit(msg)
+
+
+						case 2
+							' there are two links. attempt to find out which one is on the "near" side to the lateral
+							' by looking at the dx and dy changes
+							AbsLatDeltaX = abs(LatBegX - LatEndX)
+							AbsLatDeltaY = abs(LatBegY - LatEndY)
+							InfluentLink1 = _NearNodeLinks.obj
+							do case ucase$(gstrLateralContext)
+								case "MASTER"
+									LinkID1 = _NearNodeLinks.MLinkID
+								case "MODEL"
+									LinkID1 = _NearNodeLinks.LinkID
+							end case
+
+
+							Fetch Next from _NearNodeLinks
+							InfluentLink2 = _NearNodeLinks.obj
+							do case ucase$(gstrLateralContext)
+								case "MASTER"
+									LinkID2 = _NearNodeLinks.MLinkID
+								case "MODEL"
+									LinkID2 = _NearNodeLinks.LinkID
+							end case
+
+							Fetch First from _NearNodeLinks				' put table back to the top...
+							lResult = CalcEnds (InfluentLink1, InfLink1BegX, InfLink1BegY, JunkX, JunkY)
+							lResult = CalcEnds (InfluentLink2, InfLink2BegX, InfLink2BegY, JunkX, JunkY)
+							AbsLink1DeltaX = abs(LatEndX - InfLink1BegX)							
+							AbsLink1DeltaY = abs(LatEndY - InfLink1BegY)
+							AbsLink2DeltaX = abs(LatEndX - InfLink2BegX)
+							AbsLink2DeltaY = abs(LatEndX - InfLink2BegY)
+
+							' is lateral more or less horizontal or vertical?
+							if AbsLatDeltaX > AbsLatDeltaY then
+									' pick link with smallest dx from its start to lat end
+									if AbsLink1DeltaX < AbsLink2Deltax then
+										' use link 1
+										do case ucase$(gstrLateralContext)
+											case "MASTER"
+												Select * from LinkTableName
+												where MLinkID = LinkID1
+												into _NearPipes
+											case "MODEL"
+												Select * from LinkTableName
+												where LinkID = LinkID1
+												into _NearPipes
+										end case
+									else
+										' use link 2
+										do case ucase$(gstrLateralContext)
+											case "MASTER"
+												Select * from LinkTableName
+												where MLinkID = LinkID2
+												into _NearPipes
+											case "MODEL"
+												Select * from LinkTableName
+												where LinkID = LinkID2
+												into _NearPipes
+										end case
+
+									end if
+							else
+									' pick link with the smallest dy from its start to lat end
+									if AbsLink1DeltaY < AbsLink2DeltaY then
+										' use link 1
+										do case ucase$(gstrLateralContext)
+											case "MASTER"
+												Select * from LinkTableName
+												where MLinkID = LinkID1
+												into _NearPipes
+											case "MODEL"
+												Select * from LinkTableName
+												where LinkID = LinkID1
+												into _NearPipes
+										end case
+
+									else
+										' use link 2
+										do case ucase$(gstrLateralContext)
+											case "MASTER"
+												Select * from LinkTableName
+												where MLinkID = LinkID2
+												into _NearPipes
+											case "MODEL"
+												Select * from LinkTableName
+												where LinkID = LinkID2
+												into _NearPipes
+										end case
+									end if
+							end if							
+						case else
+							Msg = "A number of links I can't handle has the near node as 'To' node: " & str$(NearLinkCount)
+							call Loggit(msg)
+							exit function
+					end case
+				case else	
+					call loggit( "More than one pipe and more than one node! Ignored!")
+					SnapLatToSewer = False
+					exit function
+			end case
+		end if			
+'=============================================================================================================================
+'
+'  *** At this point, either we had just one pipe to begin with, or the logic above
+'			has set up the _NearPipes table so that the record we want is "on top".
+'
+'=============================================================================================================================
+
+			' just one; life is a BIT simpler... (but not much)
+
+			msg = "Found Just One pipe: " + _NearPipes.CompKey
+			call loggit(msg)
+			SewerPline = _NearPipes.obj
+
+			' does lateral intersect pipe?
+			IntersectPline = IntersectNodes(SewerPline, TheLateral.LateralObj, INCL_CROSSINGS)
+			NumPoints = ObjectInfo(IntersectPline, OBJ_INFO_NPNTS)
+			if NumPoints > 0 then
+					call loggit( "Lateral intersects pipe")
+					' get intersect point.
+					IntersectPointX = ObjectNodeX(IntersectPline, 1, 1)
+					IntersectPointY = ObjectNodeY(IntersectPline, 1, 1)
+
+					' is it THE lateral end point?
+
+					If abs(IntersectPointX - LatEndX) < SNAP_TOLERANCE
+						and abs(IntersectPointY - LatEndY) < SNAP_TOLERANCE then
+
+					'	lateral is just fine as it is (spatially)
+
+							call loggit( "Lateral is already correctly snapped")
+							SnapLatToSewer = True
+					else
+					' lateral is too long; move the end point back to the intersect point.
+							call loggit( "Move lateral back...")
+							lResult = MoveEnd(TheLateral.LateralObj, IntersectPointX, IntersectPointY)
+							call loggit( "Back from MoveEnd call")
+							ObjectChanged = True
+							SnaplatToSewer = lResult
+					end if
+		
+			else
+				'  Lateral is a bit too short.  Find a new end point and hook it up.
+				' find the intersection between the circular buffer and the pipe
+				'	usually the pipe will form a chord of the circular search buffer, though there are
+				'	other cases as well
+				call loggit( "Lateral a bit short.  Will extend")
+   				IntersectPline = IntersectNodes(SewerPline, SrchBuffer, INCL_Crossings)
+				NumPoints = ObjectInfo(IntersectPline, OBJ_INFO_NPNTS)
+				print "Intersects at " + str$(NumPoints) + " points."
+				Do case NumPoints
+					case 1
+						' whats the closer point to move to?
+						' Pipe end, or intersect point?
+						' following is the one and only intersect point
+						IntersectPointX = ObjectNodeX(IntersectPline, 1, 1)
+						IntersectPointY = ObjectNodeY(IntersectPline, 1, 1)
+						'  get the beginning point of the sewer
+						lResult = CalcEnds (SewerPline, SewerBegX, SewerBegY, SewerEndX, SewerEndY)
+						If distance(SewerBegX, SewerBegy, LatEndX, LatEndY, "ft") >
+							distance(IntersectPointX, IntersectPointY, LatEndX, LatEndY, "ft") then	
+							'call loggit( "Intersect is closer. Snap to intersect.")
+							lResult = MoveEnd(TheLateral.LateralObj, IntersectPointX, IntersectPointY)
+							ObjectChanged = True
+							SnapLatToSewer = lResult
+						else
+							'call loggit( "Sewer Start is closer.  Snap to Sewer Start")
+							lResult = MoveEnd(TheLateral.LateralObj, SewerBegX, SewerBegY)
+							IntersectPointX = SewerBegX
+							IntersectPointY = SewerBegY
+							ObjectChanged = True
+							SnapLatToSewer = lResult						
+						end if
+					case 2
+						' the direction of the line we want to construct is determined by the
+						' mid-point of the chord defined (not by the pipe) but by the intersection
+						' points.  Remember, the pipe is a Polyline and need not run directly from
+						' one intersection point to another.
+						' get the  beginning and end points of the intersection PLine
+						InterLineBegX = ObjectNodeX(IntersectPline, 1, 1)
+						InterLineBegY = ObjectNodeY(IntersectPline, 1, 1)
+						NumSects = ObjectInfo(IntersectPline,OBJ_INFO_NPOLYGONS)
+						LastNode = ObjectInfo(IntersectPline,OBJ_INFO_NPOLYGONS + NumSects)
+					  	InterLineEndX  = ObjectNodeX(IntersectPline, NumSects,LastNode)	' read x_coor of 2nd node in last segment
+				  		InterLineEndY  = ObjectNodeY(IntersectPline, NumSects,LastNode)	' read y_coor of 2nd node in last segment
+						IntersectPointX = (InterLineBegX + InterLineEndX) / 2.0
+						IntersectPointY = (InterLineBegY + InterLineEndY) / 2.0
+
+						' Construct line from end of lateral, through the mid point of the chord
+						' length anyhow.
+						'Msg = "Constructing Temp Line..."
+						'Call Loggit (msg)
+						TempLength = distance(LatEndX, LatEndY, IntersectPointX, IntersectPointY, "ft")
+						'msg = "Temp Length: " + str$(TempLength)
+						'Call Loggit (msg)
+						if TempLength < SNAP_TOLERANCE then
+							msg = "Close enough."
+							'call Loggit(Msg)
+							SnapLatToSewer = true
+						Else
+							DeltaX = IntersectPointX - LatEndX
+							DeltaY = IntersectPointY - LatEndY
+							If DeltaX > 0 then
+								SignY = 1.0
+								SignX = 1.0
+							else
+								SignY = -1.0
+								SignX = -1.0
+							end if
+							Theta = atn(DeltaY/DeltaX)
+							YY = (radius + Radius) * sin(Theta) * signX
+							XX = (Radius + radius) * cos(Theta) * signY
+							LineEndX = LatEndX + XX
+							LineEndY = LatEndY + YY
+							msg = ""
+							msg = Msg + " DeltaX: " + str$(DeltaX)
+							msg = Msg + " DeltaY: " + str$(DeltaY)
+							msg = Msg + " Theta: " + str$(Theta)
+							msg = Msg + " YY: " + str$(YY)
+							msg = Msg + " XX: " + str$(XX)
+							msg = Msg + " LineEndX: " + str$(LineEndX)
+							msg = Msg + " LineEndY: " + str$(LineEndY)
+							'call loggit(Msg)	
+
+							'OShootRatio = radius/TempLength
+							''msg = "Oshoot Ratio: " + str$(OshootRatio)
+							''Call Loggit (msg)
+							'LineEndX = LatEndX - (IntersectPointX - LatEndX) * OShootRatio
+							'LineEndY = LatEndY - (IntersectPointY - LatEndY) * OShootRatio
+							'msg = "New Line Ends: " + str$(LineEndX) + ", " + str$(LineEndY)
+							'call loggit(msg)
+							' this is the directionally correct but Too Long line...
+
+							Create Line Into Variable TempLine (LatEndX, LatEndY )(LineEndX, LineEndY)
+
+							RedPen = MakePen(2, 59, RED)
+							Alter Object TempLine Info  OBJ_INFO_PEN, RedPen
+							'insert into Cosmetic1 (
+							'	obj
+							') values (
+							'	TempLine	
+
+							')
+
+
+							'msg = "Line Created."
+							'call loggit(msg)
+							' re-use IntersectPline
+							' now, intersect that with the pipe.  That will give us the real end point
+							' that we really want to use.
+
+							intersectPline = IntersectNodes(SewerPline, TempLine, INCL_CROSSINGS)
+							numpoints = ObjectInfo(IntersectPline, OBJ_INFO_NPNTS)
+							msg =  "Should be one: " + str$(NumPoints)	
+							'call loggit(msg)
+							if NumPoints = 0 then
+								msg = "Line still too short... faugh!"
+								'call loggit(msg)
+								SnapLatToSewer = False
+								Exit Function
+							end if
+							' where there's only one point, the first one is it...
+							LineEndX = ObjectNodeX(IntersectPline, 1, 1)
+							LineEndY = ObjectNodeY(IntersectPline, 1, 1)
+
+							' Alter the end point of the lateral to be this
+							'call loggit( "Move lateral forward...")
+							lResult = MoveEnd(TheLateral.LateralObj, LineEndX, LineEndY)
+							ObjectChanged = True
+							IntersectPointX = LineEndX
+							IntersectPointY = LineEndY
+							SnapLatToSewer = lResult
+						end if
+					case else
+						call loggit( "don't like the number of points: " + str$(NumPoints))
+				end case
+			end if		' Lateral Too short
+
+			'
+		
+
+	end if			' Looking for my sewer
+
+'  Now, everything but errors or "can't handle this" falls through here...
+'
+'	put node on sewer if you need to (to measure distance)
+'	then measure, then update lateral object with all related data.
+'
+'	Assert:		IntersectPointX and IntersectPointY define the intersection point between lateral and sewer.
+'
+'	call loggit(	"Now we TOINK the lateral...")
+
+	'print	"Create pt: " & str$(IntersectPointX) & ", " & str$(IntersectPointY)
+
+	create point into variable ThePoint (IntersectPointX, IntersectPointY)
+	SewerObj = _NearPipes.obj
+	'call loggit(	"Objects Set...")
+	lResult = NodeAtPoint(SewerObj, ThePoint, Msg, NodeNum, NodeDist, NodeFract)
+	'call loggit( 	"back from NodeAtPoint")
+	msg =  "NodeNum: " & str$(NodeNum) & " NodeDist: " & str$(NodeDist) & " NOdeFract: " & str$(NodeFract)
+	'call loggit(msg)
+	if not lResult then
+		msg = "Creating node on sewer"
+		'call loggit(msg)
+		lResult = InsertNodeAtPoint(SewerObj, ThePoint, Msg)
+		if not lResult then
+			call loggit(msg)
+			exit function
+		end if
+		'call loggit( "we back...")
+		' now that node is there, call AtPoint again to compute stuff
+		lResult = NodeAtPoint(SewerObj, ThePoint, Msg, NodeNum, NodeDist, NodeFract)
+'		call loggit( 	"back from NodeAtPoint")
+		msg = "NodeNum: " & str$(NodeNum) & " NodeDist: " & str$(NodeDist) & " NOdeFract: " & str$(NodeFract)
+'		call loggit(msg)
+		
+	end if
+	'call loggit( "Back from Making your Point...")
+'	
+'	Now, stuff the data into the lateral object.  Caller has to update the database...
+'
+	TheLateral.LinkType = _NearPipes.LinkType
+	print "Link type " & TheLateral.LinkType
+	if gstrLateralContext = "MASTER" then
+		print "Master context"
+		TheLateral.MLinkID = _NearPipes.MLinkID
+		print "MLinkID is " + str$(TheLateral.MLinkID)
+	else 
+		print "Model context"
+		TheLateral.LinkID = _NearPipes.LinkID
+		TheLateral.MLinkID = _NearPipes.MLinkID
+	end if
+	'print "Link ID"
+
+	'  Allowable Pipe Flow types are C, D, F, I, S and U.
+	'	otherwise, set to the defaults according to a table...
+	' 	when making a new lateral smart the AFT will be blank, triggering the default.
+		Do Case TheLateral.LinkType
+			Case "IS", "S"
+				TheLateral.PipeFlowType = "S"
+			Case "IC", "C"
+				TheLateral.PipeFlowType = "C"
+			Case "ID", "D"
+				TheLateral.PipeFlowType = "D"
+			Case "PS", "PD", "PC", "FD"
+				TheLateral.PipeFlowType = "F"
+			Case "V", "F", "X"
+				TheLateral.PipeFlowType = "I"
+			case else
+				TheLateral.PipeFlowType = "U"		
+		end case
+	'print "AFType " & TheLateral.PipeFlowType
+	TheLateral.DSSewerIE =	_NearPipes.USIE -(NodeFract * (_NearPipes.USIE - _NearPipes.DSIE))
+	'print "DSIE " & str$(TheLateral.DSSewerIE) & " : " & str$(_NearPipes.USIE) & ", " & str$(_NearPIpes.DSIE)
+	TheLateral.SewerDiameter = _NearPipes.DiamWidth
+	'print "DiamWidth " & TheLateral.SewerDiamWidth
+	TheLateral.Frac2SwrBeg = NodeFract
+	'print "Nodefract"
+	TheLateral.SwrQCFlag = "T"
+	'print "QCFlag"
+	TheLateral.QCDate = FormatDate$(Curdate())
+	'print "End Func"
+	ObjectChanged = True
+End Function
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	SnapLatToDSC
+'
+'		Function does not actually move the start point of the lateral.
+'		Rather, verifies that lateral begins in a DSC, and if so, pulls DSC related data into the lateral.
+'		If requested (DSCTrace) code will pull data from master into model DSC to provide a place for the lateral to start.
+'
+'	Input:
+'		tblDSC			Name of the model DSC table
+'		tblMastDSC	Name of the master DSC table, if requested
+'		tblMastTax	Name of the master taxlot table, if requested
+'		tblLatEnds	Name of the lateral end points table
+'		DSCTrace		TRUE if DSC / parcel trace is requested (unused)
+'		TheLateral	The lateral "object" (the TYPE, not just the MapInfo obj)
+'		ObjectChanged		TRUE if data was added to the lateral
+'
+'	Timeframe of the data in DSC is a function of the timeframe of the lateral
+'		(which is derived from the pipe which was traced according to the
+'		modeler's wishes.)
+'	Returns:
+'		TRUE if function completed normally.
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function SnapLatToDSC(
+		tblDSC as string,	
+		tblMastDSC as string,
+		tblMastTax as string,	
+		tblLatEnds as string,	
+		DSCTrace as logical, 
+		TheLateral as Lateral,
+		ObjectChanged as logical
+		) as logical
+
+Dim		TheLateralID as integer
+Dim		lResult as logical
+Dim		Msg as string
+Dim		LatBegPoint as object
+Dim 	MyDivideID as integer
+Dim		NewDSCID as integer
+
+Dim		InsertDSC as object
+Dim		InsertPID as integer
+Dim		InsertDivID as integer
+'
+'	LateralIDs, NGTOs, DiscoClass and pipe flow types not set by this code
+'	and anything else without an "Insert..." field is also not set
+'
+Dim		InsertArea as float
+
+Dim		InsertFlev as float
+Dim		InsertQAQC as string
+Dim		INsertMaxBldGrid as float
+Dim		InsertAvgParcelElev as float
+Dim		InsertEFFMethod as string
+Dim		InsertFFOverride as string
+Dim		InsertOrigFinishElev as float
+
+Dim		InsertZoneEX as string
+Dim		InsertZoneCP as string
+Dim		InsertGenEX as string
+Dim		InsertGenCP as string
+
+Dim   InsertBaseFlowEX as float
+Dim   InsertBaseFlowFB as float
+Dim   InsertBaseFlowDM as float
+Dim   InsertBaseFlow as float
+
+Dim		InsertImpFractEX as float
+Dim		InsertImpFractCP as float
+Dim		InsertImpFractFB as float
+
+Dim		InsertAreaFt as float
+Dim		InsertRoofAreaFt as float
+Dim		InsertPkingAreaFt as float
+
+Dim		InsertTraceVisit as string
+
+Dim		CurRow as integer
+Dim	FName as string
+Dim	CName as string
+
+FName = "_MastDSC"		' this is a constant, used where literal cant
+CName = "DivideID"
+
+SnapLatToDSC = FALSE
+'   Start off setting several things to "didn't work" status
+TheLateral.DSCQCFlag = "F"
+
+
+TheLateralID = TheLateral.LateralID
+msg = "------------ DSC ----------------------"
+'call loggit(msg)
+msg = "Lat ends table: " & tblLatEnds
+'call loggit(msg)
+msg = "DSC Table: " & tblDSC
+'call Loggit(msg)
+msg = "Trace DSC for lateral ID " & str$(TheLateralID)
+'call Loggit(msg)
+
+'	Lateral has to be snapped to a sewer to enable a valid DSC snap
+If TheLateral.SwrQCFlag <> "T" then
+	msg = "Lateral skipped, SwrQCFlag <> T " & str$(TheLateralID)
+	call loggit (msg)
+	exit Function
+end if
+
+Select * from tblLatEnds
+where 
+ToOrFrom = "F" and
+LateralID = TheLateralID
+into _LatEnd
+
+
+If EOT(_LatEnd) then
+	'call loggit( "no got lat ends")
+	lResult = ConstructLateralEndPoint(tbllatEnds, TheLateral)
+
+	if not lResult then
+		Msg = "Unable to construct missing lateral end points"
+		call Loggit(msg)
+		exit function		
+	end if
+
+	Select * from tblLatEnds
+	where 
+	ToOrFrom = "F" and
+	LateralID = TheLateralID
+	into _LatEnd
+	if EOT(_LatEnd) then
+		msg = "STILL unable to find lateral ends after making them"
+		call loggit(msg)
+		exit function
+	end if
+end if
+'call loggit( "Got Lat Ends")
+
+LatBegPoint = _LatEnd.obj
+close table _LatEnd
+
+Select * from tblDSC
+where
+LatBegPoint within obj
+into _DSCSet
+
+
+If EOT(_DSCSet) then
+	msg = "There is no DSC at beginning of lateral"
+'	call loggit(msg)
+
+	' is there a divide here in the master database?
+	msg =  "Master DSC: " & tblMastDSC
+'call loggit(msg)
+	Select * from tblMastDSC
+	where LatBegPoint within obj
+	into _MastDSC
+'	call loggit( "Got Mast DSC results...")
+
+	Do Case TableInfo(_MastDSC, TAB_INFO_NROWS)
+		case 0
+			' nothing in DSC, try taxlots
+'			call loggit( "Case 0")
+			msg = "Master Taxlots: " & tblmasttax
+'			call loggit(msg)
+			Select * from tblMastTax
+			where LatBegPoint within obj
+			into _MastDSC
+			Do Case TableInfo(_MastDSC, TAB_INFO_NROWS)
+				case 0
+					msg = "Still no DSC after master search"
+'					call loggit(msg)
+					exit function
+				case 1
+					msg = "Pulling from mst_taxlots"
+'					call Loggit(msg)
+					' just what we want !  Just fall through
+					MyDivideID = 0
+				case else
+					' duplicate / ambiguous DSC
+					msg = "Found duplicate / ambiguous master taxlots"
+'					call loggit(msg)
+					exit function
+			end Case
+		case 1
+			' just what we want !  Just fall through
+			msg = "Pulling from mst_dsc"
+'			call	loggit(msg)
+			MyDivideID = _MastDSC.DivideID
+		case else
+			' duplicate / ambiguous DSC
+			msg = "Found duplicate / ambiguous master DSC"
+'			call loggit(msg)
+			exit function
+	end Case
+	' All good cases fall through to here
+'	call loggit( "Doing the insert...")
+
+	' whichever table was referenced, it's alias is now _MastDSC
+	' 
+	InsertDSC = _MastDSC.obj
+	InsertPID = _MastDSC.ParcelID
+	if IsColumnThere (FName, CName) then
+		InsertDivID = _MastDSC.DivideID
+	else
+		InsertDivID = 0			' taxlots have no divide ID
+	end if
+	
+	InsertFlev = _MastDSC.FloodRefElev
+	InsertQAQC = _MastDSC.GridQAQC
+	InsertMaxBldGrid = _MastDSC.MaxBldGrid
+	InsertAvgParcelElev = _MastDSC.AvgParcelElev
+	InsertEFFmethod = _MastDSC.EFFMethod
+	InsertFFOverride = _MastDSC.FFOverride
+	InsertOrigFinishElev = _MastDSC.OrigFinishFloor
+
+	InsertZoneEX = _MastDSC.ZoneEX
+	InsertZoneCP = _MastDSC.ZoneCP
+	InsertGenEX = _MastDSC.GenEX
+	InsertGenCP = _MastDSC.GenCP
+
+  InsertBaseFlowEX = int(_MastDSC.BaseFlowEXcfs*1000000)/1000000
+  InsertBaseFlowDM = int(_MastDSC.BaseFlowDMcfs*1000000)/1000000
+  'InsertBaseFlowDM = 0
+
+	InsertImpFractEX = _MastDSC.ImpFractEX
+	InsertImpFractCP = _MastDSC.ImpFractCP
+
+  InsertAreaFt = _MastDSC.AreaFt
+	InsertRoofAreaFt = 0
+	InsertPkingAreaFt = 0
+	
+	' the timeframe code is changed to refer to the global timeframe 
+	' this is done because time frame of the lateral is not the same as time frame of the parcel
+	do case gstrTimeFrame
+		case "EX"
+			InsertRoofAreaFt = _MastDSC.RfAreaFtEX
+			InsertPkingAreaFt = _MastDSC.PkAreaFtEX
+'      InsertBaseFlow = _MastDSC.BaseFlowEXcfs
+		case "FU"
+			InsertRoofAreaFt = _MastDSC.RfAreaFtFB
+			InsertPkingAreaFt = _MastDSC.PkAreaFtFB
+'			InsertBaseFlow = _MastDSC.BaseFlowFBcfs
+			
+	end case
+	
+	InsertTraceVisit = "T"
+
+	Insert into tblDSC
+		(
+			obj,
+			ParcelID,
+			DivideID,
+			FloodRefElev,
+			GridQAQC,
+			MaxBldGrid,
+			AvgParcelElev,
+			EFFMethod,
+			FFOverride,
+			OrigFinishFloor,
+			ZoneEX,
+			ZoneCP,
+			GenEX,
+			GenCP,
+			ImpFractEX,
+			ImpFractCP,
+			ImpFractFB,
+			AreaFt,
+			RfAreaFt,
+			PkAreaFt,
+			BaseFlow,
+			BaseFlowEX,
+      BaseFlowDM,
+			TraceVisit
+		) values (
+			InsertDSC,
+			InsertPID,
+			InsertDivID,
+			InsertFLev,
+			InsertQAQC,
+			InsertMaxBldGrid,
+			InsertAvgParcelElev,
+			InsertEFFMethod,
+			InsertFFOverride,
+			InsertOrigFinishElev,
+			InsertZoneEX,
+			InsertZoneCP,
+			InsertGenEX,
+			InsertGenCP,
+			InsertImpFractEX,
+			InsertImpFractCP,
+			InsertImpFractFB,
+			InsertAreaFt,
+			InsertRoofAreaFt,
+			InsertPkingAreaFt,
+			InsertBaseFlow,
+			InsertBaseFlowEX,
+      InsertBaseFlowDM,			
+			InsertTraceVisit
+		)
+
+'		call loggit( "Insert done...")
+		' get the one you just put there...
+		Select * from tblDSC
+		where
+		LatBegPoint within obj
+		into _DSCSet
+else
+	msg = "DSC is good."
+'	call	loggit(msg)
+'	we may be re-tracing, so we want to be sure the flag is set ...
+	CurRow = _DSCSet.ROWID
+	Update _DSCSet
+		Set
+			TraceVisit = "T"
+		Where ROWID = CurRow
+
+end if
+
+' Collins 30 Nov 2005 add more detailed error reporting
+if TableInfo(_DSCSet, TAB_INFO_NROWS) <> 1 then
+	msg = "Error: [" & str$(TableInfo(_DSCSet, TAB_INFO_NROWS)) &  "] DSCs at begin point."
+	call loggit(msg)
+	
+	if TableInfo(_DSCSet, TAB_INFO_NROWS) > 1 then
+		dim ii as integer
+	
+		fetch first from _DSCset
+		do while not EOT(_DSCset)
+			msg = "   PID:" & parcelid & " DivideID:" & divideid
+			call loggit(msg)	
+			fetch next from _DSCset
+		loop
+	end if
+	exit function
+end if
+'
+'	We now have the DSC that we start from.
+'	Set data in lateral structure
+'
+TheLateral.ParcelID = _DSCSet.ParcelID
+TheLateral.DivideID = _DSCSet.DivideID
+TheLateral.USFloodRefElev = _DSCSet.FloodRefElev
+
+'	Tell the caller we did OK
+Thelateral.DSCQCFlag = "T"
+ObjectChanged = TRUE
+SnapLatToDSC = TRUE
+
+
+End Function

@@ -1,0 +1,177 @@
+'
+'	Routines to check a current proposed link record spatially and for duplicates.
+'
+include "MapBasic.def"
+include "..\..\common\inc\EMGToolGlobal.def"
+include "..\inc\EMGLinkCheck.def"
+include "..\..\common\inc\EMGLineGeo.def"
+include "..\..\common\inc\EMGCircleGeo.def"
+
+Define SNAP_TOLERANCE 	2.0
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	Assert:
+'		record to check is current record in the magic table _LinkCheck
+'		model suite is open
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function LinkCheckDup(CheckMsg as string) as logical
+Dim		USBuffer, DSBuffer as object
+Dim		BegX, BegY, EndX, EndY as float
+Dim		LinkObj as object
+Dim		lResult as logical
+Dim		NTableName as string
+Dim		CumResult as logical
+Dim		NumRecs as smallint
+Dim		Radius as float
+Dim		MyUSNode, MyDSNode as string
+
+	if glDupSpace or glDupKey then
+		print "Assessing for duplicate link..."
+		CheckMsg = ""
+		CumResult = TRUE
+
+		LinkObj = _LinkCheck.obj
+		MyUSNode = _LinkCheck.USNode
+		MyDSNode = _LinkCHeck.DSNode
+
+		lResult = CalcEnds (LinkObj, BegX, BegY, EndX, EndY) 
+		Radius = SNAP_TOLERANCE
+		USBuffer = MakeCircle(BegX, BegY, Radius)
+		DSBuffer = MakeCircle(EndX, EndY, Radius)
+
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	'print "Link ends: " & str$(BegX) & "," &  str$(BegY)& " - " & str$(EndX)& "," &str$(EndX) 	
+		do case gMasterModelMode
+			case 1			' master
+				NTableName = "mst_links"
+			
+			case 2			' model
+				nTableName = "mdl_links"
+		end case
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		if glDupSpace then
+			Select * from NTableName
+				where obj intersects USBuffer and obj intersects DSBuffer
+				into _SameLink
+			NumRecs = TableInfo(_SameLink, TAB_INFO_NROWS)
+			Do Case NumRecs
+				case 0					' no dups
+				case else				' maybe dups
+					CumResult = FALSE
+					CheckMsg = CHeckMsg & " Space"
+			end case
+		end if
+		if glDupKey then
+			Select * from NTableName
+				where USNode = MyUSNode and DSNode = MyDSNode
+				into _SameLInk
+			NumRecs = TableInfo(_SameLink, TAB_INFO_NROWS)
+			Do Case NumRecs
+				case 0					' no dups
+				case else				' maybe dups
+					CumResult = FALSE
+					CheckMsg = CHeckMsg & " Keys"
+			end case
+		end if
+	end if
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	Assert:
+'		record to check is current record in the magic table _LinkCheck
+'		model suite is open
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function LinkCheckSpace(CheckMsg as string) as logical
+Dim		BegX, BegY, EndX, EndY as float
+Dim		LinkObj as object
+Dim		lResult as logical
+Dim		NTableName as string
+Dim		USNode, DSNode as string
+Dim		DSNodeObj, USNodeObj as object
+Dim		NumFound as smallint
+Dim		CumResult as logical
+Dim		PointX, PointY as float
+
+	LinkCheckSpace = TRUE
+	print "Checking link spatially"
+
+	' compute the ends of the lines.
+	LinkObj = _LinkCheck.obj
+	USNode = _LinkCheck.USNode
+	DSNode = _LinkCheck.DSNode
+
+	CheckMsg = ""
+	CumResult = TRUE
+
+	lResult = CalcEnds (LinkObj, BegX, BegY, EndX, EndY) 
+
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	'print "Link ends: " & str$(BegX) & "," &  str$(BegY)& " - " & str$(EndX)& "," &str$(EndX) 	
+	do case gMasterModelMode
+		case 1			' master
+			NTableName = "mst_nodes"
+			
+		case 2			' model
+			nTableName = "mdl_nodes"
+	end case
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+	select * from NTableName
+		where Node = USNode
+		into _USNode
+	NumFound = TableInfo(_USNode, TAB_INFO_NROWS)
+	do case NumFound
+		case 0
+			CheckMsg = CheckMsg & "USN Missing"
+		case 1
+			'   US node OK
+			USNodeObj = _USNode.obj
+			PointX = ObjectGeography(USNodeObj, OBJ_GEO_POINTX)
+			PointY = ObjectGeography(USNodeObj, OBJ_GEO_POINTY)
+			if abs(BegX - PointX) > SNAP_TOLERANCE then
+				CheckMsg = CheckMsg & " USN X"
+				CumResult = False
+			end if
+			if Abs(BegY - PointY) > SNAP_TOLERANCE then
+				checkMsg = CheckMsg & " USN Y"
+				CumResult = FALSE
+			end if
+		case else
+			CheckMsg = CheckMsg & "USN Dups"			
+			CumResult = False
+	end case
+
+
+	select * from NTableName
+		where Node = DSNode
+		into _DSNode
+	NumFound = TableInfo(_DSNode, TAB_INFO_NROWS)
+	do case NumFound
+		case 0
+			CheckMsg = CheckMsg & "DSN Missing"
+		case 1
+			'   DS node OK
+			DSNodeObj = _DSNode.obj
+			PointX = ObjectGeography(DSNodeObj, OBJ_GEO_POINTX)
+			PointY = ObjectGeography(DSNodeObj, OBJ_GEO_POINTY)
+			if abs(EndX - PointX) > SNAP_TOLERANCE then
+				CheckMsg = CheckMsg & " DSN X"
+				CumResult = False
+			end if
+			if Abs(EndY - PointY) > SNAP_TOLERANCE then
+				checkMsg = CheckMsg & " DSN Y"
+				CumResult = FALSE
+			end if
+		case else
+			CheckMsg = CheckMsg & "DSN Dups"			
+			CumResult = FALSE
+	end case
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	if CheckMsg <> "" then
+		print CheckMsg
+	end if
+	LinkCheckSpace = CumResult
+
+End Function

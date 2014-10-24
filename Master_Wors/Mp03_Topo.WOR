@@ -1,0 +1,254 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+Open Table "\\CASSIO\gis1\MI_DATA\FACILITY\OUTFALLS\OF_All_Current" As OF_All_Current Interactive
+Open Table "\\CASSIO\gis1\METRODAT\RLISLT99\streets\maj_art" As maj_art Interactive
+'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Revision  04/04/06
+'Open Table "\\cassio\GIS1\MI_DATA\PHOTOBAS\BUILDING\Bldg_BES" As Bldg_BES Interactive
+Open Table "\\CASSIO\MODELING\AGMaster21_calcs\ImpA\IAprocessing\Mdl_BLDG.TAB"  As Bldg_BES Interactive
+'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Open Table "\\CASSIO\GIS1\MI_DATA\PHOTOBAS\PAVEEDGE\Paveedge" As Paveedge Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\ENVIRON\TOPO\TOS\TOS" As TOS Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\ENVIRON\TOPO\TOP\Top" As Top Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\ENVIRON\TOPO\spot\SpotScrub" As SpotScrub Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\FACILITY\PUMPS\WORKING\PUMP" As PUMP Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\FACILITY\SANITARY\WORKING\All_n" As All_n Interactive
+Open Table "\\CASSIO\gis1\MI_DATA\FACILITY\SANITARY\WORKING\All_s" As All_s Interactive
+Map From mdl_Nodes_ac,mdl_links_ac,mdl_links_ac,Bldg_BES,Paveedge,Tric_row,
+  Waternew_rev0922,mdl_SurfSC_ac,SpotScrub,Top,TOS,arterial,
+  centerli,mdl_DirSC_ac,ProjArea 
+  Position (0.0833333,0.145833) Units "in"
+  Width 10 Units "in" Height 7.88542 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7653973.662,676091.3555)
+  Zoom 403.679942 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 3 with LinkType values 
+  "" Line (1,1,16711680) ,
+  "C" Line (2,2,16744703) ,
+  "D" Line (2,2,45056) ,
+  "IC" Line (1,92,16740607) ,
+  "IS" Line (1,92,11556864) ,
+  "PS" Line (2,26,16711680) ,
+  "S" Line (2,2,14694400) ,
+  "V" Line (1,2,32768) 
+  default   # color 1 # 
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (34,16776960,6)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 2000) Units "ft" 
+    Label Line Simple Position Left Font ("Arial Narrow",0,8,255) Pen (1,5,16711680) 
+      With Format$(GrndElev, "###.#")
+      Parallel On Auto On Overlap On Duplicates On Offset 9
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 2
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (12,1,16777215)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Arrows On
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Right Font ("Arial Narrow",0,8,16728319) Pen (1,2,0) 
+      With "USIE: "+USIE+Chr$(10)+"DSIE: "+DSIE
+      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2
+      Visibility On
+  Layer 3
+    Display Value
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (6,2,16776960)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (0, 2000) Units "ft" 
+  Layer 4
+    Display Graphic
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (6,2,16776960)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Below Font ("Arial Narrow",0,8,255) Pen (1,2,0) 
+      With DiamWidth+" "+Chr$(34)+Chr$(216)+Chr$(13)+" UE: "+USIE+Chr$(13)+" DE: "+DSIE
+      Parallel On Auto Off Overlap Off Duplicates On Offset 0
+      Visibility On
+  Layer 5
+    Display Global
+    Global Pen (14,2,9474192)  Brush (2,15597520,16777215)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Center Font ("Arial Narrow",0,8,10526880) Pen (1,2,0) 
+      With "" 'House_Number
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 6
+    Display Global
+    Global Pen (1,2,9474303)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,2,10526975)  Font ("Arial",0,9,16777215)
+    Selectable Off
+    Zoom (0, 2000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Global
+    Global Pen (1,2,9483775)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With mifcode
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 8
+    Display Global
+    Global Pen (1,24,255)  Brush (2,13697023,16777215)  Symbol (59,255,12)  Line (1,24,255)  Font ("Arial",0,9,16777215)
+    Selectable Off
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Subbasin
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global Pen (35,2,13684944)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTO
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 10
+    Display Global
+    Global Pen (1,2,16760960)  Brush (1,16777215,16777215)  Symbol (50,7368959,8)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Right Font ("Arial Narrow",0,8,11556864) Pen (1,2,0) 
+      With Format$(ELEVATION, "###.##")
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 11
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (2,2,16749680)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 2000) Units "ft" Off 
+    Label Line None Position Center Font ("Arial Narrow",256,8,8404992,16777215) Pen (1,2,0) 
+      With ELEVATION
+      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2
+      Visibility Zoom (0, 5000) Units "ft"
+  Layer 12
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16764992)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 2000) Units "ft" 
+    Label Line Arrow Position Center Font ("Arial Narrow",256,8,10516480,15532020) Pen (1,2,0) 
+      With ELEVATION
+      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 13
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (25,191,10526975)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (1999, 100000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial Narrow",1025,7,61680) Pen (1,2,0) 
+      With PREFIX+" "+STREETNAME+" "+FTYPE
+      Parallel On Auto On Overlap Off Duplicates Off PartialSegments On Offset 2
+      Visibility On
+  Layer 14
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16777215)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (0, 2000) Units "ft" 
+    Label Line None Position Above Font ("Arial Narrow",1025,7,44031) Pen (1,2,0) 
+      With street_full
+      Parallel On Auto On Overlap Off Duplicates Off PartialSegments On Offset 2
+      Visibility Zoom (3000, 9000) Units "ft"
+  Layer 15
+    Display Global
+    Global Pen (1,2,32768)  Brush (16,16776960)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTOSan
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 16
+    Display Global
+    Global Pen (90,2,12615935)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0 Bounds (-348623368.682, -335442185.296) (365027568.158, 378208751.545)
+Set Map Layer 0 Editable
+Create Point (7636447.9,694157.5)
+    Symbol (35,12632256,12) 
+Create Point (7637175.8,693698.2)
+    Symbol (35,12632256,12) 
+Set CoordSys Earth
+Set Map Layer 0 Editable
+set legend 
+  layer 3 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title "Model Sewers by Type" Font ("Arial Narrow",5,9,0)
+    subtitle "(mdl_Links_ac by LinkType)" Font ("Arial Narrow",0,7,7368816)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      auto display off ,
+      "C  - Combined" display on ,
+      "D - Stormwater" display on ,
+      "IC - CSO Interceptor" display on ,
+      "IS - Sanitary Interceptor" display on ,
+      "PS - Pressure Line" display on ,
+      "S - Sanitary" display on ,
+      "V - Culvert" display off  
+Set Window FrontWindow() Title "Main Map"
+Set map window  Frontwindow() Zoom 10 units "ft"
+Set Map Window  windowinfo(Frontwindow(),13) Zoom Entire Layer "ProjArea"
+Set map window  Frontwindow() Zoom (mapperinfo( Frontwindow(), 1) * 1.01) units "ft"
+Create Cartographic Legend
+  Position (8.5,0.03125) Units "in"
+  Width 3.51042 Units "in" Height 4.05208 Units "in" 
+  Window Title "Legend of Main Map"
+  Custom
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 16
+    Position (30,270) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Project Area" Region Pen (90,2,12615935)  Brush (1,0,16777215) 
+  Frame From Layer 9
+    Position (30,269.719) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Surface Subcatchment" Region Pen (35,2,13684944)  Brush (1,0,16777215) 
+  Frame From Layer 15
+    Position (30,269.51) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Direct Subcatchment" Region Pen (1,2,32768)  Brush (16,16776960) 
+  Frame From Layer 5
+    Position (30,269.323) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Building Outline\n(visible scale: 3,000 Ft)" Region Pen (14,2,9474192)  Brush (2,15597520,16777215) 
+  Frame From Layer 11
+    Position (30,268.917) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "10 Ft Interval Contour Lines" Line Pen (2,2,16749680) 
+  Frame From Layer 12
+    Position (30,268.74) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "2 Ft Interval Contour Lines\n(visible scale ; 3,000 Ft)" Line Pen (1,2,16764992) 
+  Frame From Layer 10
+    Position (30,268.333) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Spot Elevations\n(visible scale : 3,000 Ft)" Symbol (50,7368959,8) 
+  Frame From Layer 3
+    Position (30.0104,268.01) Units "in"
+    Border Pen (1,1,0) 

@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>
+<StudyArea studyArea="Chataqua Basin">
+  <CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="5">
+    <Header>
+      <Cell data="Criteria" cellType="COLUMNNAME" footerID="" />
+      <Cell data="2-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="5-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="25-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="25-Year Storm Future Conditions" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown" cellType="ROWNAME" footerID="a" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="3%" />
+      <Cell cellType="FUNCTION" data="4%" />
+      <Cell cellType="FUNCTION" data="4%" />
+    </Row>
+    <Row>
+      <Cell data="Deficient Pipe Capacity: Percent of the study area with peak flow to design flow ratio &gt; 1.2" cellType="ROWNAME" footerID="a" />
+      <Cell cellType="FUNCTION" data="2%" />
+      <Cell cellType="FUNCTION" data="2%" />
+      <Cell cellType="FUNCTION" data="4%" />
+      <Cell cellType="FUNCTION" data="5%" />
+    </Row>
+    <Row>
+      <Cell data="Basement Sewer Backup Risk: Percent of study are where hydraulic grade line is within 0 to 8 feet of finished floor." cellType="ROWNAME" footerID="b" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Footer footerID="a" footerText="Based on number of pipe segments." />
+    <Footer footerID="b" footerText="Based on number of direct subcatchments as defined in EMD-074, provided in Appendix A of the Combined Sewer System Plan Characterization Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="2" tableTitle="Zoning and Effective Impervious Area" columnCount="9">
+    <Header>
+      <Cell data="" cellType="COLUMNNAME" />
+      <Cell data="Total Area (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Single Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Mutli-Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Industrial (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Commercial (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Parks and Open Spaces (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Other (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Effective Impervious Area (acres)" cellType="COLUMNNAME" footerID="*" />
+    </Header>
+    <Row>
+      <Cell data="Existing (2006)" cellType="ROWNAME" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="FUNCTION" data="53" />
+      <Cell cellType="FUNCTION" data="25" />
+      <Cell cellType="FUNCTION" data="18" />
+      <Cell cellType="FUNCTION" data="5" />
+      <Cell cellType="FUNCTION" data="14" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="CONST" data="Manual Entry" />
+    </Row>
+    <Row>
+      <Cell data="Future (2040)" cellType="ROWNAME" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="FUNCTION" data="51" />
+      <Cell cellType="FUNCTION" data="26" />
+      <Cell cellType="FUNCTION" data="18" />
+      <Cell cellType="FUNCTION" data="5" />
+      <Cell cellType="FUNCTION" data="14" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="CONST" data="Manual Entry" />
+    </Row>
+    <Footer footerID="*" footerText="For information about how effective impervious area is calculated, refer to EMD-074, provided in Appendix A of the Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="3" tableTitle="Collection System Features" columnCount="4">
+    <Header>
+      <Cell data="Feature" cellType="COLUMNNAME" />
+      <Cell data="No. of Segments" cellType="COLUMNNAME" />
+      <Cell data="Length (miles)" cellType="COLUMNNAME" />
+      <Cell data="Maximum Diameter" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell data="Combined sewer" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="68" />
+      <Cell cellType="FUNCTION" data="2.4" />
+      <Cell cellType="FUNCTION" data="33&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Stormwater" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="24" />
+      <Cell cellType="FUNCTION" data="0.9" />
+      <Cell cellType="FUNCTION" data="36&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Sanitary sewer" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="31" />
+      <Cell cellType="FUNCTION" data="1.2" />
+      <Cell cellType="FUNCTION" data="8&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Interceptor" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="7" />
+      <Cell cellType="FUNCTION" data="0.7" />
+      <Cell cellType="FUNCTION" data="144&quot;" />
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="4" tableTitle="Diversion Locations and Locations of Future Connections to Tunnel System" columnCount="6">
+    <Header>
+      <Cell data="Location" cellType="COLUMNNAME" />
+      <Cell data="Node ID" cellType="COLUMNNAME" />
+      <Cell data="Diversion ID" cellType="COLUMNNAME" />
+      <Cell data="Node Type" cellType="COLUMNNAME" />
+      <Cell data="Status" cellType="COLUMNNAME" />
+      <Cell data="Outfall ID" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell cellType="FUNCTION" data="N CHAUTAUQUA PL 170' N OF JUNEAU, NEAR POWER POLE" />
+      <Cell cellType="FUNCTION" data="AAF534" />
+      <Cell cellType="FUNCTION" data="NE8A" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Abandoned" />
+      <Cell cellType="FUNCTION" data="CSCC" />
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="5" tableTitle="Pump Station and Force Main" columnCount="5" isMultiTable="true" multiTableKey="PumpStationList">
+    <Row>
+      <Cell cellType="COLUMNNAME" data="There are no pump stations present in this study area." colSpan="5" />
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="6" tableTitle="Roof and Parking Area Direct Connections and Underground Injection Controls (Existing Conditions)" columnCount="3">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Direct Subcatchment Connection Rate" footerID="*" />
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent of Total" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 99% connected" />
+      <Cell cellType="FUNCTION" data="101" />
+      <Cell cellType="FUNCTION" data="25%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="75% to 99% connected" />
+      <Cell cellType="FUNCTION" data="36" />
+      <Cell cellType="FUNCTION" data="9%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="50% to 75% connected" />
+      <Cell cellType="FUNCTION" data="32" />
+      <Cell cellType="FUNCTION" data="8%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="25% to 50% connected" />
+      <Cell cellType="FUNCTION" data="65" />
+      <Cell cellType="FUNCTION" data="16%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&lt; 25% connected" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Sanitary-only connection" />
+      <Cell cellType="FUNCTION" data="173" />
+      <Cell cellType="FUNCTION" data="43%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total" />
+      <Cell cellType="FUNCTION" data="407" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Row>
+      <Cell cellType="COLUMNNAME" data="Underground Injection Controls" />
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent of Total" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="UICs identified for review" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total UICs" />
+      <Cell cellType="FUNCTION" data="36" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="7" tableTitle="Roof Disconnections by Zoning" columnCount="3">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Zoning Category" />
+      <Cell cellType="COLUMNNAME" data="Existing Condition Percent of Tax Lots with Roof Disconnections" />
+      <Cell cellType="COLUMNNAME" data="Assumed Future Condition Percent of Tax Lots with Roof Disconnections" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="Commercial" />
+      <Cell cellType="FUNCTION" data="100%" />
+      <Cell cellType="FUNCTION" data="100%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Industrial" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Multifamily Residential" />
+      <Cell cellType="FUNCTION" data="7%" />
+      <Cell cellType="FUNCTION" data="7%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Single Family Residential" />
+      <Cell cellType="FUNCTION" data="42%" />
+      <Cell cellType="FUNCTION" data="47%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Parks and Open Spaces" />
+      <Cell cellType="FUNCTION" data="50%" />
+      <Cell cellType="FUNCTION" data="50%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Other" />
+      <Cell cellType="FUNCTION" data="33%" />
+      <Cell cellType="FUNCTION" data="36%" />
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="8" tableTitle="Pipe Surcharge" columnCount="9">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Pipe Surcharge" footerID="a" rowSpan="2" />
+      <Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="2" />
+      <Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="2" />
+      <Cell cellType="COLUMNNAME" data="25-Year Storm, Existing Conditions" colSpan="2" />
+      <Cell cellType="COLUMNNAME" data="25-Year Storm, Future Conditions" colSpan="2" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Length (Number)" />
+      <Cell cellType="COLUMNNAME" data="Percent of Length" />
+      <Cell cellType="COLUMNNAME" data="Length (Number)" />
+      <Cell cellType="COLUMNNAME" data="Percent of Length" />
+      <Cell cellType="COLUMNNAME" data="Length (Number)" />
+      <Cell cellType="COLUMNNAME" data="Percent of Length" />
+      <Cell cellType="COLUMNNAME" data="Length (Number)" />
+      <Cell cellType="COLUMNNAME" data="Percent of Length" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="≤ 4 feet" />
+      <Cell cellType="FUNCTION" data="5.2 (130)" />
+      <Cell cellType="FUNCTION" data="100%" />
+      <Cell cellType="FUNCTION" data="5.1 (126)" />
+      <Cell cellType="FUNCTION" data="98%" />
+      <Cell cellType="FUNCTION" data="5.1 (125)" />
+      <Cell cellType="FUNCTION" data="97%" />
+      <Cell cellType="FUNCTION" data="5.1 (125)" />
+      <Cell cellType="FUNCTION" data="97%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 4 feet" />
+      <Cell cellType="FUNCTION" data="0.0 (0)" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0.1 (4)" />
+      <Cell cellType="FUNCTION" data="2%" />
+      <Cell cellType="FUNCTION" data="0.2 (5)" />
+      <Cell cellType="FUNCTION" data="3%" />
+      <Cell cellType="FUNCTION" data="0.2 (5)" />
+      <Cell cellType="FUNCTION" data="3%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total" />
+      <Cell cellType="FUNCTION" data="5.2 (130)" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="5.2 (130)" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="5.2 (130)" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="5.2 (130)" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 30 minutes" footerID="b" />
+      <Cell cellType="FUNCTION" data="0.0 (0)" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0.0 (0)" />
+      <Cell cellType="FUNCTION" data="7%" />
+      <Cell cellType="FUNCTION" data="0.3 (4)" />
+      <Cell cellType="FUNCTION" data="6%" />
+      <Cell cellType="FUNCTION" data="0.2 (2)" />
+      <Cell cellType="FUNCTION" data="4%" />
+    </Row>
+    <Footer footerID="a" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments." />
+    <Footer footerID="b" footerText="Refers to greater measured surcharge at either the upstream or downstream manhole, relative to the highest crown elevation of all pipes at that manhole." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="9" tableTitle="Basement Sewer Backup Risk for 2-Year and 5-Year Storms under Existing Conditions" columnCount="5">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Flooding Risk as Distance from Finished Floor" rowSpan="2" />
+      <Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="2" />
+      <Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="2" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent" />
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="≤ 6 feet" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 6 to 8 feet" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 8 to 10 feet" />
+      <Cell cellType="FUNCTION" data="4" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="5" />
+      <Cell cellType="FUNCTION" data="1%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 10 feet" />
+      <Cell cellType="FUNCTION" data="397" />
+      <Cell cellType="FUNCTION" data="98%" />
+      <Cell cellType="FUNCTION" data="396" />
+      <Cell cellType="FUNCTION" data="97%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Sewer pipe crown ≥ estimated basement elevation" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total Direct Subcatchments" footerID="*" />
+      <Cell cellType="FUNCTION" data="407" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="407" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="10" tableTitle="Basement Sewer Backup Risk for 25-Year Storm under Existing and Future Conditions" columnCount="5">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Flooding Risk as Distance from Finished Floor" rowSpan="2" />
+      <Cell cellType="COLUMNNAME" data="Existing" colSpan="2" />
+      <Cell cellType="COLUMNNAME" data="Future" colSpan="2" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent" />
+      <Cell cellType="COLUMNNAME" data="Number" />
+      <Cell cellType="COLUMNNAME" data="Percent" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="≤ 6 feet" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="0" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 6 to 8 feet" />
+      <Cell cellType="FUNCTION" data="2" />
+      <Cell cellType="FUNCTION" data="0%" />
+      <Cell cellType="FUNCTION" data="2" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 8 to 10 feet" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 10 feet" />
+      <Cell cellType="FUNCTION" data="393" />
+      <Cell cellType="FUNCTION" data="97%" />
+      <Cell cellType="FUNCTION" data="393" />
+      <Cell cellType="FUNCTION" data="97%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Sewer pipe crown ≥ estimated basement elevation" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="6" />
+      <Cell cellType="FUNCTION" data="1%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total Direct Subcatchments" footerID="*" />
+      <Cell cellType="FUNCTION" data="407" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="407" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="11" tableTitle="Pipe Capacity for 2-Year and 5-Year Storms under Existing Conditions" columnCount="9">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Peak Flow to Design Flow Ratio" rowSpan="3" />
+      <Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="4" />
+      <Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="4" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter" colSpan="3" footerID="*" />
+      <Cell cellType="COLUMNNAME" data="Percent" rowSpan="2" />
+      <Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter" colSpan="3" footerID="*" />
+      <Cell cellType="COLUMNNAME" data="Percent" rowSpan="2" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="≤18&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 18&quot; and  ≤ 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="≤ 18&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 18&quot; and ≤ 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 36&quot;" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 1.5" />
+      <Cell cellType="FUNCTION" data="0 (1)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="0.1 (3)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="2%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 1.2 to 1.5" />
+      <Cell cellType="FUNCTION" data="0.1 (2)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="2%" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 0.7 to 1.2" />
+      <Cell cellType="FUNCTION" data="0.1 (3)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="2%" />
+      <Cell cellType="FUNCTION" data="0.3 (6)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="5%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 0 to 0.7" />
+      <Cell cellType="FUNCTION" data="3 (82)" />
+      <Cell cellType="FUNCTION" data="0.9 (18)" />
+      <Cell cellType="FUNCTION" data="0.6 (3)" />
+      <Cell cellType="FUNCTION" data="79%" />
+      <Cell cellType="FUNCTION" data="2.8 (79)" />
+      <Cell cellType="FUNCTION" data="0.9 (18)" />
+      <Cell cellType="FUNCTION" data="0.6 (3)" />
+      <Cell cellType="FUNCTION" data="77%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="≤ 0" />
+      <Cell cellType="FUNCTION" data="0.4 (12)" />
+      <Cell cellType="FUNCTION" data="0.1 (5)" />
+      <Cell cellType="FUNCTION" data="0.1 (4)" />
+      <Cell cellType="FUNCTION" data="16%" />
+      <Cell cellType="FUNCTION" data="0.4 (12)" />
+      <Cell cellType="FUNCTION" data="0.1 (5)" />
+      <Cell cellType="FUNCTION" data="0.1 (4)" />
+      <Cell cellType="FUNCTION" data="16%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total" />
+      <Cell cellType="FUNCTION" data="3.6 (100)" />
+      <Cell cellType="FUNCTION" data="1 (23)" />
+      <Cell cellType="FUNCTION" data="0.7 (7)" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="3.6 (100)" />
+      <Cell cellType="FUNCTION" data="1 (23)" />
+      <Cell cellType="FUNCTION" data="0.7 (7)" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Footer footerID="*" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="12" tableTitle="Pipe Capacity for 25-Year Storm under Existing and Future Conditions" columnCount="9">
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Peak Flow to Design Flow Ratio" footerID="*" rowSpan="3" />
+      <Cell cellType="COLUMNNAME" data="Existing" colSpan="4" />
+      <Cell cellType="COLUMNNAME" data="Future" colSpan="4" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter" colSpan="3" footerID="*" />
+      <Cell cellType="COLUMNNAME" data="Percent" rowSpan="2" />
+      <Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter" colSpan="3" footerID="*" />
+      <Cell cellType="COLUMNNAME" data="Percent" rowSpan="2" />
+    </Header>
+    <Header>
+      <Cell cellType="COLUMNNAME" data="≤18&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 18&quot; and  ≤ 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="≤ 18&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 18&quot; and ≤ 36&quot;" />
+      <Cell cellType="COLUMNNAME" data="&gt; 36&quot;" />
+    </Header>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 1.5" />
+      <Cell cellType="FUNCTION" data="0.2 (4)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="3%" />
+      <Cell cellType="FUNCTION" data="0.2 (4)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="3%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 1.2 to 1.5" />
+      <Cell cellType="FUNCTION" data="0 (1)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="1%" />
+      <Cell cellType="FUNCTION" data="0.1 (2)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="2%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 0.7 to 1.2" />
+      <Cell cellType="FUNCTION" data="0.4 (11)" />
+      <Cell cellType="FUNCTION" data="0.3 (7)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="14%" />
+      <Cell cellType="FUNCTION" data="0.4 (10)" />
+      <Cell cellType="FUNCTION" data="0.3 (7)" />
+      <Cell cellType="FUNCTION" data="0 (0)" />
+      <Cell cellType="FUNCTION" data="13%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="&gt; 0 to 0.7" />
+      <Cell cellType="FUNCTION" data="2.6 (73)" />
+      <Cell cellType="FUNCTION" data="0.5 (11)" />
+      <Cell cellType="FUNCTION" data="0.6 (3)" />
+      <Cell cellType="FUNCTION" data="67%" />
+      <Cell cellType="FUNCTION" data="2.7 (77)" />
+      <Cell cellType="FUNCTION" data="0.5 (11)" />
+      <Cell cellType="FUNCTION" data="0.6 (3)" />
+      <Cell cellType="FUNCTION" data="70%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="≤ 0" />
+      <Cell cellType="FUNCTION" data="0.3 (11)" />
+      <Cell cellType="FUNCTION" data="0.1 (5)" />
+      <Cell cellType="FUNCTION" data="0.1 (4)" />
+      <Cell cellType="FUNCTION" data="15%" />
+      <Cell cellType="FUNCTION" data="0.2 (7)" />
+      <Cell cellType="FUNCTION" data="0.1 (5)" />
+      <Cell cellType="FUNCTION" data="0.1 (4)" />
+      <Cell cellType="FUNCTION" data="12%" />
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total" />
+      <Cell cellType="FUNCTION" data="3.6 (100)" />
+      <Cell cellType="FUNCTION" data="1 (23)" />
+      <Cell cellType="FUNCTION" data="0.7 (7)" />
+      <Cell cellType="CONST" data="100%" />
+      <Cell cellType="FUNCTION" data="3.6 (100)" />
+      <Cell cellType="FUNCTION" data="1 (23)" />
+      <Cell cellType="FUNCTION" data="0.7 (7)" />
+      <Cell cellType="CONST" data="100%" />
+    </Row>
+    <Footer footerID="*" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments." />
+  </CharacterizationTable>
+</StudyArea>
