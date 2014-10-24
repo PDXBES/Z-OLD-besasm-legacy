@@ -124,6 +124,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           case Enumerators.StreetTypeKind.Freeway:
             unitCostPerDayOfTrafficControl = TRAFFIC_CONTROL_FREEWAY_COST_PER_DAY;
             break;
+          case Enumerators.StreetTypeKind.None:
+            unitCostPerDayOfTrafficControl = 0 ;
+            break;
         } // switch
         return unitCostPerDayOfTrafficControl;
       } // get
@@ -157,11 +160,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfUsNodeInIntersection :
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection > baseStreets ?
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
-        return (_isLiner ? _constructionDurationCalculator.ConstructionDurationDays(
-          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment, isLiner:true,
-          segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : _constructionDurationCalculator.ConstructionDurationDays(
-          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
-          (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
+        return (
+          _isLiner ? 
+          _constructionDurationCalculator.ConstructionDurationDays(
+            _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment, isLiner:true,
+            segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : 
+          _constructionDurationCalculator.ConstructionDurationDays(
+            _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
+            (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
       } // get
     } // Units
 

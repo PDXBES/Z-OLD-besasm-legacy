@@ -155,7 +155,8 @@ namespace SystemsAnalysis.Types
       Street,
       Arterial,
       MajorArterial,
-      Freeway
+      Freeway,
+      None
     }
 
     /// <summary>
