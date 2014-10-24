@@ -1785,7 +1785,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add("Sawcutting AC pavement",
-          new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", 4));
+          new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", TrenchBaseWidth));
           DirectConstructionCostItems.Add(string.Format("Asphalt removal {0:F0} in inside diam", _InsideDiameter),
           new UnitCost((float)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
           DirectConstructionCostItems.Add(string.Format("Trench excavation {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
