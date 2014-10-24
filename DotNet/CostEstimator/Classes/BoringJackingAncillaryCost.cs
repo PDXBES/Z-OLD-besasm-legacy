@@ -87,7 +87,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _coster.Depth = _ConflictPackage.Depth;
 
         double multiplier = IsMicroTunnel ? MICROTUNNELMULTIPLIER : BORINGJACKINGMULTIPLIER;
-        return (float)((double)_coster.DirectConstructionCost * multiplier);
+
+        return (float)((double)(
+          _coster.DirectConstructionCost/*-_coster.TrenchExcavationCostPerCuYdFromDepth(_coster.Depth)*/) * multiplier);
       } // get
     } // UnitCost
 
