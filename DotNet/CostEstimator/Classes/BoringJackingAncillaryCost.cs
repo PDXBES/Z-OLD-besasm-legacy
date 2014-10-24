@@ -20,7 +20,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// </summary>
   class BoringJackingAncillaryCost : AncillaryCost
   {
-    private const int MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT = 30;
+    private const int MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT = 25;
     #region Variables
     ConflictPackage _ConflictPackage;
     #endregion
