@@ -160,8 +160,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         bool crossesRailroad = _ConflictPackage.Conflicts.NumRailroadCrossings > 0;
         bool crossesLightRail = _ConflictPackage.Conflicts.NumLightRailCrossings > 0;
         bool crossesBuilding = _ConflictPackage.Conflicts.IsNearBuilding;
-        return highPipeDepth || crossesFreeway || crossesRailroad || crossesLightRail ||
-        crossesBuilding;
+        bool qualifiesForBoringJacking = highPipeDepth || crossesFreeway || crossesRailroad || crossesLightRail ||
+                crossesBuilding;
+        return qualifiesForBoringJacking;
       } // get
     } // IsBoringJacking
 

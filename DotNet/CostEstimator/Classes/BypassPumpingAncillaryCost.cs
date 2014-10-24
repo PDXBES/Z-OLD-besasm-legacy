@@ -139,12 +139,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _isLiner ?
-          _constructionDurationCalculator.ConstructionDurationDays(
-            _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction:_isSegment, isLiner:true,
-            segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : 
-          _constructionDurationCalculator.ConstructionDurationDays(
-          _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment);
+        float linerDuration = _constructionDurationCalculator.ConstructionDurationDays(
+                    _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction: _isSegment, isLiner: true,
+                    segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength);
+        float nonlinerDuration = _constructionDurationCalculator.ConstructionDurationDays(
+                    _ConflictPackage, _coster, hasManhole: _hasManhole, returnFraction: _isSegment);
+        return _isLiner ? linerDuration : nonlinerDuration;
       } // get
     } // Units
 

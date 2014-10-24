@@ -2228,7 +2228,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 string ancillaryName = string.Empty;
                 if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
                   ancillaryName = "Boring/jacking";
-                else if (ancillaryCIF.Name.StartsWith("Microtunneling"))
+                else if (ancillaryCIF.Name.StartsWith("Microtunnel"))
                   ancillaryName = "Microtunnel";
                 else if (ancillaryCIF.Name.StartsWith("Parallel water relocation"))
                   ancillaryName = "Parallel water relocation";
@@ -2364,7 +2364,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               string.Format(",{0:#}", manholeCIFs[item].Cost) :
               ",");
             WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Boring/jacking", line);
-            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Microtunneling", line);
+            WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Microtunnel", line);
             WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Traffic control", line);
             WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Parallel water relocation", line);
             WriteCIFPipeAncillaryFactor(ancillaryCIFs, item, "Crossing relocation", line);
