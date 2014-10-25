@@ -169,9 +169,6 @@ Global
 		{19DE0713-65B7-4D46-A537-49704F93CB90} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 		{9AE8BF25-3ABF-402D-BC63-841E8588D20C} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ".\CostEstimator.ndproj"
 	EndGlobalSection
