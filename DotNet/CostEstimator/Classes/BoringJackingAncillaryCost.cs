@@ -25,7 +25,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     ConflictPackage _ConflictPackage;
     #endregion
 
-    private static double BORINGJACKINGMULTIPLIER = 2.5;
+    private static double BORINGJACKINGMULTIPLIER = 3.0;
     private static double MICROTUNNELMULTIPLIER = 3.0;
     private PipeCoster _coster = null;
     #region Constructors
@@ -57,8 +57,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             tunnelType = "Boring/jacking";
         } // if
 
-        return string.Format("{3} {0:F0} in diam, {1} pipe, {2:F0} ft deep", _ConflictPackage.Diameter,
-        _ConflictPackage.PipeMaterial, _ConflictPackage.Depth, tunnelType);
+        return string.Format("{3} {0:F0} in diam, {1} pipe, {2:F0} ft deep",
+          _ConflictPackage.Diameter,
+          _ConflictPackage.PipeMaterial,
+          _ConflictPackage.Depth, 
+          tunnelType);
       } // get
     } // Name
 
@@ -87,9 +90,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _coster.Depth = _ConflictPackage.Depth;
 
         double multiplier = IsMicroTunnel ? MICROTUNNELMULTIPLIER : BORINGJACKINGMULTIPLIER;
-
+        double backOutTrenchCost = _coster.TrenchExcavationCostPerCuYdFromDepth(_coster.Depth) *
+          (_coster.ExcavationVolume - _coster.PipeVolume);
         return (float)((double)(
-          _coster.DirectConstructionCost/*-_coster.TrenchExcavationCostPerCuYdFromDepth(_coster.Depth)*/) * multiplier);
+          _coster.DirectConstructionCost-backOutTrenchCost) * multiplier);
       } // get
     } // UnitCost
 
@@ -113,7 +117,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return _ConflictPackage.Length <= 50;
+        return false;
       } // get
     } // isMicroTunnel
 
@@ -127,22 +131,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         if (IsBoringJacking)
         {
-          bool highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
-          bool crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
-
-          if (highPipeDepth || crossesFreeway)
-          {
-            return _ConflictPackage.Length;
-          } // if
-          else
-          {
-            // AltPipXP routine can have overlapping crossings, and so
-            // multiplying the number of crossings by 50 ft. won't really work,
-            // nor would a plain old' 50 ft. if there is a crossing at all.
-            // We'll return 50 for now, but we'll have to redesign the conflict 
-            // database and detection routine to calculate possible boring length
-            return 50;
-          } // else
+          return _ConflictPackage.Length;
         } // if
         else
           return 0;
