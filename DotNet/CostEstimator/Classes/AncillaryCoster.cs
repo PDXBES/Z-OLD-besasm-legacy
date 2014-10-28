@@ -287,7 +287,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       if (!_suppressSurfaceAncillaries)
       {
-        ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage, coster).AncillaryCost);
+        ancillaryCosts.Add(
+          new BoringJackingAncillaryCost(
+            conflictPackage, coster, coster.BaseENR).AncillaryCost);
         ancillaryCosts.Add(
           new TrafficControlAncillaryCost(
             conflictPackage, coster, _constructionDurationCalculator, hasManhole: _hasManhole, isSegment: (_Segment != null)).AncillaryCost);

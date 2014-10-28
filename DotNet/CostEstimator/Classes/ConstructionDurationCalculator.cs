@@ -72,7 +72,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         if (conflictPackage.Depth > BOREJACK_DEPTH_FT)
         {
-          BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage, _coster);
+          BoringJackingAncillaryCost testBoring = 
+            new BoringJackingAncillaryCost(conflictPackage, _coster, _coster.BaseENR);
           numDays = testBoring.IsMicroTunnel ?
             (float)Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
             conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?

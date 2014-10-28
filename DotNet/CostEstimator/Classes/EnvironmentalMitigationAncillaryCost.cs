@@ -22,7 +22,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   {
     #region Constants
     private const float UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 150000;
-    private const double ENVIRONMENTAL_ZONE_AFFECTED_WIDTH = 50;
+    private const double ENVIRONMENTAL_ZONE_AFFECTED_WIDTH = 25;
     #endregion
 
     #region Variables
