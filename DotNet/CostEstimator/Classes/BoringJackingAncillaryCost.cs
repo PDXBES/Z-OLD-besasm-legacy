@@ -28,14 +28,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private static double BORINGJACKINGMULTIPLIER = 3.0;
     private static double MICROTUNNELMULTIPLIER = 3.0;
     private PipeCoster _coster = null;
+    private ENR _baseENR;
+
     #region Constructors
     /// <summary>
     /// Create boring jacking ancillary cost
     /// </summary>
-    public BoringJackingAncillaryCost(ConflictPackage conflictPackage, PipeCoster coster)
+    public BoringJackingAncillaryCost(
+      ConflictPackage conflictPackage, 
+      PipeCoster coster, 
+      ENR baseENR)
     {
       _ConflictPackage = conflictPackage;
       _coster = coster;
+      _baseENR = baseENR;
     } // BoringJackingAncillaryCost()
     #endregion
 
@@ -89,11 +95,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _coster.Material = _ConflictPackage.PipeMaterial;
         _coster.Depth = _ConflictPackage.Depth;
 
-        double multiplier = IsMicroTunnel ? MICROTUNNELMULTIPLIER : BORINGJACKINGMULTIPLIER;
-        double backOutTrenchCost = _coster.TrenchExcavationCostPerCuYdFromDepth(_coster.Depth) *
-          (_coster.ExcavationVolume - _coster.PipeVolume);
-        return (float)((double)(
-          _coster.DirectConstructionCost-backOutTrenchCost) * multiplier);
+        const double curveENR = 9500.0;
+        double unitCost = 566.95 * Math.Pow(Math.E, 0.0119 * _coster.InsideDiameter);
+        double unitCostAdjustedForENR = unitCost * (double)_baseENR.Value / curveENR;
+        bool outsideTable;
+        double backOutPipeCost = unitCostAdjustedForENR - 
+          (double)_coster.PipeCost(_coster.Material, _coster.InsideDiameter, out outsideTable);
+        return (float)backOutPipeCost;
       } // get
     } // UnitCost
 
