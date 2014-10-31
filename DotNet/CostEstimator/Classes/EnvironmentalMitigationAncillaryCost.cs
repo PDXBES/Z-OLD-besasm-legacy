@@ -97,10 +97,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        return (float)(
-        _ConflictPackage.Conflicts.LengthInConservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH +
-        _ConflictPackage.Conflicts.LengthInPreservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH) /
-        Common.SQUARE_FEET_PER_ACRE;
+        float enviroMitigationUnits = (float)(
+          _ConflictPackage.Conflicts.LengthInConservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH +
+          _ConflictPackage.Conflicts.LengthInPreservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH) /
+          Common.SQUARE_FEET_PER_ACRE;
+
+        return _ConflictPackage.Conflicts.StreetType != Types.Enumerators.StreetTypeKind.None ? 
+          0 : 
+          enviroMitigationUnits;
       } // get
     } // Units
 
