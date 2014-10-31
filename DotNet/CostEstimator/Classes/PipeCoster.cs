@@ -1849,7 +1849,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           DirectConstructionCostItems.Add(string.Format("Truck haul excavation spoils {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
             new UnitCost((float)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
           DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth),
-            new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth));
+            new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth * 2));
           DirectConstructionCostItems.Add(string.Format("Pipe cost {0:F0} in inside diam", _InsideDiameter),
             new UnitCost((float)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
           if (outsidePipeCostTable)
