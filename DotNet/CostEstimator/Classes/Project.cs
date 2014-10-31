@@ -2054,7 +2054,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
           // Ancillary CostFactors
           currentStage = "Creating ancillary CostFactors";
-          if (ancillaryCoster.PipXP != null)
+          if (ancillaryCoster.Conflict != null)
           {
             List<AncillaryFactor> ancillaryFactors = ancillaryCoster.RehabAncillaryFactors;
             foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
