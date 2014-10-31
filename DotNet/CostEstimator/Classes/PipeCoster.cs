@@ -171,6 +171,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   {
     #region Constants
         private const int DEFAULT_AC_WIDTH = 4;
+        private const int MAX_TRENCH_SHORING_DEPTH = 18;
 
 #endregion
     #region Variables
@@ -1848,8 +1849,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             new UnitCost((float)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
           DirectConstructionCostItems.Add(string.Format("Truck haul excavation spoils {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
             new UnitCost((float)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
-          DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth),
-            new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth * 2));
+
+          if (_Depth < MAX_TRENCH_SHORING_DEPTH)
+            DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth),
+              new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth * 2));
           DirectConstructionCostItems.Add(string.Format("Pipe cost {0:F0} in inside diam", _InsideDiameter),
             new UnitCost((float)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
           if (outsidePipeCostTable)
