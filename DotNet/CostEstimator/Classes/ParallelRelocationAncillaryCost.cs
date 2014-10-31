@@ -51,7 +51,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         bool isInConflict;
         try
         {
-          isInConflict = (_ConflictPackage.Conflicts.HasWaterParallel);
+          if (_ConflictPackage.Conflict != null)
+            isInConflict = _ConflictPackage.Conflict.NumWaterParallels > 0;
+          else
+            isInConflict = (_ConflictPackage.Conflicts.HasWaterParallel);
         }
         catch (ArgumentException)
         {
@@ -91,7 +94,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         bool isInConflict;
         try
         {
-          isInConflict = _ConflictPackage.Conflicts.HasWaterParallel;
+          if (_ConflictPackage.Conflict != null)
+            isInConflict = _ConflictPackage.Conflict.NumWaterParallels > 0;
+          else
+            isInConflict = _ConflictPackage.Conflicts.HasWaterParallel;
         }
         catch (ArgumentException e)
         {
@@ -130,7 +136,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         try
         {
-          return _ConflictPackage.Conflicts.HasWaterParallel ? 1 : 0;
+          if (_ConflictPackage.Conflict != null)
+            return _ConflictPackage.Conflict.NumWaterParallels > 0 ? 1 : 0;
+          else
+            return _ConflictPackage.Conflicts.HasWaterParallel ? 1 : 0;
         }
         catch (ArgumentException)
         {
