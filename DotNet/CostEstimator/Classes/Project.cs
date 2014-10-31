@@ -2406,8 +2406,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       Dictionary<CostItemFactor, CostItemFactor> pipePipeZoneBackfillCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeFillAbovePipeZoneCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeLinerTVCleaningCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
-      Dictionary<CostItemFactor, CostItemFactor> pipePipeburstLateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
-      Dictionary<CostItemFactor, CostItemFactor> pipePipeburstTVCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeCostCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> pipeTrenchExcavationCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
       Dictionary<CostItemFactor, CostItemFactor> lateralCIFs = new Dictionary<CostItemFactor, CostItemFactor>();

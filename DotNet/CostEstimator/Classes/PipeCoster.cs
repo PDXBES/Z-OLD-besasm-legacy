@@ -1874,7 +1874,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         case PipeMaterial.CIPP:
           _OutsideTableMessages.Clear();
 
-          DirectConstructionCostItems.Add(string.Format("CIPP pipe cost {0:F0} in inside diam", _InsideDiameter),
+          DirectConstructionCostItems.Add(string.Format("Pipe cost - liner {0:F0} in inside diam", _InsideDiameter),
           new UnitCost((float)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
           if (outsideCIPPCostTable)
             _OutsideTableMessages.Add("CIPP Cost", "Outside CIPP cost table");
@@ -1889,7 +1889,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         case PipeMaterial.Pipeburst:
           _OutsideTableMessages.Clear();
 
-          DirectConstructionCostItems.Add(string.Format("Pipeburst pipe cost {0:F0} in inside diam", _InsideDiameter),
+          DirectConstructionCostItems.Add(string.Format("Pipe cost - pipeburst {0:F0} in inside diam", _InsideDiameter),
             new UnitCost((float)((double)PipeburstPipeCost(_InsideDiameter, out outsidePipeburstCostTable)), "ft"));
           if (outsidePipeburstCostTable)
             _OutsideTableMessages.Add("Pipeburst Cost", "Outside pipeburst cost table");
