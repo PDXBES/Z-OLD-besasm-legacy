@@ -257,6 +257,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       } // set
     } // PipXP
 
+    public Conflict Conflict
+    {
+      get
+      {
+        return _Conflict;
+      }
+    }
     /// <summary>
     /// Returns the current link being processed
     /// </summary>
