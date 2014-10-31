@@ -205,6 +205,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         return _PipeConflict;
       } // get
     } // Conflict
+
+    public Conflict Conflict
+    {
+      get
+      {
+        return _Conflict;
+      }
+    }
     #endregion
   }
 }
