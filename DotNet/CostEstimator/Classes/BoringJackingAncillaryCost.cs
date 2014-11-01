@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SystemsAnalysis.Modeling.Alternatives;
-
+using System.Linq;
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
@@ -35,8 +35,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create boring jacking ancillary cost
     /// </summary>
     public BoringJackingAncillaryCost(
-      ConflictPackage conflictPackage, 
-      PipeCoster coster, 
+      ConflictPackage conflictPackage,
+      PipeCoster coster,
       ENR baseENR)
     {
       _ConflictPackage = conflictPackage;
@@ -66,7 +66,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         return string.Format("{3} {0:F0} in diam, {1} pipe, {2:F0} ft deep",
           _ConflictPackage.Diameter,
           _ConflictPackage.PipeMaterial,
-          _ConflictPackage.Depth, 
+          _ConflictPackage.Depth,
           tunnelType);
       } // get
     } // Name
@@ -102,7 +102,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 
         _coster.AssignDirectConstructionCostItems();
-        double backOutPipeCost = unitCostAdjustedForENR - 
+        double backOutPipeCost = unitCostAdjustedForENR -
           (double)_coster.DirectConstructionCost;
         return (float)backOutPipeCost;
       } // get
@@ -157,11 +157,29 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        bool highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
-        bool crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
-        bool crossesRailroad = _ConflictPackage.Conflicts.NumRailroadCrossings > 0;
-        bool crossesLightRail = _ConflictPackage.Conflicts.NumLightRailCrossings > 0;
-        bool crossesBuilding = _ConflictPackage.Conflicts.IsNearBuilding;
+        bool highPipeDepth;
+        bool crossesRailroad;
+        bool crossesLightRail;
+        bool crossesBuilding;
+        bool crossesFreeway;
+        
+        highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
+        if (_ConflictPackage.Conflict != null)
+        {
+          int[] freewayTypeNums = new int[] { 1110, 1121, 1123, 1200, 1221, 1222, 1223 };
+
+          crossesFreeway = freewayTypeNums.Contains(_ConflictPackage.Conflict.StreetParallelsType);
+          crossesRailroad = _ConflictPackage.Conflict.NumRailCrossings > 0;
+          crossesLightRail = _ConflictPackage.Conflict.NumLRTCrossings > 0;
+          crossesBuilding = _ConflictPackage.Conflict.NearBuilding;
+        }
+        else
+        {
+          crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
+          crossesRailroad = _ConflictPackage.Conflicts.NumRailroadCrossings > 0;
+          crossesLightRail = _ConflictPackage.Conflicts.NumLightRailCrossings > 0;
+          crossesBuilding = _ConflictPackage.Conflicts.IsNearBuilding;
+        }
         bool qualifiesForBoringJacking = highPipeDepth || crossesFreeway || crossesRailroad || crossesLightRail ||
                 crossesBuilding;
         return qualifiesForBoringJacking;
