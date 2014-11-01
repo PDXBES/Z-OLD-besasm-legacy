@@ -81,7 +81,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           // 1 day per 10 ft vertical of manhole
           double manholeConstructionDurationDays = hasManhole ?
-            Math.Ceiling(conflictPackage.Depth / MANHOLE_BUILD_RATE_PER_DAY_FT) : 
+            conflictPackage.Depth / MANHOLE_BUILD_RATE_PER_DAY_FT : 
             0;
           // Mainline at 140 cy per day
           double mainlineConstructionDurationDays = _coster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
