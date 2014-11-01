@@ -54,8 +54,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (_ConflictPackage != null && _ConflictPackage.Conflict != null)
         {
           bool HasConflicts = _ConflictPackage != null && _ConflictPackage.Conflict != null;
-          bool ParallelToRailroad = _ConflictPackage.Conflict.NumRailParallels > 0;
-          bool ParallelToLTR = _ConflictPackage.Conflict.NumLRTParallels > 0;
+          bool ParallelToRailroad = 
+            (_ConflictPackage.Conflict.NumRailParallels > 0) ||
+            (
+              (_ConflictPackage.Conflict.NumRailCrossings > 0) && 
+              (_ConflictPackage.Conflict.NumRailParallels == 0)
+            );
+          bool ParallelToLTR = 
+            (_ConflictPackage.Conflict.NumLRTParallels > 0) ||
+            (
+              (_ConflictPackage.Conflict.NumLRTCrossings > 0) &&
+              (_ConflictPackage.Conflict.NumLRTParallels == 0)
+            );
           if (HasConflicts &&
             (_ConflictPackage.Conflict.InHardArea ||
             ParallelToRailroad ||
