@@ -99,8 +99,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         double unitCost = 566.95 * Math.Pow(Math.E, 0.0119 * _coster.InsideDiameter);
         double unitCostAdjustedForENR = unitCost * (double)_baseENR.Value / curveENR;
         bool outsideTable;
+
+
+        _coster.AssignDirectConstructionCostItems();
         double backOutPipeCost = unitCostAdjustedForENR - 
-          (double)_coster.PipeCost(_coster.Material, _coster.InsideDiameter, out outsideTable);
+          (double)_coster.DirectConstructionCost;
         return (float)backOutPipeCost;
       } // get
     } // UnitCost
@@ -174,7 +177,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        if (_ConflictPackage.Conflicts != null && Cost > 0)
+        if (_ConflictPackage.Conflicts != null && Math.Abs(Cost) > 0.009)
           return this;
         else
           return null;
