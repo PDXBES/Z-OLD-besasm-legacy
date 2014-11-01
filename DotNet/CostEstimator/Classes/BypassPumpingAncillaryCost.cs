@@ -65,15 +65,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         string bypassFlowType;
         if (BypassFlow <= 3)
           bypassFlowType = "(<= 3 cfs)";
+        else if (BypassFlow <= 7)
+          bypassFlowType = "(> 3 cfs, <= 7 cfs)";
+        else if (BypassFlow <= 15)
+          bypassFlowType = "(> 7 cfs, <= 15 cfs)";
+        else if (!Double.IsNaN(BypassFlow))
+          bypassFlowType = "(> 15 cfs)";
         else
-          if (BypassFlow <= 7)
-            bypassFlowType = "(> 3 cfs, <= 7 cfs)";
-          else
-            if (BypassFlow <= 15)
-              bypassFlowType = "(> 7 cfs, <= 15 cfs)";
-            else
-              bypassFlowType = "(> 15 cfs)";
-        ;
+          bypassFlowType = "(unknown)";
 
         return "Bypass pumping " + bypassFlowType;
       } // get
@@ -173,6 +172,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         float pipeCapacity = (float)(0.464 / 0.013 * Math.Pow(_ConflictPackage.Diameter / 12, 8 / 3) *
                                             Math.Sqrt(_ConflictPackage.Slope));
+        if (float.IsNaN(pipeCapacity))
+          pipeCapacity = (float)(Math.PI / 4 * Math.Pow(_ConflictPackage.Diameter, 2));
         return pipeCapacity;
       } // get
     } // PipeCapacity

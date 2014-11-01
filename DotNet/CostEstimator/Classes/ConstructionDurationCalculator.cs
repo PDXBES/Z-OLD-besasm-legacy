@@ -21,7 +21,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public const double MANHOLE_BUILD_RATE_PER_DAY_FT = 10;
     public const double CROSSING_RATE_PER_DAY_EA = 0.5;
     public const int PAVEMENT_REPAIR_RATE_PER_DAY_FT = 250;
-    public const double BOREJACK_DEPTH_FT = 30;
+    public const double BOREJACK_DEPTH_FT = 25;
     public const double MICROTUNNEL_BUILD_RATE_PER_DAY_FT = 75;
     public const double BOREJACK_SLOWERDIAMETER_IN = 30;
     public const double BOREJACK_FAST_BUILD_RATE_PER_DAY_FT = 125;
@@ -89,12 +89,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           // Mainline at 140 cy per day
           double mainlineConstructionDurationDays = _coster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
           // Utility crossings add 0.5 days per conflict
-          int numUtilityCrossings =
-          (conflictPackage.Conflicts == null) ? 0 :
-          conflictPackage.Conflicts.NumFiberOpticCrossings +
-          conflictPackage.Conflicts.NumGasCrossings +
-          conflictPackage.Conflicts.NumSewerCrossings +
-          conflictPackage.Conflicts.NumWaterCrossings;
+          int numUtilityCrossings;
+
+          if (conflictPackage.Conflict != null)
+          {
+            numUtilityCrossings =
+              conflictPackage.Conflict.NumFiberCrossings +
+              conflictPackage.Conflict.NumGasCrossings +
+              conflictPackage.Conflict.NumSewerCrossings +
+              conflictPackage.Conflict.NumWaterCrossings;
+          }
+          else
+          {
+            numUtilityCrossings =
+              (conflictPackage.Conflicts == null) ? 
+              0 :
+              conflictPackage.Conflicts.NumFiberOpticCrossings +
+                conflictPackage.Conflicts.NumGasCrossings +
+                conflictPackage.Conflicts.NumSewerCrossings +
+                conflictPackage.Conflicts.NumWaterCrossings;
+          }
           double utilityCrossingDurationDays = numUtilityCrossings * CROSSING_RATE_PER_DAY_EA;
           // Pavement repair at 250 feet per day
           double pavementRepairDurationDays = conflictPackage.Length / PAVEMENT_REPAIR_RATE_PER_DAY_FT;
