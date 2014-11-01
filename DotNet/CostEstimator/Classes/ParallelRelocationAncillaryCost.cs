@@ -63,7 +63,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         string waterPipeType;
         if (isInConflict)
-          waterPipeType = string.Format("({0:F0} in)", _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches);
+          if (_ConflictPackage.Conflict != null)
+            waterPipeType = string.Format("({0:F0} in)", _ConflictPackage.Conflict.WaterParallelsMaxDiamWidthIn);
+          else
+            waterPipeType = string.Format("({0:F0} in)", _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches);
         else
           waterPipeType = string.Empty; // if
 
@@ -106,7 +109,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         if (isInConflict)
         {
-          float diam = _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches;
+          float diam;
+          if (_ConflictPackage.Conflict != null)
+            diam = _ConflictPackage.Conflict.WaterParallelsMaxDiamWidthIn;
+          else
+            diam = _ConflictPackage.Conflicts.LargestWaterParallelDiameterInches;
           return 7.9126f * diam + 74.093f;
         } // if
         else
