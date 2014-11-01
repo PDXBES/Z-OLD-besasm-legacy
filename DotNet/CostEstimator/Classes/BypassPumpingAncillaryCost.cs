@@ -20,7 +20,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// </summary>
   class BypassPumpingAncillaryCost : AncillaryCost
   {
-    private const int ASSUMED_BYPASS_FLOW_FRACTION_OF_PIPE_CAPACITY = 5;
+    private const float ASSUMED_BYPASS_FLOW_FRACTION_OF_PIPE_CAPACITY = 5.0f;
 
     #region Variables
     ConflictPackage _ConflictPackage;
@@ -64,15 +64,25 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         string bypassFlowType;
         if (BypassFlow <= 3)
+        {
           bypassFlowType = "(<= 3 cfs)";
+        }
         else if (BypassFlow <= 7)
+        {
           bypassFlowType = "(> 3 cfs, <= 7 cfs)";
+        }
         else if (BypassFlow <= 15)
+        {
           bypassFlowType = "(> 7 cfs, <= 15 cfs)";
+        }
         else if (!Double.IsNaN(BypassFlow))
+        {
           bypassFlowType = "(> 15 cfs)";
+        }
         else
+        {
           bypassFlowType = "(unknown)";
+        }
 
         return "Bypass pumping " + bypassFlowType;
       } // get
@@ -106,15 +116,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         // >15 cfs: $7000 per day
 
         if (BypassFlow <= 3)
+        {
           return 500;
+        }
+        else if (BypassFlow <= 7)
+        {
+          return 1000;
+        }
+        else if (BypassFlow <= 15)
+        {
+          return 2000;
+        }
         else
-          if (BypassFlow <= 7)
-            return 1000;
-          else
-            if (BypassFlow <= 15)
-              return 2000;
-            else
-              return 3000;
+        {
+          return 3000;
+        }
       }
     } // UnitCost
 
@@ -170,10 +186,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        float pipeCapacity = (float)(0.464 / 0.013 * Math.Pow(_ConflictPackage.Diameter / 12, 8 / 3) *
+        float pipeCapacity = (float)(0.464 / 0.013 * Math.Pow(_ConflictPackage.Diameter / 12.0, 8.0 / 3.0) *
                                             Math.Sqrt(_ConflictPackage.Slope));
         if (float.IsNaN(pipeCapacity))
-          pipeCapacity = (float)(Math.PI / 4 * Math.Pow(_ConflictPackage.Diameter, 2));
+          pipeCapacity = (float)(Math.PI / 4.0 * Math.Pow(_ConflictPackage.Diameter, 2.0));
         return pipeCapacity;
       } // get
     } // PipeCapacity

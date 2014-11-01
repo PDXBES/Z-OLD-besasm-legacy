@@ -72,13 +72,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         if (conflictPackage.Depth > BOREJACK_DEPTH_FT)
         {
-          BoringJackingAncillaryCost testBoring = 
-            new BoringJackingAncillaryCost(conflictPackage, _coster, _coster.BaseENR);
-          numDays = testBoring.IsMicroTunnel ?
-            (float)Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
+          numDays = 
             conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
-            (float)Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
-            (float)Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
+            (float)(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
+            (float)(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
         } // if
         else
         {
