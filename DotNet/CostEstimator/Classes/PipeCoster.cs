@@ -1421,12 +1421,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <returns>float</returns>
     public float ManholeCost(double pipeDiameter, double depth, out bool outsideTable)
     {
-      // CH2M Hill Formulas convert the diameter to feet first in this formula
-      // for some reason
-      double pipeTotalWallThickness = (pipeDiameter / 12 + 1) * 2;
-      double manholeDiameterSafetySpacer = 12;
-      double requiredManholeSize = pipeTotalWallThickness + pipeDiameter + manholeDiameterSafetySpacer;
-      double finalManholeSize = Math.Ceiling(requiredManholeSize / 12) * 12;
+      bool outsideInsideDiameterToManholeDiameterTable;
+      double finalManholeSize = ManholeDiameterFromInsideDiameter(pipeDiameter, 
+        out outsideInsideDiameterToManholeDiameterTable);
 
       int diameterIndex;
       float baseCost;
