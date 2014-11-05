@@ -1520,9 +1520,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       outsideTable = false;
       double cost = insideDiameter < 0 ? 0 : 1.1406 * Math.Pow(insideDiameter, 1.4882);
-      int currentENR = CurrentENR.Value;
+      int curveENR = 9835;
       int baseENR = BaseENR.Value;
-      double costWithENRBackedOut = cost * ((double)baseENR / (double)currentENR);
+      double costWithENRBackedOut = cost * ((double)baseENR / (double)curveENR);
       return (float)costWithENRBackedOut;
     } // CIPPPipeCost(insideDiameter, outsideTable)
 
