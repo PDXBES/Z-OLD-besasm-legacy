@@ -2029,7 +2029,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               _PipeCoster,
               constructionDurationCalculator,
               isLiner,
-              hasManhole: !isLiner && currentSegment.SegUSNodeID == 0);
+              hasManhole: !isLiner && currentSegment.SegUSNodeID == 0,
+              linerTrafficControl: isLiner && currentSegment.SegUSNodeID == 0);
 
           List<AncillaryCost> ancillaryCosts = ancillaryCoster.RehabAncillaryCosts;
           if (ancillaryCosts.Count == 0)
