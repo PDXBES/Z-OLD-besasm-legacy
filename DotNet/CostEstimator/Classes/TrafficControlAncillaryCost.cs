@@ -37,6 +37,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private bool _isLiner;
     private bool _hasManhole;
     private bool _isSegment;
+    private bool _linerTrafficControl;
     #endregion
 
     #region Constructors
@@ -49,7 +50,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       ConstructionDurationCalculator constructionDurationCalculator, 
       bool isLiner = false,
       bool hasManhole = true,
-      bool isSegment = false)
+      bool isSegment = false,
+      bool linerTrafficControl = false)
     {
       _ConflictPackage = conflictPackage;
       _coster = coster;
@@ -57,6 +59,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       _isLiner = isLiner;
       _hasManhole = hasManhole;
       _isSegment = isSegment;
+      _linerTrafficControl = linerTrafficControl;
     } // TrafficControlAncillaryCost()
     #endregion
 
@@ -162,9 +165,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
         return (
           _isLiner ? 
-          _constructionDurationCalculator.ConstructionDurationDays(
-            _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment, isLiner:true,
-            segmentLength: _ConflictPackage.Length, pipeLength: _ConflictPackage.PipeLength) : 
+            _linerTrafficControl ? 
+              (float)ConstructionDurationCalculator.LINER_BUILD_TOTAL_DAYS :
+              0 : 
           _constructionDurationCalculator.ConstructionDurationDays(
             _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
             (((float)numAdditionalStreets + (float)baseStreets) / (float)baseStreets);
