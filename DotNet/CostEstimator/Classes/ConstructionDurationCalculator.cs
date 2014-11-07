@@ -19,6 +19,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   {
     public const int MAINLINE_BUILD_RATE_PER_DAY_CUYD = 140;
     public const double MANHOLE_BUILD_RATE_PER_DAY_FT = 10;
+    public const double MANHOLE_MAX_BUILD_DEPTH_FT = 25;
     public const double CROSSING_RATE_PER_DAY_EA = 0.5;
     public const int PAVEMENT_REPAIR_RATE_PER_DAY_FT = 250;
     public const double BOREJACK_DEPTH_FT = 25;
@@ -41,6 +42,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       return ConstructionDurationDays(conflictPackage, coster, returnFraction: false);
     }
 
+    public static double GetManholeConstructionDurationDays(ConflictPackage conflictPackage, bool hasManhole)
+    {
+      double manholeConstructionDurationDays =
+        Math.Min(hasManhole ?
+        conflictPackage.Depth / MANHOLE_BUILD_RATE_PER_DAY_FT :
+        0, MANHOLE_MAX_BUILD_DEPTH_FT);
+      return manholeConstructionDurationDays;
+    }
     /// <summary>
     /// Duration of construction based on build rates of components (mainline,
     /// manhole, pavement, and crossings)
@@ -80,9 +89,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         else
         {
           // 1 day per 10 ft vertical of manhole
-          double manholeConstructionDurationDays = hasManhole ?
-            conflictPackage.Depth / MANHOLE_BUILD_RATE_PER_DAY_FT : 
-            0;
+          double manholeConstructionDurationDays = GetManholeConstructionDurationDays(conflictPackage, hasManhole);
           // Mainline at 140 cy per day
           double mainlineConstructionDurationDays = _coster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
           // Utility crossings add 0.5 days per conflict
