@@ -195,18 +195,21 @@ namespace SystemsAnalysis.Modeling
       {
         case 1110:
         case 1121:
+        case 1122:
         case 1123:
         case 1200:
+          _StreetType = Enumerators.StreetTypeKind.Freeway;
+          break;
         case 1221:
         case 1222:
         case 1223:
-          _StreetType = Enumerators.StreetTypeKind.Freeway;
-          break;
-        case 1300:
           _StreetType = Enumerators.StreetTypeKind.MajorArterial;
           break;
+        case 1300:
         case 1400:
         case 1450:
+        case 5301:
+        case 5401:
           _StreetType = Enumerators.StreetTypeKind.Arterial;
           break;
         case 1500:
@@ -214,10 +217,7 @@ namespace SystemsAnalysis.Modeling
         case 1700:
         case 1740:
         case 1750:
-        case 1800:
-        case 1950:
-        case 5301:
-        case 5401:
+        case 5500:
         case 5501:
           _StreetType = Enumerators.StreetTypeKind.Street;
           break;
