@@ -100,9 +100,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       get
       {
-        double affectedLength = _ConflictPackage.Conflicts.IsNearContaminationSite ?
-        (_ConflictPackage.Length < HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET ?
-        _ConflictPackage.Length : HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET) : 0;
+        double affectedLength;
+        if (_ConflictPackage.Conflict != null)
+          affectedLength =
+            _ConflictPackage.Conflict.NearContaminationSite ?
+            (Math.Min(_ConflictPackage.Length, HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET)) : 0;
+        else
+          affectedLength = 
+            _ConflictPackage.Conflicts.IsNearContaminationSite ?
+            (Math.Min(_ConflictPackage.Length, HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET)) : 0;
         _coster.InsideDiameter = _ConflictPackage.Diameter;
         _coster.Material = _ConflictPackage.PipeMaterial;
         _coster.Depth = _ConflictPackage.Depth;
