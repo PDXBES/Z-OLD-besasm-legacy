@@ -165,8 +165,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                     _ConflictPackage.Conflicts.NumStreetsIfDSNodeInIntersection : baseStreets) - baseStreets;
         return (
           _isLiner ? 
-            _linerTrafficControl ? 
-              (float)ConstructionDurationCalculator.LINER_BUILD_TOTAL_DAYS :
+            _linerTrafficControl ?
+              (float)ConstructionDurationCalculator.LINER_BUILD_TOTAL_DAYS + 
+                (float)ConstructionDurationCalculator.GetManholeConstructionDurationDays(_ConflictPackage, _hasManhole):
               0 : 
           _constructionDurationCalculator.ConstructionDurationDays(
             _ConflictPackage, _coster, hasManhole:_hasManhole, returnFraction:_isSegment)) *
