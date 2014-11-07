@@ -80,7 +80,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
       set
       {
-        _Length = value < 1 ? 1 : value;
+        _Length = value;
       } // set
     } // Length
 
