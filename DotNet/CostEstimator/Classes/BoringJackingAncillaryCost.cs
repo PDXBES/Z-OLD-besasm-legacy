@@ -166,7 +166,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
         if (_ConflictPackage.Conflict != null)
         {
-          int[] freewayTypeNums = new int[] { 1110, 1121, 1123, 1200, 1221, 1222, 1223 };
+          int[] freewayTypeNums = new int[] { 1110, 1121, 1122, 1123, 1200 };
 
           crossesFreeway = freewayTypeNums.Contains(_ConflictPackage.Conflict.StreetParallelsType);
           crossesRailroad = _ConflictPackage.Conflict.NumRailCrossings > 0;
