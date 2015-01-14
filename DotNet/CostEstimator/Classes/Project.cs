@@ -2632,6 +2632,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           int set = 0;
           int totalSets = numRecords % increment == 0 ? numRecords / increment :
             numRecords / increment + 1;
+          int processedRecords = 0;
 
           while (set < totalSets)
           {
@@ -2676,9 +2677,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             linerRehabEstimate.AddCostItemFactor(linerOtherDirectConstructionCIF);
 
             OleDbDataReader reader = null;
+            int sliceSize = Math.Min(numRecords - processedRecords, increment);
+            processedRecords += sliceSize;
             OleDbCommand command = new OleDbCommand(
               string.Format("SELECT TOP {1} * FROM (SELECT TOP {2} * FROM [{0}] ORDER BY [ID]) T ORDER BY [ID] DESC",
-              segmentsTableName, increment, set * increment), conn);
+              segmentsTableName, sliceSize, set * increment), conn);
             reader = command.ExecuteReader();
 
             //OleDbDataReader countReader = null;
