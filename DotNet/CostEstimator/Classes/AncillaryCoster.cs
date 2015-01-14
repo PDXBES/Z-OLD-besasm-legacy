@@ -85,7 +85,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       PipeCoster coster, 
       ConstructionDurationCalculator constructionDurationCalculator,
       bool suppressSurfaceAncillaries,
-      bool hasManhole = true)
+      bool hasManhole = true,
+      bool linerTrafficControl = false)
     {
       Type = AncillaryCosterType.Rehab;
       _Segment = segment;
@@ -313,7 +314,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (_Segment != null && _Segment.SegUSNodeID == 0)
         {
           ancillaryCosts.Add(new TrafficControlAncillaryCost(
-            conflictPackage, coster, _constructionDurationCalculator, isLiner: true, hasManhole: _hasManhole, isSegment:true).AncillaryCost);
+            conflictPackage, coster, _constructionDurationCalculator, isLiner: true, 
+            hasManhole: _hasManhole, isSegment:true, linerTrafficControl: true).AncillaryCost);
         }
         ancillaryCosts.Add(
           new BypassPumpingAncillaryCost(

@@ -170,7 +170,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   public class PipeCoster
   {
     #region Constants
-    private const int DEFAULT_AC_WIDTH = 4;
+    private const int DEFAULT_SAWCUTTING_LENGTH = 4;
     private const int MIN_TRENCH_SHORING_DEPTH = 18;
     private const int MAX_TRENCH_SHORING_DEPTH = 25;
 
@@ -1421,12 +1421,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <returns>float</returns>
     public float ManholeCost(double pipeDiameter, double depth, out bool outsideTable)
     {
-      // CH2M Hill Formulas convert the diameter to feet first in this formula
-      // for some reason
-      double pipeTotalWallThickness = (pipeDiameter / 12 + 1) * 2;
-      double manholeDiameterSafetySpacer = 12;
-      double requiredManholeSize = pipeTotalWallThickness + pipeDiameter + manholeDiameterSafetySpacer;
-      double finalManholeSize = Math.Ceiling(requiredManholeSize / 12) * 12;
+      bool outsideInsideDiameterToManholeDiameterTable;
+      double finalManholeSize = ManholeDiameterFromInsideDiameter(pipeDiameter, 
+        out outsideInsideDiameterToManholeDiameterTable);
 
       int diameterIndex;
       float baseCost;
@@ -1523,9 +1520,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       outsideTable = false;
       double cost = insideDiameter < 0 ? 0 : 1.1406 * Math.Pow(insideDiameter, 1.4882);
-      int currentENR = CurrentENR.Value;
+      int curveENR = 9835;
       int baseENR = BaseENR.Value;
-      double costWithENRBackedOut = cost * ((double)baseENR / (double)currentENR);
+      double costWithENRBackedOut = cost * ((double)baseENR / (double)curveENR);
       return (float)costWithENRBackedOut;
     } // CIPPPipeCost(insideDiameter, outsideTable)
 
@@ -1843,7 +1840,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add("Sawcutting AC pavement",
-            new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", Math.Max(DEFAULT_AC_WIDTH, TrenchBaseWidth)));
+            new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", DEFAULT_SAWCUTTING_LENGTH)));
           DirectConstructionCostItems.Add(string.Format("Asphalt removal {0:F0} in inside diam", _InsideDiameter),
             new UnitCost((float)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
           DirectConstructionCostItems.Add(string.Format("Trench excavation {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
