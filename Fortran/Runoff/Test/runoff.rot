@@ -1,0 +1,109 @@
+1         *************************************************
+          *    U.S. Environmental Protection Agency       *
+          *    Storm Water Management Model  (SWMM)       *
+          *       Version 4.40 (Lahey, CDM beta)          *
+          *************************************************
+
+                           Developed by                    
+
+          *************************************************
+          *             Metcalf & Eddy, Inc.              *
+          *            University of Florida              *
+          *       Water Resources Engineers, Inc.         *
+          *     (Now Camp, Dresser and McKee, Inc.)       *
+          *              September 1970                   *
+          *************************************************
+
+                   Distributed and Maintained by           
+
+          *************************************************
+          *      U.S. Environmental Protection Agency     *
+          * Center for Exposure Assessment Modeling (CEAM)*
+          *    Athens Environmental Research Laboratory   *
+          *            960 College Station Road           *
+          *            Athens, GA    30605-2720           *
+          *************************************************
+
+          *************************************************
+          *     This is a new release of SWMM.  If any    *
+          *     problems occur executing this model       *
+          *     system, contact Mr. Frank Stancil,        *
+          *     U.S. Environmental Protection Agency.     *
+          *     706/355-8328 (voice)                      *
+          *     e-mail: stancil@athens.ath.epa.gov        *
+          *     Or contact Wayne C. Huber at Oregon St. U.*
+          *     541/737-6150 or huberw@ccmail.orst.edu    *
+          *     Or Michael F. Schmidt at Camp Dresser &   *
+          *     McKee (904) 281-0170 SCHMIDTMF@CDM.COM    *
+          *************************************************
+
+          *************************************************
+          *  This is an implementation of EPA SWMM 4.40.  *
+          *  "Nature is full of infinite causes which     *
+          *   have never occurred in experience" da Vinci *
+          *************************************************
+
+
+ ###########################################
+ #        File names by SWMM Block         #
+ #         JIN  -> Input to a Block        #
+ #        JOUT  -> Output from a Block     #
+ ###########################################
+
+    JIN for Block #     1 File #    1  JIN.UF                                                      
+   JOUT for Block #     1 File #   10  runoff.int                                                  
+
+ ###########################################
+ # Scratch file names for this simulation. #
+ ###########################################
+
+ NSCRAT #     1 File #   11  25rain.r05                                                  
+ NSCRAT #     2 File #   12  SCRT2.UF                                                    
+ NSCRAT #     3 File #   13  SCRT3.UF                                                    
+ NSCRAT #     4 File #   14  SCRT4.UF                                                    
+ NSCRAT #     5 File #   15  SCRT5.UF                                                    
+ NSCRAT #     6 File #   16  SCRT6.UF                                                    
+ NSCRAT #     7 File #   17  SCRT7.UF                                                    
+
+ ***************************************************
+ *    Parameter Values on the Tapes Common Block   *
+ ***************************************************
+
+  Number of Subcatchments in the Runoff Block (NW)......20000
+  Number of Channel/Pipes in the Runoff Block (NG)......20000
+  Number of Connections to Runoff Channels/Inlets (NCP).   20
+  Number of Runoff Water Quality Constituents (NRQ).....   10
+  Number of Runoff Land Uses per Subcatchment (NLU).....   10
+  Number of Groundwater Subcatchments in Runoff (NGW)...20000
+  Number of Interface Locations for all Blocks (NIE)....20000
+  Number of Elements in the Transport Block (NET).......20000
+  Number of Storage Junctions in Transport (NTSE).......20000
+  Number of Input Hydrographs in Transport (NTH)........20000
+  Number of Tabular Flow Splitters in Transport (NTSP)..   50
+  Number of Elements in the Extran Block (NEE).......... 1400
+  Number of Pumps in Extran (NEP).......................   75
+  Number of Orifices in Extran (NEO)....................  200
+  Number of Tide Gates/Free Outfalls in Extran (NTG)....  200
+  Number of Extran Weirs (NEW)..........................   60
+  Number of Extran Printout Locations (NPO).............   30
+  Number of Tide Elements in Extran (NTE)...............   20
+  Number of Natural Channels (NNC)......................  200
+  Number of Storage Junctions in Extran (NVSE)..........  300
+  Number of Time History Data Points in Extran (NTVAL)..  500
+  Number of Data Points for Variable Storage Elements
+    in the Extran Block (NVST)..........................   25
+  Number of Input Hydrographs in Extran (NEH)...........  400
+  Number of Allowable Channel Connections to
+    Junctions in the Extran Block (NCHN)................   15
+  Number Rain Gages in Rain and Runoff (MAXRG)..........  400
+  Number PRATE/VRATE Points for Extran Pump
+    Input (MAXPRA)......................................   10
+  Number of Variable Orifices in Extran (NVORF).........   50
+  Number of Variable Orifice Data Points (NVOTIM).......   50
+  Number of Allowable Precip. Values/yr in Rain (LIMRN). 5000
+  Number of Storm Events for Rain Analysis (LSTORM)..... 5000
+  Number of Plugs for Plug-flow in S/T (NPLUG).......... 3000
+  Number Conduits for Extran Results to ASCII 
+    File (MXFLOW).......................................  150
+
+

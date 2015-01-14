@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XMLSchema1" targetNamespace="http://tempuri.org/XMLSchema1.xsd" elementFormDefault="qualified" xmlns="http://tempuri.org/XMLSchema1.xsd" xmlns:mstns="http://tempuri.org/XMLSchema1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="InflowControlCostOptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GreenStreetPlanterCostPerAcre" type="xs:float" />
+        <xs:element name="InfiltrationPlanterCostPerAcre" type="xs:float" />
+        <xs:element name="VegetatedInfiltrationBasinCostPerAcre" type="xs:float" />
+        <xs:element name="DownspoutDisconnectionCostPerAcre" type="xs:float" />
+        <xs:element name="EcoroofCostPerAcre" type="xs:float" />
+        <xs:element name="CurbExtensionMinCost" type="xs:float" />
+        <xs:element name="CurbExtensionCostPerCuFt" type="xs:float" />
+        <xs:element name="CurbExtensionMinCuFt" type="xs:double" />
+        <xs:element name="StormwaterPlanterMinCost" type="xs:float" />
+        <xs:element name="StormwaterPlanterCostPerCuFt" type="xs:float" />
+        <xs:element name="StormwaterPlanterMinCuFt" type="xs:double" />
+        <xs:element name="FlowRestrictorCost" type="xs:float" />
+        <xs:element name="BaseENR" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

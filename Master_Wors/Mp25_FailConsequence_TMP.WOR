@@ -1,0 +1,677 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\links\mdl_Links_ac" As mdl_Links_ac Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\nodes\mdl_Nodes_ac" As mdl_Nodes_ac Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\dsc\mdl_DirSC_ac" As mdl_DirSC_ac Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\surfsc\mdl_SurfSC_ac" As mdl_SurfSC_ac Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\nodes\OFList" As QyOutfalls Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\surfsc\QySumpedSC" As QySumpedSC Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\nodes\Qy2ExternalMdl" As Qy2ExternalMdl Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\nodes\QyInflowNodes" As QyInflowNodes Interactive
+Open Table "C:\CASSIO\GIS1\MI_DATA\BOUNDARY\Citylimi" As Citylimi Interactive
+Open Table "C:\CASSIO\GIS1\MI_DATA\STREET\ROW\Tric_row" As Tric_row Interactive
+Open Table "C:\CASSIO\GIS1\MI_MISC\LABELS\WORKING\PDX_Cad_Str_Lbl" As PDX_Cad_Str_Lbl Interactive
+Open Table "C:\CASSIO\gis1\METRODAT\RLISLT99\streets\arterial" As arterial Interactive
+Open Table "C:\CASSIO\gis1\Mi_data\WATER\Waternew_rev0922" As Waternew_rev0922 Interactive
+Open Table "C:\CASSIO\gis1\MI_CGIS\transportation\streets\freeways_metro" As freeways_metro Interactive
+Open Table "C:\CASSIO\GIS1\MI_DATA\IMAGES\Hillshade\hillshadehi.TAB" As hillshadehi Interactive
+Open Table "C:\CASSIO\gis1\MI_MISC\LOGOS\WORKING\North2" As North2 Interactive
+Open Table "C:\CASSIO\gis1\MI_MISC\LOGOS\WORKING\Besbird.TAB" As Besbird Interactive
+Open Table "C:\CASSIO\gis1\MI_MISC\LOGOS\WORKING\Mapinfo2.TAB" As Mapinfo2 Interactive
+Open Table "C:\CASSIO\GIS1\MI_MISC\SCALEBAR\_MiFt_scale" As _MiFt_scale Interactive
+Open Table "C:\CASSIO\GIS1\MI_MISC\LOGOS\SystemsAnalysis5.TAB" As SysAnaLog Interactive
+Open Table "C:\CASSIO\gis1\MI_DATA\STREET\Bridges\PDX_Bridges" As PDX_Bridges Interactive
+Open Table "C:\CASSIO\gis1\MI_DATA\STREET\CENTERLN\centerli" As centerli Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\surfsc\ProjArea" As ProjArea Interactive
+Open Table "\\oberon\grp117\_ATtemp\_MITools\MdlMap\_MapRun\TGD_FB_25\surfsc\ProjMask" As ProjMask Interactive
+Open Table "C:\CASSIO\modeling\AGMaster21\Pumps\mst_pumps_ac" As mst_pumps_ac Interactive
+Open Table "C:\CASSIO\SYSTEMS_PLANNING\7977_Rehab\Phase1\Criticality\Critical_Pipes_Map" As Critical_Pipes_Map Interactive
+Select *  from mdl_Links_ac , Critical_Pipes_Map  where mdl_Links_ac . USNode = Critical_Pipes_Map . UNITID and mdl_Links_ac . DSNode = Critical_Pipes_Map . UNITID2  into QyPipCritScore noselect  
+Set Window MapBasic
+  Position (0.239583,5.25) Units "in"
+  Width 8 Units "in" Height 1.375 Units "in" Min
+Open Window MapBasic
+Map From mst_pumps_ac,PDX_Cad_Str_Lbl,mdl_Nodes_ac,mdl_Links_ac,mdl_Links_ac,QyPipCritScore,
+  Qy2ExternalMdl,QyInflowNodes,QyOutfalls,QySumpedSC,mdl_SurfSC_ac,mdl_Links_ac,
+  mdl_DirSC_ac,Tric_row,PDX_Bridges,mdl_SurfSC_ac,Waternew_rev0922,ProjMask,ProjArea,Citylimi 
+  Position (0.802083,0.260417) Units "in"
+  Width 5.92708 Units "in" Height 5.0625 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7656686.401,677712.2765)
+  Zoom 20900 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 12 with DiamWidth ranges apply all use all Line (70,2,16776960) 
+  0: 12 Line (70,2,16776960) ,
+  12: 24 Line (80,2,11796288) ,
+  24: 36 Line (90,2,16762032) ,
+  36: 72 Line (80,2,13697023) ,
+  72: 200 Line (90,2,13152144) 
+  default Line (1,2,16777215) 
+  # use 1 round 1 inflect off Line (1,2,0) at 0 by 0 color 1 # 
+shade 6 with Total_Criticality_Score ranges apply all use color Line (5,2,10551295) 
+  0: 1 Line (5,2,10551295) ,
+  1: 2 Line (1,2,10551248) ,
+  2: 3 Line (1,2,10551200) ,
+  3: 4 Line (1,2,10551136) ,
+  4: 5 Line (1,2,10551088) ,
+  5: 6 Line (1,2,11591712) ,
+  6: 7 Line (1,2,12636208) ,
+  7: 8 Line (1,2,13676624) ,
+  8: 9 Line (1,2,15769696) ,
+  9: 22 Line (6,2,16744576) 
+  default Line (1,2,16777215) 
+  # use 1 round 0.1 inflect on Line (1,2,10157824) at 5 by 0 color 1 # 
+shade 5 with LinkType values 
+  "" Line (20,2,11559167) ,
+  " C" Line (20,2,16732415) ,
+  "A" Line (17,5,11559167) ,
+  "C" Line (20,2,16732415) ,
+  "CI" Line (20,6,16744703) ,
+  "D" Line (20,2,45056) ,
+  "F" Line (20,4,6356832) ,
+  "FD" Brush (2,32768,16777215) Pen (1,2,0) Line (20,4,6356832) Symbol (34,32768,12) ,
+  "IC" Brush (2,128,16777215) Pen (1,2,0) Line (15,92,16744640) Symbol (34,128,12) ,
+  "ID" Brush (2,53352,16777215) Pen (1,2,0) Line (15,92,53352) Symbol (34,53352,12) ,
+  "IS" Brush (2,45056,16777215) Pen (1,2,0) Line (15,92,16744448) Symbol (34,45056,12) ,
+  "PC" Brush (2,32896,16777215) Pen (1,2,0) Line (15,90,16711935) Symbol (34,32896,12) ,
+  "PD" Brush (2,32768,16777215) Pen (1,2,0) Line (15,90,32768) Symbol (34,32768,12) ,
+  "PS" Brush (2,45056,16777215) Pen (1,2,0) Line (15,90,14708736) Symbol (34,45056,12) ,
+  "S" Brush (2,40960,16777215) Pen (1,2,0) Line (17,2,12595200) Symbol (34,40960,12) ,
+  "SD" Brush (2,16750640,16777215) Pen (1,2,0) Line (20,2,6356832) Symbol (34,16750640,12) ,
+  "V" Brush (2,14694400,16777215) Pen (1,2,0) Line (20,2,255) Symbol (34,14694400,12) ,
+  "X" Brush (2,16711680,16777215) Pen (1,2,0) Line (15,2,0) Symbol (34,16711680,12) 
+  default   # color 1 # 
+Set Map
+  Layer 1
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,8388608,12,"MapInfo Real Estate",256,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Below Font ("Arial Narrow",257,7,8404992,16777215) Pen (1,2,0) 
+      With Str$(PUMPSTATION+" PS")
+      Parallel On Auto On Overlap On Duplicates On Offset 3
+      Visibility On
+  Layer 2
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",0,9,49344)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (32,16777215,4)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (12,1,0)  Font ("Arial Narrow",1,8,0)
+    Arrows On
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Value
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 6
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 8
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (68,8388608,24,"MapInfo Cartographic",288,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "To External"+Chr$(10)+" Model"
+      Parallel On Auto On Overlap On Duplicates On Offset 5
+      Visibility On
+  Layer 10
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (68,8388608,24,"MapInfo Cartographic",288,270)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Below Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "External"+Chr$(10)+"Model Inflow"
+      Parallel Off Auto On Overlap Off Duplicates On Offset 9
+      Visibility On
+  Layer 11
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (46,32768,18,"MapInfo Cartographic",256,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 12
+    Display Off
+    Global Pen (30,2,9493503)  Brush (44,10526975)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 13
+    Display Off
+    Global Pen (30,2,10526880)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 14
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 15
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 16
+    Display Off
+    Global Pen (1,2,32768)  Brush (15,16777104)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 17
+    Display Global
+    Global Pen (12,2,9493503)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 18
+    Display Global
+    Global Pen (1,2,5293567)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Name
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 19
+    Display Off
+    Global Pen (1,1,0)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 20
+    Display Global
+    Global Pen (1,24,255)  Brush (2,12632319,16777215)  Symbol (46,40960,18,"MapInfo Cartographic",256,0)  Line (1,2,10526975)  Font ("Arial",0,9,16777215)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 21
+    Display Off
+    Global Pen (1,2,12632256)  Brush (16,15790320)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 22
+    Display Global
+    Global Pen (50,2,13672703)   Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 23
+    Display Global
+    Global Pen (1,1,0)  Brush (2,15790320,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With cityname
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 5 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title "Modeled Sewers by LinkType" Font ("Arial Narrow",5,10,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      "Unknown" display off ,
+      "Unknown (Blank)" display off ,
+      "Combined ( C)" display off ,
+      "Unknown (A)" display on ,
+      "Combined (C)" display on ,
+      "CSO Interceptor - (CI)" display off ,
+      "Storm (D)" display on ,
+      "Frontage Culvert (F)" display on ,
+      "French Drain (FD)" display on ,
+      "CSO Interceptor (CI)" display on ,
+      "Storm Interceptor" display on ,
+      "SAN Interceptor (IS)" display on ,
+      "Pumped CSO (PC)" display on ,
+      "Pumped Storm (PD)" display on ,
+      "Pumped SAN(PS)" display on ,
+      "Sanitary (S)" display on ,
+      "SD -" display off ,
+      "Culvert (V)" display on ,
+      "Crossing Culvert (X)" display on  
+set legend 
+  layer 7 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending off 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 14 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title "Modeled Sewers" Font ("Arial Narrow",1,10,0)
+    subtitle "by Diameter" Font ("Arial Narrow",5,10,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "< 12''" display on ,
+      "12'' to 24''" display on ,
+      "24'' to 36''" display on ,
+      "36'' to 72''" display on ,
+      "Over 72''" display on  
+Set Window FrontWindow() Title "Main Map"
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Create Cartographic Legend
+  Position (8.28125,0.208333) Units "in"
+  Width 3.42708 Units "in" Height 2.44792 Units "in" 
+  Window Title "Legend of Main Map"
+  Portrait
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 22
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Project Area" Region Pen (90,2,11559167)  Brush (1,0,16777215) 
+  Frame From Layer 7
+    Border Pen (0,1,0) 
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From _MiFt_scale 
+  Position (0.260417,0.0833333) Units "in"
+  Width 6.26042 Units "in" Height 2.71875 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (1054.02395,80777.955)
+  Zoom 6178.825503 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ZmUnits
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Scalebar Map"
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From freeways_metro,Citylimi,freeways_metro,arterial,Waternew_rev0922,hillshadehi 
+  Position (1.38542,1.5) Units "in"
+  Width 3.5625 Units "in" Height 3.0625 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7652322.007,690736.0838)
+  Zoom 21.62603352 Units "mi"
+  Preserve Zoom Display Zoom
+  Distance Units "mi" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (20,2,8421504)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global Pen (20,2,16776960)  Brush (1,16777215,16777215)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With cityname
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (2,2,16711680)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With PREFIX
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Global
+    Global Pen (1,24,49344)  Brush (15,49344,16777215)  Symbol (34,16776960,5)  Line (20,24,49344)  Font ("Arial",0,9,16777215)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Subbasin
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 6
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+    Zoom (0.25, 98) Units "mi" 
+  contrast 59 
+  brightness 45 
+  alpha 255 
+    transparency on 
+  color 0 
+    grayscale off 
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0 Bounds (-348623368.682, -335442185.296) (365027568.158, 378208751.545)
+Set Map Layer 0 Editable
+Create Point (7643244.3,713530.9)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7698920.2,688517.1)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7671082.4,655030.8)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7608548,684482.5)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7626703,652206.6)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7675520.3,720793)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Rect (7646233.8,669529.7) (7667138.8,685894.8)
+    Pen (5,2,16776960) 
+    Brush (1,0,16777215)
+Create Rect (7646233.8,669529.7) (7667138.8,685894.8)
+    Pen (3,2,16711680) 
+    Brush (1,0,16777215)
+Create Text
+    "Project \nArea"
+    (7656686.3,677712.4) (7669186.3,687712.5)
+    Font ("Arial Narrow",257,0,0,16776960)
+    Justify Center
+
+Set CoordSys Earth
+Set Map Layer 0 Editable
+Set Window FrontWindow() Title "Overview Mp"
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From North2 
+  Position (5.33333,2.10417) Units "in"
+  Width 1.19792 Units "in" Height 1.15625 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (1.065814104e-014,0.4867357599)
+  Zoom 84.66827684 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From North2 
+  Position (0.166667,0.21875) Units "in"
+  Width 1.57292 Units "in" Height 1.11458 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (-11.06057243,-0.41705)
+  Zoom 107.5707242 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,1,0)  Brush (1,16777215,16777215)  Symbol (34,16776960,5)  Line (1,1,0)  Font ("Arial",0,9,16777215)
+    Label Line None Position Center Font ("Arial Narrow",1,12,0) Pen (1,2,0) 
+      With CurDate()
+      Parallel On Auto On Overlap Off Duplicates Off PartialSegments On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Date Map"
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From Mapinfo2 
+  Position (0.291667,2.71875) Units "in"
+  Width 1.08333 Units "in" Height 1.07292 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (129.9555664,46.96170044)
+  Zoom 32.58730887 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+    Zoom (25, 10000) Units "ft" 
+  contrast 50 
+  brightness 50 
+  alpha 255 
+    transparency on 
+  color 0 
+    grayscale off 
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Map From SysAnaLog 
+  Position (0.677083,0.770833) Units "in"
+  Width 6.41667 Units "in" Height 1.96875 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (2652,-850)
+  Zoom 6240.666667 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (25, 10000) Units "ft" 
+  contrast 50 
+  brightness 50 
+  alpha 255 
+    transparency on 
+  color 0 
+    grayscale off 
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Portrait Copies 1
+ Papersize 124
+Layout
+  Position (0.09375,0.0520833) Units "in"
+  Width 5.94792 Units "in" Height 3.875 Units "in" 
+  Set CoordSys Layout Units "in"
+  Create Rect (0.5201,0.5) (16.4299,10.45)
+    Pen (20,2,0) 
+    Brush (2,5079040,16777215)
+  Create Rect (12.7201,0.6403) (16.3,10.3097)
+    Pen (17,2,0) 
+    Brush (2,16777215,16777215)
+  Create Rect (11.7833,9.9007) (12.6153,10.2944)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (0.6403,0.6403) (12.6201,10.3097)
+    Pen (17,2,0) 
+    Brush (2,16777215,16777215)
+  Create Frame (0.6701,0.6701) (12.5903,10.2799)
+    Pen (1,2,0) 
+    Brush (2,16777215,16777215)
+    Title "Main Map"
+    FillFrame On
+  Create Rect (12.75,3.691) (16.2701,8.7701)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (12.75,8.7826) (16.2701,9.4028)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (12.75,9.45) (14.4299,9.85)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (14.4597,9.8799) (16.2701,10.2799)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (12.75,9.8799) (14.4299,10.2799)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Rect (12.75,0.6701) (16.2701,3.6701)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Text
+    "Sheet No."
+    (12.7812,9.4625) (13.2049,9.5958)
+    Font ("Arial Narrow",1,8,0)
+
+  Create Text
+    "Overview Map"
+    (12.7597,0.6903) (13.3729,0.8236)
+    Font ("Arial Narrow",1,8,0)
+
+  Create Frame (12.75,8) (16.2701,8.7701)
+    Pen (1,1,12632256) 
+    Brush (1,16777215,16777215)
+    Title "Scalebar Map"
+    FillFrame On
+  Create Frame (14.0111,7.3243) (14.8868,8.0743)
+    Pen (1,1,12632256) 
+    Brush (1,16777215,16777215)
+    Title "North2 Map"
+    FillFrame On
+  Create Frame (12.75,0.6701) (16.2701,3.6701)
+    Pen (1,2,0) 
+    Brush (2,14737632,16777215)
+    Title "Overview Mp"
+    FillFrame On
+  Create Frame (12.6875,3.85) (16.3917,8.5)
+    Pen (1,1,12632256) 
+    Brush (1,0,16777215)
+    Title "Legend of Main Map"
+    FillFrame Off
+  Create Frame (14.5972,9.5076) (16.0347,9.841)
+    Pen (1,1,0) 
+    Brush (1,0,16777215)
+    Title "Date Map"
+    FillFrame On
+  Create Rect (14.4597,9.45) (16.2701,9.85)
+    Pen (1,2,0) 
+    Brush (1,16777215,16777215)
+  Create Frame (14.4597,9.8799) (16.2701,10.2799)
+    Pen (1,2,0) 
+    Brush (2,16777215,16777215)
+    Title "SysAnaLog Map"
+    FillFrame On
+  Create Text
+    "Legend"
+    (12.8264,3.716) (13.1528,3.8493)
+    Font ("Arial Narrow",1,8,0)
+
+  Create Text
+    "Project No."
+    (12.7729,9.9021) (13.2597,10.0354)
+    Font ("Arial Narrow",1,8,0)
+
+  Create Text
+    "Date Printed:"
+    (14.4812,9.459) (15.0514,9.5924)
+    Font ("Arial Narrow",1,8,0)
+
+  Create Text
+    "File Location : (\\\\oberon\\grp117\\_ATtemp\\_MITools\\MdlMap\\_MapRun\\TGD_FB_25\\wors\\_SYS_1a.WOR"
+    (0.5215,10.2014) (5.2257,10.3181)
+    Font ("Arial",3,7,16777215)
+    Angle 90
+
+  Create Text
+    "7341\nCSO Sizing & Integrated Flow Mgmt"
+    (12.8049,9.9285) (14.3715,10.1951)
+    Font ("Arial Narrow",1,8,0)
+    Justify Center
+
+  Create Text
+    "1    O F    1"
+    (13.1958,9.5903) (13.6625,9.7236)
+    Font ("Arial Narrow",1,8,0)
+    Justify Center
+
+  Create Text
+    "Consequence of \nPipe Failure"
+    (13.65,8.7993) (15.3701,9.3861)
+    Font ("Times New Roman",1,18,0)
+    Justify Center
+
+  Create Frame (12.9868,4.6792) (14.3917,7.3042)
+    Pen (1,1,0) 
+    Brush (1,16777215,16777215)
+    Title ""
+    FillFrame On
+  Set Layout Ruler On Pagebreaks On Frame Contents On
+  Zoom 31.5341 Center (8.7973,5.5) Extents To Fit
+  Set Window FrontWindow() Autoscroll On
+  Set CoordSys Earth
+Set Window FrontWindow() Title "Main Layout"
+Set Window FrontWindow() Printer
+ Name "HyperXpress PDF Writer 4.2" Orientation Landscape Copies 1
+ Papersize 125
+ Margins Left 0.346667 Right 0.18 Top 0.33 Bottom 0.346667 Units "in"

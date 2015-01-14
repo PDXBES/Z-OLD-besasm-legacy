@@ -1,0 +1,98 @@
+This file documents the changes made to the files in the
+\SWMM\SWMM42\PDXTRAN directory.
+
+BD.INC
+  Changed ANORM, TWNORM, and HRNORM array sizes to 30 (hard-coded
+  does not use LASTCP--see PDXTRN.INC)
+
+BLKDATA.FOR
+  Added data blocks for shapes 16-20 as well as placeholders for
+  shapes 6-15 and 21-30.
+
+CDSUB.FOR
+  Fixed call to ENDOFF, which does not require arguments.
+
+DEPTHX.FOR
+  Changed various IF switches that referred to shape classes < 8 and
+  < 5 to include shapes >= 13.
+
+FLDETM.FOR
+FRECAL.FOR
+  Same as CDSUB.FOR
+
+HEAD.FOR
+  Changed IF switches referring to shapes <= 9 to include shapes >=
+  13. 
+
+HYDRAD.FOR
+  Same as DEPTHX.FOR.
+
+INDAT11P.FOR
+  Consolidated the pdx_## variables into the pdxcp array, which is
+  used to check for repeat definitions of custom shapes.
+
+  Added the variable pdxar for use in accessing the pdx_ca,
+  pdx_cr, and pdx_cw arrays.
+
+  Dimensions for pdx_ca, pdx_cr, and pdx_cw arrays changed from
+  hard-coded '3' to constant NUM_CP defined in PDXTRN.INC.
+
+  Increased dimension for CTYPE to LASTCP elements.  CTYPE holds
+  strings describing the type of pipe.
+
+  Added data blocks for pdxsha, pdxshr, and pdxshw, which contain
+  coefficients for shapes 16-20.
+
+  Changed initialization of pdx_## variables to pdxcp array.
+
+  Changed initialization of pdx_ca, pdx_cr, and pdx_cw arrays from
+  hard-coded '3' to constant NUM_CP.
+
+  Changed various switches so types 13-30 are covered.
+
+  Removed flags pdx_3, pdx_4, and pdx_5 since they are no longer
+  necessary.  They are not used in the pdxcp array.  Types 3, 4,
+  and 5 can now coexist with types 13, 14, and 15.
+
+  Added code to calculate AFULL, RFULL, and WIDE for shapes 16-20.
+  Changed error messages for trapping illegal user-defined shape
+  definitions.
+
+  Added code for variable pdxar to map shape numbers as follows
+  for use with the pdx_ca, pdx_cr, and pdx_cw arrays:
+    13-15  ->  1-3
+    21-30  ->  4-13
+
+  Removed trap for checking coexistence of types 3-5 and 13-15.
+
+INDAT12P.FOR
+  Changed IF switch to exclude shapes >= 13.
+
+  Added statement to force usage of default diurnal curve if D1
+  card ha no coordinates or land use code (i.e., it's a standard
+  D1 card)
+
+MAINEXT.FOR
+  Added comments for use with Fortran Powerstation.
+
+  Added trap for identical input & output filenames.
+
+OUTPUT.FOR
+  Fixed call to RGOUT, which only requires one parameter, not two.
+
+PDXTRN.INC
+  Added the constants NUM_CP and LASTCP
+
+RGFREE.FOR
+RGSUB.FOR
+SUBCAL.FOR
+  Same as CDSUB.FOR
+
+TRANSXPX.FOR
+  Changed switch so that shape 5 is not included in a calculation.
+
+  Added wrote statements for screen output.
+
+XROUTE.FOR
+  Changed IF switches to exclude shapes >= 13 as well as other IF
+  switches to include shapes >= 13.
