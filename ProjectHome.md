@@ -1,0 +1,1 @@
+This project houses BES/ASM's code base that existed before the switchover to Google Code.
