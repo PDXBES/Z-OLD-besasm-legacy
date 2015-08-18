@@ -175,6 +175,9 @@ namespace SystemsAnalysis.Modeling.Alternatives
         case 5501:
           _StreetType = Enumerators.StreetTypeKind.Street;
           break;
+        default:
+          _StreetType = Enumerators.StreetTypeKind.None;
+          break;
       } // switch
       _DistToStreetCenterlineFeet = altPipXPRow.pFt2Strt;
       _NumStreetsIfUSNodeInIntersection = altPipXPRow.uxCLx;
