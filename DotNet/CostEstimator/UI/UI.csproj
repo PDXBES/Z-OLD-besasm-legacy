@@ -11,8 +11,8 @@
     <RootNamespace>SystemsAnalysis.Analysis.CostEstimator.UI</RootNamespace>
     <AssemblyName>CostEstimator</AssemblyName>
     <StartupObject>SystemsAnalysis.Analysis.CostEstimator.UI.Program</StartupObject>
-    <ManifestCertificateThumbprint>718A52F82AA6DDA66E0CA00E1DE01DA3DACD9ACA</ManifestCertificateThumbprint>
-    <ManifestKeyFile>UI_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>8DA78FC627D5864220D9C0BF7058198EFDAAA300</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UI_2_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -361,6 +361,7 @@
     <None Include="Properties\DataSources\SystemsAnalysis.Analysis.CostEstimator.Classes.ReportSummaryItem.datasource" />
     <None Include="Resources\CloseProject.png" />
     <None Include="UI_1_TemporaryKey.pfx" />
+    <None Include="UI_2_TemporaryKey.pfx" />
     <None Include="UI_TemporaryKey.pfx" />
     <EmbeddedResource Include="BatchPage.resx">
       <SubType>Designer</SubType>
