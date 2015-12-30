@@ -1,0 +1,363 @@
+USE [ASM_MASTER_RPT_SDE]
+GO
+
+-------------------------------------------------------------------------------
+-- ASM_ZONING
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S11_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ASM_ZONING]') AND name = N'S11_idx')
+DROP INDEX [S11_idx] ON [GIS].[ASM_ZONING]
+GO
+
+/****** Object:  Index [R16_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ASM_ZONING]') AND name = N'R16_pk')
+ALTER TABLE [GIS].[ASM_ZONING] DROP CONSTRAINT [R16_pk]
+GO
+
+/****** Object:  Index [PK_ASM_ZONING]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ASM_ZONING]') AND name = N'PK_ASM_ZONING')
+ALTER TABLE [GIS].[ASM_ZONING] DROP CONSTRAINT [PK_ASM_ZONING]
+GO
+
+ALTER TABLE [GIS].[ASM_ZONING] ADD  CONSTRAINT [PK_ASM_ZONING] PRIMARY KEY CLUSTERED 
+(
+	[asm_zoning_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R16_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ASM_ZONING]') AND name = N'R16_ROWID_SDE_UK')
+ALTER TABLE [GIS].[ASM_ZONING] DROP CONSTRAINT [R16_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[ASM_ZONING] ADD  CONSTRAINT [R16_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- DSC_ZINGERS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S9_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSC_ZINGERS]') AND name = N'S9_idx')
+DROP INDEX [S9_idx] ON [GIS].[DSC_ZINGERS]
+GO
+
+/****** Object:  Index [R14_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSC_ZINGERS]') AND name = N'R14_pk')
+ALTER TABLE [GIS].[DSC_ZINGERS] DROP CONSTRAINT [R14_pk]
+GO
+
+/****** Object:  Index [DSC_ZINGERS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSC_ZINGERS]') AND name = N'PK_DSC_ZINGERS')
+ALTER TABLE [GIS].[DSC_ZINGERS] DROP CONSTRAINT [PK_DSC_ZINGERS]
+GO
+
+ALTER TABLE [GIS].[DSC_ZINGERS] ADD  CONSTRAINT [PK_DSC_ZINGERS] PRIMARY KEY CLUSTERED 
+(
+	[dsc_zinger_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R14_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSC_ZINGERS]') AND name = N'R14_ROWID_SDE_UK')
+ALTER TABLE [GIS].[DSC_ZINGERS] DROP CONSTRAINT [R14_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[DSC_ZINGERS] ADD  CONSTRAINT [R14_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- DSCS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S8_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSCS]') AND name = N'S8_idx')
+DROP INDEX [S8_idx] ON [GIS].[DSCS]
+GO
+
+/****** Object:  Index [R13_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSCS]') AND name = N'R13_pk')
+ALTER TABLE [GIS].[DSCS] DROP CONSTRAINT [R13_pk]
+GO
+
+/****** Object:  Index [PK_DSCS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSCS]') AND name = N'PK_DSCS')
+ALTER TABLE [GIS].[DSCS] DROP CONSTRAINT [PK_DSCS]
+GO
+
+ALTER TABLE [GIS].[DSCS] ADD  CONSTRAINT [PK_DSCS] PRIMARY KEY CLUSTERED 
+(
+	[dsc_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R13_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[DSCS]') AND name = N'R13_ROWID_SDE_UK')
+ALTER TABLE [GIS].[DSCS] DROP CONSTRAINT [R13_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[DSCS] ADD  CONSTRAINT [R13_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- LINKS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S7_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[LINKS]') AND name = N'S7_idx')
+DROP INDEX [S7_idx] ON [GIS].[LINKS]
+GO
+
+/****** Object:  Index [R12_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[LINKS]') AND name = N'R12_pk')
+ALTER TABLE [GIS].[LINKS] DROP CONSTRAINT [R12_pk]
+GO
+
+/****** Object:  Index [PK_LINKS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[LINKS]') AND name = N'PK_LINKS')
+ALTER TABLE [GIS].[LINKS] DROP CONSTRAINT [PK_LINKS]
+GO
+
+ALTER TABLE [GIS].[LINKS] ADD  CONSTRAINT [PK_LINKS] PRIMARY KEY CLUSTERED 
+(
+	[link_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R12_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[LINKS]') AND name = N'R12_ROWID_SDE_UK')
+ALTER TABLE [GIS].[LINKS] DROP CONSTRAINT [R12_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[LINKS] ADD  CONSTRAINT [R12_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- NODES
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S6_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[NODES]') AND name = N'S6_idx')
+DROP INDEX [S6_idx] ON [GIS].[NODES]
+GO
+
+/****** Object:  Index [R11_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[NODES]') AND name = N'R11_pk')
+ALTER TABLE [GIS].[NODES] DROP CONSTRAINT [R11_pk]
+GO
+
+/****** Object:  Index [PK_NODES]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[NODES]') AND name = N'PK_NODES')
+ALTER TABLE [GIS].[NODES] DROP CONSTRAINT [PK_NODES]
+GO
+
+ALTER TABLE [GIS].[NODES] ADD  CONSTRAINT [PK_NODES] PRIMARY KEY CLUSTERED 
+(
+	[node_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R11_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[NODES]') AND name = N'R11_ROWID_SDE_UK')
+ALTER TABLE [GIS].[NODES] DROP CONSTRAINT [R11_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[NODES] ADD  CONSTRAINT [R11_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- PARKING_TARGETS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S5_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[PARKING_TARGETS]') AND name = N'S5_idx')
+DROP INDEX [S5_idx] ON [GIS].[PARKING_TARGETS]
+GO
+
+/****** Object:  Index [R10_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[PARKING_TARGETS]') AND name = N'R10_pk')
+ALTER TABLE [GIS].[PARKING_TARGETS] DROP CONSTRAINT [R10_pk]
+GO
+
+/****** Object:  Index [PK_PARKING_TARGETS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[PARKING_TARGETS]') AND name = N'PK_PARKING_TARGETS')
+ALTER TABLE [GIS].[PARKING_TARGETS] DROP CONSTRAINT [PK_PARKING_TARGETS]
+GO
+
+ALTER TABLE [GIS].[PARKING_TARGETS] ADD  CONSTRAINT [PK_PARKING_TARGETS] PRIMARY KEY CLUSTERED 
+(
+	[parking_target_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R10_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[PARKING_TARGETS]') AND name = N'R10_ROWID_SDE_UK')
+ALTER TABLE [GIS].[PARKING_TARGETS] DROP CONSTRAINT [R10_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[PARKING_TARGETS] ADD  CONSTRAINT [R10_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- ROOF_TARGETS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S4_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ROOF_TARGETS]') AND name = N'S4_idx')
+DROP INDEX [S4_idx] ON [GIS].[ROOF_TARGETS]
+GO
+
+/****** Object:  Index [R9_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ROOF_TARGETS]') AND name = N'R9_pk')
+ALTER TABLE [GIS].[ROOF_TARGETS] DROP CONSTRAINT [R9_pk]
+GO
+
+/****** Object:  Index [PK_ROOF_TARGETS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ROOF_TARGETS]') AND name = N'PK_ROOF_TARGETS')
+ALTER TABLE [GIS].[ROOF_TARGETS] DROP CONSTRAINT [PK_ROOF_TARGETS]
+GO
+
+ALTER TABLE [GIS].[ROOF_TARGETS] ADD  CONSTRAINT [PK_ROOF_TARGETS] PRIMARY KEY CLUSTERED 
+(
+	[roof_target_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R9_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[ROOF_TARGETS]') AND name = N'R9_ROWID_SDE_UK')
+ALTER TABLE [GIS].[ROOF_TARGETS] DROP CONSTRAINT [R9_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[ROOF_TARGETS] ADD  CONSTRAINT [R9_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- SSC_ZINGERS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S10_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSC_ZINGERS]') AND name = N'S10_idx')
+DROP INDEX [S10_idx] ON [GIS].[SSC_ZINGERS]
+GO
+
+/****** Object:  Index [R15_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSC_ZINGERS]') AND name = N'R15_pk')
+ALTER TABLE [GIS].[SSC_ZINGERS] DROP CONSTRAINT [R15_pk]
+GO
+
+/****** Object:  Index [PK_SSC_ZINGERS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSC_ZINGERS]') AND name = N'PK_SSC_ZINGERS')
+ALTER TABLE [GIS].[SSC_ZINGERS] DROP CONSTRAINT [PK_SSC_ZINGERS]
+GO
+
+ALTER TABLE [GIS].[SSC_ZINGERS] ADD  CONSTRAINT [PK_SSC_ZINGERS] PRIMARY KEY CLUSTERED 
+(
+	[ssc_zinger_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R15_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSC_ZINGERS]') AND name = N'R15_ROWID_SDE_UK')
+ALTER TABLE [GIS].[SSC_ZINGERS] DROP CONSTRAINT [R15_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[SSC_ZINGERS] ADD  CONSTRAINT [R15_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- SSCS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S3_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSCS]') AND name = N'S3_idx')
+DROP INDEX [S3_idx] ON [GIS].[SSCS]
+GO
+
+/****** Object:  Index [R8_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSCS]') AND name = N'R8_pk')
+ALTER TABLE [GIS].[SSCS] DROP CONSTRAINT [R8_pk]
+GO
+
+/****** Object:  Index [PK_SSCS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSCS]') AND name = N'PK_SSCS')
+ALTER TABLE [GIS].[SSCS] DROP CONSTRAINT [PK_SSCS]
+GO
+
+ALTER TABLE [GIS].[SSCS] ADD  CONSTRAINT [PK_SSCS] PRIMARY KEY CLUSTERED 
+(
+	[ssc_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R8_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[SSCS]') AND name = N'R8_ROWID_SDE_UK')
+ALTER TABLE [GIS].[SSCS] DROP CONSTRAINT [R8_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[SSCS] ADD  CONSTRAINT [R8_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+-------------------------------------------------------------------------------
+-- STREET_TARGETS
+-------------------------------------------------------------------------------
+
+/****** Object:  Index [S2_idx]    Script Date: 10/11/2012 17:42:53 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[STREET_TARGETS]') AND name = N'S2_idx')
+DROP INDEX [S2_idx] ON [GIS].[STREET_TARGETS]
+GO
+
+/****** Object:  Index [R7_pk]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[STREET_TARGETS]') AND name = N'R7_pk')
+ALTER TABLE [GIS].[STREET_TARGETS] DROP CONSTRAINT [R7_pk]
+GO
+
+/****** Object:  Index [PK_STREET_TARGETS]    Script Date: 10/11/2012 17:23:10 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[STREET_TARGETS]') AND name = N'PK_STREET_TARGETS')
+ALTER TABLE [GIS].[STREET_TARGETS] DROP CONSTRAINT [PK_STREET_TARGETS]
+GO
+
+ALTER TABLE [GIS].[STREET_TARGETS] ADD  CONSTRAINT [PK_STREET_TARGETS] PRIMARY KEY CLUSTERED 
+(
+	[street_target_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 75) ON [PRIMARY]
+GO
+
+/****** Object:  Index [R7_ROWID_SDE_UK]    Script Date: 10/11/2012 17:25:25 ******/
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[GIS].[STREET_TARGETS]') AND name = N'R7_ROWID_SDE_UK')
+ALTER TABLE [GIS].[STREET_TARGETS] DROP CONSTRAINT [R7_ROWID_SDE_UK]
+GO
+
+ALTER TABLE [GIS].[STREET_TARGETS] ADD  CONSTRAINT [R7_ROWID_SDE_UK] UNIQUE NONCLUSTERED 
+(
+	[OBJECTID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
