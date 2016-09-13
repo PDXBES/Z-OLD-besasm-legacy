@@ -115,7 +115,7 @@ namespace SystemsAnalysis.Types
 
 				public enum StreetTypeKind 
 				{
-					Street, Arterial, MajorArterial, Freeway
+					Street, Arterial, MajorArterial, Freeway, None
 				}
 
         /// <summary>

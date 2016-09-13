@@ -699,7 +699,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
@@ -731,7 +731,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
@@ -763,7 +763,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
@@ -796,7 +796,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
@@ -829,7 +829,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
@@ -863,7 +863,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       OleDbConnection connection;
       OleDbCommand command;
-      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + database);
       command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();

@@ -29,7 +29,7 @@ namespace SystemsAnalysis.DataAccess.ModelDataSetTableAdapters
 
     public static string GetConnectionString(string databasePath, string databaseName)
     {
-      return @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+      return @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
         NormalizePath(databasePath) + databaseName;
     }
   }

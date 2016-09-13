@@ -48,7 +48,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -59,7 +59,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -70,7 +70,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -81,7 +81,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -92,7 +92,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -103,7 +103,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -114,7 +114,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -125,7 +125,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -144,7 +144,7 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
 
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     } // AltPipXpTableAdapter(alternativePath)
   } // class AltPipXpTableAdapter
 }

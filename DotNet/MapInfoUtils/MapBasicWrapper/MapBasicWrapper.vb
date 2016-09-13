@@ -8,7 +8,7 @@ Public Class MapBasicWrapper
     Dim miStartTime As DateTime
 
     Public Sub New()
-        Me.mi = New MapInfoApplicationClass
+        Me.mi = New MapInfoApplication
         Me.miStartTime = System.DateTime.Now
     End Sub
 

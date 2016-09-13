@@ -138,7 +138,7 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
 
     public static string GetConnectionString(string databasePath, string databaseName)
     {
-      return @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+      return @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
         NormalizePath(databasePath) + databaseName;
     }
   }
@@ -222,7 +222,7 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -233,7 +233,7 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
@@ -244,7 +244,7 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
     {
       alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
         Path.DirectorySeparatorChar.ToString());
-      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+      this.Connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 }
