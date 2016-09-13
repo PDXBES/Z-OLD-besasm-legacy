@@ -730,7 +730,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
       //Access.Application oAccess = null;
       //oAccess = ShellGetDB("c:\\mydb.mdb", null,
       //  ProcessWindowStyle.Minimized, 1000);
-
       Access.Application oAccess = null;
       string sAccPath = null; //path to msaccess.exe
       string sCmdLine = null;
@@ -741,7 +740,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       try
       {
         // Obtain the path to msaccess.exe:
-        sAccPath = GetOfficeAppPath("Access.Application", "msaccess.exe");
+        sAccPath = GetOfficeAppPath("Access.Application", "msaccess.exe") + "\"";
         if (sAccPath == null)
         {
           throw new Exception("AccessHelper can't determine path to msaccess.exe");

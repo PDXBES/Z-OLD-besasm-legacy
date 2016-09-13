@@ -641,7 +641,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       } // if
 
       using (System.Data.OleDb.OleDbConnection modelConn =
-      new System.Data.OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;" +
+      new System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;" +
       "Data Source=" + modelPath + Path.DirectorySeparatorChar + "mdbs" +
       Path.DirectorySeparatorChar + "DataAccess.mdb"))
       {
@@ -686,7 +686,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       {
         string masterPipXPLocation = _UserSettings.MasterPipXPLocation;
         using (System.Data.OleDb.OleDbConnection sourceConn =
-        new System.Data.OleDb.OleDbConnection(String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"{0}\"",
+        new System.Data.OleDb.OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{0}\"",
         masterPipXPLocation)))
         {
           sourceConn.Open();
@@ -710,7 +710,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     {
       Catalog dataAccessCatalog = new CatalogClass();
       Connection dataAccessConn = new ConnectionClass();
-      dataAccessConn.Open("Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" +
+      dataAccessConn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" +
       modelPath + Path.DirectorySeparatorChar + "mdbs" +
       Path.DirectorySeparatorChar + "DataAccess.mdb;" +
       "Jet OLEDB:Engine Type=5", "admin", "", -1);
@@ -743,7 +743,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
       CatalogClass catalog = new CatalogClass();
       string createDBSpec = String.Format(
-      "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Jet OLEDB:Engine Type=5",
+      "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Jet OLEDB:Engine Type=5",
       pipXPTableFileName);
       catalog.Create(createDBSpec);
 
@@ -782,7 +782,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       } // if
 
       System.Data.OleDb.OleDbConnection altPackageConn = new System.Data.OleDb.OleDbConnection(
-      "Provider=Microsoft.Jet.OLEDB.4.0;" +
+      "Provider=Microsoft.ACE.OLEDB.12.0;" +
       "Data Source=" + altInfo.AlternativePath + Path.DirectorySeparatorChar + "alternative_package.mdb");
       altPackageConn.Open();
       System.Data.OleDb.OleDbCommand deleteCmd = new System.Data.OleDb.OleDbCommand(
@@ -884,7 +884,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       try
       {
         System.Data.OleDb.OleDbConnection sourceConn = new System.Data.OleDb.OleDbConnection(
-        "Provider=Microsoft.Jet.OLEDB.4.0;" +
+        "Provider=Microsoft.ACE.OLEDB.12.0;" +
         "Data Source=\"" + altInfo.AlternativePath + Path.DirectorySeparatorChar + "alt_PipXP_ac.mdb" + "\"");
         sourceConn.Open();
         System.Data.OleDb.OleDbCommand copyCmd = new System.Data.OleDb.OleDbCommand(
@@ -1037,7 +1037,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       tabMain.SelectedTab = tabMain.Tabs["Progress"];
 
       // Determine number of records
-      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
         segmentsFile + @";Persist Security Info=False";
       int totalCount = 0;
       int beginID = 0;

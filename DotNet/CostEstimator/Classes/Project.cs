@@ -1819,7 +1819,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       Dictionary<int, Segment> segmentsTable = new Dictionary<int,Segment>();
 
-      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + 
+      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + 
         segmentsTableFileName + @";Persist Security Info=False";
       using (OleDbConnection conn = new OleDbConnection(connectionString))
       {
@@ -1866,7 +1866,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       Dictionary<int, Conflict> conflictsTable = new Dictionary<int, Conflict>();
 
-      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
         conflictsTableFileName + @";Persist Security Info=False";
       using (OleDbConnection conn = new OleDbConnection(connectionString))
       {
@@ -2623,7 +2623,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         int fromID = beginID;
         int toID = fromID + increment - 1;
 
-        string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+        string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
           segmentsTableDB + @";Persist Security Info=False";
         using (OleDbConnection conn = new OleDbConnection(connectionString))
         {
